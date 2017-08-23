@@ -13,6 +13,7 @@ export default class MatchRender extends Component {
       }
   this.renderjoin = this.renderjoin.bind(this)
   this.handleJoin = this.handleJoin.bind(this)
+  this.removeMatch = this.removeMatch.bind(this)
   }
 
 handleJoin(){
@@ -38,6 +39,15 @@ this.setState({joined: true})
 }
 
 handleMessage(){}
+
+removeMatch(e){
+       e.preventDefault();
+      // Meteor.call('Post.remove',this.props.post._id);
+    //  make query for all children joined games with people joined,
+    // run loop to delete the joined game
+      //ref.child(`users/${user.uid}/account-info/`)remove()
+      
+   }
 
 renderjoin(e){
   e.preventDefault()
@@ -102,6 +112,7 @@ renderjoin(e){
             <div className="pull-left image">
               <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
             </div>
+            <div className="pull-right "><i onClick={this.removeMatch} className="fa fa-remove"></i></div>
             <div className="pull-left meta">
               <div className="title h5">
                <h4>  <strong> {this.props.match.creatorName} </strong> made a Match </h4>

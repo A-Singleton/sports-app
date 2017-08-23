@@ -10,6 +10,10 @@ import { ref, firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-rou
 import matchFeed from './matchFeed'
 import 'react-datepicker/dist/react-datepicker.css';
 import * as firebase from "firebase"
+import TimePicker from 'react-bootstrap-time-picker';
+//import TimePicker from '../dist/bundle.js';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import Maps from './Maps'
 
 export default class Dashboard extends Component {
 
@@ -19,6 +23,7 @@ export default class Dashboard extends Component {
       first_name: '',
       last_name: '',
       matchKey: '',
+      time: 0,
       newProfile: {
         sports : null,
         startDate: moment(),
@@ -27,6 +32,7 @@ export default class Dashboard extends Component {
       }
     }
     this.handleChange = this.handleChange.bind(this);
+     this.handleTimeChange = this.handleTimeChange.bind(this);
   }
 
   sportsChanged(newSports) {
@@ -49,7 +55,10 @@ export default class Dashboard extends Component {
      });
   }
 
-
+  handleTimeChange(time) {
+    console.log(time);     // <- prints "3600" if "01:00" is picked
+    this.setState({ time });
+  }
 
   handleSubmit = (e) => {
     //e.preventDefault()
@@ -244,6 +253,8 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
            maxDate={moment().add(65, "days")}
            placeholderText="Choose a Day" />
            </div>
+
+           <TimePicker onChange={this.handleTimeChange} value={this.state.time}/>
 
            <label>Skill Level</label>
            <div className="form-group">
