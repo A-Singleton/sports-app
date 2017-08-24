@@ -254,7 +254,12 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
            placeholderText="Choose a Day" />
            </div>
 
+           <br/>
+           <label> Match Start Time </label>
            <TimePicker onChange={this.handleTimeChange} value={this.state.time}/>
+
+           <br/>
+           <Maps/>
 
            <label>Skill Level</label>
            <div className="form-group">

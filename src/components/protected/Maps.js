@@ -1,5 +1,6 @@
 import React from 'react'
-import PlacesAutocomplete, { geocodeByAddress, getLatLng } from '../src'
+//import PlacesAutocomplete, { geocodeByAddress, getLatLng } from '..../src'
+import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 class Maps extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class Maps extends React.Component {
     this.state = {
       address: '',
       geocodeResults: null,
-      loading: false
+      loading: false,
     }
     this.handleSelect = this.handleSelect.bind(this)
     this.handleChange = this.handleChange.bind(this)
@@ -37,22 +38,6 @@ class Maps extends React.Component {
           loading: false
         })
       })
-
-    /* NOTE: Using callback (Deprecated version) */
-    // geocodeByAddress(address,  (err, { lat, lng }) => {
-    //   if (err) {
-    //     console.log('Oh no!', err)
-    //     this.setState({
-    //       geocodeResults: this.renderGeocodeFailure(err),
-    //       loading: false
-    //     })
-    //   }
-    //   console.log(`Yay! got latitude and longitude for ${address}`, { lat, lng })
-    //   this.setState({
-    //     geocodeResults: this.renderGeocodeSuccess(lat, lng),
-    //     loading: false
-    //   })
-    // })
   }
 
   handleChange(address) {
@@ -106,15 +91,7 @@ class Maps extends React.Component {
 
     return (
       <div className='page-wrapper'>
-        <div className='container'>
-          <h1 className='display-3'>react-places-autocomplete <i className='fa fa-map-marker header'/></h1>
-          <p className='lead'>A React component to build a customized UI for Google Maps Places Autocomplete</p>
-          <hr />
-          <a href='https://github.com/kenny-hibino/react-places-autocomplete' className='Demo__github-link' target="_blank" >
-            <span className='fa fa-github Demo__github-icon'></span>
-            &nbsp;View on GitHub
-          </a>
-        </div>
+      <label> Enter Address </label>
         <div className='container'>
           <PlacesAutocomplete
             onSelect={this.handleSelect}
@@ -128,9 +105,6 @@ class Maps extends React.Component {
             <div className='geocoding-results'>{this.state.geocodeResults}</div> :
           null}
         </div>
-        <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDdF3b7VI0t-l2u9FJTy5v5OxQpgjBBAYc&callback=initMap">
-    </script>
       </div>
     )
   }
