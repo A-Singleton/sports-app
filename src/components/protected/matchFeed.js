@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import * as firebase from "firebase"
-import { ref, firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
+import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
 import MatchRender from './MatchRender'
-import ChatRoom from './ChatRoom'
+//import ChatRoom from './ChatRoom'
 
 export default class matchFeed extends Component {
 
@@ -20,13 +20,13 @@ componentDidMount(){
 
   this.setState({User: user})
 
-  console.log(this.state.User.uid)
-  firebase.database().ref(`matches`).on('value', (snapshot)=> {
+  //console.log(this.state.User.uid)
+  firebase.database().ref(`matches/`).on('value', (snapshot)=> {
 
   //  var matchesInfo = []
     var matches = snapshot.val()
-    console.log('allmatches')
-    console.log(matches)
+    //console.log('allmatches')
+    //console.log(matches)
 
     var keys = []
     var keys = Object.keys(matches)
@@ -44,13 +44,12 @@ componentDidMount(){
           var players = matches[k].players;
           var creator_first_name = matches[k].creator_first_name;
           var creator_last_name = matches[k].creator_last_name;
-        //  var thatUser =
-          //var li = document.createElement('li', 'Sport: ' + sport + '   Skill Level: ' + skill
-          //   + '   Match Date: ' + date);
 
-    console.log(skill)
-    console.log(sport)
-    console.log(date)
+    //console.log(skill)
+    //console.log(sport)
+  //  console.log(date)
+  console.log('players')
+    console.log(players)
 
     var nextMatch = {
       id: k,
@@ -61,45 +60,61 @@ componentDidMount(){
       creator: creator_query,
       creatorName: creator_first_name + " " + creator_last_name
     }
-    console.log('nextMatch')
-    console.log(nextMatch)
+    //console.log('nextMatch')
+    //console.log(nextMatch)
 
     var allMatches = this.state.allMatches.slice()
-    console.log('allList')
-    console.log(allMatches)
+    //console.log('allMathces')
+    //console.log(this.state.allMatches)
+    //console.log('runMathces')
+    //console.log(allMatches)
 
     allMatches.push(nextMatch)
+    //console.log(allMatches)
     this.setState({ allMatches: allMatches})
-    console.log(allMatches)
-    console.log('pushed')
+    //console.log('pushed and set')
+    //console.log(this.state.allMatches)
+
 }
 
 })
 }
 
-
-
-
   render(){
-    console.log('This.state.User')
-    console.log(this.state.User)
-    console.log('this.state.allMatches')
-    console.log(this.state.allMatches)
-    var posts = this.state.allMatches.map(function(record){
-      return <MatchRender key={record.id} match={record} />
+  //  console.log('This.state.User')
+  //  console.log(this.state.User)
+  //  console.log('this.state.allMatches')
+  //  console.log(this.state.allMatches)
+
+    // const posts = this.state.allMatches.map(function(record){
+    //   return <MatchRender key={record.id} match={record} />
+
+      const posts = this.state.allMatches.map((match, i) => {
+        console.log(match.players)
+        return <MatchRender key={match.id} match={match} />
+      // return (
+      //   <li key={match.id}>{match.skill}
+      //   {match.sport}
+      //   {match.date}
+      //   </li>
+      // )
+
 
     //  var messages = this.
    })
-  console.log('testpost')
-  var testpost = this.state.allMatches
+//  console.log('testpost')
+//  var testpost = this.state.allMatches
   //console.log('testpost')
-  console.log(testpost)
+//  console.log(testpost)
+  //  console.log(posts)
+
 
     return(
 
        <div>  Local Matches
+
        { posts }
-       
+
           </div>
 
 )

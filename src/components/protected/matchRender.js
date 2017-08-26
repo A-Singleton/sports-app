@@ -18,21 +18,22 @@ export default class MatchRender extends Component {
 
 handleJoin(){
 const user = firebaseAuth().currentUser
-console.log("this.props.match.players")
+//console.log("this.props.match.players")
 //var players = this.props.match.players.map(function(value, i){
   //  return (
 //console.log(this.props.match.players)
 const players = this.props.match.players
+//this.console.log(players)
 const matchID = this.props.match.id
 players.push(user.uid)
-console.log(players)
+//console.log(players)
 
 firebase.database().ref(`matches/${this.props.match.id}/`).update({ players: players })
 
 //Questionable...
-ref.child(`users/${user.uid}/account-info/`)
+ref.child(`users/${user.uid}/account-info/joinedGames`)
 .push({
-joinedGames: matchID
+matchID
 })
 //firebase.database().ref(`matches/${this.props.match.id}/players`).push(user.uid)
 this.setState({joined: true})
@@ -42,59 +43,37 @@ handleMessage(){}
 
 removeMatch(e){
        e.preventDefault();
-      // Meteor.call('Post.remove',this.props.post._id);
+       console.log("Remove Match")
+      //
     //  make query for all children joined games with people joined,
     // run loop to delete the joined game
-      //ref.child(`users/${user.uid}/account-info/`)remove()
-      
+   // ref.child(`matches/this.props.match.id/`).remove()
+
    }
 
 renderjoin(e){
   e.preventDefault()
 
-  // const CONDITION_STATES = {
-  //
-  // }
-
-
   return <div>  </div>
-  // push user id to player field if match not made by user
-  // remove button if made by user
-  // make some 'joined' button if joined another users game
-
-  //switch(){
-
-// if match.creator === user.uid
-//     render "your match"
-// defult null
-
-// if match.players.exists???(user.uid)
-      //  render button that says " Joined! "
-//
-//   if not in joined players and players.length < max length for sport:
-//   render "Join match" button
-//      players.
-// if reached max player capacity:
-// Render "Match Full" or remove from list.
-
-//}
-
-
 }
 
   render(){
-    console.log("props test")
-    console.log(this.props.match.id)
+  //  console.log("props test")
+  //  console.log(this.props.match.id)
     const user = firebaseAuth().currentUser.uid
     let button = null
 
-    if(this.props.match.creator !== user){
+    if( this.props.match.creator === user) {
+      button = <div> Your match </div>
+    }
+     else if (this.props.match.players.includes(user)) {
+      button = <div> You Joined the match </div>
+    } else if(this.props.match.creator !== user){
       button = <button onClick={this.handleJoin} className="btn btn-primary">Join Match</button>
     }
     // else{
     //   button = <button />
     // }
-
 
     let matchRemark = null
 
@@ -112,7 +91,7 @@ renderjoin(e){
             <div className="pull-left image">
               <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
             </div>
-            <div className="pull-right "><i onClick={this.removeMatch} className="fa fa-remove"></i></div>
+            <div className="pull-right "><button onClick={this.removeMatch} className="fa fa-remove">Cancel Match</button></div>
             <div className="pull-left meta">
               <div className="title h5">
                <h4>  <strong> {this.props.match.creatorName} </strong> made a Match </h4>

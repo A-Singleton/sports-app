@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
 import CreateMatch from './createMatch'
-import ChatRoom from './ChatRoom'
+//import ChatRoom from './ChatRoom'
 //import DatePicker from 'react-bootstrap-date-picker'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
@@ -12,8 +12,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 import * as firebase from "firebase"
 import TimePicker from 'react-bootstrap-time-picker';
 //import TimePicker from '../dist/bundle.js';
-import FormControl from 'react-bootstrap/lib/FormControl';
+//import FormControl from 'react-bootstrap/lib/FormControl';
 import Maps from './Maps'
+import ImageUpload from './ImageUpload'
 
 export default class Dashboard extends Component {
 
@@ -24,6 +25,9 @@ export default class Dashboard extends Component {
       last_name: '',
       matchKey: '',
       time: 0,
+      mapDataAddress: null,
+      mapDataLat: null,
+      mapDataLng: null,
       newProfile: {
         sports : null,
         startDate: moment(),
@@ -60,22 +64,44 @@ export default class Dashboard extends Component {
     this.setState({ time });
   }
 
+  myCallback = (dataFromMaps) => {
+      //  [...we will use the dataFromChild here...]
+      console.log(dataFromMaps.address)
+      this.setState({mapDataAddress: dataFromMaps.address,
+                     mapDataLat: dataFromMaps.lat,
+                     mapDataLng: dataFromMaps.lng
+      })
+    }
+
   handleSubmit = (e) => {
-    //e.preventDefault()
+    e.preventDefault()
 
     var sport = this.sport.value;
-    console.log(sport)
+  //  console.log(sport)
     //var matchDay = this.formatDate.value;
     var formatDate = this.state.formatDate
-    console.log(formatDate)
-    var skill = this.skill.value;
-    console.log(skill)
+  //  console.log(formatDate)
+    var skill = this.skill.value
+    const time = this.state.time
+    const mapDataAddress = this.state.mapDataAddress
+    const mapDataLat = this.state.mapDataLat
+    const mapDataLng = this.state.mapDataLng
+
+    console.log('entered')
+    console.log('this.state.time')
+    console.log(this.state.time)
+    console.log('this.state.mapDataAddress')
+    console.log(this.state.mapDataAddress)
+    console.log('this.state.mapDataLat')
+    console.log(this.state.mapDataLat)
+    console.log('this.state.mapDataLng')
+    console.log(this.state.mapDataLng)
 
   firebaseAuth().onAuthStateChanged(function(user) {
 if (user) {
-  console.log(sport)
-  console.log(formatDate)
-  console.log(skill)
+  //console.log(sport)
+  //console.log(formatDate)
+//  console.log(skill)
 
 
 // User is signed in.
@@ -116,11 +142,13 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
 
   const f_name = profile.FirstName
   const l_name = profile.LastName
-  console.log(f_name)
-  console.log(l_name)
+//  console.log(f_name)
+  //console.log(l_name)
 
-  var newMatchKey = firebase.database().ref('matches').push().key;
+  var newMatchKey = firebase.database().ref('matches').push().key
+  console.log('newMatchKey')
   console.log(newMatchKey)
+
   //console.log(this.state.matchKey)
   //this.setState({matchKey: newMatchKey})
   //this.setState({first_name: f_name})
@@ -134,6 +162,10 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
     sport: sport,
     gameDate: formatDate,
     skill: skill,
+    matchTime: time,
+    mapDataAddress: mapDataAddress,
+    mapDataLat: mapDataLat,
+    mapDataLng: mapDataLng,
     players: [user.uid],
     creator: user.uid
   })
@@ -189,6 +221,9 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
 }
 
   render () {
+    // console.log(this.state.mapData)
+    // var object = this.state.mapData
+  //   console.log(object.address)
 
     return (
       <div>
@@ -210,6 +245,9 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
                    <input type="submit" value="Update Profile" />
                    </div>
       <br />
+
+      <ImageUpload />
+
       <br />
       <matchFeed  />
       <li><NavLink to="/protected/matchFeed">Match Feed</NavLink></li>
@@ -256,10 +294,11 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
 
            <br/>
            <label> Match Start Time </label>
-           <TimePicker onChange={this.handleTimeChange} value={this.state.time}/>
+           <TimePicker onChange={this.handleTimeChange} value={this.state.time}
+                                                    start="6:00" end="23:30"/>
 
            <br/>
-           <Maps/>
+           <Maps callbackFromParent={this.myCallback}/>
 
            <label>Skill Level</label>
            <div className="form-group">

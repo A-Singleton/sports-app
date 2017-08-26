@@ -38,6 +38,10 @@ class Maps extends React.Component {
           loading: false
         })
       })
+
+      console.log("this.state.address")
+      console.log(this.state.address)
+
   }
 
   handleChange(address) {
@@ -56,6 +60,20 @@ class Maps extends React.Component {
   }
 
   renderGeocodeSuccess(lat, lng) {
+    //console.log("this.state.address 2")
+    //console.log(this.state.address)
+    //console.log("geocodeResults")
+    //console.log(lat)
+    //console.log(lng)
+
+    const mapInfo = {
+      address: this.state.address,
+      lat: lat,
+      lng: lng
+    }
+
+   this.props.callbackFromParent(mapInfo)
+
     return (
       <div className="alert alert-success" role="alert">
         <strong>Success!</strong> Geocoder found latitude and longitude: <strong>{lat}, {lng}</strong>

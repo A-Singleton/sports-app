@@ -14,9 +14,9 @@ export default class ChatRoom extends Component {
   }
 
   componentDidMount(){
-    console.log('ComponentDidMount')
-    console.log("Chat Room props test")
-    console.log(this.props.matchkey)
+  //  console.log('ComponentDidMount')
+  //  console.log("Chat Room props test")
+  //  console.log(this.props.matchkey)
     firebase.database().ref(`messages/${this.props.matchkey}/`).on('value', (snapshot)=> {
 
       const currentMessages = snapshot.val()
@@ -30,14 +30,14 @@ export default class ChatRoom extends Component {
   }
 
   updateMessage(event){
-    console.log('updateMessage')
+  //  console.log('updateMessage')
     this.setState({
       message: event.target.value
     })
   }
 
   submitMessage(event){
-    console.log('submit')
+  //  console.log('submit')
     const nextMessage = {
       id: this.state.messages.length,
       text: this.state.message
