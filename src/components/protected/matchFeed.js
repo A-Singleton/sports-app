@@ -15,6 +15,7 @@ export default class matchFeed extends Component {
   }
 
 componentDidMount(){
+
   console.log('Did Mount')
   const user = firebaseAuth().currentUser
 

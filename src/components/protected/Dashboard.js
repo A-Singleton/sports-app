@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
 import CreateMatch from './createMatch'
 //import ChatRoom from './ChatRoom'
-//import DatePicker from 'react-bootstrap-date-picker'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { ref, firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
@@ -11,8 +10,6 @@ import matchFeed from './matchFeed'
 import 'react-datepicker/dist/react-datepicker.css';
 import * as firebase from "firebase"
 import TimePicker from 'react-bootstrap-time-picker';
-//import TimePicker from '../dist/bundle.js';
-//import FormControl from 'react-bootstrap/lib/FormControl';
 import Maps from './Maps'
 import ImageUpload from './ImageUpload'
 
@@ -99,40 +96,7 @@ export default class Dashboard extends Component {
 
   firebaseAuth().onAuthStateChanged(function(user) {
 if (user) {
-  //console.log(sport)
-  //console.log(formatDate)
-//  console.log(skill)
 
-
-// User is signed in.
-//   var user_pers_info = firebase.database().ref(`users/${user.uid}/personal-info`)
-// console.log('user_pers_info')
-// console.log(user_pers_info)
-// .push({
-//   creator: user.uid,
-//   players: user.uid,
-//   sport: sport,
-//   gameDate: formatDate,
-//   skill: skill
-// })
-//
-// ref.child(`users/${user.uid}/personal-info`).once('value', function(snapshot) {
-//   snapshot.forEach(function(childSnapshot) {
-//     var childKey = childSnapshot.key;
-//     var childData = childSnapshot.val();
-//     var first_name = childData.FirstName
-//     var last_name = childData.LastName
-//     this.setState({first_name: first_name})
-//     this.setState({last_name: last_name})
-//
-//     // ...
-//   });
-// });
-
-// const user = firebaseAuth().currentUser
-// console.log(user.uid)
-//  console.log(user.FirstName)
-//  var user_pers_info = firebase.database().ref(`users/${user.uid}/personal-info`)
 
 firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
 
@@ -142,8 +106,6 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
 
   const f_name = profile.FirstName
   const l_name = profile.LastName
-//  console.log(f_name)
-  //console.log(l_name)
 
   var newMatchKey = firebase.database().ref('matches').push().key
   console.log('newMatchKey')
@@ -176,43 +138,7 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
       })
 
   })
-  //
-  // ref.child(`/matches/` + this.state.matchKey)
-  // .update({
-  //
-  // })
-//
-// firebase.database().ref(`users/${user.uid}/personal-info`).once('value', function(snapshot) {
-// snapshot.forEach(function(childSnapshot) {
-// var childKey = childSnapshot.key;
-// var childData = childSnapshot.val();
-// console.log(childKey)
-// console.log(childData)
-// if (childKey === 'FirstName'){
-//   console.log(childData)
-//   console.log(this.state.first_name)
-//   const f_name = childData
-//   this.setState({first_name: f_name})
-// }
-// if (childKey === 'LastName'){
-//   this.setState({last_name: childData})
-// }
-// // ...
-// });
-// //var first_name = childData.FirstName
-// //console.log(first_name)
-// //var last_name = childData.LastName
-// ///this.setState({first_name: first_name})
-// //this.setState({last_name: last_name})
-//
-// });
 
-//console.log('First Name')
-//console.log(this.state.first_name)
-
-
-//console.log('First Name')
-//console.log(this.state.first_name)
 
 } else {
 // No user is signed in.
@@ -221,9 +147,6 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
 }
 
   render () {
-    // console.log(this.state.mapData)
-    // var object = this.state.mapData
-  //   console.log(object.address)
 
     return (
       <div>
@@ -252,7 +175,7 @@ firebase.database().ref(`users/${user.uid}/personal-info`).on('value', (snapshot
       <matchFeed  />
       <li><NavLink to="/protected/matchFeed">Match Feed</NavLink></li>
             <Route path="/protected/matchFeed" component={matchFeed}/>
-      <h3> Basic Messenger </h3>
+      
       <div>
       <CreateMatch />
       </div>

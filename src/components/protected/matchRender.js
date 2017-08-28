@@ -30,10 +30,9 @@ players.push(user.uid)
 
 firebase.database().ref(`matches/${this.props.match.id}/`).update({ players: players })
 
-//Questionable...
-ref.child(`users/${user.uid}/account-info/joinedGames`)
-.push({
-matchID
+//May need this for other info
+ref.child(`users/${user.uid}/account-info/joinedGames/${this.props.match.id}`)
+.set({ id: 0
 })
 //firebase.database().ref(`matches/${this.props.match.id}/players`).push(user.uid)
 this.setState({joined: true})
@@ -44,10 +43,20 @@ handleMessage(){}
 removeMatch(e){
        e.preventDefault();
        console.log("Remove Match")
-      //
+
+    const players = this.props.match.players
+
+
+    //can use address for advantage..
     //  make query for all children joined games with people joined,
     // run loop to delete the joined game
-   // ref.child(`matches/this.props.match.id/`).remove()
+
+    for (var i =0; i < players.length; i++){
+      console.log(players[i])
+    ref.child(`users/${players[i]}/account-info/joinedGames/${this.props.match.id}`).remove()
+}
+  // delete the match from firebase
+   ref.child(`matches/${this.props.match.id}/`).remove()
 
    }
 
