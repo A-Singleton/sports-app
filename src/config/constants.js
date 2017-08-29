@@ -13,3 +13,5 @@ firebase.initializeApp(config);
 
 export const ref = firebase.database().ref();
 export const firebaseAuth = firebase.auth;
+export const firebaseStorageRef = firebase.storage().ref();
+export const taskEvent = firebase.storage.TaskEvent;
