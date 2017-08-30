@@ -11,6 +11,7 @@ import TimePicker from 'react-bootstrap-time-picker';
 import Maps from './Maps'
 import ImageUpload from './ImageUpload'
 import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import Tournament from './Tournament'
 
 export default class Dashboard extends Component {
 
@@ -132,7 +133,7 @@ saveMatch(matchData, user)
 
       <Router>
       <div>
-  
+
            </div>
            </Router>
 
@@ -182,6 +183,8 @@ saveMatch(matchData, user)
            <br />
            </div>
          </form>
+
+         <Tournament />
 
       </div>
     )
