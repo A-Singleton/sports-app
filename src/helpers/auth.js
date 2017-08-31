@@ -16,6 +16,20 @@ export function resetPassword (email) {
   return firebaseAuth().sendPasswordResetEmail(email)
 }
 
+export function registerUser (info, user) {
+ref.child(`users/${user.uid}/personal-info`)
+.set({
+  email: user.email,
+  uid: user.uid,
+  FirstName: info.FirstName,
+  LastName: info.LastName,
+  BirthMonth: info.BirthMonth,
+  BirthDay: info.BirthDay,
+  BirthYear: info.BirthYear,
+  Gender: info.Gender
+})
+}
+
 export function saveMatch (newMatch, user) {
 
   ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {

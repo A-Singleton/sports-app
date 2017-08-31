@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { auth } from '../helpers/auth'
 import { ref, firebaseAuth } from '../config/constants'
+import { registerUser } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+
 
 function setErrorMsg(error) {
   return {
@@ -14,12 +16,20 @@ export default class Register extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    var first_Name_Var = this.fName.value;
-    var last_Name_Var = this.lName.value;
-    var month = this.month.value;
-    var day = this.day.value;
-    var year = this.year.value;
-    var gender = this.gender.value;
+    const registration = {
+      FirstName: this.fName.value,
+      LastName: this.lName.value,
+      BirthMonth: this.month.value,
+      BirthDay: this.day.value,
+      BirthYear: this.year.value,
+      Gender: this.gender.value
+}
+    // var first_Name_Var = this.fName.value;
+    // var last_Name_Var = this.lName.value;
+    // var month = this.month.value;
+    // var day = this.day.value;
+    // var year = this.year.value;
+    // var gender = this.gender.value;
 
     auth(this.email.value, this.pw.value)
       .catch(e => this.setState(setErrorMsg(e)))
@@ -27,17 +37,7 @@ export default class Register extends Component {
       firebaseAuth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-    ref.child(`users/${user.uid}/personal-info`)
-    .set({
-      email: user.email,
-      uid: user.uid,
-      FirstName: first_Name_Var,
-      LastName: last_Name_Var,
-      BirthMonth: month,
-      BirthDay: day,
-      BirthYear: year,
-      Gender: gender
-    })
+    registerUser(registration, user)
 
   } else {
     // No user is signed in.
