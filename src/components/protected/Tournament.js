@@ -3,6 +3,8 @@ import Maps from './Maps'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
+import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
+import { saveTournament, removeTournamentBackend } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
 
 export default class Tournament extends Component{
 
@@ -24,7 +26,7 @@ export default class Tournament extends Component{
 	teams:  [],                         // array of arrays? Or dynamically create entries in teams object
   // set later
 	//tournamentAdmin: user.uid      // Admin of tourney, default the creator
-  sports: ""     //for checbox group
+  //sports: ""     //for checbox group
   }
 
   this.handleSubmit = this.handleSubmit.bind(this)
@@ -43,12 +45,42 @@ handleChange(e){
 
 sportsChanged(newSports) {
   this.setState({
-    sports: newSports
+    sport: newSports
   });
 }
 
+removeTournament(e){
+       e.preventDefault();
+       console.log("Removing Tourney")
+    const players = this.props.match.confirmedPlayersplayers
+    // Call to firebase
+    removeTournamentBackend(players)
+   }
+
 onSubmit(e){
   e.preventDefault()
+
+  const tournamentData =  {
+  sport: this.sport.value,
+  gameDate: this.state.formatDate,
+  skill: this.skill.value,
+  matchTime: this.state.time,
+  mapDataAddress: this.state.mapDataAddress,
+  mapDataLat: this.state.mapDataLat,
+  mapDataLng: this.state.mapDataLng
+}
+
+firebaseAuth().onAuthStateChanged(function(user) {
+if (user) {
+
+// External function, handles upload to firebase
+saveTournament(tournamentData, user)
+
+
+} else {
+// No user is signed in. Cannot perform upload.
+}
+});
 }
 
 render(){

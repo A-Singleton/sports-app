@@ -128,30 +128,71 @@ return allMatches
 }
 
 export function displayMessages(matchKey) {
-   var allMessages = []
- ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
-   var messages = snapshot.val()
-   if (messages !== null){
-   console.log(messages)
+  var fbMessages = []
+  ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
+  //
+  // //const currentMessages = snapshot.val()
+  const currentMessages = snapshot.val()
+  //  blank.push(currentMessages)
 
-   //var keys = []
-   var keys = Object.keys(messages)
-   for (var i =0; i < keys.length; i++) {
-     var id = messages[i].id;
-     var text = messages[i].text;
+  //blank.push(currentMessages)
+  // need to put finishing touches on this
+  //
+  if (currentMessages != null){
+  // console.log('currentMessages')
+  // console.log(currentMessages)
+  // console.log(currentMessages[0].id)
+  // console.log(currentMessages[0].text)
+  var keys = []
+  var keys = Object.keys(currentMessages)
+  for(var i=0; i < currentMessages.length; i++ ){
+   var key = keys[i]
+   var id = currentMessages[i].id
+   var text = currentMessages[i].text
 
-     var nextMessage = {
-       id: id,
-       text: text
-     }
-
-     allMessages.push(nextMessage)
-     console.log(allMessages)
+   var message = {
+     key:key,
+     id: id,
+     text: text
    }
- }
+  //  console.log('message')
+  //  console.log(message)
+   fbMessages.push(message)
+   //fbMessages.concat(message)
+
+  }
+  }
+
 })
-console.log(allMessages)
- return allMessages
+// console.log('fbMessages')
+//   console.log(fbMessages)
+  return fbMessages
+
+  // var allMessages = []
+   //console.log(this.state.messages)
+//  ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
+//    var messages = snapshot.val()
+//    if (messages !== null){
+//    console.log(messages)
+//
+//    //var keys = []
+//    var keys = Object.keys(messages)
+//    for (var i =0; i < keys.length; i++) {
+//      var id = messages[i].id;
+//      var text = messages[i].text;
+//
+//      var nextMessage = {
+//        id: id,
+//        text: text
+//      }
+//
+//      allMessages.push(nextMessage)
+//      console.log(allMessages)
+//    }
+//  }
+// })
+// console.log(allMessages)
+//  return allMessages
 //
 
 // ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
@@ -229,4 +270,54 @@ uploadTask.on(taskEvent.STATE_CHANGED, // or 'state_changed'
 
 export function downloadImage(image) {
 //
+}
+
+
+export function saveTournament (tournamentData, user) {
+
+  ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+
+    var profile = snapshot.val()
+
+    const f_name = profile.FirstName
+    const l_name = profile.LastName
+
+    var newMatchKey = ref.child('tournaments').push().key
+
+      ref.child(`/tournaments/` + newMatchKey)
+      .update({
+        creator_first_name: f_name,
+        creator_last_name: l_name,
+        // sport: newMatch.sport,
+        // gameDate: newMatch.gameDate,
+        // skill: newMatch.skill,
+        // matchTime: newMatch.matchTime,
+        // mapDataAddress: newMatch.mapDataAddress,
+        // mapDataLat: newMatch.mapDataLat,
+        // mapDataLng: newMatch.mapDataLng,
+        // players: [user.uid],
+        creator: user.uid
+      })
+
+      ref.child(`users/${user.uid}/account-info/joinedTournaments/`+ newMatchKey)
+      .set({ id: 0
+      })
+
+          // ref.child(`users/${user.uid}/account-info`)
+          // .set({
+          //   joinedGames: newMatchKey
+          // })
+      })
+}
+
+export function removeTournamentBackend(players) {
+      //  make query for all children joined games with people joined,
+      // run loop to delete the joined game
+      for (var i =0; i < players.length; i++){
+        console.log(players[i])
+      ref.child(`users/${players[i]}/account-info/
+                                  joinedTournaments/${this.props.match.id}`).remove()
+  }
+    // delete the match from firebase
+     ref.child(`tournaments/${this.props.match.id}/`).remove()
 }

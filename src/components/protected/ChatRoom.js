@@ -16,24 +16,27 @@ export default class ChatRoom extends Component {
 
   componentDidMount(){
     const matchKey = this.props.matchkey
-  //  const blank = []
-     firebase.database().ref(`messages/${this.props.matchkey}/`).on('value', (snapshot)=> {
-    //
-    // //const currentMessages = snapshot.val()
-    const currentMessages = snapshot.val()
-  //  blank.push(currentMessages)
+     //const blank = []
+     const fbMessages = displayMessages(matchKey)
 
-  // need to put finishing touches on this
-  //  const currentMessages = displayMessages(matchKey)
-  //  console.log(currentMessages)
-
-      if (currentMessages != null){
-        this.setState({
-          messages: currentMessages
+       console.log('fbMessages Chatroom')
+       console.log(fbMessages)
+//      if (currentMessages != null){
+        this.setState(
+          {
+          messages: fbMessages
         })
-      }
-   })
+//      }
+    console.log('this.state.messages')
+    console.log(this.state.messages)
+//   })
+   //console.log('scope test')
+  //  //console.log(currentMessages)
+  //  console.log('scope test blank var')
+  //  console.log(blank)
   }
+
+
 
   updateMessage(event){
   //  console.log('updateMessage')
@@ -52,13 +55,14 @@ export default class ChatRoom extends Component {
 
   render(){
 
+    //if(this.state.messages !== undefined){
     const currentMessage = this.state.messages.map((message, i) => {
 
     return (
       <li key={message.id}>{message.text}</li>
     )
-    })
-
+})
+//}
     return(
       <div>
         <ol>

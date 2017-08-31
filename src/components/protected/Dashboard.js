@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
 import CreateMatch from './createMatch'
-import DatePicker from 'react-datepicker'
+//import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
 import matchFeed from './matchFeed'
@@ -25,9 +25,9 @@ export default class Dashboard extends Component {
       mapDataAddress: null,
       mapDataLat: null,
       mapDataLng: null,
+      startDate: null,
       newProfile: {
         sports : null,
-        startDate: moment(),
         formatDate: null,
         User: null
       }
@@ -50,14 +50,15 @@ export default class Dashboard extends Component {
 
   handleChange(date){
 
-    //console.log(formatDate)
-     this.setState({startDate: date,
-                    formatDate: date.format("MM/DD/YYYY")
+    //console.log(date)
+     this.setState({startDate: date
+                  //  formatDate: date.format("MM/DD/YYYY")
      });
+     console.log(this.startDate)
   }
 
   handleTimeChange(time) {
-  //  console.log(time);     // <- prints "3600" if "01:00" is picked
+    console.log(time);     // <- prints "3600" if "01:00" is picked
     this.setState({ time });
   }
 
@@ -225,16 +226,11 @@ saveMatch(matchData, user)
 
            </div>
 
-           <div style={divCheckbox} >
-           <label style={checkboxLabel}>2. Date</label>
-           <DatePicker
-           style={stdInput}
-           selected={this.state.startDate}
-           onChange={this.handleChange}
-           minDate={moment()}
-           maxDate={moment().add(65, "days")}
-           placeholderText="  Choose a Day..." />
+           <label htmlFor="example-datetime-local-input" className="col-2 col-form-label">Date and time</label>
+             <input className="form-control" type="datetime-local" value="2011-08-19T13:45:00" id="example-datetime-local-input"
+             onChange={this.handleChange}/>
 <br/>
+            <div>
            <label style={checkboxLabel}>3. Match Start Time </label>
            <TimePicker  onChange={this.handleTimeChange}
            value={this.state.time}

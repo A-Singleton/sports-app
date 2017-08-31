@@ -15,7 +15,11 @@ export default class matchFeed extends Component {
 componentDidMount(){
   //const user = firebaseAuth().currentUser
   const allMatches = getScheduledMatches()
+  console.log('allMatches')
+  console.log(allMatches)
     this.setState({ allMatches: allMatches})
+    console.log('allMatches')
+    console.log(allMatches)
 }
 
   render(){
