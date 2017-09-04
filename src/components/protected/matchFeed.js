@@ -18,12 +18,19 @@ componentDidMount(){
   console.log('allMatches')
   console.log(allMatches)
     this.setState({ allMatches: allMatches})
-    console.log('allMatches')
-    console.log(allMatches)
+    console.log('state allMatches')
+    console.log(this.state.allMatches)
 }
 
   render(){
-      const posts = this.state.allMatches.map((match, i) => {
+
+    console.log('render allMatches')
+    console.log(this.state.allMatches)
+      // var stateVar = this.state.allMatches
+      // console.log('render stateVar')
+      // console.log(stateVar)
+      var posts = this.state.allMatches.map((match, i) => {
+    //var posts = stateVar.map((match, i) => {
         return <MatchRender key={match.id} match={match} />
    })
     return(

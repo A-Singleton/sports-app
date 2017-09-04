@@ -1,5 +1,4 @@
 .then(() => user)
-
 //firebase.database().ref(`matches/${this.props.match.id}/players`).push(user.uid)
 
 //  <div className="col-sm-9">
@@ -460,3 +459,116 @@ user={this.state.User}
       // )
 
         //ref.child(`users/${user.uid}/personal-info`).update({profPic: this.state.file})
+
+
+
+            <div className="row">
+                <div className="col-md-2">
+                  Type:
+                </div>
+                <div className="col-md-10">
+                  <CheckboxGroup
+                     className="row"
+                     name="type">
+                    <Checkbox
+                       className="col-md-4"
+                       value="other"
+                       label="Other" />
+                    <Checkbox
+                       className="col-md-4"
+                       value="custom"
+                       label="Custom" />
+                  </CheckboxGroup>
+                </div>
+              </div>
+
+
+
+
+
+                              <h2> Create a Match: </h2>
+                         <form onSubmit={this.handleSubmit}>
+                         <label>Sport</label>
+                         <div className="form-group">
+                         <select id="sport" ref={(sport) => this.sport = sport}>
+                         <option disabled value>Sport</option>
+                         <option value="Tennis">Tennis</option>
+                         <option value="Badminton">Badminton</option>
+                         <option value="Basketball">Basketball</option>
+                         <option value="Soccer">Soccer</option>
+                         <option value="Softball">Softball</option>
+                         </select>
+
+                         </div>
+                         <label>Date</label>
+                         <div className="date">
+                         <DatePicker
+                         selected={this.state.startDate}
+                         onChange={this.handleChange}
+                         minDate={moment()}
+                         maxDate={moment().add(65, "days")}
+                         placeholderText="Choose a Day" />
+                         </div>
+
+                         <br/>
+                         <label> Match Start Time </label>
+                         <TimePicker onChange={this.handleTimeChange} value={this.state.time}
+                                                                  start="6:00" end="23:30"/>
+
+                         <br/>
+                         <Maps callbackFromParent={this.myCallback}/>
+
+                         <label>Skill Level</label>
+                         <div className="form-group">
+                         <select id="skill" ref={(skill) => this.skill = skill}>
+                         <option disabled value>Skill</option>
+                         <option value="Beginner">Beginner</option>
+                         <option value="Intermediate">Intermediate</option>
+                         <option value="Advanced">Advanced</option>
+                         </select>
+                         <br />
+                         <br />
+                         <button type="submit" className="btn btn-primary">Create</button>
+                         <br />
+                         </div>
+
+                         //
+                         // constructor(props){
+                         // super(props)
+                         //
+                         // this.enterChatHandler = this.enterChatHandler.bind(this)
+                         // }
+                         //
+                         // enterChatHandler(e){
+                         // e.preventDefault()
+                         // this.setState({submitted: true})
+                         // }
+                         //
+                         // render(){
+                         //   if(this.state.submitted){
+                         //     // Upon submission, Show messageing room
+                         //     return (
+                         //       <Chat />
+                         //     )
+                         //   }
+                         //
+                         // return(
+                         // <form onSubmit={this.enterChatHandler} className="enterChatHandler">
+                         //   <div>
+                         //   <button type="submit" className="btn btn-enter-chat"> Enter Chat </button>
+                         //   </div>
+                         // </form>
+                         // )}
+                         // }
+
+                         // <form onSubmit={this.usernameSubmitHandler} className="username-container">
+                         //   <h1>React Instant Chat</h1>
+                         //   <div>
+                         //     <input
+                         //       type="text"
+                         //       onChange={this.usernameChangeHandler}
+                         //       placeholder="Enter a username..."
+                         //       required />
+                         //   </div>
+                         //   <input type="submit" value="Submit" />
+                         // </form>

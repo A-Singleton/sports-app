@@ -35,7 +35,6 @@ export function saveMatch (newMatch, user) {
   ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
 
     var profile = snapshot.val()
-
     const f_name = profile.FirstName
     const l_name = profile.LastName
 
@@ -59,11 +58,6 @@ export function saveMatch (newMatch, user) {
       ref.child(`users/${user.uid}/account-info/joinedGames/`+ newMatchKey)
       .set({ id: 0
       })
-
-          // ref.child(`users/${user.uid}/account-info`)
-          // .set({
-          //   joinedGames: newMatchKey
-          // })
       })
 }
 
@@ -102,7 +96,7 @@ export function getScheduledMatches() {
   //console.log('allmatches')
   //console.log(matches)
 
-  var keys = []
+  //var keys = []
   var keys = Object.keys(matches)
       //console.log(keys)
 
@@ -143,10 +137,13 @@ return allMatches
 
 export function displayMessages(matchKey) {
   var fbMessages = []
+  //child_added could be of use here
   ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
   //
   // //const currentMessages = snapshot.val()
   const currentMessages = snapshot.val()
+  // console.log('currentMessages')
+  // console.log(currentMessages)
   //  blank.push(currentMessages)
 
   //blank.push(currentMessages)
@@ -157,20 +154,26 @@ export function displayMessages(matchKey) {
   // console.log(currentMessages)
   // console.log(currentMessages[0].id)
   // console.log(currentMessages[0].text)
-  var keys = []
+  //var keys = []
   var keys = Object.keys(currentMessages)
-  for(var i=0; i < currentMessages.length; i++ ){
-   var key = keys[i]
-   var id = currentMessages[i].id
-   var text = currentMessages[i].text
+  for(var i=0; i < keys.length; i++ ){
+   //var key = keys[i]
+  // var id = currentMessages[i].id
+
+   var id = keys[i]
+   var message = currentMessages[id].message
+   var username = currentMessages[id].username
+  //  console.log('id')
+  //  console.log(id)
 
    var message = {
-     key:key,
+     //key:key,
      id: id,
-     text: text
+     message: message,
+     username: username
    }
   //  console.log('message')
-  //  console.log(message)
+  //   console.log(message)
    fbMessages.push(message)
    //fbMessages.concat(message)
 
@@ -178,8 +181,8 @@ export function displayMessages(matchKey) {
   }
 
 })
-// console.log('fbMessages')
-//   console.log(fbMessages)
+ console.log('fbMessages')
+   console.log(fbMessages)
   return fbMessages
 
   // var allMessages = []
@@ -220,7 +223,8 @@ export function displayMessages(matchKey) {
 
 
 export function submitMessagesBackend(nextMessage, matchkey) {
-      ref.child(`messages/${matchkey}/` + nextMessage.id).set(nextMessage)
+      //ref.child(`messages/${matchkey}/` + nextMessage.id).set(nextMessage)
+      ref.child(`messages/${matchkey}/`).push(nextMessage)
 }
 
 export function uploadImage(file) {

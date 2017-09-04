@@ -101,7 +101,7 @@ render(){
 
   const divCheckbox = {
     textAlign: 'center',
-    display: 'table',
+  //  display: 'table',
     //justifyContent: 'center',
   //  float: 'left',
     display: 'inlineBlock',

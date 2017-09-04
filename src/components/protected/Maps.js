@@ -77,11 +77,11 @@ class Maps extends React.Component {
   }
 
   render() {
-    const cssClasses = {
-      // root: 'form-group',
-      // input: 'Demo__search-input',
-      // autocompleteContainer: 'Demo__autocomplete-container',
-    }
+    // const cssClasses = {
+    //   // root: 'form-group',
+    //   // input: 'Demo__search-input',
+    //   // autocompleteContainer: 'Demo__autocomplete-container',
+    // }
 
     const defaultStyles = {
     root: {

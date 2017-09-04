@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import * as firebase from "firebase"
 import { displayMessages, submitMessagesBackend } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
 
 export default class ChatRoom extends Component {
@@ -19,16 +18,16 @@ export default class ChatRoom extends Component {
      //const blank = []
      const fbMessages = displayMessages(matchKey)
 
-       console.log('fbMessages Chatroom')
-       console.log(fbMessages)
-//      if (currentMessages != null){
+      //  console.log('fbMessages Chatroom')
+      //  console.log(fbMessages)
+    //  if (fbMessages != null){
         this.setState(
           {
           messages: fbMessages
         })
-//      }
-    console.log('this.state.messages')
-    console.log(this.state.messages)
+  //    }
+    // console.log('this.state.messages')
+    // console.log(this.state.messages)
 //   })
    //console.log('scope test')
   //  //console.log(currentMessages)
@@ -54,7 +53,8 @@ export default class ChatRoom extends Component {
   }
 
   render(){
-
+    // console.log('render messages')
+    // console.log(this.state.messages)
     //if(this.state.messages !== undefined){
     const currentMessage = this.state.messages.map((message, i) => {
 

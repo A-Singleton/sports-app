@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { auth } from '../helpers/auth'
-import { ref, firebaseAuth } from '../config/constants'
+import { firebaseAuth } from '../config/constants'
 import { registerUser } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
 
 

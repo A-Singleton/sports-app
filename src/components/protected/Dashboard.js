@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
-import CreateMatch from './createMatch'
+//import CreateMatch from './createMatch'
 //import DatePicker from 'react-datepicker'
-import moment from 'moment'
+//import moment from 'moment'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
 import matchFeed from './matchFeed'
 import 'react-datepicker/dist/react-datepicker.css';
@@ -12,6 +12,7 @@ import Maps from './Maps'
 import ImageUpload from './ImageUpload'
 import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
 import Tournament from './Tournament'
+import ChatButton from './ChatButton'
 
 export default class Dashboard extends Component {
 
@@ -34,6 +35,8 @@ export default class Dashboard extends Component {
     }
      this.handleChange = this.handleChange.bind(this);
      this.handleTimeChange = this.handleTimeChange.bind(this);
+     this.handleChangeUser = this.handleChangeUser.bind(this)
+     this.handleChangeGuest = this.handleChangeGuest.bind(this)
   }
 
   sportsChanged(newSports) {
@@ -60,6 +63,14 @@ export default class Dashboard extends Component {
   handleTimeChange(time) {
     console.log(time);     // <- prints "3600" if "01:00" is picked
     this.setState({ time });
+  }
+
+  handleChangeUser(value){
+    value.preventDefault()
+  }
+
+  handleChangeGuest(value){
+    value.preventDefault()
   }
 
   myCallback = (dataFromMaps) => {
@@ -116,7 +127,7 @@ saveMatch(matchData, user)
 
     const divCheckbox = {
       textAlign: 'center',
-      display: 'table',
+      //display: 'table',
       //justifyContent: 'center',
     //  float: 'left',
       display: 'inlineBlock',
@@ -166,6 +177,12 @@ saveMatch(matchData, user)
     width: '100%',
 //    width: '200px'
     };
+
+    const horInput = {
+      padding: "2px",
+      width: '40px',
+      margin: "10px",
+    }
 
 
     return (
@@ -260,6 +277,22 @@ saveMatch(matchData, user)
          </form>
 </div>
          <Tournament />
+         
+
+         <div style={divStyle}>
+
+         <h2 style={headerStyle2}> How did the match go? </h2>
+
+         <label> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> You <input style={horInput} className="match-report-user" type="number"
+         onChange={this.handleChangeUser}/></label>
+         to
+         <label> <input style={horInput} className="match-report-guest" type="number"
+         onChange={this.handleChangeGuest}/> Your Guest <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/></label>
+         <br/>
+          <button type="submit" className="btn btn-primary">Submit the Result</button>
+         </div>
+
+
 </div>
 
 
