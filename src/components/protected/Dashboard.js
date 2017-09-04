@@ -27,6 +27,7 @@ export default class Dashboard extends Component {
       mapDataLat: null,
       mapDataLng: null,
       startDate: null,
+      matchkeyTest: "-Ks1L59ZoCcdyWZ3Xa7g",
       newProfile: {
         sports : null,
         formatDate: null,
@@ -209,10 +210,13 @@ saveMatch(matchData, user)
       <ImageUpload />
 
       <br />
-      <matchFeed  />
+
       <li><NavLink to="/protected/matchFeed">Match Feed</NavLink></li>
             <Route path="/protected/matchFeed" component={matchFeed}/>
 
+            <li><NavLink to="/protected/ChatButton">Chat Button Test</NavLink></li>
+                  <Route path="/protected/ChatButton" component={ChatButton}/>
+                  <ChatButton matchkey={this.state.matchkeyTest} />
       <div>
 
       </div>
@@ -277,7 +281,7 @@ saveMatch(matchData, user)
          </form>
 </div>
          <Tournament />
-         
+
 
          <div style={divStyle}>
 

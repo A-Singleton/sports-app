@@ -47,7 +47,7 @@ const messageBody = {
 
 const fromMeStyle = this.props.username === user ? messageFromMe : message
 const fromMeBodyStyle = this.props.username === user ? messageFromMeMessageBody : messageBody
-
+console.log('Entered Message Component')
 console.log('this.props.message')
 console.log(this.props.message)
 

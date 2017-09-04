@@ -5,7 +5,7 @@ import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Dashboard from './protected/Dashboard'
-
+import ChatButton from './protected/ChatButton'
 import matchFeed from './protected/matchFeed'
 
 import { logout } from '../helpers/auth'
@@ -97,6 +97,7 @@ export default class App extends Component {
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
 
                 <PrivateRoute authed={this.state.authed} path='/protected/matchFeed' component={matchFeed} />
+                <PrivateRoute authed={this.state.authed} path='/protected/ChatButton' component={ChatButton} />
 
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>

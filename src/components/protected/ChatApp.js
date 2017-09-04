@@ -10,11 +10,14 @@ constructor(props){
   this.sendHandler = this.sendHandler.bind(this)
   // console.log(this.props.matchkey)
   // console.log(this.props.user)
-  const fbMessages = displayMessages(this.props.matchkey)
-    console.log('fbMessages')
-  console.log(fbMessages)
   //this.setState({ messages: fbMessages })
-  this.addMessage(fbMessages)
+}
+
+componentDidMount(){
+  const fbMessages = displayMessages(this.props.matchkey)
+  console.log('fbMessages')
+  console.log(fbMessages)
+  this.setState({messages: fbMessages})
 }
 
 sendHandler(message) {
@@ -26,18 +29,19 @@ sendHandler(message) {
   console.log('this.props.matchKey')
   console.log(this.props.matchkey)
 
+
   submitMessagesBackend(messageObj, this.props.matchkey)
   //messageObj.fromMe = true
-  this.addMessage(messageObj)
+  //this.addMessage(messageObj)
 }
 
-addMessage(message){
-  const messages = this.state.messages
-  console.log('messages')
-  console.log(messages)
-  messages.push(message)
-  this.setState({ messages })
-}
+// addMessage(message){
+//   //const messages = this.state.messages
+//   console.log('messages')
+//   console.log(this.state.messages)
+//   messages.push(message)
+//   this.setState({ messages })
+// }
 
 //
 //
