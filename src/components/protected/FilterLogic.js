@@ -1,4 +1,9 @@
-var ProductTable = React.createClass({
+import React, { Component } from 'react'
+import ProductCategoryRow from './ProductCategoryRow'
+import ProductRow from './ProductRow'
+//var ProductTable = React.createClass({
+
+export default class FilterLogic extends Component{
 
   render() {
     var rows = [];
@@ -19,11 +24,11 @@ var ProductTable = React.createClass({
         <thead>
           <tr>
             <th>Name</th>
-            <th>Price</th>
+            <th>Rank</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
       </table>
     );
   }
-});
+}

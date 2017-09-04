@@ -139,11 +139,12 @@ export function displayMessages(matchKey) {
   var fbMessages = []
   //child_added could be of use here
   ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
+  //ref.child(`messages/${matchKey}/`).on('child_added', (snapshot)=> {
   //
   // //const currentMessages = snapshot.val()
   const currentMessages = snapshot.val()
   // console.log('currentMessages')
-  // console.log(currentMessages)
+   console.log(currentMessages)
   //  blank.push(currentMessages)
 
   //blank.push(currentMessages)
@@ -338,4 +339,9 @@ export function removeTournamentBackend(players) {
   }
     // delete the match from firebase
      ref.child(`tournaments/${this.props.match.id}/`).remove()
+}
+
+export function recordMatch(hostScore, awayScore, hostID, awayID){
+  // ref.child(`users/${players[i]}/account-info/
+  //                             /${this.props.match.id}`)
 }

@@ -13,6 +13,7 @@ import ImageUpload from './ImageUpload'
 import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
 import Tournament from './Tournament'
 import ChatButton from './ChatButton'
+import FinalFriendsComp from './FinalFriendsComp'
 
 export default class Dashboard extends Component {
 
@@ -185,6 +186,11 @@ saveMatch(matchData, user)
       margin: "10px",
     }
 
+    const PRODUCTS = [
+      {category: 'Best Friends', rank: '1239', stocked: true, name: 'Jim Rogers'},
+      {category: 'Best Friends', rank: '566', stocked: true, name: 'Kay Winslett'},
+      {category: 'Best Friends', rank: '21', stocked: true, name: 'Yuan Wang'},
+    ]
 
     return (
       <div>
@@ -296,6 +302,7 @@ saveMatch(matchData, user)
           <button type="submit" className="btn btn-primary">Submit the Result</button>
          </div>
 
+         <FinalFriendsComp products={PRODUCTS}/>
 
 </div>
 

@@ -20,6 +20,7 @@ componentDidMount(){
   this.setState({messages: fbMessages})
 }
 
+// Add error handling logic here
 sendHandler(message) {
   const messageObj = {
     username: this.props.user,
@@ -32,22 +33,23 @@ sendHandler(message) {
 
   submitMessagesBackend(messageObj, this.props.matchkey)
   //messageObj.fromMe = true
-  //this.addMessage(messageObj)
+//  this.addMessage(messageObj.message)
 }
 
 // addMessage(message){
 //   //const messages = this.state.messages
 //   console.log('messages')
 //   console.log(this.state.messages)
-//   messages.push(message)
-//   this.setState({ messages })
+//   var messagesCopy = this.state.messages
+//   messagesCopy.push(message)
+//   console.log('messages Copy')
+//   console.log(messagesCopy)
+//   this.setState({ messages: messagesCopy })
 // }
 
 //
 //
 //
-
-
 render(){
   const h3 = {
     textAlign: 'center',

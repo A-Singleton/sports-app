@@ -41,6 +41,7 @@ const messageBody = {
     color: 'white',
   }
 
+// Change for names
   const messageFromMeUsername = {
     display: 'none',
   }
@@ -53,7 +54,7 @@ console.log(this.props.message)
 
   return(
     <div style={fromMeStyle} className={`message ${fromMe}`}>
-      <div className='username'>
+      <div style={messageFromMeUsername} className='username'>
       { this.props.username }
     </div>
     <div style={fromMeBodyStyle} className='message-body'>
