@@ -181,6 +181,10 @@ saveMatch(matchData, user)
       margin: "10px",
     }
 
+    const h2 = {
+      textAlign: 'center',
+    }
+
     const PRODUCTS = [
       {category: 'Best Friends', rank: '1239', stocked: true, name: 'Jim Rogers'},
       {category: 'Best Friends', rank: '566', stocked: true, name: 'Kay Winslett'},
@@ -208,11 +212,12 @@ saveMatch(matchData, user)
                    </div>
       <br />
 
+      <h3> Update Profile Picture </h3>
       <ImageUpload />
 
       <br />
 
-      <li><NavLink to="/protected/matchFeed">Match Feed</NavLink></li>
+      <li><NavLink to="/protected/matchFeed">Click here to see the Match Feed</NavLink></li>
             <Route path="/protected/matchFeed" component={matchFeed}/>
       <div>
       </div>
@@ -221,6 +226,7 @@ saveMatch(matchData, user)
            </div>
            </Router>
 
+           <h2 style={h2}> Mockups </h2>
            <div style={divStyle}>
 
            <h2 style={headerStyle2}> Create a Match! </h2>
@@ -288,6 +294,7 @@ saveMatch(matchData, user)
           <button type="submit" className="btn btn-primary">Submit the Result</button>
          </div>
 
+         <h2 style={h2}> Invite to Match demo </h2>
          <FinalFriendsComp products={PRODUCTS}/>
 
 </div>
