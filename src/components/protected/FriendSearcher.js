@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-//var ProductTable = React.createClass({
 
 export default class FriendSearcher extends Component{
 constructor(props){
   super(props)
   this.handleChange = this.handleChange.bind(this)
 }
-//var SearchBar = React.createClass({
 
   handleChange() {
     this.props.onUserInput(
@@ -34,7 +32,7 @@ constructor(props){
             onChange={this.handleChange}
           />
           {' '}
-          Only show products in stock
+          Show only friends that play this sport
         </p>
       </form>
     )

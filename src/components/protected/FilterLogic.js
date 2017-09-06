@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import ProductCategoryRow from './ProductCategoryRow'
-import ProductRow from './ProductRow'
-//var ProductTable = React.createClass({
+import FriendCategoryRow from './FriendCategoryRow'
+import FriendRowInfo from './FriendRowInfo'
 
 export default class FilterLogic extends Component{
 
@@ -13,9 +12,9 @@ export default class FilterLogic extends Component{
         return;
       }
       if (product.category !== lastCategory) {
-        rows.push(<ProductCategoryRow category={product.category} key={product.category} />);
+        rows.push(<FriendCategoryRow category={product.category} key={product.category} />);
       }
-      rows.push(<ProductRow product={product} key={product.name} />);
+      rows.push(<FriendRowInfo product={product} key={product.name} />);
       lastCategory = product.category;
     }.bind(this));
 

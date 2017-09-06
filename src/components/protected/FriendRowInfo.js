@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-export default class ProductRow extends Component{
+export default class FriendRowInfo extends Component{
 
   constructor(props){
     super(props)

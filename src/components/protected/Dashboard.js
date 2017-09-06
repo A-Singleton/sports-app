@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
-//import CreateMatch from './createMatch'
-//import DatePicker from 'react-datepicker'
-//import moment from 'moment'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
 import matchFeed from './matchFeed'
 import 'react-datepicker/dist/react-datepicker.css';
@@ -12,7 +9,6 @@ import Maps from './Maps'
 import ImageUpload from './ImageUpload'
 import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
 import Tournament from './Tournament'
-import ChatButton from './ChatButton'
 import FinalFriendsComp from './FinalFriendsComp'
 
 export default class Dashboard extends Component {
@@ -28,7 +24,6 @@ export default class Dashboard extends Component {
       mapDataLat: null,
       mapDataLng: null,
       startDate: null,
-      matchkeyTest: "-Ks1L59ZoCcdyWZ3Xa7g",
       newProfile: {
         sports : null,
         formatDate: null,
@@ -219,21 +214,12 @@ saveMatch(matchData, user)
 
       <li><NavLink to="/protected/matchFeed">Match Feed</NavLink></li>
             <Route path="/protected/matchFeed" component={matchFeed}/>
-
-            <li><NavLink to="/protected/ChatButton">Chat Button Test</NavLink></li>
-                  <Route path="/protected/ChatButton" component={ChatButton}/>
-                  <ChatButton matchkey={this.state.matchkeyTest} />
       <div>
-
       </div>
-
-
       <Router>
       <div>
-
            </div>
            </Router>
-
 
            <div style={divStyle}>
 
