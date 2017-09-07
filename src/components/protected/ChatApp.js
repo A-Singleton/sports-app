@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {submitMessagesBackend, displayMessages} from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import {submitMessagesBackend, displayMessages} from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import Messages from './Messages'
 import ChatInput from './ChatInput'
 

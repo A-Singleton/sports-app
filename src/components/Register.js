@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { auth } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
-import { registerUser } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import { registerUser } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 
 function setErrorMsg(error) {

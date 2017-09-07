@@ -3,8 +3,8 @@ import Maps from './Maps'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
-import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
-import { saveTournament, removeTournamentBackend } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import { saveTournament, removeTournamentBackend } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class Tournament extends Component{
 

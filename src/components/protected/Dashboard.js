@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, NavLink} from 'react-router-dom'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
-import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
+import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import matchFeed from './matchFeed'
 import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'react-bootstrap-time-picker';
 import Maps from './Maps'
 import ImageUpload from './ImageUpload'
-import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import Tournament from './Tournament'
 import FinalFriendsComp from './FinalFriendsComp'
 

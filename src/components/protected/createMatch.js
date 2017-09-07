@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-//import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
+//import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import * as firebase from "firebase"
 
 export default class CreateMatch extends Component {
