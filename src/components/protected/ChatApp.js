@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {submitMessagesBackend, displayMessages} from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import {submitMessagesBackend, displayMessages} from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import Messages from './Messages'
 import ChatInput from './ChatInput'
 
@@ -8,16 +8,40 @@ constructor(props){
   super(props)
   this.state = { messages: [] }
   this.sendHandler = this.sendHandler.bind(this)
+  this.loadMessages = this.loadMessages.bind(this)
   // console.log(this.props.matchkey)
   // console.log(this.props.user)
   //this.setState({ messages: fbMessages })
 }
 
 componentDidMount(){
-  const fbMessages = displayMessages(this.props.matchkey)
-  console.log('fbMessages')
+  const fbMessages = this.loadMessages(this.props.matchkey)
+  // const fbMessages = displayMessages(this.props.matchkey)
+  // console.log('fbMessages')
+  // console.log(fbMessages)
+   this.setState({messages: fbMessages})
+}
+
+componentDidUpdate(){
+  console.log("Comp did update")
+
+  const fbMessages = this.loadMessages(this.props.matchkey)
+  console.log("len of fbMessages")
+  console.log(fbMessages.length)
+  console.log("Len of state messages")
+  console.log(this.state.messages.length)
+
+  if (fbMessages.length !== this.state.messages.length){
+    console.log("Weird exception")
+    this.setState({messages: fbMessages})
+  }
+}
+
+loadMessages(matchkey){
+  const fbMessages = displayMessages(matchkey)
+  console.log('load messages')
   console.log(fbMessages)
-  this.setState({messages: fbMessages})
+  return(fbMessages)
 }
 
 // Add error handling logic here
@@ -32,9 +56,18 @@ sendHandler(message) {
 
 
   submitMessagesBackend(messageObj, this.props.matchkey)
+
+
   //messageObj.fromMe = true
-//  this.addMessage(messageObj.message)
+  this.addMessage(messageObj.message)
 }
+
+addMessage(message) {
+    // Append the message to the component state
+    const messages = this.state.messages;
+    messages.push(message);
+    this.setState({ messages });
+  }
 
 // addMessage(message){
 //   //const messages = this.state.messages

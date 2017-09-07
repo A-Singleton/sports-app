@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { displayMessages, submitMessagesBackend } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import { displayMessages, submitMessagesBackend } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class ChatRoom extends Component {
 

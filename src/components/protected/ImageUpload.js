@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/config/constants'
-import { uploadImage } from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import { uploadImage } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class ImageUpload extends Component {
   constructor(props) {

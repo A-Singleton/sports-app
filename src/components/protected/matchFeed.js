@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import MatchRender from './MatchRender'
-import {getScheduledMatches} from 'C:/Users/Duwan_000/Documents/GitHub/react-router-firebase-auth/src/helpers/auth.js'
+import MatchRender from './matchRender'
+import {getScheduledMatches} from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class matchFeed extends Component {
 
