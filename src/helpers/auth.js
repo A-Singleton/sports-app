@@ -1,4 +1,4 @@
-import { ref, firebaseAuth, firebaseStorageRef, taskEvent } from '../config/constants'
+import { ref, firebaseAuth, firebaseStorageRef, taskEvent, db } from '../config/constants'
 
 export function auth (email, pw) {
   return firebaseAuth().createUserWithEmailAndPassword(email, pw)
@@ -89,7 +89,8 @@ export function joinMatch(user, players, matchID) {
 export function getScheduledMatches() {
   //console.log(this.state.User.uid)
   var allMatches = []
-  ref.child(`matches/`).on('value', (snapshot)=> {
+  //ref.child(`matches/`).on('value', (snapshot)=> {
+  db.ref(`matches/`).on('value', (snapshot)=> {
 
 //  var matchesInfo = []
   var matches = snapshot.val()
@@ -167,7 +168,7 @@ export function displayMessages(matchKey) {
   //  console.log('id')
   //  console.log(id)
 
-   var message = {
+   var newMessage = {
      //key:key,
      id: id,
      message: message,
@@ -175,7 +176,7 @@ export function displayMessages(matchKey) {
    }
   //  console.log('message')
   //   console.log(message)
-   fbMessages.push(message)
+   fbMessages.push(newMessage)
    //fbMessages.concat(message)
 
   }
