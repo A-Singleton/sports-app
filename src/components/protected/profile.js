@@ -3,6 +3,25 @@ import React, { Component } from 'react'
 export default class profile extends Component {
 
   render () {
+
+    const profileText = {
+      margin: '0px',
+      marginLeft: '250px'
+    }
+
+    const headerStyle3 = {
+      color: 'white',
+      background: "SteelBlue",
+      textAlign: 'center',
+      padding: "3px",
+      margin: "40px",
+      width: "158x",
+      whiteSpace: 'nowrap',
+      border: '1px solid #000',
+      padding: '20px',
+      marginTop: '80px'
+    };
+    
 return (
 <div className="profile-page">
   <div className="profile" style={profile}>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
+//import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import matchFeed from './matchFeed'
 import 'react-datepicker/dist/react-datepicker.css';
@@ -11,7 +11,11 @@ import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/he
 import Tournament from './Tournament'
 import FinalFriendsComp from './FinalFriendsComp'
 import MatchFeed from './matchFeed'
-import { Form,  FormGroup, FormControl, Col, Button, ControlLabel, Navbar, NavDropdown, NavItem, Nav, MenuItem} from 'react-bootstrap'
+import { Cell, Box, Checkbox, Grid, Row, Radio, Form,  FormGroup, FormControl, Col, Button, ControlLabel, Navbar, NavDropdown, NavItem, Nav, MenuItem} from 'react-bootstrap'
+import Background from '../images/tennis_background.jpg';
+import Profile from './profile'
+import EditProfile from './editProfile'
+
 
 export default class Dashboard extends Component {
 
@@ -177,7 +181,8 @@ saveMatch(matchData, user)
       width: "158x",
       whiteSpace: 'nowrap',
       border: '1px solid #000',
-      padding: '20px'
+      padding: '20px',
+      marginTop: '80px'
     };
 
     const checkbox = {
@@ -216,36 +221,38 @@ saveMatch(matchData, user)
     ]
 
     const navbarHeader = {
-    color: 'white',
-     background: '#F16E10'
+    color: 'black',
+  //   background: "turquoise"
 }
 
 const navItem = {
   color: 'white'
 }
+
+const backImg = {
+   width: "100%",
+   height: "270px",
+   border: '2px solid #000',
+   //rightMargin: '150px',
+  backgroundSize: 'cover',
+    backgroundImage: `url(${Background})`
+}
+
+const blue = {
+  primary:'blue'
+}
+
+const pushTopMargin = {
+  marginTop: ' 30px '
+}
+
+const pushRightMargin = {
+  marginTop: ' 60px '
+}
+
     return (
       <div>
-      <Navbar style={navbarHeader} inverse collapseOnSelect>
-   <Navbar.Header>
-     <Navbar.Brand>
-       <a href="#">React-Bootstrap</a>
-     </Navbar.Brand>
-     <Navbar.Toggle />
-   </Navbar.Header>
-   <Navbar.Collapse>
-     <Nav >
-       <NavItem eventKey={1} href="#">Link</NavItem>
-       <NavItem eventKey={2} href="#">Link</NavItem>
-       <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-         <MenuItem eventKey={3.1}>Action</MenuItem>
-         <MenuItem eventKey={3.2}>Another action</MenuItem>
-         <MenuItem eventKey={3.3}>Something else here</MenuItem>
-         <MenuItem divider />
-         <MenuItem eventKey={3.3}>Separated link</MenuItem>
-       </NavDropdown>
-     </Nav>
-   </Navbar.Collapse>
- </Navbar>
+      <EditProfile />
      </div>
     )
   }

@@ -1,11 +1,21 @@
 import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
+import ImageUpload from './ImageUpload'
 
 export default class editProfile extends Component {
 
   render () {
+
+    const profileText = {
+      margin: '0px',
+      marginLeft: '250px'
+    }
+
 return (
   <div>
+  <div className="title h5" style={profileText}>
+   <h3><strong> Edit Your Profile </strong> </h3>
+   </div>
   <img className="img-square avatar" src="http://placehold.it/200x200" alt=""/>
   <ImageUpload />
   <br/>
