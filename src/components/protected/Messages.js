@@ -25,23 +25,7 @@ render() {
 console.log('this.props.messages')
  console.log(this.props.messages)
 
-
- // const testMessages = this.props.messages.map((message, i) => {
- //   console.log('message.test')
- //   console.log('i')
- //   console.log(i)
- //   console.log('message')
- //   console.log(message)
- //
- //   return(
- //          <div> message </div>
- //   )
- // })
-
-// const messages = null
-// if(this.props.messages.length !== 1){
   const messages = this.props.messages.map((message, i) => {
-  //  console.log(message[0])
     console.log('message.message')
     console.log(i)
      console.log(message)

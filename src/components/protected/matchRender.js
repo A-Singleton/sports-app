@@ -42,7 +42,7 @@ renderjoin(e){
 }
 
   render(){
-    console.log('entered')
+    console.log('entered match Render')
     const user = firebaseAuth().currentUser.uid
     let button = null
 
@@ -98,16 +98,11 @@ renderjoin(e){
             </div>
             {button}
             <div className="actions">
-              <a href="#" className="btn btn-default stat-item"></a>
-
-              <a onClick={this.renderjoin}  href="#" className="btn btn-default stat-item">
-                               <i className="fa fa-thumbs-up icon"></i>
-                           </a>
         </div>
 
         <ChatButton matchkey={this.props.match.id}/>
 
-        <ChatRoom matchkey={this.props.match.id}/>
+
 
       </div>
     )
