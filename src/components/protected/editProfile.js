@@ -10,6 +10,7 @@ import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src
 // 3. Multi Selection support
 // 4. Lock glyphicons w/ private popup
 // 5. Instructional gray bottom text
+// 6. Prepopulate info
 
 export default class editProfile extends Component {
 
@@ -22,30 +23,49 @@ constructor(props){
     gender:'',
     location: '',
     favSports: [],
-    aboutUser: ''
+    aboutUser: '',
+    profInfo: ''
   }
 }
 
 componentDidMount(){
+  const that = this
   firebaseAuth().onAuthStateChanged(function(user) {
 if (user) {
 // User is signed in.
-const profileInfo = getProfileInfo(user)
+// const test = {}
+// setTimeout(function()
+// {
+//   console.log('entered timeout')
+    const profileInfo = that.loadProfile(user)
+//     test.fName = profileInfo.fName
+// }, 100);
 
+console.log(Object.keys(profileInfo))
+console.log(JSON.stringify(profileInfo))
 console.log(profileInfo)
-profileInfo.forEach(function(item){
-  console.log(item.FirstName)
-})
 
-const test = profileInfo.map((info, i) => {
-  console.log('info')
-  console.log(i)
-   console.log(info)
-   console.log(info.FirstName)
-  return(
-    null
-  )
-})
+that.setState({fName: profileInfo})
+
+setTimeout(function () {
+  console.log('Timeout')
+  console.log(Object.keys(profileInfo))
+  console.log(JSON.stringify(profileInfo))
+    console.log(profileInfo)
+});
+// profileInfo.forEach(function(item){
+//   console.log(item.FirstName)
+// })
+
+// const test = profileInfo.map((info, i) => {
+//   console.log('info')
+//   console.log(i)
+//    console.log(info)
+//    console.log(info.FirstName)
+//   return(
+//     null
+//   )
+// })
 
 
 //const test = profileInfo.map(info, i)
@@ -58,6 +78,13 @@ const test = profileInfo.map((info, i) => {
 })
 
 }
+
+loadProfile = (user) => {
+    const profInfo = getProfileInfo(user)    //voila!
+    console.log(profInfo)
+    this.setState({profInfo: profInfo})
+    return profInfo
+  };
 
 handleChangeFname = (event) => {
   console.log(event.target.value)
@@ -119,6 +146,7 @@ handleChangeFname = (event) => {
 
 return (
   <div>
+  {this.state.profInfo.fName}
   <div className="title h5" style={profileText}>
    <h3><strong> Edit Your Profile </strong> </h3>
    </div>

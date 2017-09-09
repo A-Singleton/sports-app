@@ -5,6 +5,11 @@ import moment from 'moment'
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import { saveTournament, removeTournamentBackend } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import {Bracket} from 'react-tournament-bracket';
+import JSOG from 'jsog'
+import _ from 'underscore'
+import BracketDemo from './bracketDemo'
+
 
 export default class Tournament extends Component{
 
@@ -141,6 +146,12 @@ render(){
 display: 'inlineBlock',
   width: '100%',
   };
+const game = {
+  id:0
+}
+// <Bracket game={game}/>
+
+//console.log(this.props.demoData)
 
 
   return(
@@ -192,6 +203,9 @@ display: 'inlineBlock',
     <button type="submit" className="btn btn-primary">Confirm Tournament</button>
 
   </form>
+
+<BracketDemo />
+
  </div>
 
   )

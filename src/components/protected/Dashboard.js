@@ -15,7 +15,8 @@ import { Cell, Box, Checkbox, Grid, Row, Radio, Form,  FormGroup, FormControl, C
 import Background from '../images/tennis_background.jpg';
 import Profile from './profile'
 import EditProfile from './editProfile'
-
+import DEMO_DATA from './demoData'
+import MatchReport from './MatchReport'
 
 export default class Dashboard extends Component {
 
@@ -252,7 +253,7 @@ const pushRightMargin = {
 
     return (
       <div>
-      <EditProfile />
+      <MatchReport />
      </div>
     )
   }

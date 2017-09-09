@@ -87,25 +87,15 @@ export function joinMatch(user, players, matchID) {
 
 
 export function getScheduledMatches() {
-  //console.log(this.state.User.uid)
+
   var allMatches = []
-  //ref.child(`matches/`).on('value', (snapshot)=> {
   db.ref(`matches/`).on('value', (snapshot)=> {
 
-//  var matchesInfo = []
   var matches = snapshot.val()
-  //console.log('allmatches')
-  //console.log(matches)
-
-  //var keys = []
   var keys = Object.keys(matches)
-      //console.log(keys)
 
       for (var i =0; i < keys.length; i++) {
-        //var id = matches[k].key
-        //console.log(id)
         var k = keys[i];
-      //  var match = matches[k];
         var skill = matches[k].skill;
         var sport = matches[k].sport;
         var date = matches[k].gameDate;
@@ -113,9 +103,6 @@ export function getScheduledMatches() {
         var players = matches[k].players;
         var creator_first_name = matches[k].creator_first_name;
         var creator_last_name = matches[k].creator_last_name;
-
-// console.log('players')
-//   console.log(players)
 
   var nextMatch = {
     id: k,
@@ -126,11 +113,7 @@ export function getScheduledMatches() {
     creator: creator_query,
     creatorName: creator_first_name + " " + creator_last_name
   }
-
   allMatches.push(nextMatch)
-//  console.log('allMatches')
-//  console.log(allMatches)
-
 }
 })
 return allMatches
@@ -140,45 +123,25 @@ export function displayMessages(matchKey) {
   var fbMessages = []
   //child_added could be of use here
   ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
-  //ref.child(`messages/${matchKey}/`).on('child_added', (snapshot)=> {
-  //
-  // //const currentMessages = snapshot.val()
-  const currentMessages = snapshot.val()
-  // console.log('currentMessages')
-   console.log(currentMessages)
-  //  blank.push(currentMessages)
 
-  //blank.push(currentMessages)
-  // need to put finishing touches on this
-  //
+  const currentMessages = snapshot.val()
+   console.log(currentMessages)
+
   if (currentMessages != null){
-  // console.log('currentMessages')
-  // console.log(currentMessages)
-  // console.log(currentMessages[0].id)
-  // console.log(currentMessages[0].text)
-  //var keys = []
+
   var keys = Object.keys(currentMessages)
   for(var i=0; i < keys.length; i++ ){
-   //var key = keys[i]
-  // var id = currentMessages[i].id
 
    var id = keys[i]
    var message = currentMessages[id].message
    var username = currentMessages[id].username
-  //  console.log('id')
-  //  console.log(id)
 
    var newMessage = {
-     //key:key,
      id: id,
      message: message,
      username: username
    }
-  //  console.log('message')
-  //   console.log(message)
    fbMessages.push(newMessage)
-   //fbMessages.concat(message)
-
   }
   }
 
@@ -190,7 +153,6 @@ export function displayMessages(matchKey) {
 
 
 export function submitMessagesBackend(nextMessage, matchkey) {
-      //ref.child(`messages/${matchkey}/` + nextMessage.id).set(nextMessage)
       ref.child(`messages/${matchkey}/`).push(nextMessage)
 }
 
@@ -288,10 +250,6 @@ export function saveTournament (tournamentData, user) {
       .set({ id: 0
       })
 
-          // ref.child(`users/${user.uid}/account-info`)
-          // .set({
-          //   joinedGames: newMatchKey
-          // })
       })
 }
 
@@ -307,10 +265,57 @@ export function removeTournamentBackend(players) {
      ref.child(`tournaments/${this.props.match.id}/`).remove()
 }
 
-export function recordMatch(hostScore, awayScore, hostID, awayID){
-  // ref.child(`users/${players[i]}/account-info/
-  //                             /${this.props.match.id}`)
-}
+  // TODO: Send arrays of winners to update, and losers
+export function recordMatch(hostScore, awayScore, hostID, awayID, matchID){
+
+  if(hostScore > awayScore){
+  //  hostID.map(id, i){
+  // ref.child(`users/${id}/account-info/won-matches
+  //                               /${matchID}`)
+//  ref.child(`users/${id}/account-info/
+//                              joinedGames/${matchID}`).remove()
+// }
+
+//  awayID.map(id, i){
+// ref.child(`users/${id}/account-info/lost-matches
+//                               /${matchID}`)
+//  ref.child(`users/${id}/account-info/
+//                              joinedGames/${matchID}`).remove()
+//}
+  }
+
+  else if(hostScore < awayScore){
+    //  hostID.map(id, i){
+    // ref.child(`users/${id}/account-info/lost-matches
+    //                               /${matchID}`)
+  //  ref.child(`users/${id}/account-info/
+  //                              joinedGames/${matchID}`).remove()
+  // }
+
+  //  awayID.map(id, i){
+  // ref.child(`users/${id}/account-info/won-matches
+  //                               /${matchID}`)
+  //  ref.child(`users/${id}/account-info/
+  //                              joinedGames/${matchID}`).remove()
+  //}
+  }
+
+  else{
+    //  hostID.map(id, i){
+    // ref.child(`users/${id}/account-info/drawn-matches
+    //                               /${matchID}`)
+  //  ref.child(`users/${id}/account-info/
+  //                              joinedGames/${matchID}`).remove()
+  // }
+
+  //  awayID.map(id, i){
+  // ref.child(`users/${id}/account-info/drawn-matches
+  //                               /${matchID}`)
+  //  ref.child(`users/${id}/account-info/
+  //                              joinedGames/${matchID}`).remove()
+  //}
+  }
+ }
 
 // BirthMonth: info.BirthMonth,
 // BirthDay: info.BirthDay,
@@ -329,12 +334,14 @@ ref.child(`users/${user.uid}/personal-info`)
 
 //may have to loop these next two
 export function getProfileInfo(user) {
-  const profileInfo = []
+  const profileInfo = {}
   ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
 
   const persInfo = snapshot.val()
    console.log(persInfo)
-   profileInfo.push(persInfo)
+   //profileInfo.push(persInfo)
+  profileInfo.fName = persInfo.FirstName
+  console.log( profileInfo)
 })
 console.log(profileInfo)
    return profileInfo
