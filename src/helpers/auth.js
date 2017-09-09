@@ -186,41 +186,6 @@ export function displayMessages(matchKey) {
  console.log('fbMessages')
    console.log(fbMessages)
   return fbMessages
-
-  // var allMessages = []
-   //console.log(this.state.messages)
-//  ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
-//    var messages = snapshot.val()
-//    if (messages !== null){
-//    console.log(messages)
-//
-//    //var keys = []
-//    var keys = Object.keys(messages)
-//    for (var i =0; i < keys.length; i++) {
-//      var id = messages[i].id;
-//      var text = messages[i].text;
-//
-//      var nextMessage = {
-//        id: id,
-//        text: text
-//      }
-//
-//      allMessages.push(nextMessage)
-//      console.log(allMessages)
-//    }
-//  }
-// })
-// console.log(allMessages)
-//  return allMessages
-//
-
-// ref.child(`messages/${matchKey}/`).on('value', (snapshot)=> {
-// const currentMessages = snapshot.val()
-// if (currentMessages !== null) {
-//   console.log(currentMessages)
-//   return currentMessages
-// }
-// })
 }
 
 
@@ -345,4 +310,78 @@ export function removeTournamentBackend(players) {
 export function recordMatch(hostScore, awayScore, hostID, awayID){
   // ref.child(`users/${players[i]}/account-info/
   //                             /${this.props.match.id}`)
+}
+
+// BirthMonth: info.BirthMonth,
+// BirthDay: info.BirthDay,
+// BirthYear: info.BirthYear,
+export function updateProfile (info, user) {
+  console.log(info.FirstName)
+ref.child(`users/${user.uid}/personal-info`)
+.update({
+//   email: info.Email,
+//   FirstName: info.FirstName,
+//   LastName: info.LastName,
+//   Gender: info.Gender
+ }
+)
+}
+
+//may have to loop these next two
+export function getProfileInfo(user) {
+  const profileInfo = []
+  ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+
+  const persInfo = snapshot.val()
+   console.log(persInfo)
+   profileInfo.push(persInfo)
+})
+console.log(profileInfo)
+   return profileInfo
+}
+
+export function getKeyStats(user) {
+  const statsInfo = []
+  ref.child(`users/${user.uid}/account-info/key-stats`).on('value', (snapshot)=> {
+
+  const persStats = snapshot.val()
+   console.log(persStats)
+   statsInfo.push(persStats)
+})
+   return statsInfo
+}
+
+export function getYourMatches(user) {
+  const yourMatches = []
+  ref.child(`users/${user.uid}/account-info/scheduled-matches`).on('value', (snapshot)=> {
+
+  const matches = snapshot.val()
+   console.log(matches)
+
+// Can I just through in the whole object? Seems likely
+   var keys = Object.keys(matches)
+   for(var i=0; i < keys.length; i++ ){
+     var k = keys[i];
+   //  var match = matches[k];
+     var skill = matches[k].skill;
+     var sport = matches[k].sport;
+     var date = matches[k].gameDate;
+     var creator_query = matches[k].creator;
+     var players = matches[k].players;
+     var creator_first_name = matches[k].creator_first_name;
+     var creator_last_name = matches[k].creator_last_name;
+
+var nextMatch = {
+ id: k,
+ skill: skill,
+ sport: sport,
+ date:  date,
+ players: players,
+ creator: creator_query,
+ creatorName: creator_first_name + " " + creator_last_name
+}
+   yourMatches.push(nextMatch)
+ }
+})
+   return yourMatches
 }

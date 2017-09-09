@@ -26,7 +26,6 @@ joinMatch(user, players, matchID)
 this.setState({joined: true})
 }
 
-handleMessage(){}
 
 removeMatch(e){
        e.preventDefault();

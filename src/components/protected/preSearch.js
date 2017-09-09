@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+import { getProfileInfo, getKeyStats } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 
+//1. Friend Feed component
+//2. Interesting News Component
 export default class preSearch extends Component {
 
   render () {

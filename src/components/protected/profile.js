@@ -1,8 +1,33 @@
 import React, { Component } from 'react'
+import { getProfileInfo, getKeyStats } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 
+
+//1. Add error handling to fb queries
+//2. Component for scheduled matches
+//3. Component for recent activity
 export default class profile extends Component {
 
+  componentDidMount(){
+    firebaseAuth().onAuthStateChanged(function(user) {
+if (user) {
+  // User is signed in.
+  const profileInfo = getProfileInfo(user)
+  const statInfo = getKeyStats(user)
+
+  //set consts to state, pass as props to rendering comps
+} else {
+  // No user is signed in.
+}
+})
+}
+
   render () {
+
+    const profileStyle = {
+      border: '1px solid #000',
+      padding: '20px'
+    }
 
     const profileText = {
       margin: '0px',
@@ -20,11 +45,11 @@ export default class profile extends Component {
       border: '1px solid #000',
       padding: '20px',
       marginTop: '80px'
-    };
-    
+    }
+
 return (
 <div className="profile-page">
-  <div className="profile" style={profile}>
+  <div className="profile" style={profileStyle}>
    <div className="pull-left image">
     <img className="img-square avatar" src="http://placehold.it/200x200" alt=""/>
    </div>
