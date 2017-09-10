@@ -18,6 +18,7 @@ import EditProfile from './editProfile'
 import DEMO_DATA from './demoData'
 import MatchReport from './MatchReport'
 import ScheduledMatches from './scheduledMatches'
+import FriendRequest from './friendRequest'
 
 export default class Dashboard extends Component {
 
@@ -254,7 +255,7 @@ const pushRightMargin = {
 
     return (
       <div>
-      <ScheduledMatches />
+      <FriendRequest />
      </div>
     )
   }

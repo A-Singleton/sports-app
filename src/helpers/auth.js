@@ -392,3 +392,9 @@ var nextMatch = {
 })
    return yourMatches
 }
+
+export function addFriend (friendID, userID) {
+  console.log(friendID)
+ref.child(`users/${userID}/account-info/friends`)
+.push({ friendID })
+}
