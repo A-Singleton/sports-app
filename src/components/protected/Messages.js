@@ -11,7 +11,7 @@ componentDidUpdate(){
   objDiv.scrollTop = objDiv.scrollHeight
 }
 
-// removeed: fromMe={message.fromMe} from message comp. and key={i}
+// removed: fromMe={message.fromMe} from message comp. and key={i}
 
 render() {
 
