@@ -8,6 +8,7 @@ import Dashboard from './protected/Dashboard'
 import ChatButton from './protected/ChatButton'
 import matchFeed from './protected/matchFeed'
 
+
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 
@@ -73,6 +74,9 @@ export default class App extends Component {
                   <Link to="/dashboard" className="navbar-brand">Profile</Link>
                 </li>
                 <li>
+                <Link to="/matchFeed" className="navbar-brand">Match Feed</Link>
+                </li>
+                <li>
                   {this.state.authed
                     ? <button
                         style={{border: 'none', background: 'transparent'}}
@@ -95,10 +99,7 @@ export default class App extends Component {
                 <PublicRoute authed={this.state.authed} path='/login' component={Login} />
                 <PublicRoute authed={this.state.authed} path='/register' component={Register} />
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
-
-                <PrivateRoute authed={this.state.authed} path='/protected/matchFeed' component={matchFeed} />
-                <PrivateRoute authed={this.state.authed} path='/protected/ChatButton' component={ChatButton} />
-
+                <PrivateRoute authed={this.state.authed} path='/matchFeed' component={matchFeed} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>
