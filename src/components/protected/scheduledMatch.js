@@ -37,10 +37,10 @@ export default class ScheduledMatch extends Component {
             </div>
             <div className="pull-left meta">
               <div className="title h5">
-               <h4>  <strong> {this.props.match.creatorName} </strong> made a Match </h4>
+               <h4>  <strong> Host: {this.props.match.creatorName} </strong>  </h4>
                <br/>
               </div>
-              <h6 className="text-muted time">An hour ago</h6>
+              <h5> Tomorrow, 5:00 PM </h5>
               </div>
             </div>
           </div>

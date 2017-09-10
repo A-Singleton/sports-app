@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { getProfileInfo, getKeyStats } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
-
+import ScheduledMatches from './scheduledMatches'
 
 //1. Add error handling to fb queries
 //2. Component for scheduled matches
@@ -77,6 +77,7 @@ return (
   </div>
   <div className="pull-right scheduled-matches">
   <h3 style={headerStyle3}><strong> Scheduled Matches </strong></h3>
+  <ScheduledMatches />
   <h4> Tennis: 10-3-2017 at 11:00am </h4>
   <h4> Jimbo creted a Tennis Match, for October 1st </h4>
   </div>

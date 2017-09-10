@@ -252,10 +252,10 @@ const pushTopMargin = {
 const pushRightMargin = {
   marginTop: ' 60px '
 }
-
+  //  <ScheduledMatches />
     return (
       <div>
-      <FriendRequest />
+      <Profile />
      </div>
     )
   }

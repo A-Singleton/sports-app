@@ -27,19 +27,7 @@ handleSubmit = (e) => {
 }
 
 render(){
-//   console.log('keys')
-//   console.log(this.state.keys)
-//   const scheduledMatches = ''
-// if (this.state.keys) {
-//   //  const scheduledMatches = this.state.keys.map((fbKey, i) => {
-//     console.log('entered key loop')
-//     //console.log(fbKey)
-//     return(
-//     <GetScheduledMatches
-//     keyCodes={this.state.keys}/>
-//   )
-// }
-//)}
+
   return(
     <div>
     <form onSubmit={this.handleSubmit}>
