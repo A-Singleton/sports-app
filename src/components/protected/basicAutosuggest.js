@@ -25,7 +25,10 @@ const getSuggestions = value => {
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion.name;
+const getSuggestionValue = suggestion => (
+  suggestion.name
+)
+
 
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
@@ -45,7 +48,8 @@ export default class basicAutosuggest extends Component {
     // and they are initially empty because the Autosuggest is closed.
     this.state = {
       value: '',
-      suggestions: []
+      suggestions: [],
+      invites: []
     };
   }
 
@@ -65,10 +69,25 @@ export default class basicAutosuggest extends Component {
 
   // Autosuggest will call this function every time you need to clear suggestions.
   onSuggestionsClearRequested = () => {
+    console.log('clear Suggestions')
     this.setState({
       suggestions: []
     });
   };
+
+//TODO: logic to prevent double invites
+  getSuggestionVal = (suggestion) => {
+    console.log('getSuggestionVal')
+    console.log(suggestion)
+    const getSuggestionValue = suggestion.name
+    console.log(getSuggestionValue)
+    var invitesCopy = this.state.invites
+    invitesCopy.push(getSuggestionValue)
+    this.setState({
+      invites: invitesCopy
+    })
+    return(getSuggestionValue)
+  }
 
   render() {
     const { value, suggestions } = this.state;
@@ -79,17 +98,23 @@ export default class basicAutosuggest extends Component {
       value,
       onChange: this.onChange
     };
-
+    //this.getSuggestionVal
     // Finally, render it!
     return (
+      <div>
       <Autosuggest
         suggestions={suggestions}
         onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
+        getSuggestionValue={this.getSuggestionVal}
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
       />
+    <h4>  Invited Friends: </h4>
+    <li>
+    {this.state.invites}
+    </li>
+    </div>
     );
   }
 }

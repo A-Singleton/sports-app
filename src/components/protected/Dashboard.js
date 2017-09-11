@@ -21,6 +21,7 @@ import ScheduledMatches from './scheduledMatches'
 import FriendRequest from './friendRequest'
 import InviteFriends from './InviteFriends'
 import BasicAutosuggest from './basicAutosuggest'
+import ProfileIndex from './profileIndex'
 
 export default class Dashboard extends Component {
 
@@ -256,9 +257,12 @@ const pushRightMargin = {
 }
   //  <ScheduledMatches />
   // <FinalFriendsComp products={PRODUCTS}/>
+  //
     return (
       <div>
       <BasicAutosuggest />
+      <br/>
+      <ProfileIndex />
      </div>
     )
   }

@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
 import { getProfileInfo, getKeyStats } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
-import { firebaseAuth, firebaseStorageRef } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import { firebaseAuth, firebaseStorageRef, ref } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import ScheduledMatches from './scheduledMatches'
 
 //1. Add error handling to fb queries
 //2. Component for scheduled matches
 //3. Component for recent activity
 export default class profile extends Component {
+  constructor(props){
+    super(props)
+  this.state = {
+    profInfo: '',
+    LastName: '',
+    FirstName: ''
+  }
+}
 
   componentDidMount(){
+    //logic for handling whether it is own users or someone else's 
+    var that = this
     firebaseAuth().onAuthStateChanged(function(user) {
 if (user) {
-  // User is signed in.
-  const profileInfo = getProfileInfo(user)
-  const statInfo = getKeyStats(user)
-
 
   // Create a reference to the file we want to download
 var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
@@ -47,6 +53,20 @@ starsRef.getDownloadURL().then(function(url) {
   }
 });
 
+// retrieve personal-info
+ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+
+const profInfo = snapshot.val()
+console.log('profInfo')
+ console.log(profInfo)
+ console.log(profInfo.FirstName)
+ //profileInfo.push(persInfo)
+ that.setState({
+   profInfo,
+   FirstName: profInfo.FirstName,
+   LastName: profInfo.LastName
+ })
+})
 
   //set consts to state, pass as props to rendering comps
 } else {
@@ -80,6 +100,9 @@ starsRef.getDownloadURL().then(function(url) {
       marginTop: '80px'
     }
 
+    console.log('this.state.profInfo')
+    console.log(this.state.FirstName)
+
 return (
 <div className="profile-page">
   <div className="profile" style={profileStyle}>
@@ -95,7 +118,7 @@ return (
     <h5 className="text-muted time">See Full Stats</h5>
    </div>
    <div className="title h5" style={profileText}>
-    <h3><strong> Jimbo Neutron </strong> <img className="img-square avatar" src="http://placehold.it/48x38" alt=""/></h3>
+    <h3><strong> {this.state.FirstName + " " + this.state.LastName} </strong> <img className="img-square avatar" src="http://placehold.it/48x38" alt=""/></h3>
     <h4> Springfield, IN USA </h4>
     <h4> Sports: </h4>
     <h4> Tennis, Squash </h4>
