@@ -19,6 +19,8 @@ import DEMO_DATA from './demoData'
 import MatchReport from './MatchReport'
 import ScheduledMatches from './scheduledMatches'
 import FriendRequest from './friendRequest'
+import InviteFriends from './InviteFriends'
+import BasicAutosuggest from './basicAutosuggest'
 
 export default class Dashboard extends Component {
 
@@ -253,9 +255,10 @@ const pushRightMargin = {
   marginTop: ' 60px '
 }
   //  <ScheduledMatches />
+  // <FinalFriendsComp products={PRODUCTS}/>
     return (
       <div>
-      <FinalFriendsComp products={PRODUCTS}/>
+      <BasicAutosuggest />
      </div>
     )
   }
