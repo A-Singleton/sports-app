@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { getProfileInfo, getKeyStats } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
-import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
-
+import { firebaseAuth, firebaseStorageRef } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import ScheduledMatches from './scheduledMatches'
 
 //1. Add error handling to fb queries
 //2. Component for scheduled matches
@@ -14,6 +14,39 @@ if (user) {
   // User is signed in.
   const profileInfo = getProfileInfo(user)
   const statInfo = getKeyStats(user)
+
+
+  // Create a reference to the file we want to download
+var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
+
+// Get the download URL
+starsRef.getDownloadURL().then(function(url) {
+  // Insert url into an <img> tag to "download"
+  var img = document.getElementById('myimg');
+  img.src = url;
+}).catch(function(error) {
+
+  // A full list of error codes is available at
+  // https://firebase.google.com/docs/storage/web/handle-errors
+  switch (error.code) {
+    case 'storage/object_not_found':
+      // File doesn't exist
+      break;
+
+    case 'storage/unauthorized':
+      // User doesn't have permission to access the object
+      break;
+
+    case 'storage/canceled':
+      // User canceled the upload
+      break;
+
+    case 'storage/unknown':
+      // Unknown error occurred, inspect the server response
+      break;
+  }
+});
+
 
   //set consts to state, pass as props to rendering comps
 } else {
@@ -51,7 +84,7 @@ return (
 <div className="profile-page">
   <div className="profile" style={profileStyle}>
    <div className="pull-left image">
-    <img className="img-square avatar" src="http://placehold.it/200x200" alt=""/>
+    <img className="img-square avatar"  id="myimg" src="http://placehold.it/200x200" alt="" height="200" width="200"/>
    </div>
    <div className="pull-right">
     <h3><strong> Key Stats: </strong></h3>
@@ -77,6 +110,7 @@ return (
   </div>
   <div className="pull-right scheduled-matches">
   <h3 style={headerStyle3}><strong> Scheduled Matches </strong></h3>
+  <ScheduledMatches />
   <h4> Tennis: 10-3-2017 at 11:00am </h4>
   <h4> Jimbo creted a Tennis Match, for October 1st </h4>
   </div>
