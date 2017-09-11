@@ -255,7 +255,7 @@ const pushRightMargin = {
   //  <ScheduledMatches />
     return (
       <div>
-      <Profile />
+      <FinalFriendsComp products={PRODUCTS}/>
      </div>
     )
   }
