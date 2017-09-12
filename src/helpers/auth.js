@@ -340,8 +340,8 @@ export function getProfileInfo(user) {
   const persInfo = snapshot.val()
    console.log(persInfo)
    //profileInfo.push(persInfo)
-  profileInfo.fName = persInfo.FirstName
-  console.log( profileInfo)
+   var profileInfo = persInfo
+  //console.log( profileInfo)
 })
 console.log(profileInfo)
    return profileInfo
