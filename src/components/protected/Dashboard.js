@@ -22,6 +22,7 @@ import FriendRequest from './friendRequest'
 import InviteFriends from './InviteFriends'
 import BasicAutosuggest from './basicAutosuggest'
 import ProfileIndex from './profileIndex'
+import Link2Profile from './link2Profile'
 
 export default class Dashboard extends Component {
 
@@ -109,7 +110,6 @@ if (user) {
 
 // External function, handles upload to firebase
 saveMatch(matchData, user)
-
 
 } else {
 // No user is signed in. Cannot perform upload.
@@ -257,12 +257,16 @@ const pushRightMargin = {
 }
   //  <ScheduledMatches />
   // <FinalFriendsComp products={PRODUCTS}/>
-  //
+  //       <BasicAutosuggest />
+  // <ProfileIndex />
+//   <Link to={`/protected/profileIndex/${user}`}>This Users Profile</Link>
+// <br/>
+// <Link2Profile user={user}/>
+  var user =  firebaseAuth().currentUser.uid
+
     return (
       <div>
       <BasicAutosuggest />
-      <br/>
-      <ProfileIndex />
      </div>
     )
   }

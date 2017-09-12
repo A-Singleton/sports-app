@@ -8,11 +8,15 @@ export default class profileIndex extends Component {
       Id : ''
     }
   }
-// this.props.id 
+
+
+
+// this.props.id
   render () {
     console.log('profileIndex')
+    console.log(this.props.match.params.value)
     return(
-      <div> <Profile /> </div>
+      <div> <Profile userID={this.props.match.params.value}/> </div>
     )
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 //import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 //import ChatRoom from './ChatRoom'
 //import ChatButton from './ChatButton'
@@ -37,6 +38,7 @@ export default class ScheduledMatch extends Component {
             </div>
             <div className="pull-left meta">
               <div className="title h5">
+              <h4> <Link to={`/protected/profileIndex/${this.props.match.creator}`}>This Users Test Link</Link> </h4>
                <h4>  <strong> Host: {this.props.match.creatorName} </strong>  </h4>
                <br/>
               </div>

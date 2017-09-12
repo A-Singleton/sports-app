@@ -71,7 +71,8 @@ export default class basicAutosuggest extends Component {
   onSuggestionsClearRequested = () => {
     console.log('clear Suggestions')
     this.setState({
-      suggestions: []
+      suggestions: [],
+      value: ''
     });
   };
 

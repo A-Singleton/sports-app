@@ -16,10 +16,69 @@ export default class profile extends Component {
   }
 }
 
+  componentWillReceiveProps(nextProps){
+    console.log("Recieved Props")
+  //  var that = this
+  console.log('nextProps')
+  console.log(nextProps)
+    // Create a reference to the file we want to download
+  var starsRef = firebaseStorageRef.child('profilePics/Classic_Singleton.png');
+  // Get the download URL
+  starsRef.getDownloadURL().then(function(url) {
+    // Insert url into an <img> tag to "download"
+    var img = document.getElementById('myimg');
+    img.src = url;
+  }).catch(function(error) {
+
+    // A full list of error codes is available at
+    // https://firebase.google.com/docs/storage/web/handle-errors
+    switch (error.code) {
+      case 'storage/object_not_found':
+        // File doesn't exist
+        break;
+
+      case 'storage/unauthorized':
+        // User doesn't have permission to access the object
+        break;
+
+      case 'storage/canceled':
+        // User canceled the upload
+        break;
+
+      case 'storage/unknown':
+        // Unknown error occurred, inspect the server response
+        break;
+    }
+  });
+
+  // retrieve personal-info
+
+  //ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+  ref.child(`users/${nextProps.userID}/personal-info`).on('value', (snapshot)=> {
+
+  const profInfo = snapshot.val()
+  console.log('profInfo')
+   console.log(profInfo)
+   console.log(profInfo.FirstName)
+   //profileInfo.push(persInfo)
+   this.setState({
+     profInfo,
+     FirstName: profInfo.FirstName,
+     LastName: profInfo.LastName
+   })
+  })
+
+  }
+
+
   componentDidMount(){
-    //logic for handling whether it is own users or someone else's 
+    //logic for handling whether it is own users or someone else's
     var that = this
+    var propsUser = this.props.userID
+    console.log('propsUser')
+    console.log(propsUser)
     firebaseAuth().onAuthStateChanged(function(user) {
+      console.log(propsUser, user)
 if (user) {
 
   // Create a reference to the file we want to download
@@ -54,7 +113,9 @@ starsRef.getDownloadURL().then(function(url) {
 });
 
 // retrieve personal-info
-ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+
+//ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+ref.child(`users/${propsUser}/personal-info`).on('value', (snapshot)=> {
 
 const profInfo = snapshot.val()
 console.log('profInfo')
@@ -74,6 +135,10 @@ console.log('profInfo')
 }
 })
 }
+
+// componentWillReceiveProps(nextProps) {
+//   if(user)
+// }
 
   render () {
 
@@ -102,12 +167,15 @@ console.log('profInfo')
 
     console.log('this.state.profInfo')
     console.log(this.state.FirstName)
+    //http://placehold.it/200x200
+     console.log('this.props.userID')
+     console.log(this.props.userID)
 
 return (
 <div className="profile-page">
   <div className="profile" style={profileStyle}>
    <div className="pull-left image">
-    <img className="img-square avatar"  id="myimg" src="http://placehold.it/200x200" alt="" height="200" width="200"/>
+    <img className="img-square avatar"  id="myimg" src="" alt="" height="200" width="200"/>
    </div>
    <div className="pull-right">
     <h3><strong> Key Stats: </strong></h3>

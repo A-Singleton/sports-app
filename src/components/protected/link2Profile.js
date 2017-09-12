@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { Route, Router, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import ProfileIndex from './profileIndex'
 
 export default class link2Profile extends Component {
 
   render () {
-
+    console.log(this.props)
+    var props = this.props
     const ThisProfilePage = (props) => {
+      console.log(props)
           return (
             // <ProductPage
             //   toggleSidebarOn={this.toggleSidebarOn.bind(this)}
@@ -12,7 +16,7 @@ export default class link2Profile extends Component {
             // />
 
             <ProfileIndex
-              id={this.id.bind(this)}
+              id={this.props.bind(this)}
               {...props}
             />
           );
@@ -21,14 +25,14 @@ export default class link2Profile extends Component {
     return(
       <div> blankComp
 
-      <Router>
+      <Link to={`/protected/profileIndex/${user}`}>This Users Profile</Link>
+
         <div>
           <Switch>
-            <Route exact path="/profile" render={ThisProfilePage} />
-            <Route component={NotFound}/>
+            <Route path="protected/profile" render={ThisProfilePage} />
+            <Route render={() => <h3>No Match</h3>}/>
           </Switch>
         </div>
-      </Router>
 
       </div>
     )
