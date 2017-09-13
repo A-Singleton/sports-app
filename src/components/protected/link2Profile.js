@@ -21,11 +21,12 @@ export default class link2Profile extends Component {
             />
           );
         }
+        //  <Link to={`/protected/profileIndex/${user}`}>This Users Profile</Link>
 
     return(
       <div> blankComp
 
-      <Link to={`/protected/profileIndex/${user}`}>This Users Profile</Link>
+
 
         <div>
           <Switch>

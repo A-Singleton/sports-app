@@ -66,42 +66,6 @@ componentDidMount(){
   console.log('entered comp did mount')
 const user = firebaseAuth().currentUser
 console.log(this.props.keyCodes)
-// this.props.keyCodes.forEach(function(element) {
-// const allMatches = []
-// //console.log(user.uid)
-// db.ref(`matches/${element}`).on('value', (snapshot)=> {
-//
-// var matches = snapshot.val()
-// console.log(matches)
-// var keys = Object.keys(matches)
-// console.log(keys)
-//
-//     for (var i =0; i < keys.length; i++) {
-//       var k = keys[i];
-//       var skill = matches[k].skill;
-//       var sport = matches[k].sport;
-//       var date = matches[k].gameDate;
-//       var creator_query = matches[k].creator;
-//       var players = matches[k].players;
-//       var creator_first_name = matches[k].creator_first_name;
-//       var creator_last_name = matches[k].creator_last_name;
-//
-// var nextMatch = {
-//   id: k,
-//   skill: skill,
-//   sport: sport,
-//   date:  date,
-//   players: players,
-//   creator: creator_query,
-//   creatorName: creator_first_name + " " + creator_last_name
-// }
-// }
-// console.log('nextMatch')
-// console.log(nextMatch)
-// allMatches.push(nextMatch)
-// this.setState({matches: allMatches})
-// })
-// })
 }
 
 render(){

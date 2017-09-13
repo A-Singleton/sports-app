@@ -1,5 +1,8 @@
 import Autosuggest from 'react-autosuggest';
 import React, { Component } from 'react'
+import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
+import { invite2Match } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+
 // Imagine you have a list of languages that you'd like to autosuggest.
 const languages = [
   {
@@ -90,6 +93,12 @@ export default class basicAutosuggest extends Component {
     return(getSuggestionValue)
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('submitted')
+  //  invite2Match(this.state.invites, this.props.matchID)
+  }
+
   render() {
     const { value, suggestions } = this.state;
 
@@ -100,6 +109,14 @@ export default class basicAutosuggest extends Component {
       onChange: this.onChange
     };
     //this.getSuggestionVal
+
+    var inviteList = this.state.invites.map((invite, i) => {
+      console.log(invite)
+      return(
+        <li key={i}> {invite} </li>
+      )
+  })
+
     // Finally, render it!
     return (
       <div>
@@ -112,9 +129,14 @@ export default class basicAutosuggest extends Component {
         inputProps={inputProps}
       />
     <h4>  Invited Friends: </h4>
-    <li>
-    {this.state.invites}
-    </li>
+    <ol>
+    { inviteList }
+    </ol>
+    <form onSubmit={this.handleSubmit}>
+    <Button bsStyle="primary" type="submit">
+      Add as Friend
+    </Button>
+    </form>
     </div>
     );
   }
