@@ -411,7 +411,7 @@ export function reportConfirmed (matchID) {
 //   console.log(friends)
 // friends.forEach(function(friend) {
 // ref.child(`matches/${matchID}/invited-friends`)
-// .push({ friend })
+// .push({  })
 //})
 }
 
