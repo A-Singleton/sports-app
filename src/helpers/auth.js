@@ -398,3 +398,27 @@ export function addFriend (friendID, userID) {
 ref.child(`users/${userID}/account-info/friends`)
 .push({ friendID })
 }
+
+export function invite2Match (friends, matchID) {
+  console.log(friends)
+friends.forEach(function(friend) {
+ref.child(`matches/${matchID}/invited-friends`)
+.push({ friend })
+})
+}
+
+export function reportConfirmed (matchID) {
+//   console.log(friends)
+// friends.forEach(function(friend) {
+// ref.child(`matches/${matchID}/invited-friends`)
+// .push({  })
+//})
+}
+
+export function matchDispute (matchID) {
+//   console.log(friends)
+// friends.forEach(function(friend) {
+// ref.child(`matches/${matchID}/invited-friends`)
+// .push({ friend })
+// })
+}
