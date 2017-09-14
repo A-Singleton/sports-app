@@ -406,3 +406,19 @@ ref.child(`matches/${matchID}/invited-friends`)
 .push({ friend })
 })
 }
+
+export function reportConfirmed (matchID) {
+//   console.log(friends)
+// friends.forEach(function(friend) {
+// ref.child(`matches/${matchID}/invited-friends`)
+// .push({ friend })
+//})
+}
+
+export function matchDispute (matchID) {
+//   console.log(friends)
+// friends.forEach(function(friend) {
+// ref.child(`matches/${matchID}/invited-friends`)
+// .push({ friend })
+// })
+}
