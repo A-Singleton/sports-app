@@ -271,7 +271,7 @@ const pushRightMargin = {
 
     return (
       <div>
-        <PostRenderReport />
+        <Profile />
      </div>
     )
   }

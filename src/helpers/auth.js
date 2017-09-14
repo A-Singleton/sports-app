@@ -85,7 +85,6 @@ export function joinMatch(user, players, matchID) {
     })
 }
 
-
 export function getScheduledMatches() {
 
   var allMatches = []

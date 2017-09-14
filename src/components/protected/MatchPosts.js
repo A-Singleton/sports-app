@@ -32,6 +32,7 @@ componentWillReceiveProps(nextProps) {
     // }
 //const matches = this.props.matches
     var theMatches = this.props.matches.map((match, i) => {
+  //  var theMatches = this.state.matches.map((match, i) => {
     //  console.log(message[0])
       console.log('match')
       console.log(i)

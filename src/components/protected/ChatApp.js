@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {submitMessagesBackend, displayMessages} from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import Messages from './Messages'
 import ChatInput from './ChatInput'
+import { ref, firebaseAuth, firebaseStorageRef, taskEvent, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+
 
 export default class ChatApp extends Component{
 constructor(props){
@@ -15,17 +17,45 @@ constructor(props){
 }
 
 componentDidMount(){
-  const fbMessages = this.loadMessages(this.props.matchkey)
+//  const fbMessages = this.loadMessages(this.props.matchkey)
   // const fbMessages = displayMessages(this.props.matchkey)
+
+  var fbMessages = []
+  //child_added could be of use here
+  ref.child(`messages/${this.props.matchkey}/`).on('value', (snapshot)=> {
+
+  const currentMessages = snapshot.val()
+   console.log(currentMessages)
+
+  if (currentMessages != null){
+
+  var keys = Object.keys(currentMessages)
+  for(var i=0; i < keys.length; i++ ){
+
+   var id = keys[i]
+   var message = currentMessages[id].message
+   var username = currentMessages[id].username
+
+   var newMessage = {
+     id: id,
+     message: message,
+     username: username
+   }
+   fbMessages.push(newMessage)
+  this.setState({messages: fbMessages})
+  }
   // console.log('fbMessages')
   // console.log(fbMessages)
-   this.setState({messages: fbMessages})
-}
 
+}})}
+
+// TODO: limit messages to 6 most recent, with ability to load more at top
+// TODO: fix bug where first messages of new chat room don't render
 componentDidUpdate(){
   console.log("Comp did update")
 
-  const fbMessages = this.loadMessages(this.props.matchkey)
+ const fbMessages = this.loadMessages(this.props.matchkey)
+
   console.log("len of fbMessages")
   console.log(fbMessages.length)
   console.log("Len of state messages")

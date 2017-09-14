@@ -3,9 +3,11 @@ import { getProfileInfo, getKeyStats } from 'C:/Users/Duwan_000/Documents/GitHub
 import { firebaseAuth, firebaseStorageRef, ref } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import ScheduledMatches from './scheduledMatches'
 
+//TODO: profile pic + url in upper corner
 //1. Add error handling to fb queries
 //2. Component for scheduled matches
 //3. Component for recent activity
+//
 export default class profile extends Component {
   constructor(props){
     super(props)
