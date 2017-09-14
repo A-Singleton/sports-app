@@ -37,6 +37,9 @@ componentWillReceiveProps(nextProps) {
       console.log('match')
       console.log(i)
        console.log(match)
+
+
+
       return(
         <MatchRender
          key={match.id}

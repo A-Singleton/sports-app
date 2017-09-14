@@ -44,8 +44,9 @@ componentDidMount(){
       creatorName: creator_first_name + " " + creator_last_name
     }
     allMatchesCopy.push(nextMatch)
-    this.setState({allMatches: allMatchesCopy})
+  //  this.setState({allMatches: allMatchesCopy})
   }
+  this.setState({allMatches: allMatchesCopy})
   })
   //
   // console.log('allMatches')

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+//import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import ChatRoom from './ChatRoom'
 import ChatButton from './ChatButton'
 import { removeMatchBackend, joinMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { firebaseAuth, firebaseStorageRef, ref } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 
 export default class MatchRender extends Component {
 
@@ -16,6 +17,46 @@ export default class MatchRender extends Component {
   this.handleJoin = this.handleJoin.bind(this)
   this.removeMatch = this.removeMatch.bind(this)
   }
+
+componentWillReceiveProps(nextProps){
+  // console.log("Recieved Props")
+  // //  var that = this
+  // console.log('nextProps')
+  // //console.log(nextProps)
+  console.log("nextProps")
+  console.log(nextProps)
+    // Create a reference to the file we want to download
+  var starsRef = firebaseStorageRef.child('profilePics/Classic_Singleton.png');
+  console.log("afterRef")
+  // Get the download URL
+  starsRef.getDownloadURL().then(function(url) {
+    // Insert url into an <img> tag to "download"
+    var img = document.getElementById('myimg');
+    img.src = url;
+    console.log("Done image")
+  }).catch(function(error) {
+
+    // A full list of error codes is available at
+    // https://firebase.google.com/docs/storage/web/handle-errors
+    switch (error.code) {
+      case 'storage/object_not_found':
+        // File doesn't exist
+        break;
+
+      case 'storage/unauthorized':
+        // User doesn't have permission to access the object
+        break;
+
+      case 'storage/canceled':
+        // User canceled the upload
+        break;
+
+      case 'storage/unknown':
+        // Unknown error occurred, inspect the server response
+        break;
+    }
+  });
+}
 
 handleJoin(){
 const user = firebaseAuth().currentUser
@@ -71,7 +112,7 @@ renderjoin(e){
         <div className="panel panel-white post panel-shadow">
           <div className="post-heading">
             <div className="pull-left image">
-              <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
+              <img className="img-circle avatar" id="myimg" src="" alt="" height="48" width="48"/>
             </div>
             <div className="pull-right "><button onClick={this.removeMatch} className="fa fa-remove">Cancel Match</button></div>
             <div className="pull-left meta">

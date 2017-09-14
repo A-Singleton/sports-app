@@ -155,7 +155,7 @@ export function submitMessagesBackend(nextMessage, matchkey) {
       ref.child(`messages/${matchkey}/`).push(nextMessage)
 }
 
-export function uploadImage(file) {
+export function uploadImage(file, user) {
     // Create a root reference
 //var storageRef = firebase.storage().ref();
 var storageRef = firebaseStorageRef
@@ -165,7 +165,8 @@ var metadata = {
 };
 
 // Upload file and metadata to the object 'images/mountains.jpg'
-var uploadTask = storageRef.child('profilePics/' + file.name).put(file, metadata);
+//var uploadTask = storageRef.child('profilePics/' + file.name).put(file, metadata);
+var uploadTask = storageRef.child('profilePics/' + user).put(file, metadata);
 
 //taskEvent
 

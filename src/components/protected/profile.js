@@ -19,7 +19,7 @@ export default class profile extends Component {
 }
 
   componentWillReceiveProps(nextProps){
-    console.log("Recieved Props")
+  console.log("Recieved Props")
   //  var that = this
   console.log('nextProps')
   console.log(nextProps)

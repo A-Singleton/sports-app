@@ -42,11 +42,11 @@ componentDidMount(){
      username: username
    }
    fbMessages.push(newMessage)
-  this.setState({messages: fbMessages})
+  //this.setState({messages: fbMessages})
   }
   // console.log('fbMessages')
   // console.log(fbMessages)
-
+  this.setState({messages: fbMessages})
 }})}
 
 // TODO: limit messages to 6 most recent, with ability to load more at top
