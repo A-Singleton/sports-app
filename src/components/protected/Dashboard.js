@@ -272,7 +272,7 @@ const pushRightMargin = {
 
     return (
       <div>
-        <RepReport />
+        <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
      </div>
     )
   }

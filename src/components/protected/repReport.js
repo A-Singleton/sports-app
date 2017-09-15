@@ -21,14 +21,6 @@ this.state = {
     e.preventDefault()
     console.log("submitted")
     // submitRep(this.props.opp, this.state.rating)
-    // BirthMonth: this.month.value,
-    // // BirthDay: this.day.value,
-    // // BirthYear: this.year.value
-    // const updatedInfo = {
-    //   FirstName: this.state.fName,
-    //   LastName: this.state.lName,
-    //   Email: this.state.email,
-    //   Gender: this.state.gender
 }
 
   render () {
@@ -39,13 +31,6 @@ this.state = {
       background: "#eee",
       padding: "5px",
       margin: "5px",
-      //width: "550px",
-      //justifyContent: 'center'
-      //alignItems: 'flex',
-      //justifyContent: 'flex',
-      //alignSelf: 'flex',
-    //  color: 'blue',
-    //  backgroundImage: 'url(' + imgUrl + ')',
     };
 
     const starStyle = {
@@ -58,26 +43,18 @@ this.state = {
 
     const divCheckbox = {
       textAlign: 'center',
-      //display: 'table',
-      //justifyContent: 'center',
-    //  float: 'left',
       display: 'inlineBlock',
-    //  marginRight: '155px'
-      //margin: '0 auto'
     }
 
     const checkboxLabel =  {
-      //display: 'table-row'
       display: 'inlineBlock'
   }
 
   const checkbox = {
-//    padding: "100px",
     margin: "5px",
-//  display: 'table-row',
 display: 'inlineBlock',
   width: '100%',
-//    width: '200px'
+
   }
 
     var rateOpener = "Rate your Opponent's Sportsmanship"

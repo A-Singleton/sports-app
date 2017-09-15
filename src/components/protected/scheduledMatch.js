@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-//import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
-//import ChatRoom from './ChatRoom'
-//import ChatButton from './ChatButton'
-//import { removeMatchBackend, joinMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class ScheduledMatch extends Component {
 

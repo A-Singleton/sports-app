@@ -169,7 +169,6 @@ console.log('profInfo')
 
     console.log('this.state.profInfo')
     console.log(this.state.FirstName)
-    //http://placehold.it/200x200
      console.log('this.props.userID')
      console.log(this.props.userID)
 
@@ -203,9 +202,7 @@ return (
   </div>
   <div className="pull-right scheduled-matches">
   <h3 style={headerStyle3}><strong> Scheduled Matches </strong></h3>
-  <ScheduledMatches />
-  <h4> Tennis: 10-3-2017 at 11:00am </h4>
-  <h4> Jimbo creted a Tennis Match, for October 1st </h4>
+  <ScheduledMatches user={this.props.userID}/>
   </div>
 </div>
 )

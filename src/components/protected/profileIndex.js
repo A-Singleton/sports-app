@@ -9,9 +9,6 @@ export default class profileIndex extends Component {
     }
   }
 
-
-
-// this.props.id
   render () {
     console.log('profileIndex')
     console.log(this.props.match.params.value)
