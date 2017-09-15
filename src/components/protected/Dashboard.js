@@ -25,6 +25,7 @@ import ProfileIndex from './profileIndex'
 import Link2Profile from './link2Profile'
 import ConfirmReport from './confirmReport'
 import PostRenderReport from './postRenderReport'
+import RepReport from './repReport'
 
 export default class Dashboard extends Component {
 
@@ -271,7 +272,7 @@ const pushRightMargin = {
 
     return (
       <div>
-        <Profile />
+        <RepReport />
      </div>
     )
   }

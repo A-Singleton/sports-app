@@ -11,20 +11,22 @@ export default class MatchRender extends Component {
     super(props)
     this.state = {
       joined: false,
-      playerList: []
+      playerList: [],
+      url: ""
       }
   this.renderjoin = this.renderjoin.bind(this)
   this.handleJoin = this.handleJoin.bind(this)
   this.removeMatch = this.removeMatch.bind(this)
   }
 
-componentWillReceiveProps(nextProps){
+//componentWillReceiveProps(nextProps){
+componentDidMount(){
   // console.log("Recieved Props")
   // //  var that = this
   // console.log('nextProps')
   // //console.log(nextProps)
   console.log("nextProps")
-  console.log(nextProps)
+//  console.log(nextProps)
     // Create a reference to the file we want to download
   var starsRef = firebaseStorageRef.child('profilePics/Classic_Singleton.png');
   console.log("afterRef")
@@ -33,6 +35,9 @@ componentWillReceiveProps(nextProps){
     // Insert url into an <img> tag to "download"
     var img = document.getElementById('myimg');
     img.src = url;
+    console.log("url")
+    console.log(url)
+    this.setState({url})
     console.log("Done image")
   }).catch(function(error) {
 
@@ -106,13 +111,16 @@ renderjoin(e){
     else if (this.state.joined){
       matchRemark = ' You Joined this Match! '
     }
+//id="myimg"
+
+  console.log(this.state.url)
 
     return(
       <div className="col-sm-12">
         <div className="panel panel-white post panel-shadow">
           <div className="post-heading">
             <div className="pull-left image">
-              <img className="img-circle avatar" id="myimg" src="" alt="" height="48" width="48"/>
+              <img className="img-circle avatar" src="https://firebasestorage.googleapis.com/v0/b/add-users-to-app.appspot.com/o/profilePics%2FClassic_Singleton.png?alt=media&token=cacccb2e-3200-4dba-94b9-1d71ec491cd9" alt="" height="48" width="48"/>
             </div>
             <div className="pull-right "><button onClick={this.removeMatch} className="fa fa-remove">Cancel Match</button></div>
             <div className="pull-left meta">

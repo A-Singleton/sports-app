@@ -89,11 +89,11 @@ return(
         name="preferred opponent skill level"
         value={this.state.sports}
         onChange={this.sportsChanged.bind(this)}>
-           <div style={divCheckbox}>
+            <div style={divCheckbox}>
             <label style={checkboxLabel}><Checkbox style={checkbox} value="Beginner"/> Beginner</label>
             <label style={checkboxLabel}><Checkbox style={checkbox} value="Intermediate"/> Intermediate</label>
             <label style={checkboxLabel}><Checkbox style={checkbox} value="Advanced"/> Advanced</label>
-               </div>
+            </div>
           </CheckboxGroup>
           <br/>
      <button type="submit" className="btn btn-primary">Create Match</button>

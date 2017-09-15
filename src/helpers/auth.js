@@ -422,3 +422,11 @@ export function matchDispute (matchID) {
 // .push({ friend })
 // })
 }
+
+export function  submitRep (opponent, rep) {
+//   console.log(friends)
+// friends.forEach(function(friend) {
+// ref.child(`opponent/account-info/rep)
+// .push({ rep })
+// })
+}

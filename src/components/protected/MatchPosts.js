@@ -11,9 +11,9 @@ constructor(props){
 
 componentWillReceiveProps(nextProps) {
   console.log("Comp recieved props")
-  if (nextProps.matches !== this.props.matches) {
+//  if (nextProps.matches !== this.props.matches) {
     this.setState({ matches: nextProps.matches });
-  }
+//  }
 }
 
   render() {
@@ -37,8 +37,6 @@ componentWillReceiveProps(nextProps) {
       console.log('match')
       console.log(i)
        console.log(match)
-
-
 
       return(
         <MatchRender

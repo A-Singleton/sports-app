@@ -34,7 +34,7 @@ export default class ScheduledMatch extends Component {
         <div className="panel panel-white post panel-shadow">
           <div className="post-heading">
             <div className="pull-left image">
-              <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
+              <img className="img-circle avatar" src="https://firebasestorage.googleapis.com/v0/b/add-users-to-app.appspot.com/o/profilePics%2FClassic_Singleton.png?alt=media&token=cacccb2e-3200-4dba-94b9-1d71ec491cd9" height="48" width="48" alt=""/>
             </div>
             <div className="pull-left meta">
               <div className="title h5">
