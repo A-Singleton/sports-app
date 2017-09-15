@@ -4,6 +4,7 @@ import ChatRoom from './ChatRoom'
 import ChatButton from './ChatButton'
 import { removeMatchBackend, joinMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { firebaseAuth, firebaseStorageRef, ref } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import MatchReport from './MatchReport'
 
 export default class MatchRender extends Component {
 
@@ -19,6 +20,8 @@ export default class MatchRender extends Component {
   this.removeMatch = this.removeMatch.bind(this)
   }
 
+
+// TODO: fix src url for each prof pic
 //componentWillReceiveProps(nextProps){
 componentDidMount(){
   // console.log("Recieved Props")
@@ -149,7 +152,7 @@ renderjoin(e){
         </div>
 
         <ChatButton matchkey={this.props.match.id}/>
-
+        <MatchReport match={this.props.match}/>
 
 
       </div>

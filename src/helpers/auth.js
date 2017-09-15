@@ -268,52 +268,43 @@ export function removeTournamentBackend(players) {
   // TODO: Send arrays of winners to update, and losers
 export function recordMatch(hostScore, awayScore, hostID, awayID, matchID){
 
-  if(hostScore > awayScore){
-  //  hostID.map(id, i){
-  // ref.child(`users/${id}/account-info/won-matches
-  //                               /${matchID}`)
-//  ref.child(`users/${id}/account-info/
-//                              joinedGames/${matchID}`).remove()
-// }
+  if(hostScore > awayScore) {
+   hostID.forEach(function(element) {
+     console.log('element')
+     console.log(element)
 
-//  awayID.map(id, i){
-// ref.child(`users/${id}/account-info/lost-matches
-//                               /${matchID}`)
-//  ref.child(`users/${id}/account-info/
-//                              joinedGames/${matchID}`).remove()
-//}
+    ref.child(`users/${element}/account-info/won-matches/${matchID}`)
+    ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+})
+
+ awayID.forEach(function(element) {
+    ref.child(`users/${element}/account-info/lost-matches/${matchID}`)
+    ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+})
   }
 
   else if(hostScore < awayScore){
-    //  hostID.map(id, i){
-    // ref.child(`users/${id}/account-info/lost-matches
-    //                               /${matchID}`)
-  //  ref.child(`users/${id}/account-info/
-  //                              joinedGames/${matchID}`).remove()
-  // }
-
-  //  awayID.map(id, i){
-  // ref.child(`users/${id}/account-info/won-matches
-  //                               /${matchID}`)
-  //  ref.child(`users/${id}/account-info/
-  //                              joinedGames/${matchID}`).remove()
-  //}
+     hostID.forEach(function(element) {
+       ref.child(`users/${element}/account-info/lost-matches/${matchID}`)
+       ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+  }
+)
+     awayID.forEach(function(element) {
+       ref.child(`users/${element}/account-info/won-matches/${matchID}`)
+       ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+  })
   }
 
   else{
-    //  hostID.map(id, i){
-    // ref.child(`users/${id}/account-info/drawn-matches
-    //                               /${matchID}`)
-  //  ref.child(`users/${id}/account-info/
-  //                              joinedGames/${matchID}`).remove()
-  // }
-
-  //  awayID.map(id, i){
-  // ref.child(`users/${id}/account-info/drawn-matches
-  //                               /${matchID}`)
-  //  ref.child(`users/${id}/account-info/
-  //                              joinedGames/${matchID}`).remove()
-  //}
+    hostID.forEach(function(element) {
+      ref.child(`users/${element}/account-info/drawn-matches/${matchID}`)
+      ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+ }
+)
+    awayID.forEach(function(element) {
+      ref.child(`users/${element}/account-info/drawn-matches/${matchID}`)
+      ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+ })
   }
  }
 
@@ -407,13 +398,13 @@ ref.child(`matches/${matchID}/invited-friends`)
 })
 }
 
-export function reportConfirmed (matchID) {
-//   console.log(friends)
-// friends.forEach(function(friend) {
-// ref.child(`matches/${matchID}/invited-friends`)
-// .push({  })
-//})
-}
+// export function reportConfirmed (matchID) {
+// //   console.log(friends)
+// // friends.forEach(function(friend) {
+// // ref.child(`matches/${matchID}/invited-friends`)
+// // .push({  })
+// //})
+//}
 
 export function matchDispute (matchID) {
 //   console.log(friends)
@@ -423,10 +414,26 @@ export function matchDispute (matchID) {
 // })
 }
 
-export function  submitRep (opponent, rep) {
+export function submitRep (opponent, rep) {
 //   console.log(friends)
 // friends.forEach(function(friend) {
 // ref.child(`opponent/account-info/rep)
 // .push({ rep })
 // })
+}
+
+export function submittedMatch (hostScore, awayScore, hostID, awayID, matchID, sport, date, user) {
+//   console.log(friends)
+  // make a notification in opp user info
+var newMatchKey = ref.child('pendingMatches').push().key
+ ref.child(`/pendingMatches/` + newMatchKey)
+ .update({
+   hostScore: hostScore,
+   awayScore: awayScore,
+   hostID: hostID,
+   awayID: awayID,
+   matchID: matchID,
+   sport: sport,
+   date: date
+ })
 }

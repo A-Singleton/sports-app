@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { submittedMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { Form, Button} from 'react-bootstrap'
+import { ref, firebaseAuth, firebaseStorageRef, taskEvent, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 
 export default class MatchReport extends Component{
   constructor(props){
     super(props)
     this.state = {
-      hostScore: "",
-      awayScore: ""
+      hostScore: -1,
+      awayScore: -1
     }
     this.handleChangeUser = this.handleChangeUser.bind(this)
     this.handleChangeGuest = this.handleChangeGuest.bind(this)
@@ -24,11 +26,18 @@ export default class MatchReport extends Component{
     this.setState({awayScore: event.target.value})
   }
 
-  onSubmit(e){
+  onSubmit = (e) => {
     e.preventDefault()
-    //send to backend
     // need props of players' IDs
-    recordMatch(this.state.hostScore, this.state.awayScore, this.props.homeId, this.props.guestId)
+    console.log('submitted')
+    const user = firebaseAuth().currentUser
+
+    console.log(Object.keys(this.state.hostScore))
+    console.log(JSON.stringify(this.state.hostScore))
+
+    submittedMatch(this.state.hostScore, this.state.awayScore,
+       this.props.match.players[0], this.props.match.players[1], this.props.match.id,
+     this.props.match.sport, this.props.match.date, user)
   }
 
 render(){
@@ -63,17 +72,26 @@ render(){
     margin: "10px",
   }
 
+  console.log(" Match Render Props")
+  console.log(this.props.match)
+
+  const isEnabled =
+  this.state.hostScore > -1 &&
+  this.state.awayScore > -1;
 
   return (
     <div style={divStyle}>
     <h2 style={headerStyle2}> How did the match go? </h2>
-    <label> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> You <input style={horInput} className="match-report-user" type="number" min="0"
+    <h3> {this.props.match.sport} on {this.props.match.date} </h3>
+    <label> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> {this.props.match.creatorName} <input style={horInput} className="match-report-user" type="number" min="0"
     onChange={this.handleChangeUser}/></label>
     to
     <label> <input style={horInput} className="match-report-guest" type="number" min="0"
     onChange={this.handleChangeGuest}/> Your Guest <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/></label>
     <br/>
-     <button type="submit" className="btn btn-primary">Submit the Result</button>
+    <Form onSubmit={this.onSubmit}>
+     <Button disabled={!isEnabled} bsStyle="success" type="submit">Submit the Result</Button>
+    </Form>
     </div>
   )
 }

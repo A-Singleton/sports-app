@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { getProfileInfo, getKeyStats } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { firebaseAuth, firebaseStorageRef, ref } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import ScheduledMatches from './scheduledMatches'
+import ConfirmReport from './confirmReport'
+import MatchReport from './MatchReport'
 
 //TODO: profile pic + url in upper corner
 //1. Add error handling to fb queries
-//2. Component for scheduled matches
 //3. Component for recent activity
 //
 export default class profile extends Component {
@@ -29,6 +30,8 @@ export default class profile extends Component {
   starsRef.getDownloadURL().then(function(url) {
     // Insert url into an <img> tag to "download"
     var img = document.getElementById('myimg');
+    var imgBar = document.getElementById('imgBar');
+    imgBar.src = url
     img.src = url;
   }).catch(function(error) {
 
@@ -90,6 +93,8 @@ var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
 starsRef.getDownloadURL().then(function(url) {
   // Insert url into an <img> tag to "download"
   var img = document.getElementById('myimg');
+  var imgBar = document.getElementById('imgBar');
+  imgBar.src = url
   img.src = url;
 }).catch(function(error) {
 
@@ -197,6 +202,7 @@ return (
   </div>
   <div className="pull-left activity-feed">
   <h3 style={headerStyle3}><strong> Recent Activity </strong></h3>
+  <ConfirmReport />
   <h4> Jimbo won a Tennis Match, something to something </h4>
   <h4> Jimbo creted a Tennis Match, for October 1st </h4>
   </div>
