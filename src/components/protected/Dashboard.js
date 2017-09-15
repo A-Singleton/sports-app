@@ -267,12 +267,13 @@ const pushRightMargin = {
 // <Link2Profile user={user}/>
 // <BasicAutosuggest />
 // <ConfirmReport />
+// <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
 
   var user =  firebaseAuth().currentUser.uid
 
     return (
       <div>
-        <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
+        <EditProfile />
      </div>
     )
   }

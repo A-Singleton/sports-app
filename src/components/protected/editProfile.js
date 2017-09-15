@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import ImageUpload from './ImageUpload'
 import { updateProfile, getProfileInfo } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
-import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import { firebaseAuth, ref, firebaseStorageRef } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 
 //To do:
 // 1. Seperate Image change (probably)
@@ -33,44 +33,51 @@ componentDidMount(){
   firebaseAuth().onAuthStateChanged(function(user) {
 if (user) {
 // User is signed in.
-// const test = {}
-// setTimeout(function()
-// {
-//   console.log('entered timeout')
-    const profileInfo = that.loadProfile(user)
-//     test.fName = profileInfo.fName
-// }, 100);
 
-console.log(Object.keys(profileInfo))
-console.log(JSON.stringify(profileInfo))
-console.log(profileInfo)
+    ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
 
-that.setState({fName: profileInfo})
+    const persInfo = snapshot.val()
+     console.log(persInfo)
+     that.setState({
+    fName: persInfo.FirstName,
+    lName: persInfo.LastName,
+    email: persInfo.email,
+    gender: persInfo.Gender,
 
-setTimeout(function () {
-  console.log('Timeout')
-  console.log(Object.keys(profileInfo))
-  console.log(JSON.stringify(profileInfo))
-    console.log(profileInfo)
-});
-// profileInfo.forEach(function(item){
-//   console.log(item.FirstName)
-// })
+     })
+    })
 
-// const test = profileInfo.map((info, i) => {
-//   console.log('info')
-//   console.log(i)
-//    console.log(info)
-//    console.log(info.FirstName)
-//   return(
-//     null
-//   )
-// })
+    // Create a reference to the file we want to download
+  var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
 
+  // Get the download URL
+  starsRef.getDownloadURL().then(function(url) {
+    // Insert url into an <img> tag to "download"
+    var img = document.getElementById('myimg');
+    img.src = url;
+  }).catch(function(error) {
 
-//const test = profileInfo.map(info, i)
-//console.log(info.FirstName)
-//this.setState({fName: profileInfo.FirstName})
+    // A full list of error codes is available at
+    // https://firebase.google.com/docs/storage/web/handle-errors
+    switch (error.code) {
+      case 'storage/object_not_found':
+        // File doesn't exist
+        break;
+
+      case 'storage/unauthorized':
+        // User doesn't have permission to access the object
+        break;
+
+      case 'storage/canceled':
+        // User canceled the upload
+        break;
+
+      case 'storage/unknown':
+        // Unknown error occurred, inspect the server response
+        break;
+    }
+  });
+
 //set consts to state, pass as props to rendering comps
 } else {
 // No user is signed in.
@@ -78,13 +85,6 @@ setTimeout(function () {
 })
 
 }
-
-loadProfile = (user) => {
-    const profInfo = getProfileInfo(user)    //voila!
-    console.log(profInfo)
-    this.setState({profInfo: profInfo})
-    return profInfo
-  };
 
 handleChangeFname = (event) => {
   console.log(event.target.value)
@@ -124,17 +124,18 @@ handleChangeFname = (event) => {
   handleSubmit = (e) => {
     e.preventDefault()
     console.log(this.state.fName)
-    // BirthMonth: this.month.value,
-    // BirthDay: this.day.value,
-    // BirthYear: this.year.value
+    console.log(this.state.lName)
+    console.log(this.state.email)
+    console.log(this.state.gender)
+
     const updatedInfo = {
       FirstName: this.state.fName,
       LastName: this.state.lName,
       Email: this.state.email,
       Gender: this.state.gender
 }
-  const user = firebaseAuth().currentUser
-  updateProfile(updatedInfo, user)
+//  const user = firebaseAuth().currentUser
+//  updateProfile(updatedInfo, user)
 }
 
   render () {
@@ -150,7 +151,7 @@ return (
   <div className="title h5" style={profileText}>
    <h3><strong> Edit Your Profile </strong> </h3>
    </div>
-  <img className="img-square avatar" src="http://placehold.it/200x200" alt=""/>
+  <img className="img-square avatar" id="myimg" src="" alt="" height="200" width="200"/>
   <ImageUpload />
   <br/>
   <Form horizontal onSubmit={this.handleSubmit}>
