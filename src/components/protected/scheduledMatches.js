@@ -13,39 +13,36 @@ export default class scheduledMatches extends Component {
          }
         }
 
+        componentWillReceiveProps(nextProps){
+        //const user = firebaseAuth().currentUser
+        console.log("nextProps")
+        console.log(nextProps)
+        //db.ref(`users/${user.uid}/account-info/joinedGames`).on('value', (snapshot)=> {
+        db.ref(`users/${nextProps.user}/account-info/joinedGames`).on('value', (snapshot)=> {
+
+
+        var matches = snapshot.val()
+        console.log(matches)
+        var keys = Object.keys(matches)
+        console.log(keys)
+        this.setState({keys})
+        })
+        }
+
+
 componentDidMount(){
-const user = firebaseAuth().currentUser
-console.log(user.uid)
-db.ref(`users/${user.uid}/account-info/joinedGames`).on('value', (snapshot)=> {
+//const user = firebaseAuth().currentUser
+console.log("this.props.user")
+console.log(this.props.user)
+//db.ref(`users/${user.uid}/account-info/joinedGames`).on('value', (snapshot)=> {
+db.ref(`users/${this.props.user}/account-info/joinedGames`).on('value', (snapshot)=> {
+
 
 var matches = snapshot.val()
 console.log(matches)
 var keys = Object.keys(matches)
 console.log(keys)
 this.setState({keys})
-//     for (var i =0; i < keys.length; i++) {
-//       var k = keys[i];
-//       var skill = matches[k].skill;
-//       var sport = matches[k].sport;
-//       var date = matches[k].gameDate;
-//       var creator_query = matches[k].creator;
-//       var players = matches[k].players;
-//       var creator_first_name = matches[k].creator_first_name;
-//       var creator_last_name = matches[k].creator_last_name;
-//
-// var nextMatch = {
-//   id: k,
-//   skill: skill,
-//   sport: sport,
-//   date:  date,
-//   players: players,
-//   creator: creator_query,
-//   creatorName: creator_first_name + " " + creator_last_name
-// }
-//
-// }
-
-//allMatches.push(nextMatch)
 })
 }
 

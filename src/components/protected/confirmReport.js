@@ -1,12 +1,41 @@
 import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
+import { firebaseAuth, firebaseStorageRef, ref, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class ConfirmReport extends Component {
+
+  constructor(){
+    super()
+    this.state = {
+      pendingMatch: ''
+    }
+  }
+
+  componentDidMount(){
+    console.log("Con Report did mount")
+    var user =  firebaseAuth().currentUser.uid
+  //var ref = db.ref("");
+  ref.orderByChild(`pending-matches`).on("value", function(snapshot) {
+  //ref.child(`pending-matches`).on("child_added", function(snapshot) {
+
+  //  var pending = "pending-matches"
+     var data = snapshot.val().pendingMatches
+
+     console.log("data")
+    console.log(data)
+   //
+  // //  var query = data.orderByChild(`awayID`).equalTo(user)
+  // console.log("snapshot.key")
+  // console.log(snapshot.key);
+  });
+
+  }
 
   handleSubmit(event) {
       event.preventDefault();
       console.log("handleSubmit")
-      // reportConfirmed(this.props.matchID)
+      //recordMatch(this.state.matchInfo)
     }
 
     handleAlternate(event) {

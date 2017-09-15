@@ -10,7 +10,7 @@ export default class ImageUpload extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
-    const user = firebaseAuth().currentUser
+    const user = firebaseAuth().currentUser.uid
     console.log(user.uid)
 
     //Get Element
@@ -19,7 +19,7 @@ export default class ImageUpload extends Component {
     // Get File
     var file = this.state.file
 
-    uploadImage(file)
+    uploadImage(file, user)
 
     //console.log('handle uploading-', this.state.file);
   }

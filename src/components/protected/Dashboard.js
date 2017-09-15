@@ -25,6 +25,7 @@ import ProfileIndex from './profileIndex'
 import Link2Profile from './link2Profile'
 import ConfirmReport from './confirmReport'
 import PostRenderReport from './postRenderReport'
+import RepReport from './repReport'
 
 export default class Dashboard extends Component {
 
@@ -266,11 +267,14 @@ const pushRightMargin = {
 // <Link2Profile user={user}/>
 // <BasicAutosuggest />
 // <ConfirmReport />
+// <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
+//  <MatchReport />
 
   var user =  firebaseAuth().currentUser.uid
-
+  var otherUser = 'q2xlsIvehieukIw1QYOi6LxGUp33'
     return (
       <div>
+        <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
         <PostRenderReport />
      </div>
     )
