@@ -58,6 +58,13 @@ export default class App extends Component {
     this.removeListener()
   }
   render() {
+
+    const profImage = {
+    //  margin: '0px',
+      marginTop: '10px',
+      marginRight: '4px'
+    }
+
     return this.state.loading === true ? <h1>Loading</h1> : (
       <BrowserRouter>
         <div>
@@ -68,10 +75,10 @@ export default class App extends Component {
               </div>
               <ul className="nav navbar-nav pull-right">
                 <li>
-                  <Link to="/" className="navbar-brand">Home</Link>
+                 <img style={profImage} className="img-square avatar"  id="imgBar" src="" alt="" height="30" width="30"/>
                 </li>
                 <li>
-                  <Link to="/dashboard" className="navbar-brand">Profile</Link>
+                <Link to="/dashboard" className="navbar-brand"> Profile</Link>
                 </li>
                 <li>
                 <Link to="/matchFeed" className="navbar-brand">Match Feed</Link>

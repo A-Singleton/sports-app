@@ -53,8 +53,11 @@ if (user) {
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {
     // Insert url into an <img> tag to "download"
-    var img = document.getElementById('myimg');
-    img.src = url;
+  //  var img = document.getElementById('myimg');
+    var imgBar = document.getElementById('imgBar')
+    var img = document.getElementById('myimg')
+    imgBar.src = url
+    img.src = url
   }).catch(function(error) {
 
     // A full list of error codes is available at
