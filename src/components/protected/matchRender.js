@@ -75,10 +75,9 @@ joinMatch(user, players, matchID)
 this.setState({joined: true})
 }
 
-
 removeMatch(e){
-       e.preventDefault();
-       console.log("Removing Match")
+    e.preventDefault();
+    console.log("Removing Match")
     const players = this.props.match.players
     // Call to firebase
     removeMatchBackend(players)
@@ -87,6 +86,11 @@ removeMatch(e){
 renderjoin(e){
   e.preventDefault()
   return <div> No function yet </div>
+}
+
+friendRequest = (event) => {
+  console.log(event.target.value)
+  addFriend(event.target.value, user)
 }
 
   render(){
@@ -105,6 +109,9 @@ renderjoin(e){
     // else{
     //   button = <button />
     // }
+    // this.props.friends.includes(creator)
+    this.props.match.creator ? <button onClick={this.friendRequest}>Send Friend Request</button> : '';
+    condition ? expr1 : expr2
 
     let matchRemark = null
 
@@ -114,7 +121,6 @@ renderjoin(e){
     else if (this.state.joined){
       matchRemark = ' You Joined this Match! '
     }
-//id="myimg"
 
   console.log(this.state.url)
 
@@ -146,6 +152,7 @@ renderjoin(e){
             <br/>
             <h3> Players: {this.props.match.players.length} </h3>
             <br/>
+
             </div>
             {button}
             <div className="actions">
@@ -153,7 +160,6 @@ renderjoin(e){
 
         <ChatButton matchkey={this.props.match.id}/>
         <MatchReport match={this.props.match}/>
-
 
       </div>
     )

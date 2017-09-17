@@ -452,3 +452,22 @@ var newMatchKey = ref.child('pendingMatches').push().key
    date: date
  })
 }
+
+export function addFriend (friend, user) {
+//   console.log(friends)
+// ref.child(`users/friend/account-info/friendRequests)
+// .push({ user })
+}
+
+export function acceptFriend (friend, user) {
+//   console.log(friend)
+// ref.child(`users/${user}/account-info/friends)
+// .push({ friend })
+
+// ref.child(`users/${user}/account-info/friendRequests/${friend}).remove()
+}
+
+export function declineFriend (friend, user) {
+//   console.log(friend)
+// ref.child(`users/${user}/account-info/friendRequests/${friend}).remove()
+}

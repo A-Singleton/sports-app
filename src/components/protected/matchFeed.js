@@ -10,12 +10,13 @@ export default class matchFeed extends Component {
     super(props)
     this.state = {
         allMatches: [],
-        User: ''
+        User: '',
+        friendsList: []
     }
   }
 
 componentDidMount(){
-  //const user = firebaseAuth().currentUser
+  const user = firebaseAuth().currentUser.uid
   // const fbMatches = getScheduledMatches()
   //const fbMatches = getScheduledMatches()
     db.ref(`matches/`).on('value', (snapshot)=> {
@@ -46,7 +47,7 @@ componentDidMount(){
     allMatchesCopy.push(nextMatch)
   //  this.setState({allMatches: allMatchesCopy})
   }
-  this.setState({allMatches: allMatchesCopy})
+    this.setState({allMatches: allMatchesCopy})
   })
   //
   // console.log('allMatches')
@@ -54,6 +55,20 @@ componentDidMount(){
   // this.setState({ allMatches: fbMatches})
   // console.log('state allMatches')
   // console.log(this.state.allMatches)
+
+  db.ref(`users/${user}/friends`).on('value', (snapshot)=> {
+      const friends = snapshot.val()
+      var keys = Object.keys(friends)
+      var allFriendsCopy = this.state.friendsList
+          for (var i =0; i < keys.length; i++) {
+
+            var friend = friends[keys[i]]
+            console.log(friend)
+            allFriendsCopy.push(friend)
+          }
+      this.setState({ friendsList: allFriendsCopy })
+  })
+
 }
 
   render(){

@@ -29,14 +29,12 @@ export default class scheduledMatches extends Component {
         })
         }
 
-
 componentDidMount(){
 //const user = firebaseAuth().currentUser
 console.log("this.props.user")
 console.log(this.props.user)
 //db.ref(`users/${user.uid}/account-info/joinedGames`).on('value', (snapshot)=> {
 db.ref(`users/${this.props.user}/account-info/joinedGames`).on('value', (snapshot)=> {
-
 
 var matches = snapshot.val()
 console.log(matches)
