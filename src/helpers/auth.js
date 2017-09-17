@@ -266,46 +266,61 @@ export function removeTournamentBackend(players) {
 }
 
   // TODO: Send arrays of winners to update, and losers
-export function recordMatch(hostScore, awayScore, hostID, awayID, matchID){
+export function recordMatch(match){
 
+  const hostScore = match.hostScore
+  const awayScore = match.awayScore
+  const hostID = [match.hostID]
+  const awayID = [match.awayID]
+  const matchID = match.matchID
+  const pendingMatchID = match.pendingMatchID
+
+// Host wins
   if(hostScore > awayScore) {
    hostID.forEach(function(element) {
      console.log('element')
      console.log(element)
 
-    ref.child(`users/${element}/account-info/won-matches/${matchID}`)
+    ref.child(`users/${element}/account-info/wonMatches/`).push(matchID)
     ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
 })
 
  awayID.forEach(function(element) {
-    ref.child(`users/${element}/account-info/lost-matches/${matchID}`)
+    ref.child(`users/${element}/account-info/lostMatches/`).push(matchID)
     ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
 })
   }
 
+// Host loses
   else if(hostScore < awayScore){
      hostID.forEach(function(element) {
-       ref.child(`users/${element}/account-info/lost-matches/${matchID}`)
+       ref.child(`users/${element}/account-info/lostMatches/`).push(matchID)
        ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
   }
 )
      awayID.forEach(function(element) {
-       ref.child(`users/${element}/account-info/won-matches/${matchID}`)
+       ref.child(`users/${element}/account-info/wonMatches/`).push(matchID)
        ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
   })
   }
 
+// Draw for all
   else{
     hostID.forEach(function(element) {
-      ref.child(`users/${element}/account-info/drawn-matches/${matchID}`)
+      ref.child(`users/${element}/account-info/drawnMatches/`).push(matchID)
       ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
  }
 )
     awayID.forEach(function(element) {
-      ref.child(`users/${element}/account-info/drawn-matches/${matchID}`)
+      ref.child(`users/${element}/account-info/drawnMatches/`).push(matchID)
       ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
  })
   }
+
+  //delete the match from Joined Matches and regular matches
+  ref.child(`matches/${matchID}`).remove()
+  ref.child(`pendingMatches/${pendingMatchID}`).remove()
+  // Save match as "Confirmed Match", copy it somehow
  }
 
 // BirthMonth: info.BirthMonth,

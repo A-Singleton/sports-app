@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { firebaseAuth, firebaseStorageRef, ref, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
-import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import PendingMatchRender from './pendingMatchRender'
 
 export default class ConfirmReport extends Component {
@@ -28,9 +27,7 @@ export default class ConfirmReport extends Component {
   var queryRef = db.ref("pendingMatches")
   var that = this
   queryRef.orderByChild(`awayID`).equalTo(userTest).on("value", (snapshot)=> {
-  //ref.child(`pending-matches`).on("child_added", function(snapshot) {
-// add link in user to list of pendingMatches? Query is easier...if worked..
-  //  var pending = "pending-matches"
+
     var allPendingMatchesCopy = this.state.allPendingMatches
 
     const data = snapshot.val()
@@ -41,22 +38,20 @@ export default class ConfirmReport extends Component {
   for (var i =0; i < keys.length; i++) {
 
     var nextMatch = {
-       awayID: data[keys].awayID,
-       awayScore: data[keys].awayScore,
-       date: data[keys].date,
-       hostID: data[keys].hostID,
-       hostScore: data[keys].hostScore,
-       matchID: data[keys].matchID,
-       sport: data[keys].sport,
+       awayID: data[keys[i]].awayID,
+       awayScore: data[keys[i]].awayScore,
+       date: data[keys[i]].date,
+       hostID: data[keys[i]].hostID,
+       hostScore: data[keys[i]].hostScore,
+       matchID: data[keys[i]].matchID,
+       sport: data[keys[i]].sport,
+       pendingMatchID: keys[i]
      }
     //  console.log("data")
       console.log('nextMatch')
       console.log(nextMatch)
 
       allPendingMatchesCopy.push(nextMatch)
-  // //  var query = data.orderByChild(`awayID`).equalTo(user)
-  // console.log("snapshot.key")
-  // console.log(snapshot.key);
   }
       this.setState({ allPendingMatches: allPendingMatchesCopy })
  })
@@ -80,7 +75,6 @@ export default class ConfirmReport extends Component {
     //  backgroundImage: 'url(' + imgUrl + ')',
     }
 
-
   var pendingMatches = ''
 
   if (this.state.allPendingMatches) {
@@ -96,22 +90,6 @@ export default class ConfirmReport extends Component {
     )
   })
 }
-
-
-    // var yourScheduledMatches = ''
-    //
-    // if(this.state.joinedMatches){
-    //   var yourScheduledMatches = this.state.joinedMatches.map((match, i) => {
-    //     console.log('entered match loop')
-    //     console.log(match)
-    //     console.log(i)
-    //     return(
-    //       <ScheduledMatch
-    //       key={i}
-    //       match={match}
-    //       />
-    //     )
-    //   })
 
     return(
       <div style={divStyle}>

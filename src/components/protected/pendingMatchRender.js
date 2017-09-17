@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
+import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class PendingMatchRender extends Component {
 
   handleSubmit(event) {
       event.preventDefault();
       console.log("handleSubmit")
-      //recordMatch(this.state.matchInfo)
+
+      recordMatch(this.props.matches)
     }
 
     handleAlternate(event) {
@@ -35,13 +37,6 @@ export default class PendingMatchRender extends Component {
         const score = {
           padding: "5px",
           margin: "5px",
-          //width: "550px",
-          //justifyContent: 'center'
-          //alignItems: 'flex',
-          //justifyContent: 'flex',
-          //alignSelf: 'flex',
-        //  color: 'blue',
-        //  backgroundImage: 'url(' + imgUrl + ')',
         };
 
         console.log(this.props.matches)
@@ -50,6 +45,7 @@ export default class PendingMatchRender extends Component {
     return(
       <div style={divStyle}>
       <h2> Jimbo Reported the Scores from Your Match </h2>
+      <h3> { this.props.matches.sport + " at " + this.props.matches.date } </h3>
       <label style={score}> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> Home: { this.props.matches.hostScore + "  " } </label>
       <label>  { this.props.matches.awayScore } : Away <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
         <Form onSubmit={this.handleSubmit.bind(this)}>
