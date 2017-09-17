@@ -43,7 +43,6 @@ if (user) {
     lName: persInfo.LastName,
     email: persInfo.email,
     gender: persInfo.Gender,
-
      })
     })
 

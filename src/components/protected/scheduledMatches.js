@@ -18,7 +18,7 @@ export default class scheduledMatches extends Component {
         console.log("nextProps")
         console.log(nextProps)
         //db.ref(`users/${user.uid}/account-info/joinedGames`).on('value', (snapshot)=> {
-        db.ref(`users/${nextProps.user}/account-info/joinedGames`).on('value', (snapshot)=> {
+        db.ref(`users/${nextProps.user}/account-info/joinedGames`).on('value', (snapshot) => {
 
 
         var matches = snapshot.val()
@@ -59,8 +59,6 @@ if (this.state.keys) {
     keyCodes={this.state.keys}/>
   )
 }
-//)}
-
 
   return(
     <div>

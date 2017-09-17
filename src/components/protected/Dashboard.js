@@ -275,7 +275,7 @@ const pushRightMargin = {
     return (
       <div>
         <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
-        <PostRenderReport />
+        <ConfirmReport />
      </div>
     )
   }
