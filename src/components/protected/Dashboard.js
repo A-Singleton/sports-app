@@ -26,6 +26,7 @@ import Link2Profile from './link2Profile'
 import ConfirmReport from './confirmReport'
 import PostRenderReport from './postRenderReport'
 import RepReport from './repReport'
+import addDeclineFriend from './addDeclineFriend'
 
 export default class Dashboard extends Component {
 

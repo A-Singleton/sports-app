@@ -398,12 +398,12 @@ var nextMatch = {
 })
    return yourMatches
 }
-
-export function addFriend (friendID, userID) {
-  console.log(friendID)
-ref.child(`users/${userID}/account-info/friends`)
-.push({ friendID })
-}
+//
+// export function addFriend (friendID, userID) {
+//   console.log(friendID)
+// ref.child(`users/${userID}/account-info/friends`)
+// .push({ friendID })
+// }
 
 export function invite2Match (friends, matchID) {
   console.log(friends)
@@ -454,20 +454,27 @@ var newMatchKey = ref.child('pendingMatches').push().key
 }
 
 export function addFriend (friend, user) {
-//   console.log(friends)
-// ref.child(`users/friend/account-info/friendRequests)
-// .push({ user })
+console.log(friend)
+console.log(user)
+ref.child(`users/${friend}/account-info/friendRequests`).push({ user })
+
+ref.child(`users/${user}/account-info/pendingFriends`).push({ friend })
 }
 
-export function acceptFriend (friend, user) {
-//   console.log(friend)
-// ref.child(`users/${user}/account-info/friends)
-// .push({ friend })
+export function acceptFriend (requester, accepter) {
+console.log(accepter)
+ref.child(`users/${accepter}/account-info/friends`).push({ requester })
 
-// ref.child(`users/${user}/account-info/friendRequests/${friend}).remove()
+ref.child(`users/${requester}/account-info/friends`).push({ accepter })
+
+ref.child(`users/${accepter}/account-info/friendRequests/${requester}`).remove()
+
+ref.child(`users/${requester}/account-info/pendingFriends/${accepter}`).remove()
 }
 
-export function declineFriend (friend, user) {
-//   console.log(friend)
-// ref.child(`users/${user}/account-info/friendRequests/${friend}).remove()
+export function declineFriend (requester, decliner) {
+console.log(decliner)
+ref.child(`users/${requester}/account-info/friendRequests/${decliner}`).remove()
+
+ref.child(`users/${decliner}/account-info/friendRequests/${requester}`).remove()
 }
