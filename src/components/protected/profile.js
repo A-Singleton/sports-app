@@ -83,7 +83,7 @@ export default class profile extends Component {
     console.log('propsUser')
     console.log(propsUser)
     firebaseAuth().onAuthStateChanged(function(user) {
-      console.log(propsUser, user)
+      console.log(propsUser)
 if (user) {
 
   // Create a reference to the file we want to download
@@ -202,7 +202,7 @@ return (
   </div>
   <div className="pull-left activity-feed">
   <h3 style={headerStyle3}><strong> Recent Activity </strong></h3>
-  <ConfirmReport />
+  <ConfirmReport user={this.props.userID}/>
   <h4> Jimbo won a Tennis Match, something to something </h4>
   <h4> Jimbo creted a Tennis Match, for October 1st </h4>
   </div>

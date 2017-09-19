@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {ProgressBar, Button} from 'react-bootstrap'
+import {ProgressBar, Button, Form} from 'react-bootstrap'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 
 export default class postRenderReport extends Component {
@@ -10,14 +10,10 @@ export default class postRenderReport extends Component {
      }
    }
 
-
-
   handleSubmit = (e) => {
     e.preventDefault()
     console.log("submitted")
-    //
-
-    //this.setState({ fireRedirect: true })
+    this.setState({ fireRedirect: true })
 }
 
   render () {
@@ -37,9 +33,11 @@ export default class postRenderReport extends Component {
     //  backgroundImage: 'url(' + imgUrl + ')',
     };
 
-    console.log(this.props.stuff)
+    // console.log(this.props.stuff)
+    // console.log(this.props.stuffMine)
     const { from } = this.props.location.state || '/'
     const { fireRedirect } = this.state
+    console.log(this.state.fireRedirect)
 
     return(
       <div style={divStyle}>
@@ -58,12 +56,13 @@ export default class postRenderReport extends Component {
           <div className="pull-right"> 37 </div>
           <div className="pull-left"> 36 </div>
           <h4> Just 114 Points to go to 37 </h4>
-          <Button bsStyle="success" type="submit" onSubmit={this.handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
+          <Button bsStyle="success" type="submit">
           Back to Dashboard
           </Button>
-
-          {fireRedirect && (
-            <Redirect to={from || '/dashboard'}/>
+          </Form>
+          { this.state.fireRedirect && (
+            <Redirect to={'/dashboard'}/>
           )}
 
       </div>

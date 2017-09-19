@@ -18,43 +18,86 @@ export default class ConfirmReport extends Component {
       sport: ''
     }
   }
+//
+//   componentDidMount(){
+//     console.log("Con Report did mount")
+//     //var user =  firebaseAuth().currentUser.uid
+//     console.log(this.props.user)
+//     var user = this.props.user
+//     //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
+//   var queryRef = db.ref("pendingMatches")
+//   var that = this
+//   queryRef.orderByChild(`awayID`).equalTo(user).on("value", (snapshot)=> {
+//
+//     var allPendingMatchesCopy = this.state.allPendingMatches
+//
+//     const data = snapshot.val()
+//     var keys = Object.keys(data)
+//     console.log(data)
+//     console.log(keys)
+//
+//   for (var i =0; i < keys.length; i++) {
+//
+//     var nextMatch = {
+//        awayID: data[keys[i]].awayID,
+//        awayScore: data[keys[i]].awayScore,
+//        date: data[keys[i]].date,
+//        hostID: data[keys[i]].hostID,
+//        hostScore: data[keys[i]].hostScore,
+//        matchID: data[keys[i]].matchID,
+//        sport: data[keys[i]].sport,
+//        pendingMatchID: keys[i]
+//      }
+//     //  console.log("data")
+//       console.log('nextMatch')
+//       console.log(nextMatch)
+//
+//       allPendingMatchesCopy.push(nextMatch)
+//   }
+//       this.setState({ allPendingMatches: allPendingMatchesCopy })
+//  })
+// }
 
-  componentDidMount(){
-    console.log("Con Report did mount")
-    var user =  firebaseAuth().currentUser.uid
-    console.log(user)
-    const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
-  var queryRef = db.ref("pendingMatches")
-  var that = this
-  queryRef.orderByChild(`awayID`).equalTo(userTest).on("value", (snapshot)=> {
+componentWillReceiveProps(nextProps){
+  console.log("Con Report did mount")
+  //var user =  firebaseAuth().currentUser.uid
+  console.log(nextProps.user)
+  var user = nextProps.user
+  //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
+var queryRef = db.ref("pendingMatches")
+var that = this
+queryRef.orderByChild(`awayID`).equalTo(user).on("value", (snapshot)=> {
 
-    var allPendingMatchesCopy = this.state.allPendingMatches
+  //var allPendingMatchesCopy = this.state.allPendingMatches
+  var allPendingMatchesCopy = this.state.allPendingMatches
 
-    const data = snapshot.val()
-    var keys = Object.keys(data)
-    console.log(data)
-    console.log(keys)
+  const data = snapshot.val()
+  var keys = Object.keys(data)
+  console.log(data)
+  console.log(keys)
 
-  for (var i =0; i < keys.length; i++) {
+for (var i =0; i < keys.length; i++) {
+if(user === data[keys[i]].awayID){
+  var nextMatch = {
+     awayID: data[keys[i]].awayID,
+     awayScore: data[keys[i]].awayScore,
+     date: data[keys[i]].date,
+     hostID: data[keys[i]].hostID,
+     hostScore: data[keys[i]].hostScore,
+     matchID: data[keys[i]].matchID,
+     sport: data[keys[i]].sport,
+     pendingMatchID: keys[i]
+   }
+  //  console.log("data")
+    console.log('nextMatch')
+    console.log(nextMatch)
 
-    var nextMatch = {
-       awayID: data[keys[i]].awayID,
-       awayScore: data[keys[i]].awayScore,
-       date: data[keys[i]].date,
-       hostID: data[keys[i]].hostID,
-       hostScore: data[keys[i]].hostScore,
-       matchID: data[keys[i]].matchID,
-       sport: data[keys[i]].sport,
-       pendingMatchID: keys[i]
-     }
-    //  console.log("data")
-      console.log('nextMatch')
-      console.log(nextMatch)
-
-      allPendingMatchesCopy.push(nextMatch)
+    allPendingMatchesCopy.push(nextMatch)
   }
-      this.setState({ allPendingMatches: allPendingMatchesCopy })
- })
+}
+
+    this.setState({ allPendingMatches: allPendingMatchesCopy })
+})
 }
 
 

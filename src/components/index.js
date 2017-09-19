@@ -9,6 +9,7 @@ import ChatButton from './protected/ChatButton'
 import MatchFeed from './protected/matchFeed'
 import ProfileIndex from './protected/profileIndex'
 import PostRenderReport from './protected/postRenderReport'
+import RepReport from './protected/repReport'
 
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
@@ -103,6 +104,8 @@ export default class App extends Component {
       rating: 7
     }
 
+//   console.log(this.props.stuffMine)
+
     return this.state.loading === true ? <h1>Loading</h1> : (
       <BrowserRouter>
         <div>
@@ -147,6 +150,7 @@ export default class App extends Component {
                 <PrivateRoute authed={this.state.authed} path='/matchFeed' component={MatchFeed} />
                 <PrivateRoute authed={this.state.authed} path='/protected/profileIndex/:value' component={ProfileIndex} />
                 <PrivateRoute authed={this.state.authed} path='/postRenderReport' component={PostRenderReport} stuff={myRating}/>
+                <PrivateRoute authed={this.state.authed} path='/repReport' component={RepReport} stuff={myRating}/>
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

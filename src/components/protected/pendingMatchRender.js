@@ -52,8 +52,8 @@ export default class PendingMatchRender extends Component {
         console.log(this.props.matches)
         console.log(this.props.matches.awayScore)
 
-    const { from } = this.props.location.state || '/'
-    const { fireRedirect } = this.state
+  //  const { from } = this.props.location.state || '/'
+  //  const { fireRedirect } = this.state
 
     return(
       <div style={divStyle}>
@@ -71,8 +71,8 @@ export default class PendingMatchRender extends Component {
                 <h5> Learn more </h5>
         </Form>
 
-        {fireRedirect && (
-          <Redirect to={from || '/repReport'}/>
+        {this.state.fireRedirect && (
+          <Redirect to={'/repReport'}/>
         )}
 
 

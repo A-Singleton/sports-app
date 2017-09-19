@@ -4,6 +4,7 @@ import { Form,  FormGroup, FormControl, Col, Button, ControlLabel, Row} from 're
 import { submiteRep } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import StarCentered from './starCentered'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import Index from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/components/index.js'
 
 export default class RepReport extends Component {
   constructor(){
@@ -91,8 +92,9 @@ display: 'inlineBlock',
         </Button>
         </Form>
 
+          
         {this.state.fireRedirect && (
-          <Redirect to={'/postRenderReport'} stuff={this.state.rating}/>
+          <Redirect to={'/postRenderReport'} />
         )}
 
       </div>
