@@ -37,6 +37,7 @@ export default class postRenderReport extends Component {
     //  backgroundImage: 'url(' + imgUrl + ')',
     };
 
+    console.log(this.props.stuff)
     const { from } = this.props.location.state || '/'
     const { fireRedirect } = this.state
 

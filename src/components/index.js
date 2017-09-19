@@ -8,20 +8,38 @@ import Dashboard from './protected/Dashboard'
 import ChatButton from './protected/ChatButton'
 import MatchFeed from './protected/matchFeed'
 import ProfileIndex from './protected/profileIndex'
+import PostRenderReport from './protected/postRenderReport'
 
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 
-function PrivateRoute ({component: Component, authed, ...rest}) {
+
+const PrivateRoute = ({ component, authed, ...rest }) => {
   return (
-    <Route
-      {...rest}
-      render={(props) => authed === true
-        ? <Component {...props} />
-        : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
-    />
-  )
-}
+    <Route {...rest} render={routeProps => {
+      return authed ? (
+        renderMergedProps(component, routeProps, rest)
+      ) : (
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: routeProps.location }
+        }}/>
+      );
+    }}/>
+  );
+};
+
+
+// function PrivateRoute ({component: Component, authed, ...rest}) {
+//   return (
+//     <Route
+//       {...rest}
+//       render={(props) => authed === true
+//         ? <Component {...props} />
+//         : <Redirect to={{pathname: '/login', state: {from: props.location}}} />}
+//     />
+//   )
+// }
 
 function PublicRoute ({component: Component, authed, ...rest}) {
   return (
@@ -33,6 +51,22 @@ function PublicRoute ({component: Component, authed, ...rest}) {
     />
   )
 }
+/// New for rendering props
+const renderMergedProps = (component, ...rest) => {
+const finalProps = Object.assign({}, ...rest);
+return (
+  React.createElement(component, finalProps)
+);
+}
+
+const PropsRoute = ({ component, ...rest }) => {
+return (
+  <Route {...rest} render={routeProps => {
+    return renderMergedProps(component, routeProps, rest);
+  }}/>
+);
+}
+///////////////
 
 export default class App extends Component {
   state = {
@@ -63,6 +97,10 @@ export default class App extends Component {
     //  margin: '0px',
       marginTop: '10px',
       marginRight: '4px'
+    }
+
+    const myRating = {
+      rating: 7
     }
 
     return this.state.loading === true ? <h1>Loading</h1> : (
@@ -108,6 +146,7 @@ export default class App extends Component {
                 <PrivateRoute authed={this.state.authed} path='/dashboard' component={Dashboard} />
                 <PrivateRoute authed={this.state.authed} path='/matchFeed' component={MatchFeed} />
                 <PrivateRoute authed={this.state.authed} path='/protected/profileIndex/:value' component={ProfileIndex} />
+                <PrivateRoute authed={this.state.authed} path='/postRenderReport' component={PostRenderReport} stuff={myRating}/>
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

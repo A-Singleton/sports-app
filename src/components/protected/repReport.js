@@ -10,7 +10,8 @@ export default class RepReport extends Component {
     super()
 this.state = {
   rating: 5,
-  fireRedirect: false
+  fireRedirect: false,
+  bool: true
 }
 }
 
@@ -23,7 +24,7 @@ this.state = {
     e.preventDefault()
     console.log("submitted")
     // submitRep(this.props.opp, this.state.rating)
-    //this.setState({ fireRedirect: true })
+    this.setState({ fireRedirect: true })
 }
 
   render () {
@@ -60,8 +61,10 @@ display: 'inlineBlock',
 
   }
 
-  const { from } = this.props.location.state || '/'
-  const { fireRedirect } = this.state
+//  const { from } = this.props.location.state || '/'
+  var { fireRedirect } = this.state.fireRedirect
+  console.log(this.state.fireRedirect)
+  console.log(this.state.bool)
 
     var rateOpener = "Rate your Opponent's Sportsmanship"
     var rateExplanation = "Your rating is anonymous, but will help other players find good sports to play with"
@@ -88,8 +91,8 @@ display: 'inlineBlock',
         </Button>
         </Form>
 
-        {fireRedirect && (
-          <Redirect to={from || '/postRenderReport'}/>
+        {this.state.fireRedirect && (
+          <Redirect to={'/postRenderReport'} stuff={this.state.rating}/>
         )}
 
       </div>
