@@ -26,6 +26,7 @@ export default class MatchReport extends Component{
     this.setState({awayScore: event.target.value})
   }
 
+// TODO: Seperate players into home and away team
   onSubmit = (e) => {
     e.preventDefault()
     // need props of players' IDs
@@ -48,13 +49,6 @@ render(){
     background: "#eee",
     padding: "5px",
     margin: "5px",
-    //width: "550px",
-    //justifyContent: 'center'
-    //alignItems: 'flex',
-    //justifyContent: 'flex',
-    //alignSelf: 'flex',
-  //  color: 'blue',
-  //  backgroundImage: 'url(' + imgUrl + ')',
   };
 
   const headerStyle2 = {

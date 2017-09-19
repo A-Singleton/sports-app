@@ -18,7 +18,7 @@ export default class scheduledMatches extends Component {
         console.log("nextProps")
         console.log(nextProps)
         //db.ref(`users/${user.uid}/account-info/joinedGames`).on('value', (snapshot)=> {
-        db.ref(`users/${nextProps.user}/account-info/joinedGames`).on('value', (snapshot)=> {
+        db.ref(`users/${nextProps.user}/account-info/joinedGames`).on('value', (snapshot) => {
 
 
         var matches = snapshot.val()
@@ -29,14 +29,12 @@ export default class scheduledMatches extends Component {
         })
         }
 
-
 componentDidMount(){
 //const user = firebaseAuth().currentUser
 console.log("this.props.user")
 console.log(this.props.user)
 //db.ref(`users/${user.uid}/account-info/joinedGames`).on('value', (snapshot)=> {
 db.ref(`users/${this.props.user}/account-info/joinedGames`).on('value', (snapshot)=> {
-
 
 var matches = snapshot.val()
 console.log(matches)
@@ -59,8 +57,6 @@ if (this.state.keys) {
     keyCodes={this.state.keys}/>
   )
 }
-//)}
-
 
   return(
     <div>

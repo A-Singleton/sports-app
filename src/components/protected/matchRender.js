@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 //import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import ChatRoom from './ChatRoom'
 import ChatButton from './ChatButton'
-import { removeMatchBackend, joinMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { removeMatchBackend, joinMatch, addFriend } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { firebaseAuth, firebaseStorageRef, ref } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import MatchReport from './MatchReport'
+import { Button } from 'react-bootstrap'
 
 export default class MatchRender extends Component {
 
@@ -20,14 +21,9 @@ export default class MatchRender extends Component {
   this.removeMatch = this.removeMatch.bind(this)
   }
 
-
 // TODO: fix src url for each prof pic
 //componentWillReceiveProps(nextProps){
 componentDidMount(){
-  // console.log("Recieved Props")
-  // //  var that = this
-  // console.log('nextProps')
-  // //console.log(nextProps)
   console.log("nextProps")
 //  console.log(nextProps)
     // Create a reference to the file we want to download
@@ -35,6 +31,7 @@ componentDidMount(){
   console.log("afterRef")
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {
+
     // Insert url into an <img> tag to "download"
     var img = document.getElementById('myimg');
     img.src = url;
@@ -70,17 +67,16 @@ handleJoin(){
 const user = firebaseAuth().currentUser
 const players = this.props.match.players
 const matchID = this.props.match.id
-// Writes data to backend
+
 joinMatch(user, players, matchID)
 this.setState({joined: true})
 }
 
-
 removeMatch(e){
-       e.preventDefault();
-       console.log("Removing Match")
+    e.preventDefault();
+    console.log("Removing Match")
     const players = this.props.match.players
-    // Call to firebase
+
     removeMatchBackend(players)
    }
 
@@ -89,22 +85,37 @@ renderjoin(e){
   return <div> No function yet </div>
 }
 
+friendRequest = (event) => {
+  console.log(this.props.match.creator)
+  const user = firebaseAuth().currentUser.uid
+  addFriend(this.props.match.creator, user)
+}
+
   render(){
     console.log('entered match Render')
     const user = firebaseAuth().currentUser.uid
     let button = null
 
-    if( this.props.match.creator === user) {
+    if (this.props.match.creator === user) {
       button = <div> Your match </div>
     }
+
      else if (this.props.match.players.includes(user)) {
       button = <div> You Joined the match </div>
+
     } else if(this.props.match.creator !== user){
       button = <button onClick={this.handleJoin} className="btn btn-primary">Join Match</button>
     }
+
     // else{
     //   button = <button />
     // }
+    //if (this.props.friends.includes(creator)) {
+    //      button = null...
+    //    }
+
+    // Bring state higher than match feed, compare the pending list to the creator
+    this.props.match.creator ? <button onClick={this.friendRequest}>Send Friend Request</button> : '';
 
     let matchRemark = null
 
@@ -114,7 +125,6 @@ renderjoin(e){
     else if (this.state.joined){
       matchRemark = ' You Joined this Match! '
     }
-//id="myimg"
 
   console.log(this.state.url)
 
@@ -146,6 +156,7 @@ renderjoin(e){
             <br/>
             <h3> Players: {this.props.match.players.length} </h3>
             <br/>
+            <Button bsStyle="success" onClick={this.friendRequest}>Send Friend Request</Button>
             </div>
             {button}
             <div className="actions">
@@ -153,7 +164,6 @@ renderjoin(e){
 
         <ChatButton matchkey={this.props.match.id}/>
         <MatchReport match={this.props.match}/>
-
 
       </div>
     )

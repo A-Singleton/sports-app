@@ -836,7 +836,7 @@ user={this.state.User}
                               </div>
 
                               <p>The core element in rendering the data is the <code>BracketGame</code> component</p>
-                              
+
 
                               <p>
                                 The bracket is rendered using a <code>Bracket</code> component, which takes the final game of the
@@ -850,3 +850,17 @@ user={this.state.User}
                                 It also places each <code>Bracket</code> in mobile friendly parent <code>div</code>s and
                                 synchronizes the highlighted teams across brackets.
                               </p>
+
+
+
+                                handleSubmit(event) {
+                                    event.preventDefault();
+                                    console.log("handleSubmit")
+                                    //recordMatch(this.state.matchInfo)
+                                  }
+
+                                  handleAlternate(event) {
+                                    event.preventDefault();
+                                    console.log("HandleAlt")
+                                    // matchDispute(this.props.matchID)
+                                  }

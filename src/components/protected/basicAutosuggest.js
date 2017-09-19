@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { invite2Match } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
+
 // Imagine you have a list of languages that you'd like to autosuggest.
+// array from fb, full name, uid under.
 const languages = [
   {
     name: 'Jim Mathers',

@@ -1,48 +1,62 @@
 import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { firebaseAuth, firebaseStorageRef, ref, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
-import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import PendingMatchRender from './pendingMatchRender'
 
 export default class ConfirmReport extends Component {
 
   constructor(){
     super()
     this.state = {
-      pendingMatch: ''
+      allPendingMatches: [],
+      awayID: '',
+      awayScore: '',
+      date: '',
+      hostID: '',
+      hostScore: '',
+      matchID: '',
+      sport: ''
     }
   }
 
   componentDidMount(){
     console.log("Con Report did mount")
     var user =  firebaseAuth().currentUser.uid
-  //var ref = db.ref("");
-  ref.orderByChild(`pending-matches`).on("value", function(snapshot) {
-  //ref.child(`pending-matches`).on("child_added", function(snapshot) {
+    console.log(user)
+    const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
+  var queryRef = db.ref("pendingMatches")
+  var that = this
+  queryRef.orderByChild(`awayID`).equalTo(userTest).on("value", (snapshot)=> {
 
-  //  var pending = "pending-matches"
-     var data = snapshot.val().pendingMatches
+    var allPendingMatchesCopy = this.state.allPendingMatches
 
-     console.log("data")
+    const data = snapshot.val()
+    var keys = Object.keys(data)
     console.log(data)
-   //
-  // //  var query = data.orderByChild(`awayID`).equalTo(user)
-  // console.log("snapshot.key")
-  // console.log(snapshot.key);
-  });
+    console.log(keys)
 
+  for (var i =0; i < keys.length; i++) {
+
+    var nextMatch = {
+       awayID: data[keys[i]].awayID,
+       awayScore: data[keys[i]].awayScore,
+       date: data[keys[i]].date,
+       hostID: data[keys[i]].hostID,
+       hostScore: data[keys[i]].hostScore,
+       matchID: data[keys[i]].matchID,
+       sport: data[keys[i]].sport,
+       pendingMatchID: keys[i]
+     }
+    //  console.log("data")
+      console.log('nextMatch')
+      console.log(nextMatch)
+
+      allPendingMatchesCopy.push(nextMatch)
   }
+      this.setState({ allPendingMatches: allPendingMatchesCopy })
+ })
+}
 
-  handleSubmit(event) {
-      event.preventDefault();
-      console.log("handleSubmit")
-      //recordMatch(this.state.matchInfo)
-    }
-
-    handleAlternate(event) {
-      event.preventDefault();
-      console.log("HandleAlt")
-      // matchDispute(this.props.matchID)
-    }
 
   render () {
 
@@ -59,22 +73,27 @@ export default class ConfirmReport extends Component {
       //alignSelf: 'flex',
     //  color: 'blue',
     //  backgroundImage: 'url(' + imgUrl + ')',
-    };
+    }
+
+  var pendingMatches = ''
+
+  if (this.state.allPendingMatches) {
+    //  const scheduledMatches = this.state.keys.map((fbKey, i) => {
+      console.log('entered key loop')
+      var pendingMatches = this.state.allPendingMatches.map((match, i) => {
+      //console.log(fbKey)
+      return(
+      <PendingMatchRender
+      key={i}
+      matches={ match }
+      />
+    )
+  })
+}
 
     return(
       <div style={divStyle}>
-        <h2> Jimbo Reported the Scores from Your Match </h2>
-        <label> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> Them: 10 </label>
-        <label>  5 :You <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
-          <Form onSubmit={this.handleSubmit.bind(this)}>
-            <Button bsStyle="success" type="submit">Confirm the Scores</Button>
-            <br/>
-            <h6> Did they make a mistake? </h6>
-            <Button bsStyle="warning" onClick={this.handleAlternate.bind(this)}>Dispute the Result</Button>
-            <h6> Clicking this button will send a notification to them to double
-                  check their report. The scores won't take effect for now </h6>
-                  <h5> Learn more </h5>
-          </Form>
+        { pendingMatches }
        </div>
     )
   }

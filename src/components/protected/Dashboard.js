@@ -26,6 +26,9 @@ import Link2Profile from './link2Profile'
 import ConfirmReport from './confirmReport'
 import PostRenderReport from './postRenderReport'
 import RepReport from './repReport'
+import addDeclineFriend from './addDeclineFriend'
+import CreateMatch from './createMatch'
+import Mockups from './mockups'
 
 export default class Dashboard extends Component {
 
@@ -275,7 +278,7 @@ const pushRightMargin = {
     return (
       <div>
         <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
-        <PostRenderReport />
+        <Mockups />
      </div>
     )
   }

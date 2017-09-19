@@ -266,46 +266,61 @@ export function removeTournamentBackend(players) {
 }
 
   // TODO: Send arrays of winners to update, and losers
-export function recordMatch(hostScore, awayScore, hostID, awayID, matchID){
+export function recordMatch(match){
 
+  const hostScore = match.hostScore
+  const awayScore = match.awayScore
+  const hostID = [match.hostID]
+  const awayID = [match.awayID]
+  const matchID = match.matchID
+  const pendingMatchID = match.pendingMatchID
+
+// Host wins
   if(hostScore > awayScore) {
    hostID.forEach(function(element) {
      console.log('element')
      console.log(element)
 
-    ref.child(`users/${element}/account-info/won-matches/${matchID}`)
+    ref.child(`users/${element}/account-info/wonMatches/`).push(matchID)
     ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
 })
 
  awayID.forEach(function(element) {
-    ref.child(`users/${element}/account-info/lost-matches/${matchID}`)
+    ref.child(`users/${element}/account-info/lostMatches/`).push(matchID)
     ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
 })
   }
 
+// Host loses
   else if(hostScore < awayScore){
      hostID.forEach(function(element) {
-       ref.child(`users/${element}/account-info/lost-matches/${matchID}`)
+       ref.child(`users/${element}/account-info/lostMatches/`).push(matchID)
        ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
   }
 )
      awayID.forEach(function(element) {
-       ref.child(`users/${element}/account-info/won-matches/${matchID}`)
+       ref.child(`users/${element}/account-info/wonMatches/`).push(matchID)
        ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
   })
   }
 
+// Draw for all
   else{
     hostID.forEach(function(element) {
-      ref.child(`users/${element}/account-info/drawn-matches/${matchID}`)
+      ref.child(`users/${element}/account-info/drawnMatches/`).push(matchID)
       ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
  }
 )
     awayID.forEach(function(element) {
-      ref.child(`users/${element}/account-info/drawn-matches/${matchID}`)
+      ref.child(`users/${element}/account-info/drawnMatches/`).push(matchID)
       ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
  })
   }
+
+  //delete the match from Joined Matches and regular matches
+  ref.child(`matches/${matchID}`).remove()
+  ref.child(`pendingMatches/${pendingMatchID}`).remove()
+  // Save match as "Confirmed Match", copy it somehow
  }
 
 // BirthMonth: info.BirthMonth,
@@ -383,12 +398,12 @@ var nextMatch = {
 })
    return yourMatches
 }
-
-export function addFriend (friendID, userID) {
-  console.log(friendID)
-ref.child(`users/${userID}/account-info/friends`)
-.push({ friendID })
-}
+//
+// export function addFriend (friendID, userID) {
+//   console.log(friendID)
+// ref.child(`users/${userID}/account-info/friends`)
+// .push({ friendID })
+// }
 
 export function invite2Match (friends, matchID) {
   console.log(friends)
@@ -436,4 +451,30 @@ var newMatchKey = ref.child('pendingMatches').push().key
    sport: sport,
    date: date
  })
+}
+
+export function addFriend (friend, user) {
+console.log(friend)
+console.log(user)
+ref.child(`users/${friend}/account-info/friendRequests`).push({ user })
+
+ref.child(`users/${user}/account-info/pendingFriends`).push({ friend })
+}
+
+export function acceptFriend (requester, accepter) {
+console.log(accepter)
+ref.child(`users/${accepter}/account-info/friends`).push({ requester })
+
+ref.child(`users/${requester}/account-info/friends`).push({ accepter })
+
+ref.child(`users/${accepter}/account-info/friendRequests/${requester}`).remove()
+
+ref.child(`users/${requester}/account-info/pendingFriends/${accepter}`).remove()
+}
+
+export function declineFriend (requester, decliner) {
+console.log(decliner)
+ref.child(`users/${requester}/account-info/friendRequests/${decliner}`).remove()
+
+ref.child(`users/${decliner}/account-info/friendRequests/${requester}`).remove()
 }
