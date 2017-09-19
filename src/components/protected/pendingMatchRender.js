@@ -1,14 +1,24 @@
 import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 
 export default class PendingMatchRender extends Component {
+  constructor () {
+     super();
+     this.state = {
+       fireRedirect: false
+     }
+   }
+
 
   handleSubmit(event) {
       event.preventDefault();
       console.log("handleSubmit")
 
       recordMatch(this.props.matches)
+      // redirect to rep page
+      this.setState({ fireRedirect: true })
     }
 
     handleAlternate(event) {
@@ -42,6 +52,9 @@ export default class PendingMatchRender extends Component {
         console.log(this.props.matches)
         console.log(this.props.matches.awayScore)
 
+    const { from } = this.props.location.state || '/'
+    const { fireRedirect } = this.state
+
     return(
       <div style={divStyle}>
       <h2> Jimbo Reported the Scores from Your Match </h2>
@@ -54,9 +67,15 @@ export default class PendingMatchRender extends Component {
           <h6> Did they make a mistake? </h6>
           <Button bsStyle="warning" onClick={this.handleAlternate.bind(this)}>Dispute the Result</Button>
           <h6> Clicking this button will send a notification to them to double
-                check their report. The scores won't take effect for now </h6>
+                check their report. The scores will not take effect for now </h6>
                 <h5> Learn more </h5>
         </Form>
+
+        {fireRedirect && (
+          <Redirect to={from || '/repReport'}/>
+        )}
+
+
        </div>
     )
   }

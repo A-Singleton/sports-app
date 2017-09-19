@@ -3,12 +3,14 @@ import ReactStars from 'react-stars'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel, Row} from 'react-bootstrap'
 import { submiteRep } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import StarCentered from './starCentered'
+import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 
 export default class RepReport extends Component {
   constructor(){
     super()
 this.state = {
-  rating: 5
+  rating: 5,
+  fireRedirect: false
 }
 }
 
@@ -21,6 +23,7 @@ this.state = {
     e.preventDefault()
     console.log("submitted")
     // submitRep(this.props.opp, this.state.rating)
+    //this.setState({ fireRedirect: true })
 }
 
   render () {
@@ -57,6 +60,9 @@ display: 'inlineBlock',
 
   }
 
+  const { from } = this.props.location.state || '/'
+  const { fireRedirect } = this.state
+
     var rateOpener = "Rate your Opponent's Sportsmanship"
     var rateExplanation = "Your rating is anonymous, but will help other players find good sports to play with"
 
@@ -81,6 +87,11 @@ display: 'inlineBlock',
            Rate
         </Button>
         </Form>
+
+        {fireRedirect && (
+          <Redirect to={from || '/postRenderReport'}/>
+        )}
+
       </div>
     )
   }

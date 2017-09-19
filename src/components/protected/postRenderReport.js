@@ -1,7 +1,24 @@
 import React, { Component } from 'react'
-import {ProgressBar} from 'react-bootstrap'
+import {ProgressBar, Button} from 'react-bootstrap'
+import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 
 export default class postRenderReport extends Component {
+  constructor () {
+     super();
+     this.state = {
+       fireRedirect: false
+     }
+   }
+
+
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log("submitted")
+    //
+
+    //this.setState({ fireRedirect: true })
+}
 
   render () {
 
@@ -20,6 +37,9 @@ export default class postRenderReport extends Component {
     //  backgroundImage: 'url(' + imgUrl + ')',
     };
 
+    const { from } = this.props.location.state || '/'
+    const { fireRedirect } = this.state
+
     return(
       <div style={divStyle}>
         <h3> Good game, keep it up! </h3>
@@ -37,6 +57,14 @@ export default class postRenderReport extends Component {
           <div className="pull-right"> 37 </div>
           <div className="pull-left"> 36 </div>
           <h4> Just 114 Points to go to 37 </h4>
+          <Button bsStyle="success" type="submit" onSubmit={this.handleSubmit}>
+          Back to Dashboard
+          </Button>
+
+          {fireRedirect && (
+            <Redirect to={from || '/dashboard'}/>
+          )}
+
       </div>
     )
   }
