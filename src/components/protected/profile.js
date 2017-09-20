@@ -4,6 +4,7 @@ import { firebaseAuth, firebaseStorageRef, ref } from 'C:/Users/Duwan_000/Docume
 import ScheduledMatches from './scheduledMatches'
 import ConfirmReport from './confirmReport'
 import MatchReport from './MatchReport'
+import RenderFriendRequests from './renderFriendRequests'
 
 //TODO: profile pic + url in upper corner
 //1. Add error handling to fb queries
@@ -25,7 +26,9 @@ export default class profile extends Component {
   console.log('nextProps')
   console.log(nextProps)
     // Create a reference to the file we want to download
-  var starsRef = firebaseStorageRef.child('profilePics/Classic_Singleton.png');
+  //var starsRef = firebaseStorageRef.child('profilePics/Classic_Singleton.png');
+  var starsRef = firebaseStorageRef.child(`profilePics/${nextProps.userID}`)
+
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {
     // Insert url into an <img> tag to "download"
@@ -87,7 +90,8 @@ export default class profile extends Component {
 if (user) {
 
   // Create a reference to the file we want to download
-var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
+//var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
+var starsRef = firebaseStorageRef.child(`profilePics/${propsUser}`)
 
 // Get the download URL
 starsRef.getDownloadURL().then(function(url) {
@@ -202,6 +206,7 @@ return (
   </div>
   <div className="pull-left activity-feed">
   <h3 style={headerStyle3}><strong> Recent Activity </strong></h3>
+  <RenderFriendRequests user={this.props.userID}/>
   <ConfirmReport user={this.props.userID}/>
   <h4> Jimbo won a Tennis Match, something to something </h4>
   <h4> Jimbo creted a Tennis Match, for October 1st </h4>
