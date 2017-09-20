@@ -272,13 +272,16 @@ const pushRightMargin = {
 // <ConfirmReport />
 // <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
 //  <MatchReport />
+//<Mockups />
 
   var user =  firebaseAuth().currentUser.uid
   var otherUser = 'q2xlsIvehieukIw1QYOi6LxGUp33'
+  var otherUser2 = "6Vm6eVPj3aNS3GM8dr2CVDVbtaL2"
     return (
       <div>
-        <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
-        <Mockups />
+        <h4> <Link to={`/protected/profileIndex/${otherUser2}`}>This Users Test Link</Link> </h4>
+
+
      </div>
     )
   }

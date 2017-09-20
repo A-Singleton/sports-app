@@ -1,50 +1,47 @@
 import React, { Component } from 'react'
 import AddDeclineFriend from './addDeclineFriend'
+import { firebaseAuth, firebaseStorageRef, ref, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 
-export default class renderFriendRequests extends Component {
+export default class RenderFriendRequests extends Component {
   constructor(props){
     super(props)
     this.state = {
       pendingFriends: []
       }
-
+    }
 
   componentDidMount(){
     console.log("Con Report did mount")
-    var user =  firebaseAuth().currentUser.uid
-    console.log(user)
-    //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
+    //var user =  firebaseAuth().currentUser.uid
+    console.log(this.props.user)
+    const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
     //var queryRef = db.ref("pendingMatches")
     var that = this
+  //  var otherUser2 = "6Vm6eVPj3aNS3GM8dr2CVDVbtaL2"
   //queryRef.orderByChild(`awayID`).equalTo(userTest).on("value", (snapshot)=> {
-  db.ref(`matches/${element}`).on('value', (snapshot)=> {
+  db.ref(`users/${this.props.user}/account-info/pendingFriends`).on('value', (snapshot)=> {
 
     var pendingFriendsCopy = this.state.pendingFriends
 
-    const data = snapshot.val()
-    var keys = Object.keys(data)
+    var data = snapshot.val()
     console.log(data)
+    var keys = Object.keys(data)
+
     console.log(keys)
 
   for (var i =0; i < keys.length; i++) {
 
     var nextFriend = {
       //  awayID: data[keys[i]].awayID,
-      //  awayScore: data[keys[i]].awayScore,
-      //  date: data[keys[i]].date,
-      //  hostID: data[keys[i]].hostID,
-      //  hostScore: data[keys[i]].hostScore,
-      //  matchID: data[keys[i]].matchID,
-      //  sport: data[keys[i]].sport,
-      //  pendingMatchID: keys[i]
+         user: data[keys[i]].friend
      }
     //  console.log("data")
       console.log('nextMatch')
-      console.log(nextMatch)
+      console.log(nextFriend)
 
-      allPendingMatchesCopy.push(nextFriend)
+      pendingFriendsCopy.push(nextFriend)
   }
-      this.setState({ allPendingMatches: allPendingMatchesCopy })
+      this.setState({ pendingFriends: pendingFriendsCopy })
   })
   }
 
@@ -54,11 +51,11 @@ export default class renderFriendRequests extends Component {
 
     if(this.state.pendingFriends){
       var yourPendingFriends = this.state.pendingFriends.map((friendRequest, i) => {
-        console.log('entered match loop')
-        console.log(match)
+        console.log('entered pending friends loop')
+        console.log(friendRequest)
         console.log(i)
         return(
-          <addDeclineFriend
+          <AddDeclineFriend
           key={i}
           friendRequest={friendRequest}
           />

@@ -462,14 +462,34 @@ ref.child(`users/${user}/account-info/pendingFriends`).push({ friend })
 }
 
 export function acceptFriend (requester, accepter) {
+console.log(requester)
 console.log(accepter)
+
 ref.child(`users/${accepter}/account-info/friends`).push({ requester })
 
 ref.child(`users/${requester}/account-info/friends`).push({ accepter })
 
-ref.child(`users/${accepter}/account-info/friendRequests/${requester}`).remove()
+//var queryRef_1 = db.ref(`users/${requester}/account-info/friendRequests/`)
+//queryRef_1.orderByChild(`user`).equalTo(`${accepter}`).remove()
+//ref.child(`users/${requester}/account-info/friendRequests/`).orderByChild(`user`).equalTo(`${accepter}`).remove()
+let ref_1 = db.ref(`users/${requester}/account-info/friendRequests/`);
+ref_1.orderByChild(`user`).equalTo(`${accepter}`).once('value', snapshot => {
+     let updates = {};
+     snapshot.forEach(child => updates[child.key] = null);
+     ref_1.update(updates);
+});
 
-ref.child(`users/${requester}/account-info/pendingFriends/${accepter}`).remove()
+
+//var queryRef_2 = db.ref(`users/${accepter}/account-info/pendingFriends/`)
+//queryRef_2.orderByChild(`friend`).equalTo(`${requester}`).remove()
+//ref.child(`users/${accepter}/account-info/pendingFriends/`).orderByChild(`friend`).equalTo(`${requester}`).remove()
+let ref_2 = db.ref(`users/${accepter}/account-info/pendingFriends/`);
+ref_2.orderByChild(`friend`).equalTo(`${requester}`).once('value', snapshot => {
+     let updates = {};
+     snapshot.forEach(child => updates[child.key] = null);
+     ref_2.update(updates);
+});
+
 }
 
 export function declineFriend (requester, decliner) {
