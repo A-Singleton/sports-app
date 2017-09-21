@@ -52,7 +52,8 @@ export function saveMatch (newMatch, user) {
         mapDataLat: newMatch.mapDataLat,
         mapDataLng: newMatch.mapDataLng,
         players: [user.uid],
-        creator: user.uid
+        creator: user.uid,
+        maxPlayers: newMatch.players
       })
 
       ref.child(`users/${user.uid}/account-info/joinedGames/`+ newMatchKey)

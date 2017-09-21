@@ -31,6 +31,7 @@ import CreateMatch from './createMatch'
 import Mockups from './mockups'
 import Thumbnail from './thumbnail'
 import ModalConfirmScore from './modalConfirmScore'
+import MakeMatch from './makeMatch'
 
 export default class Dashboard extends Component {
 
@@ -283,8 +284,11 @@ const pushRightMargin = {
       <div>
         <h4> <Link to={`/protected/profileIndex/${otherUser2}`}>This Users Test Link</Link> </h4>
 
-        <RepReport />
+        <MakeMatch />
+
         <ModalConfirmScore />
+
+
 
      </div>
     )

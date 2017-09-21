@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react'
 import {Popover, Tooltip, Button, Modal, Tooltips, OverlayTrigger} from 'react-bootstrap'
+import RepReport from './repReport'
 
 export default class modalConfirmScore extends Component {
 
@@ -62,6 +63,9 @@ export default class modalConfirmScore extends Component {
            <hr />
 
            <h4>Overflowing text to show scroll behavior</h4>
+
+           <RepReport />
+
            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
            <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
