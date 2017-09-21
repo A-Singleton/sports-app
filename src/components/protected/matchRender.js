@@ -26,8 +26,13 @@ export default class MatchRender extends Component {
 componentDidMount(){
   console.log("nextProps")
 //  console.log(nextProps)
+//const user = firebaseAuth().currentUser.uid
+var thisUser = this.props.match.creator
+console.log(thisUser)
     // Create a reference to the file we want to download
-  var starsRef = firebaseStorageRef.child('profilePics/Classic_Singleton.png');
+  //var starsRef = firebaseStorageRef.child('profilePics/Classic_Singleton.png');
+var starsRef = firebaseStorageRef.child('profilePics/${thisUser}')
+
   console.log("afterRef")
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {

@@ -16,6 +16,14 @@ this.state = {
 }
 }
 
+// Need list of all players other than reviewer
+  componentDidMount(){
+
+
+
+  }
+
+
   ratingChanged = (newRating) => {
     console.log(newRating)
     this.setState({rating: newRating})
@@ -24,7 +32,7 @@ this.state = {
   handleSubmit = (e) => {
     e.preventDefault()
     console.log("submitted")
-    // submitRep(this.props.opp, this.state.rating)
+    //submitRep(this.props.opp, this.state.rating)
     this.setState({ fireRedirect: true })
 }
 
@@ -67,6 +75,9 @@ display: 'inlineBlock',
   console.log(this.state.fireRedirect)
   console.log(this.state.bool)
 
+
+  // send thumbnail info to fill appropraite fields
+
     var rateOpener = "Rate your Opponent's Sportsmanship"
     var rateExplanation = "Your rating is anonymous, but will help other players find good sports to play with"
 
@@ -92,7 +103,7 @@ display: 'inlineBlock',
         </Button>
         </Form>
 
-          
+
         {this.state.fireRedirect && (
           <Redirect to={'/postRenderReport'} />
         )}

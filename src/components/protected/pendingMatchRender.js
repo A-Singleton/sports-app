@@ -16,8 +16,10 @@ export default class PendingMatchRender extends Component {
       event.preventDefault();
       console.log("handleSubmit")
 
+
       recordMatch(this.props.matches)
       // redirect to rep page
+
       this.setState({ fireRedirect: true })
     }
 

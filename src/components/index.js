@@ -101,7 +101,7 @@ export default class App extends Component {
     }
 
     const myRating = {
-      rating: 7
+    //  rating: 7
     }
 
 //   console.log(this.props.stuffMine)

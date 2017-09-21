@@ -34,7 +34,10 @@ componentDidMount(){
 if (user) {
 // User is signed in.
 
-    ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+var otherUser = "Qciqsxq1ZAdCCgGAZzJTqIGE7qp1"
+
+   ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+//    ref.child(`users/${otherUser}/personal-info`).on('value', (snapshot)=> {
 
     const persInfo = snapshot.val()
      console.log(persInfo)
@@ -47,7 +50,7 @@ if (user) {
     })
 
     // Create a reference to the file we want to download
-  var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
+  var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}.png`);
 
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {

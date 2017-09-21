@@ -58,8 +58,9 @@ export default class AddDeclineFriend extends Component {
  })
 }
 
+// TODO: see if not preventing default is better, probably is
   onSubmit = (e) => {
-    e.preventDefault()
+    //e.preventDefault()
     const user = firebaseAuth().currentUser.uid
     acceptFriend(this.props.friendRequest.user, user)
   }
