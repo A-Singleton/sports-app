@@ -59,12 +59,8 @@ export default class MakeMatch extends Component {
     }
 
   handleChange(event){
-
-    //console.log(date)
      this.setState({startDate: event.target.value
-                  //  formatDate: date.format("MM/DD/YYYY")
      });
-  //   console.log(date)
   }
 
   handleTimeChange(time) {

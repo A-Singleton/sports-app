@@ -10,8 +10,8 @@ export default class matchFeed extends Component {
     super(props)
     this.state = {
         allMatches: [],
-        User: '',
-        friendsList: []
+        userName: '',
+        friendsList: [],
     }
   }
 
@@ -31,9 +31,11 @@ componentDidMount(){
           var sport = matches[k].sport;
           var date = matches[k].gameDate;
           var creator_query = matches[k].creator;
-          var players = matches[k].players;
+          var players = matches[k].homePlayers;
+          var players2 =  matches[k].awayPlayers;
           var creator_first_name = matches[k].creator_first_name;
           var creator_last_name = matches[k].creator_last_name;
+          var idStack = matches[k].idStack
 
     var nextMatch = {
       id: k,
@@ -42,13 +44,17 @@ componentDidMount(){
       date:  date,
       players: players,
       creator: creator_query,
-      creatorName: creator_first_name + " " + creator_last_name
+      creatorName: creator_first_name + " " + creator_last_name,
+      players2: players2,
+      idStack: idStack
     }
+    console.log(nextMatch)
     allMatchesCopy.push(nextMatch)
   //  this.setState({allMatches: allMatchesCopy})
   }
     this.setState({allMatches: allMatchesCopy})
   })
+
   //
   // console.log('allMatches')
   // console.log(fbMatches)
@@ -56,7 +62,7 @@ componentDidMount(){
   // console.log('state allMatches')
   // console.log(this.state.allMatches)
 
-  db.ref(`users/${user}/friends`).on('value', (snapshot)=> {
+  db.ref(`users/${user}/account-info/friends`).on('value', (snapshot)=> {
       const friends = snapshot.val()
       var keys = Object.keys(friends)
       var allFriendsCopy = this.state.friendsList
@@ -64,9 +70,23 @@ componentDidMount(){
 
             var friend = friends[keys[i]]
             console.log(friend)
-            allFriendsCopy.push(friend)
+            allFriendsCopy.push(friend.requester)
           }
       this.setState({ friendsList: allFriendsCopy })
+  })
+
+
+  db.ref(`users/${user}/personal-info`).on('value', (snapshot)=> {
+
+    var profile = snapshot.val()
+    const f_name = profile.FirstName
+    const l_name = profile.LastName
+    const full_Name = f_name + " " + l_name
+    console.log(JSON.stringify(full_Name))
+
+    this.setState({
+      userName: full_Name
+    })
   })
 
 }
@@ -75,6 +95,8 @@ componentDidMount(){
 
     console.log('render allMatches')
     console.log(this.state.allMatches)
+    console.log(this.state.friendsList)
+    console.log(this.state.userName)
       // var stateVar = this.state.allMatches
       // console.log('render stateVar')
       // console.log(stateVar)
@@ -87,7 +109,8 @@ componentDidMount(){
     return(
      <div>
        <h4> Local Matches </h4>
-       <MatchPosts matches={this.state.allMatches}/>
+       <MatchPosts matches={this.state.allMatches}
+       friends={this.state.friendsList} userName={this.state.userName}/>
      </div>
 )}
 }

@@ -32,6 +32,7 @@ import Mockups from './mockups'
 import Thumbnail from './thumbnail'
 import ModalConfirmScore from './modalConfirmScore'
 import MakeMatch from './makeMatch'
+import JoinGrid from './joinGrid'
 
 export default class Dashboard extends Component {
 
@@ -276,6 +277,7 @@ const pushRightMargin = {
 // <h4> <Link to={`/protected/profileIndex/${user}`}>This Users Test Link</Link> </h4>
 //  <MatchReport />
 //<Mockups />
+// <JoinGrid />
 
   var user =  firebaseAuth().currentUser.uid
   var otherUser = 'q2xlsIvehieukIw1QYOi6LxGUp33'
@@ -287,9 +289,7 @@ const pushRightMargin = {
         <MakeMatch />
 
         <ModalConfirmScore />
-
-
-
+        <Profile />
      </div>
     )
   }

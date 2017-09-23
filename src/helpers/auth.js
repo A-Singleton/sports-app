@@ -37,6 +37,12 @@ export function saveMatch (newMatch, user) {
     var profile = snapshot.val()
     const f_name = profile.FirstName
     const l_name = profile.LastName
+    const joinerName = f_name + " " + l_name
+
+    const this_user = user.uid
+    var personPacket = {
+    this_user,
+    joinerName }
 
     var newMatchKey = ref.child('matches').push().key
 
@@ -51,9 +57,10 @@ export function saveMatch (newMatch, user) {
         mapDataAddress: newMatch.mapDataAddress,
         mapDataLat: newMatch.mapDataLat,
         mapDataLng: newMatch.mapDataLng,
-        players: [user.uid],
+        homePlayers: [personPacket],
         creator: user.uid,
-        maxPlayers: newMatch.players
+        maxPlayers: newMatch.players,
+        idStack: [user.uid]
       })
 
       ref.child(`users/${user.uid}/account-info/joinedGames/`+ newMatchKey)
@@ -65,26 +72,56 @@ export function saveMatch (newMatch, user) {
 export function removeMatchBackend(players) {
       //  make query for all children joined games with people joined,
       // run loop to delete the joined game
-      for (var i =0; i < players.length; i++){
-        console.log(players[i])
+    for (var i =0; i < players.length; i++){
+      console.log(players[i])
       ref.child(`users/${players[i]}/account-info/
                                   joinedGames/${this.props.match.id}`).remove()
   }
     // delete the match from firebase
-     ref.child(`matches/${this.props.match.id}/`).remove()
+      ref.child(`matches/${this.props.match.id}/`).remove()
 }
 
 
-export function joinMatch(user, players, matchID) {
-    players.push(user.uid)
+export function joinMatch(user, players, matchID, joinerName, stackID) {
+    //players.push(user.uid)
+    //const this_user = user
+    var personPacket = {
+    user,
+    joinerName }
+
+    players.push(
+    personPacket)
+
     console.log(players)
-    ref.child(`matches/${matchID}/`).update({ players: players })
+    ref.child(`matches/${matchID}/`).update({ players })
 
     //Sets ID:0 because can then directly delete match by calling match.id
-    ref.child(`users/${user.uid}/account-info/joinedGames/${matchID}`)
+    ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
     .set({ id: 0
     })
 }
+
+
+ export function joinMatchAway(user, awayPlayers, matchID, joinerName, stackID) {
+     //players.push(user.uid)
+     //const this_user = user
+      if (typeof  awayPlayers === "undefined") { awayPlayers = [] }
+
+     var personPacket = {
+     user,
+     joinerName }
+
+     awayPlayers.push(
+     personPacket)
+
+     console.log(awayPlayers)
+     ref.child(`matches/${matchID}/`).update({ awayPlayers })
+
+     //Sets ID:0 because can then directly delete match by calling match.id
+     ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
+     .set({ id: 0
+     })
+ }
 
 export function getScheduledMatches() {
 
@@ -499,3 +536,10 @@ ref.child(`users/${requester}/account-info/friendRequests/${decliner}`).remove()
 
 ref.child(`users/${decliner}/account-info/friendRequests/${requester}`).remove()
 }
+
+// export function makeThumbnailInfo (requester, decliner) {
+// console.log(decliner)
+// ref.child(`users/${requester}/account-info/friendRequests/${decliner}`).remove()
+//
+// ref.child(`users/${decliner}/account-info/friendRequests/${requester}`).remove()
+// }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { submittedMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
-import { Form, Button} from 'react-bootstrap'
+import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { ref, firebaseAuth, firebaseStorageRef, taskEvent, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import Thumbnail from './thumbnail'
 
 export default class MatchReport extends Component{
   constructor(props){
@@ -65,23 +66,65 @@ render(){
     width: '40px',
     margin: "10px",
   }
+  //
+  // const homeMargin = {
+  //   marginLeft: "-600px"
+  // }
 
   console.log(" Match Render Props")
   console.log(this.props.match)
+  console.log(this.props.players)
 
   const isEnabled =
   this.state.hostScore > -1 &&
   this.state.awayScore > -1;
 
+
+  var theHomePlayers = this.props.players.map((player, i) => {
+
+    console.log('match Posts')
+    console.log(i)
+     console.log(player)
+
+    return(
+      <Thumbnail
+       key={i}
+       player={player}
+      />
+    )
+  })
+
+if (typeof this.props.players2 !== "undefined") {
+  var theAwayPlayers = this.props.players2.map((player, i) => {
+
+    console.log('match Posts')
+    console.log(i)
+    console.log(player)
+
+        return(
+          <Thumbnail
+           key={i}
+           player={player}
+          />
+        )
+      })
+    }
+
+
   return (
     <div style={divStyle}>
     <h2 style={headerStyle2}> How did the match go? </h2>
     <h3> {this.props.match.sport} on {this.props.match.date} </h3>
-    <label> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> {this.props.match.creatorName} <input style={horInput} className="match-report-user" type="number" min="0"
-    onChange={this.handleChangeUser}/></label>
-    to
-    <label> <input style={horInput} className="match-report-guest" type="number" min="0"
-    onChange={this.handleChangeGuest}/> Your Guest <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/></label>
+    <Col componentClass={ControlLabel} smOffset={3} sm={2}>
+        { theHomePlayers }
+        <label> <input style={horInput} className="match-report-user" type="number" min="0"
+        onChange={this.handleChangeUser}/></label>
+    </Col>
+    <Col componentClass={ControlLabel} smOffset={2} sm={2}>
+        { theAwayPlayers }
+        <label> <input style={horInput} className="match-report-guest" type="number" min="0"
+        onChange={this.handleChangeGuest}/> </label>
+    </Col>
     <br/>
     <Form onSubmit={this.onSubmit}>
      <Button disabled={!isEnabled} bsStyle="success" type="submit">Submit the Result</Button>

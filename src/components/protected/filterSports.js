@@ -7,7 +7,6 @@ class CustomToggle extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-
     this.props.onClick(e);
   }
 
