@@ -189,6 +189,7 @@ friendRequest = (event) => {
         players2={this.props.match.players2}
         matchID={this.props.match.id}
         userName={this.props.userName}
+        idStack={this.props.match.idStack}
         />
 
         <ChatButton matchkey={this.props.match.id}/>

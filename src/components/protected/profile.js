@@ -59,8 +59,6 @@ export default class profile extends Component {
     }
   });
 
-  // retrieve personal-info
-
   //ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
   ref.child(`users/${nextProps.userID}/personal-info`).on('value', (snapshot)=> {
 

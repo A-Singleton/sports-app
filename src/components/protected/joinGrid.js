@@ -216,7 +216,7 @@ export default class JoinGrid extends Component {
     const players = this.props.players
     const matchID = this.props.matchID
 
-    joinMatch(user, players, matchID, this.props.userName)
+    joinMatch(user, players, matchID, this.props.userName, this.props.idStack)
     this.setState({joined: true})
   }
 
@@ -226,7 +226,7 @@ export default class JoinGrid extends Component {
     const awayPlayers = this.props.players2
     const matchID = this.props.matchID
     console.log("Join Away")
-    joinMatchAway(user, awayPlayers, matchID, this.props.userName)
+    joinMatchAway(user, awayPlayers, matchID, this.props.userName, this.props.idStack)
     this.setState({joined: true})
   }
 

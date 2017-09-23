@@ -38,8 +38,8 @@ export default class MatchReport extends Component{
     console.log(JSON.stringify(this.state.hostScore))
 
     submittedMatch(this.state.hostScore, this.state.awayScore,
-       this.props.match.players[0], this.props.match.players[1], this.props.match.id,
-     this.props.match.sport, this.props.match.date, user)
+       this.props.match.players, this.props.match.players2, this.props.match.id,
+     this.props.match.sport, this.props.match.date, user, this.props.match.idStack)
   }
 
 render(){
@@ -97,7 +97,7 @@ render(){
 if (typeof this.props.players2 !== "undefined") {
   var theAwayPlayers = this.props.players2.map((player, i) => {
 
-    console.log('match Posts')
+    console.log('players 2')
     console.log(i)
     console.log(player)
 
@@ -116,7 +116,7 @@ if (typeof this.props.players2 !== "undefined") {
     <h2 style={headerStyle2}> How did the match go? </h2>
     <h3> {this.props.match.sport} on {this.props.match.date} </h3>
     <Col componentClass={ControlLabel} smOffset={3} sm={2}>
-        { theHomePlayers }
+            { theHomePlayers }
         <label> <input style={horInput} className="match-report-user" type="number" min="0"
         onChange={this.handleChangeUser}/></label>
     </Col>

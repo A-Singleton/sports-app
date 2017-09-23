@@ -24,7 +24,10 @@ export default class Thumbnail extends Component {
   //  imgBar.src = url
     console.log("thumbnail")
     console.log(url)
-     img.src = url
+
+    for (var i = 0; i < img.length; i++) {
+      img[i].src = url
+  }
     //this.setState({url})
   }).catch(function(error) {
 
@@ -58,9 +61,11 @@ export default class Thumbnail extends Component {
       margin: "10px",
     }
 
+    var classNameImg = `img-circle avatar ${this.props.player.this_user}`
+
     return(
       <div>
-      <label> <img className={`img-circle avatar ${this.props.player.this_user}`} id="myimg" src="" alt=""/>
+      <label> <img className={classNameImg} id="myimg" src="" alt=""/>
       { this.props.player.joinerName } </label>
       </div>
     )

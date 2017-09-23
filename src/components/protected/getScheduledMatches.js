@@ -34,7 +34,8 @@ componentWillReceiveProps(nextProps) {
         var sport = matches.sport;
         var date = matches.gameDate;
         var creator_query = matches.creator;
-        var players = matches.players;
+        var homePlayers = matches.homePlayers;
+        var awayPlayers = matches.awayPlayers;
         var creator_first_name = matches.creator_first_name;
         var creator_last_name = matches.creator_last_name;
 
@@ -43,7 +44,8 @@ componentWillReceiveProps(nextProps) {
     skill: skill,
     sport: sport,
     date:  date,
-    players: players,
+    homePlayers: homePlayers,
+    awayPlayers:  awayPlayers,
     creator: creator_query,
     creatorName: creator_first_name + " " + creator_last_name
   }

@@ -58,6 +58,7 @@ export default class ConfirmReport extends Component {
 //  })
 // }
 
+// TODO: Need id stack
 componentWillReceiveProps(nextProps){
   console.log("Con Report did mount")
   //var user =  firebaseAuth().currentUser.uid
@@ -66,12 +67,13 @@ componentWillReceiveProps(nextProps){
   //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
 var queryRef = db.ref("pendingMatches")
 var that = this
-queryRef.orderByChild(`awayID`).equalTo(user).on("value", (snapshot)=> {
-
+queryRef.orderByChild(`idStack`).on("value", (snapshot)=> {
+console.log("Entered pending Matches")
   //var allPendingMatchesCopy = this.state.allPendingMatches
   var allPendingMatchesCopy = this.state.allPendingMatches
 
   const data = snapshot.val()
+  console.log(data)
   var keys = Object.keys(data)
   console.log(data)
   console.log(keys)

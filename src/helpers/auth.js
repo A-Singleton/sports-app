@@ -82,18 +82,20 @@ export function removeMatchBackend(players) {
 }
 
 
-export function joinMatch(user, players, matchID, joinerName, stackID) {
+export function joinMatch (user, players, matchID, joinerName, stackID) {
     //players.push(user.uid)
     //const this_user = user
     var personPacket = {
     user,
     joinerName }
 
-    players.push(
-    personPacket)
+    players.push(personPacket)
+
+    stackID.push(user)
 
     console.log(players)
-    ref.child(`matches/${matchID}/`).update({ players })
+    ref.child(`matches/${matchID}/`).update({ players,
+                                              idStack: stackID })
 
     //Sets ID:0 because can then directly delete match by calling match.id
     ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
@@ -111,11 +113,13 @@ export function joinMatch(user, players, matchID, joinerName, stackID) {
      user,
      joinerName }
 
-     awayPlayers.push(
-     personPacket)
+     awayPlayers.push(personPacket)
+
+     stackID.push(user)
 
      console.log(awayPlayers)
-     ref.child(`matches/${matchID}/`).update({ awayPlayers })
+     ref.child(`matches/${matchID}/`).update({ awayPlayers,
+                                                idStack: stackID    })
 
      //Sets ID:0 because can then directly delete match by calling match.id
      ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
@@ -475,7 +479,7 @@ export function submitRep (opponent, rep) {
 // })
 }
 
-export function submittedMatch (hostScore, awayScore, hostID, awayID, matchID, sport, date, user) {
+export function submittedMatch (hostScore, awayScore, hostID, awayID, matchID, sport, date, user, idStack) {
 //   console.log(friends)
   // make a notification in opp user info
 var newMatchKey = ref.child('pendingMatches').push().key
@@ -487,7 +491,8 @@ var newMatchKey = ref.child('pendingMatches').push().key
    awayID: awayID,
    matchID: matchID,
    sport: sport,
-   date: date
+   date: date,
+   idStack: idStack
  })
 }
 
