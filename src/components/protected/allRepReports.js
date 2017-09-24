@@ -54,6 +54,7 @@ componentDidMount(){
   }
 
   handleSubmit(event) {
+    this.props.nextStep()
     alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
     //(this.state.value, this.state.opponents)
@@ -80,7 +81,8 @@ componentDidMount(){
      for(let i = 0; i < this.state.count; i++){
            uiItems.push(
                <div key={i}>
-                  <RepReport value={this.state.value[i]} onChange={this.handleChange.bind(this,i)} />
+                  <RepReport value={this.state.value[i]} onChange={this.handleChange.bind(this,i)}
+                  player={this.props.match.hostID[i]} />
                </div>
             )
      }

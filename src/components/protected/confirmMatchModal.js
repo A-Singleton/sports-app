@@ -24,7 +24,7 @@ nextStep = (e) => {
 
 var rendering = ''
 
-    this.state.step === 1 ? rendering = <RepReport nextStep={this.nextStep}/> : rendering = <PostRenderReport />
+    this.state.step === 1 ? rendering = <AllRepReports match={this.props.players} nextStep={this.nextStep}/> : rendering = <PostRenderReport />
   // var rendering =  switch (this.state.step) {
   //         case 1:
   //           return <RepReport />
@@ -36,7 +36,7 @@ var rendering = ''
 
     return(
       <div>
-      <AllRepReports match={this.props.players}/>
+      {rendering}
       </div>
     )
   }

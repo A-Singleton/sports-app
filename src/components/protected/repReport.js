@@ -90,9 +90,11 @@ display: 'inlineBlock',
   // </Button>
   // </Form>
 
+// TODO: Get thumbnail
     return(
       <div style={divStyle}>
           <div style={divCheckbox}>
+          {this.props.player.joinerName}
           <StarCentered
           style={starStyle}
           value={this.state.rating}
