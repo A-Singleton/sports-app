@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import ModalConfirmScore from './modalConfirmScore'
 
 export default class PendingMatchRender extends Component {
   constructor () {
@@ -16,10 +17,8 @@ export default class PendingMatchRender extends Component {
       event.preventDefault();
       console.log("handleSubmit")
 
-
       recordMatch(this.props.matches)
       // redirect to rep page
-
       this.setState({ fireRedirect: true })
     }
 
@@ -49,6 +48,9 @@ export default class PendingMatchRender extends Component {
 
   //  const { from } = this.props.location.state || '/'
   //  const { fireRedirect } = this.state
+  // {this.state.fireRedirect && (
+  //   <Redirect to={'/repReport'}/>
+  // )}
 
     return(
       <div style={divStyle}>
@@ -66,10 +68,7 @@ export default class PendingMatchRender extends Component {
                 <h5> Learn more </h5>
         </Form>
 
-        {this.state.fireRedirect && (
-          <Redirect to={'/repReport'}/>
-        )}
-
+        <ModalConfirmScore match={this.props.matches}/>
 
        </div>
     )

@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import {Popover, Tooltip, Button, Modal, Tooltips, OverlayTrigger} from 'react-bootstrap'
 import RepReport from './repReport'
+import ConfirmMatchModal from './confirmMatchModal'
 
 export default class modalConfirmScore extends Component {
 
@@ -34,6 +35,9 @@ export default class modalConfirmScore extends Component {
      </Tooltip>
    );
 
+   var rateOpener = "Rate your Opponent's Sportsmanship"
+   var rateExplanation = "Your rating is anonymous, but will help other players find good sports to play with"
+   //<RepReport />
    return (
      <div>
        <p>Click to get the full Modal experience!</p>
@@ -48,10 +52,10 @@ export default class modalConfirmScore extends Component {
 
        <Modal show={this.state.showModal} onHide={this.close}>
          <Modal.Header closeButton>
-           <Modal.Title>Modal heading</Modal.Title>
+           <Modal.Title>Almost Done...</Modal.Title>
          </Modal.Header>
          <Modal.Body>
-           <h4>Text in a modal</h4>
+           <h2> { rateOpener } </h2>
            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
            <h4>Popover in a modal</h4>
@@ -63,18 +67,9 @@ export default class modalConfirmScore extends Component {
            <hr />
 
            <h4>Overflowing text to show scroll behavior</h4>
+           <ConfirmMatchModal players={this.props.match}/>
 
-           <RepReport />
-
-           <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-           <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-           <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-           <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-           <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-           <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+          <h5> { rateExplanation } </h5>
          </Modal.Body>
          <Modal.Footer>
            <Button onClick={this.close}>Close</Button>

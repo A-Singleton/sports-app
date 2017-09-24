@@ -35,9 +35,13 @@ export default class postRenderReport extends Component {
 
     // console.log(this.props.stuff)
     // console.log(this.props.stuffMine)
-    const { from } = this.props.location.state || '/'
-    const { fireRedirect } = this.state
-    console.log(this.state.fireRedirect)
+    //const { from } = this.props.location.state || '/'
+    //const { fireRedirect } = this.state
+    //console.log(this.state.fireRedirect)
+    // { this.state.fireRedirect && (
+    //   <Redirect to={'/dashboard'}/>
+    // )}
+
 
     return(
       <div style={divStyle}>
@@ -61,9 +65,6 @@ export default class postRenderReport extends Component {
           Back to Dashboard
           </Button>
           </Form>
-          { this.state.fireRedirect && (
-            <Redirect to={'/dashboard'}/>
-          )}
 
       </div>
     )
