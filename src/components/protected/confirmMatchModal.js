@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import RepReport from './repReport'
 import PostRenderReport from './postRenderReport'
 
-export default class blank extends Component {
+export default class ModalRender extends Component {
   constructor(props){
     super(props)
     this.state = {

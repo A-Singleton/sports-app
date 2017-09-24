@@ -37,13 +37,6 @@ export default class PendingMatchRender extends Component {
           background: "#eee",
           padding: "5px",
           margin: "5px",
-          //width: "550px",
-          //justifyContent: 'center'
-          //alignItems: 'flex',
-          //justifyContent: 'flex',
-          //alignSelf: 'flex',
-        //  color: 'blue',
-        //  backgroundImage: 'url(' + imgUrl + ')',
         };
 
         const score = {

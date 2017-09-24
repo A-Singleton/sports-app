@@ -480,7 +480,7 @@ export function submitRep (opponent, rep) {
 }
 
 export function submittedMatch (hostScore, awayScore, hostID, awayID, matchID, sport, date, user, idStack) {
-//   console.log(friends)
+  // console.log(friends)
   // make a notification in opp user info
 var newMatchKey = ref.child('pendingMatches').push().key
  ref.child(`/pendingMatches/` + newMatchKey)
@@ -494,6 +494,20 @@ var newMatchKey = ref.child('pendingMatches').push().key
    date: date,
    idStack: idStack
  })
+//}
+
+//for id in idStack:
+for (var i=0; i < idStack.length; i++ ) {
+  var user = idStack[i]
+
+  // ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
+  // .set({ id: 0
+  // })
+  //
+  
+    ref.child(`/users/${user}/account-info/pendingMatches/${newMatchKey}`).set({ id: 0 })
+
+  }
 }
 
 export function addFriend (friend, user) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { firebaseAuth, firebaseStorageRef, ref, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
-import PendingMatchRender from './pendingMatchRender'
+import GetConfirmedMatches from './getConfirmedMatches'
 
 export default class ConfirmReport extends Component {
 
@@ -9,13 +9,7 @@ export default class ConfirmReport extends Component {
     super()
     this.state = {
       allPendingMatches: [],
-      awayID: '',
-      awayScore: '',
-      date: '',
-      hostID: '',
-      hostScore: '',
-      matchID: '',
-      sport: ''
+      keys: []
     }
   }
 //
@@ -58,49 +52,31 @@ export default class ConfirmReport extends Component {
 //  })
 // }
 
-// TODO: Need id stack
 componentWillReceiveProps(nextProps){
   console.log("Con Report did mount")
-  //var user =  firebaseAuth().currentUser.uid
+  console.log("this.props.user")
   console.log(nextProps.user)
-  var user = nextProps.user
-  //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
-var queryRef = db.ref("pendingMatches")
-var that = this
-queryRef.orderByChild(`idStack`).on("value", (snapshot)=> {
-console.log("Entered pending Matches")
-  //var allPendingMatchesCopy = this.state.allPendingMatches
-  var allPendingMatchesCopy = this.state.allPendingMatches
+  //db.ref(`users/${user.uid}/account-info/joinedGames`).on('value', (snapshot)=> {
+  db.ref(`users/${nextProps.user}/account-info/pendingMatches/`).on('value', (snapshot)=> {
 
-  const data = snapshot.val()
-  console.log(data)
-  var keys = Object.keys(data)
-  console.log(data)
+  var matches = snapshot.val()
+  console.log(matches)
+  var keys = Object.keys(matches)
   console.log(keys)
+  this.setState({keys})
+  })
 
-for (var i =0; i < keys.length; i++) {
-if(user === data[keys[i]].awayID){
-  var nextMatch = {
-     awayID: data[keys[i]].awayID,
-     awayScore: data[keys[i]].awayScore,
-     date: data[keys[i]].date,
-     hostID: data[keys[i]].hostID,
-     hostScore: data[keys[i]].hostScore,
-     matchID: data[keys[i]].matchID,
-     sport: data[keys[i]].sport,
-     pendingMatchID: keys[i]
-   }
-  //  console.log("data")
-    console.log('nextMatch')
-    console.log(nextMatch)
+//var user =  firebaseAuth().currentUser.uid
+console.log(nextProps.user)
+var user = nextProps.user
 
-    allPendingMatchesCopy.push(nextMatch)
-  }
+  //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
+//var queryRef = db.ref("pendingMatches")
+//queryRef.orderByChild(`idStack`).on("value", (snapshot)=> {
+var that = this
+
 }
 
-    this.setState({ allPendingMatches: allPendingMatchesCopy })
-})
-}
 
 
   render () {
@@ -120,25 +96,13 @@ if(user === data[keys[i]].awayID){
     //  backgroundImage: 'url(' + imgUrl + ')',
     }
 
-  var pendingMatches = ''
+//{ pendingMatches }
 
-  if (this.state.allPendingMatches) {
-    //  const scheduledMatches = this.state.keys.map((fbKey, i) => {
-      console.log('entered key loop')
-      var pendingMatches = this.state.allPendingMatches.map((match, i) => {
-      //console.log(fbKey)
-      return(
-      <PendingMatchRender
-      key={i}
-      matches={ match }
-      />
-    )
-  })
-}
+//<GetConfirmedMatches keys={this.state.keys}/>
 
     return(
       <div style={divStyle}>
-        { pendingMatches }
+        <GetConfirmedMatches keys={this.state.keys}/>
        </div>
     )
   }

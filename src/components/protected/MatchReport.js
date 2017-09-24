@@ -27,7 +27,6 @@ export default class MatchReport extends Component{
     this.setState({awayScore: event.target.value})
   }
 
-// TODO: Seperate players into home and away team
   onSubmit = (e) => {
     e.preventDefault()
     // need props of players' IDs
