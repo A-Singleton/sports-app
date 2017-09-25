@@ -323,39 +323,39 @@ export function recordMatch(match){
      console.log('element')
      console.log(element)
 
-    ref.child(`users/${element}/account-info/wonMatches/`).push(matchID)
-    ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+    ref.child(`users/${element.this_user}/account-info/wonMatches/`).push(matchID)
+    ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
 })
 
  awayID.forEach(function(element) {
-    ref.child(`users/${element}/account-info/lostMatches/`).push(matchID)
-    ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+    ref.child(`users/${element.this_user}/account-info/lostMatches/`).push(matchID)
+    ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
 })
   }
 
 // Host loses
   else if(hostScore < awayScore){
      hostID.forEach(function(element) {
-       ref.child(`users/${element}/account-info/lostMatches/`).push(matchID)
-       ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+       ref.child(`users/${element.this_user}/account-info/lostMatches/`).push(matchID)
+       ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
   }
 )
      awayID.forEach(function(element) {
-       ref.child(`users/${element}/account-info/wonMatches/`).push(matchID)
-       ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+       ref.child(`users/${element.this_user}/account-info/wonMatches/`).push(matchID)
+       ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
   })
   }
 
 // Draw for all
   else{
     hostID.forEach(function(element) {
-      ref.child(`users/${element}/account-info/drawnMatches/`).push(matchID)
-      ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+      ref.child(`users/${element.this_user}/account-info/drawnMatches/`).push(matchID)
+      ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
  }
 )
     awayID.forEach(function(element) {
-      ref.child(`users/${element}/account-info/drawnMatches/`).push(matchID)
-      ref.child(`users/${element}/account-info/joinedGames/${matchID}`).remove()
+      ref.child(`users/${element.this_user}/account-info/drawnMatches/`).push(matchID)
+      ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
  })
   }
 
@@ -471,15 +471,40 @@ export function matchDispute (matchID) {
 // })
 }
 
-export function submitRep (opponent, rep) {
-//   console.log(friends)
-// friends.forEach(function(friend) {
-// ref.child(`opponent/account-info/rep)
+export function submitRep (opponents, rep) {
+  console.log(opponents)
+  console.log(rep)
+for (var i=0; i < opponents.length; i++ ) {
+  var this_rep = rep[i]
+  var this_user = opponents[i].this_user
+  ref.child(`users/${this_user}/account-info/rep`)
+  .push({ this_rep })
+}
+
+// friends.forEach(function(opponent) {
+// ref.child(`users/${opponent}/account-info/rep`)
 // .push({ rep })
 // })
 }
 
-export function submittedMatch (hostScore, awayScore, hostID, awayID, matchID, sport, date, user, idStack) {
+
+export function add2Stats (currentEarnings, level, nextLevel, user) {
+  //   console.log(friends)
+  //var profit = winBonus + gameBonus + mysteryBonus
+  console.log(currentEarnings)
+  console.log(level)
+  console.log(user)
+  //var currentEarnings = 0
+  //var newEarnings = currentEarnings + profit
+  ref.child(`users/${user}/account-info/stats/`)
+  .update({ level,
+            nextLevel,
+            currentEarnings
+  })
+}
+
+export function submittedMatch (hostScore, awayScore, hostID, awayID, matchID,
+                                                  sport, date, user, idStack) {
   // console.log(friends)
   // make a notification in opp user info
 var newMatchKey = ref.child('pendingMatches').push().key
@@ -504,7 +529,7 @@ for (var i=0; i < idStack.length; i++ ) {
   // .set({ id: 0
   // })
   //
-  
+
     ref.child(`/users/${user}/account-info/pendingMatches/${newMatchKey}`).set({ id: 0 })
 
   }

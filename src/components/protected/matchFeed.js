@@ -17,8 +17,7 @@ export default class matchFeed extends Component {
 
 componentDidMount(){
   const user = firebaseAuth().currentUser.uid
-  // const fbMatches = getScheduledMatches()
-  //const fbMatches = getScheduledMatches()
+
     db.ref(`matches/`).on('value', (snapshot)=> {
 
     var allMatchesCopy = this.state.allMatches

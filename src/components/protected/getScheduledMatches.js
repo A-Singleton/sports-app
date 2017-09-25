@@ -26,8 +26,6 @@ componentWillReceiveProps(nextProps) {
   console.log(matches)
   var keys = Object.keys(matches)
   console.log(keys)
-// Since this is a special case of 1 time loop, hardcoding 1
-  //    for (var i =0; i < 1; i++) {
 
         var id = k;
         var skill = matches.skill;

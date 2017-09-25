@@ -3,6 +3,7 @@ import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-b
 import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import ModalConfirmScore from './modalConfirmScore'
+import Thumbnail from './thumbnail'
 
 export default class PendingMatchRender extends Component {
   constructor () {
@@ -52,10 +53,43 @@ export default class PendingMatchRender extends Component {
   //   <Redirect to={'/repReport'}/>
   // )}
 
+
+  var theHomePlayers = this.props.matches.hostID.map((player, i) => {
+
+    console.log('match Posts')
+    console.log(i)
+     console.log(player)
+
+    return(
+      <Thumbnail
+       key={i}
+       player={player}
+      />
+    )
+  })
+
+  //if (typeof this.props.p !== "undefined") {
+  var theAwayPlayers = this.props.matches.awayID.map((player, i) => {
+
+    console.log('players 2')
+    console.log(i)
+    console.log(player)
+
+        return(
+          <Thumbnail
+           key={i}
+           player={player}
+          />
+        )
+      })
+  //  }
+
+
     return(
       <div style={divStyle}>
       <h2> Jimbo Reported the Scores from Your Match </h2>
       <h3> { this.props.matches.sport + " at " + this.props.matches.date } </h3>
+      { theHomePlayers } { theAwayPlayers }
       <label style={score}> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> Home: { this.props.matches.hostScore + "  " } </label>
       <label>  { this.props.matches.awayScore } : Away <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
         <Form onSubmit={this.handleSubmit.bind(this)}>

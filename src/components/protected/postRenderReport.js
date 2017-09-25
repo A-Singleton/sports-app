@@ -1,20 +1,77 @@
 import React, { Component } from 'react'
 import {ProgressBar, Button, Form} from 'react-bootstrap'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import { add2Stats, recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { firebaseAuth, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import AnimatedBar from './animatedBar'
 
 export default class postRenderReport extends Component {
   constructor () {
      super();
      this.state = {
-       fireRedirect: false
+       fireRedirect: false,
+       winBonus: 500,
+       gameBonus: 1000,
+       mysteryBonus: Math.floor(Math.random()*500),
+       winOrLose: '',
+       profit: 0,
+       levelBarrier: 0,
+       current_earnings: 0,
+       level: 0
      }
    }
 
   handleSubmit = (e) => {
     e.preventDefault()
     console.log("submitted")
+    this.addStats()
     this.setState({ fireRedirect: true })
 }
+
+  addStats = () => {
+    console.log("add stats")
+    const user = firebaseAuth().currentUser.uid
+  console.log(user)
+  add2Stats(this.state.current_earnings, this.state.level,
+                                                this.state.levelBarrier, user)
+  recordMatch(this.props.matches)
+  }
+
+  componentDidMount() {
+    //download level, current earnings sum, $ to next level
+    // take: level barrier increase by 5%
+    //
+
+    const user = firebaseAuth().currentUser.uid
+      db.ref(`users/${user}/account-info/stats`).on('value', (snapshot)=> {
+
+
+        var stats = snapshot.val()
+        //var levelStart = stats.levelStart
+        var levelBarrier = stats.nextLevel
+      ///  var levelBarrier = 800
+        var level = stats.level
+      //  var level = 1
+        var next_level = level + 1
+        var profit = this.state.winBonus + this.state.gameBonus +
+                                                       this.state.mysteryBonus
+      //  var new_earnings = stats.current_earnings + profit
+        var new_earnings = this.state.current_earnings + profit
+
+        if (levelBarrier < new_earnings) {
+            level = next_level
+            levelBarrier = levelBarrier*1.03
+            //current_earnings = current_earnings + this.state.profit
+            //next_level = next_level + 1
+        }
+
+        this.setState({ level,
+                        current_earnings: new_earnings,
+                        profit,
+                        levelBarrier
+          })
+      })
+  }
 
   render () {
 
@@ -43,19 +100,30 @@ export default class postRenderReport extends Component {
     // )}
 
 
+    // Need to add these to stats
+
+    // TODO: need some way of determing winner or loser
+    // also need level, current points, points to next level
+    // const winBonus = 500
+    // const gameBonus = 1000
+    // var mysteryBonus = Math.floor(Math.random()*500)
+
     return(
       <div style={divStyle}>
         <h3> Good game, keep it up! </h3>
           <div>
-            <h4> You scored: </h4>
-            <h4> 1,386 points! </h4>
+            <h4> You Earned: </h4>
+            <h4> ${this.state.winBonus + this.state.gameBonus +
+                                                this.state.mysteryBonus}! </h4>
           </div>
           <div>
-            <h4> Score Report: </h4>
-              <h5> Win Bonus: 1000 </h5>
-              <h5> Opponent Skill Bonus: 386 </h5>
+            <h4> Earnings Report: </h4>
+              <h5> Game Bonus: ${ this.state.gameBonus } </h5>
+              <h5> Win Bonus: ${ this.state.winBonus } </h5>
+              <h5> Mystery Bonus: ${ this.state.mysteryBonus } </h5>
               <h4> Moved Up 3 Ranks! 346th in division A </h4>
           </div>
+          <AnimatedBar />
           <ProgressBar active now={73} bsStyle="warning" />
           <div className="pull-right"> 37 </div>
           <div className="pull-left"> 36 </div>
@@ -65,7 +133,6 @@ export default class postRenderReport extends Component {
           Back to Dashboard
           </Button>
           </Form>
-
       </div>
     )
   }

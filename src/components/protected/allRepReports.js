@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import RepReport from './repReport'
+import { submitRep } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class AllRepReports extends Component {
 constructor(props) {
@@ -55,9 +56,9 @@ componentDidMount(){
 
   handleSubmit(event) {
     this.props.nextStep()
-    alert('A name was submitted: ' + this.state.value);
+    //alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-    //(this.state.value, this.state.opponents)
+    submitRep(this.props.match.hostID, this.state.value)
   }
 
   addClick(){

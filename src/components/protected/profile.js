@@ -206,8 +206,6 @@ return (
   <h3 style={headerStyle3}><strong> Recent Activity </strong></h3>
   <RenderFriendRequests user={this.props.userID}/>
   <ConfirmReport user={this.props.userID}/>
-  <h4> Jimbo won a Tennis Match, something to something </h4>
-  <h4> Jimbo creted a Tennis Match, for October 1st </h4>
   </div>
   <div className="pull-right scheduled-matches">
   <h3 style={headerStyle3}><strong> Scheduled Matches </strong></h3>

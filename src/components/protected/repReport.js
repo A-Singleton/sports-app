@@ -32,13 +32,6 @@ this.state = {
     this.props.onChange(newRating)
   }
 
-//   handleSubmit = (e) => {
-//     e.preventDefault()
-//     console.log("submitted")
-//     this.props.nextStep()
-//     //submitRep(this.props.opp, this.state.rating)
-//   //  this.setState({ fireRedirect: true })
-// }
 
   render () {
 
@@ -74,21 +67,6 @@ display: 'inlineBlock',
 
   }
 
-//  const { from } = this.props.location.state || '/'
-  // var { fireRedirect } = this.state.fireRedirect
-  // console.log(this.state.fireRedirect)
-  // console.log(this.state.bool)
-
-  // {this.state.fireRedirect && (
-  //   <Redirect to={'/postRenderReport'} />
-  // )}
-  // send thumbnail info to fill appropraite fields
-  //
-  // <Form onSubmit={this.handleSubmit}>
-  // <Button bsStyle="success" type="submit">
-  //    Rate
-  // </Button>
-  // </Form>
 
 // TODO: Get thumbnail
     return(

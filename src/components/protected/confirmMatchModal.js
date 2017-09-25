@@ -11,11 +11,6 @@ export default class ModalRender extends Component {
     }
   }
 
-  // case 3:
-  //   return <Confirmation />
-  // case 4:
-  //   return <Success />
-
 nextStep = (e) => {
   this.setState({ step : this.state.step + 1 })
 }
@@ -24,14 +19,8 @@ nextStep = (e) => {
 
 var rendering = ''
 
-    this.state.step === 1 ? rendering = <AllRepReports match={this.props.players} nextStep={this.nextStep}/> : rendering = <PostRenderReport />
-  // var rendering =  switch (this.state.step) {
-  //         case 1:
-  //           return <RepReport />
-  //         case 2:
-  //           return <PostRenderReport />
-  //         }
-  //{ rendering }
+    this.state.step === 1 ? rendering = <AllRepReports match={this.props.players} nextStep={this.nextStep}/> : rendering = <PostRenderReport matches={this.props.players}/>
+
   console.log(this.props.players)
 
     return(
