@@ -73,6 +73,7 @@ render(){
   console.log(" Match Render Props")
   console.log(this.props.match)
   console.log(this.props.players)
+  console.log(this.props.players2)
 
   const isEnabled =
   this.state.hostScore > -1 &&

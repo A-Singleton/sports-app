@@ -36,19 +36,36 @@ export default class JoinGrid extends Component {
        //console.log(this.props.players[1].joinerName)
 
        let players = this.props.players
+
        let players2 = this.props.players2
        if (typeof  players2 === "undefined") {
            players2 = [players2]
         }
 
+        let players3 = this.props.players3
+        if (typeof  players3 === "undefined") {
+            players3 = [players3]
+         }
+
+         let players4 = this.props.players4
+         if (typeof  players4 === "undefined") {
+             players4 = [players4]
+          }
+
        console.log(players2)
        var personArrayCopy = this.state.personArray
        var team_1 = ''
        var team_2 = ''
+       var team_3 = ''
+       var team_4 = ''
        var team_1_space = false
        var team_2_space = false
+       var team_3_space = false
+       var team_4_space = false
 
-      // for (var i =0; i < this.state.max_len; i++) {
+
+       if (this.props.sport !== "Golf") {
+
       for (var i =0; i < max_len; i++) {
          if (typeof  players[i] === "undefined") {
              team_1 = " Slot Open "
@@ -83,6 +100,70 @@ export default class JoinGrid extends Component {
                         max_len,
                         homeSpace: team_1_space,
                         awaySpace: team_2_space })
+        }
+
+
+
+        else {
+          for (var i =0; i < max_len; i++) {
+             if (typeof  players[i] === "undefined") {
+                 team_1 = " Slot Open "
+                 team_1_space = true
+              }
+             else{
+                team_1 = players[i].joinerName
+             // console.log("test_arr_1")
+             // console.log(test_arr_1[i])
+             }
+
+             if (typeof  players2[i] === "undefined") {
+                 team_2 = " Slot Open "
+                 team_2_space = true
+              }
+             else{
+                team_2 = players2[i].joinerName
+             // console.log("test_arr_1")
+             // console.log(test_arr_1[i])
+             }
+
+             if (typeof  players3[i] === "undefined") {
+                 team_3 = " Slot Open "
+                 team_3_space = true
+              }
+             else{
+                team_3 = players3[i].joinerName
+             // console.log("test_arr_1")
+             // console.log(test_arr_1[i])
+             }
+
+             if (typeof  players4[i] === "undefined") {
+                 team_4 = " Slot Open "
+                 team_4_space = true
+              }
+             else{
+                team_4 = players4[i].joinerName
+             // console.log("test_arr_1")
+             // console.log(test_arr_1[i])
+             }
+
+             var nextRow = {
+               team_1,
+               team_2,
+               team_3,
+               team_4
+             }
+             // console.log("test_arr_2")
+             // console.log(test_arr_2[i])
+
+             personArrayCopy.push(nextRow)
+           }
+           this.setState({personArray: personArrayCopy,
+                            max_len,
+                            homeSpace: team_1_space,
+                            awaySpace: team_2_space,
+                            thirdSpace: team_3_space,
+                            fourthSpace: team_4_space })
+        }
      }
   //   const test_arr_1 = ['kid']
   //   const test_arr_2 = ['looking', 'at', 'you']
@@ -100,103 +181,7 @@ export default class JoinGrid extends Component {
 //  }
 
   componentWillReceiveProps(nextProps) {
-
      console.log(nextProps)
-    // console.log(nextProps.players[1].joinerName)
-    //
-    // let players = []
-    // let players2 = nextProps.players[1].joinerName
-    // var personArrayCopy = this.state.personArray
-    // var team_1 = ''
-    // var team_2 = ''
-    //
-    // for (var i =0; i < this.state.max_len; i++) {
-    //   if (typeof  players[i] === "undefined") {
-    //       team_1 = " Slot Open "
-    //    }
-    //   else{
-    //      team_1 = players[i]
-    //   // console.log("test_arr_1")
-    //   // console.log(test_arr_1[i])
-    //   }
-    //
-    //   if (typeof  players2[i] === "undefined") {
-    //       team_2 = " Slot Open "
-    //    }
-    //   else{
-    //      team_2 = players2[i]
-    //   // console.log("test_arr_1")
-    //   // console.log(test_arr_1[i])
-    //   }
-    //
-    //   var nextRow = {
-    //     team_1,
-    //     team_2
-    //   }
-    //   // console.log("test_arr_2")
-    //   // console.log(test_arr_2[i])
-    //
-    //   personArrayCopy.push(nextRow)
-    // }
-    // this.setState({personArray: personArrayCopy})
-
-
-
-
-    //
-    //
-    // if (this.props.sport === "Squash - Doubles" ||
-    //                          "Tennis - Doubles" || "Badminton - Doubles")
-    //    { this.setState({max_len: 2}) }
-    //
-    //    else if (this.props.sport === "Soccer - 5 a Side" || "Basketball" ) {
-    //      console.log("enters basketball")
-    //          this.setState({max_len: 5}) }
-    //          let max_length = 5
-    //
-    //    console.log(this.props.players)
-    //    console.log(this.props.players[1].joinerName)
-    //
-    //    let players = []
-    //    let players2 = [this.props.players[1].joinerName]
-    //    console.log(players2)
-    //    var personArrayCopy = this.state.personArray
-    //    var team_1 = ''
-    //    var team_2 = ''
-    //
-    //   // for (var i =0; i < this.state.max_len; i++) {
-    //   for (var i =0; i < max_length; i++) {
-    //      if (typeof  players[i] === "undefined") {
-    //          team_1 = " Slot Open "
-    //       }
-    //      else{
-    //         team_1 = players[i]
-    //      // console.log("test_arr_1")
-    //      // console.log(test_arr_1[i])
-    //      }
-    //
-    //      if (typeof  players2[i] === "undefined") {
-    //          team_2 = " Slot Open "
-    //       }
-    //      else{
-    //         team_2 = players2[i]
-    //      // console.log("test_arr_1")
-    //      // console.log(test_arr_1[i])
-    //      }
-    //
-    //      var nextRow = {
-    //        team_1,
-    //        team_2
-    //      }
-    //      // console.log("test_arr_2")
-    //      // console.log(test_arr_2[i])
-    //
-    //      personArrayCopy.push(nextRow)
-    //    }
-    //    this.setState({personArray: personArrayCopy})
-    //  }
-
-
   }
 
 
@@ -240,6 +225,9 @@ export default class JoinGrid extends Component {
     )
   }
 
+  // {(this.props.sport === "Golf") ? <td>{row.team_3}</td> : null}
+  // {(this.props.sport === "Golf") ? <td>{row.team_4}</td> : null}
+
   render () {
     console.log(this.props.sport)
     console.log(this.state.max_len)
@@ -255,15 +243,27 @@ export default class JoinGrid extends Component {
       team_2_Join = <Button bsStyle="success" onClick={this.joinAway}>
       Join Team 2</Button> }
 
+      let team_3_Join = null
+      if (this.props.sport === "Golf") {
+        team_3_Join = <Button bsStyle="success" onClick={this.join3}>
+        Join Team 3</Button> }
+
+        let team_4_Join = null
+        if (this.props.sport === "Golf") {
+          team_4_Join = <Button bsStyle="success" onClick={this.join4}>
+          Join Team 4</Button> }
+
     return(
       <div>
-      { team_1_Join } { team_2_Join }
+      { team_1_Join } { team_2_Join } { team_3_Join } { team_4_Join }
       <Table striped condensed hover>
   <thead>
     <tr>
       <th></th>
       <th>Home (Team 1)</th>
       <th>Away (Team 2)</th>
+      {(this.props.sport === "Golf") ? <th>Team 3</th> : null}
+      {(this.props.sport === "Golf") ? <th>Team 4</th> : null}
     </tr>
   </thead>
   <tbody>

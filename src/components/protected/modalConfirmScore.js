@@ -38,16 +38,16 @@ export default class modalConfirmScore extends Component {
    var rateOpener = "Rate your Opponent's Sportsmanship"
    var rateExplanation = "Your rating is anonymous, but will help other players find good sports to play with"
    //<RepReport />
+   //  <p>Click to get the full Modal experience!</p>
+
    return (
      <div>
-       <p>Click to get the full Modal experience!</p>
-
        <Button
-         bsStyle="primary"
+         bsStyle="success"
          bsSize="large"
          onClick={this.open}
        >
-         Launch demo modal
+         Confirm Scores
        </Button>
 
        <Modal show={this.state.showModal} onHide={this.close}>

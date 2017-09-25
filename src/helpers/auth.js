@@ -41,7 +41,7 @@ export function saveMatch (newMatch, user) {
 
     const this_user = user.uid
     var personPacket = {
-    this_user,
+    user,
     joinerName }
 
     var newMatchKey = ref.child('matches').push().key

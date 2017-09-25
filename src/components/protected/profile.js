@@ -9,14 +9,18 @@ import RenderFriendRequests from './renderFriendRequests'
 //TODO: profile pic + url in upper corner
 //1. Add error handling to fb queries
 //3. Component for recent activity
-//
+
 export default class profile extends Component {
   constructor(props){
     super(props)
   this.state = {
     profInfo: '',
     LastName: '',
-    FirstName: ''
+    FirstName: '',
+    rep: 0,
+    aboutMe: '',
+    sports: '',
+    location: ''
   }
 }
 
@@ -66,7 +70,11 @@ export default class profile extends Component {
   console.log('profInfo')
    console.log(profInfo)
    console.log(profInfo.FirstName)
-   //profileInfo.push(persInfo)
+
+   //    profInfo.aboutMe
+   //    profInfo.sports
+   //    profInfo.location
+
    this.setState({
      profInfo,
      FirstName: profInfo.FirstName,
@@ -74,8 +82,25 @@ export default class profile extends Component {
    })
   })
 
-  }
 
+  ref.child(`users/${nextProps.userID}/account-info/rep`).on('value', (snapshot)=> {
+
+  const rep = snapshot.val()
+   console.log('rep')
+   console.log(rep)
+   console.log(rep)
+
+    var rep_sum = 0
+    var keys = Object.keys(rep)
+
+    for (var i =0; i < keys.length; i++) {
+      var k = keys[i];
+      var this_rep = rep[k];
+      rep_sum = rep_sum + this_rep
+    }
+      this.setState({ rep: (rep_sum/keys.length) })
+  })
+  }
 
   componentDidMount(){
     //logic for handling whether it is own users or someone else's
@@ -189,7 +214,7 @@ return (
     <h3><strong> Key Stats: </strong></h3>
     <h4> Trophies Won: 2 </h4>
     <h4> Games played: 86 </h4>
-    <h4> Reputation: 99% </h4>
+    <h4> Reputation: {this.state.rep}% </h4>
     <h4> Member since: August 3, 2017 </h4>
     <h5 className="text-muted time">See Full Stats</h5>
    </div>

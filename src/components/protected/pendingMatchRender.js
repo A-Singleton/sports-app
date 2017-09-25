@@ -84,6 +84,9 @@ export default class PendingMatchRender extends Component {
       })
   //  }
 
+// <Form onSubmit={this.handleSubmit.bind(this)}>
+//  </Form>
+//  <Button bsStyle="success" type="submit">Confirm the Scores</Button>
 
     return(
       <div style={divStyle}>
@@ -92,18 +95,13 @@ export default class PendingMatchRender extends Component {
       { theHomePlayers } { theAwayPlayers }
       <label style={score}> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> Home: { this.props.matches.hostScore + "  " } </label>
       <label>  { this.props.matches.awayScore } : Away <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
-        <Form onSubmit={this.handleSubmit.bind(this)}>
-          <Button bsStyle="success" type="submit">Confirm the Scores</Button>
+          <ModalConfirmScore match={this.props.matches}/>
           <br/>
           <h6> Did they make a mistake? </h6>
           <Button bsStyle="warning" onClick={this.handleAlternate.bind(this)}>Dispute the Result</Button>
           <h6> Clicking this button will send a notification to them to double
                 check their report. The scores will not take effect for now </h6>
                 <h5> Learn more </h5>
-        </Form>
-
-        <ModalConfirmScore match={this.props.matches}/>
-
        </div>
     )
   }
