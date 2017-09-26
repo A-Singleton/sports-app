@@ -12,18 +12,23 @@ export default class animatedBar extends Component {
 
 render() {
   var options = {
-            strokeWidth: 10
+            strokeWidth: 8,
+            textAlign: 'center',
+            display:  'inlineBlock',
         };
 
   var containerStyle = {
-              width: '200px',
-              height: '200px'
+              // width: '200px',
+              // height: '200px',
+              // textAlign: 'center',
+              // display:  'inlineBlock',
           };
+
+      //    text={'test'}
 
   return(
     <Line
     progress={this.state.progress}
-    text={'test'}
     options={options}
     initialAnimate={true}
     containerStyle={containerStyle}

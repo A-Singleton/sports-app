@@ -46,6 +46,8 @@ var otherUser = "Qciqsxq1ZAdCCgGAZzJTqIGE7qp1"
     lName: persInfo.LastName,
     email: persInfo.email,
     gender: persInfo.Gender,
+    aboutMe: persInfo.aboutMe,
+    favSports: persInfo.favSports
      })
     })
 
@@ -137,7 +139,8 @@ handleChangeFname = (event) => {
       FirstName: this.state.fName,
       LastName: this.state.lName,
       Email: this.state.email,
-      Gender: this.state.gender
+      Gender: this.state.gender,
+      aboutMe: this.state.aboutUser
 }
 //  const user = firebaseAuth().currentUser
 //  updateProfile(updatedInfo, user)

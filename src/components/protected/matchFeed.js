@@ -32,6 +32,8 @@ componentDidMount(){
           var creator_query = matches[k].creator;
           var players = matches[k].homePlayers;
           var players2 =  matches[k].awayPlayers;
+          var players3 =  matches[k].players3;
+          var players4 =  matches[k].players4;
           var creator_first_name = matches[k].creator_first_name;
           var creator_last_name = matches[k].creator_last_name;
           var idStack = matches[k].idStack
@@ -45,7 +47,9 @@ componentDidMount(){
       creator: creator_query,
       creatorName: creator_first_name + " " + creator_last_name,
       players2: players2,
-      idStack: idStack
+      idStack: idStack,
+      players3: players3,
+      players4: players4
     }
     console.log(nextMatch)
     allMatchesCopy.push(nextMatch)
@@ -67,9 +71,16 @@ componentDidMount(){
       var allFriendsCopy = this.state.friendsList
           for (var i =0; i < keys.length; i++) {
 
-            var friend = friends[keys[i]]
-            console.log(friend)
-            allFriendsCopy.push(friend.requester)
+            var friend = friends[keys[i]].user
+            var name = friends[keys[i]].name
+
+            var nextFriend = {
+              friend,
+              name
+            }
+
+            console.log(nextFriend)
+            allFriendsCopy.push(nextFriend)
           }
       this.setState({ friendsList: allFriendsCopy })
   })

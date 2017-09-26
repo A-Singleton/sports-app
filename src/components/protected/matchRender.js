@@ -20,7 +20,7 @@ export default class MatchRender extends Component {
       l_name: ''
       }
 
-  this.renderjoin = this.renderjoin.bind(this)
+//  this.renderjoin = this.renderjoin.bind(this)
   this.handleJoin = this.handleJoin.bind(this)
   this.removeMatch = this.removeMatch.bind(this)
   }
@@ -95,15 +95,16 @@ removeMatch(e) {
     removeMatchBackend(players)
    }
 
-renderjoin(e){
-  e.preventDefault()
-  return <div> No function yet </div>
-}
+// renderjoin(e){
+//   e.preventDefault()
+//   return <div> No function yet </div>
+// }
 
 friendRequest = (event) => {
   console.log(this.props.match.creator)
   const user = firebaseAuth().currentUser.uid
-  addFriend(this.props.match.creator, user)
+  addFriend(this.props.match.creator, this.props.match.creator_first_name,
+                this.props.match.creator_last_name, user, this.props.userName)
 }
 
   render(){
@@ -187,6 +188,8 @@ friendRequest = (event) => {
         sport={this.props.match.sport}
         players={this.props.match.players}
         players2={this.props.match.players2}
+        players3={this.props.match.players3}
+        players4={this.props.match.players4}
         matchID={this.props.match.id}
         userName={this.props.userName}
         idStack={this.props.match.idStack}

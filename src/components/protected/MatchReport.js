@@ -110,6 +110,10 @@ if (typeof this.props.players2 !== "undefined") {
       })
     }
 
+    
+  //  { playeer3 }
+  //  { player4 }
+
 
   return (
     <div style={divStyle}>

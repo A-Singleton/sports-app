@@ -205,8 +205,8 @@ saveMatch(matchData, user)
   //    padding: "100px",
       margin: "5px",
   //  display: 'table-row',
-  display: 'inlineBlock',
-    width: '100%',
+      display: 'inlineBlock',
+      width: '100%',
 //    width: '200px'
     };
 
@@ -288,8 +288,7 @@ const pushRightMargin = {
 
         <MakeMatch />
 
-        <ModalConfirmScore />
-        <Profile />
+        <EditProfile />
      </div>
     )
   }

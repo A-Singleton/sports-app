@@ -12,45 +12,46 @@ export default class ConfirmReport extends Component {
       keys: []
     }
   }
-//
-//   componentDidMount(){
-//     console.log("Con Report did mount")
-//     //var user =  firebaseAuth().currentUser.uid
-//     console.log(this.props.user)
-//     var user = this.props.user
-//     //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
-//   var queryRef = db.ref("pendingMatches")
-//   var that = this
-//   queryRef.orderByChild(`awayID`).equalTo(user).on("value", (snapshot)=> {
-//
-//     var allPendingMatchesCopy = this.state.allPendingMatches
-//
-//     const data = snapshot.val()
-//     var keys = Object.keys(data)
-//     console.log(data)
-//     console.log(keys)
-//
-//   for (var i =0; i < keys.length; i++) {
-//
-//     var nextMatch = {
-//        awayID: data[keys[i]].awayID,
-//        awayScore: data[keys[i]].awayScore,
-//        date: data[keys[i]].date,
-//        hostID: data[keys[i]].hostID,
-//        hostScore: data[keys[i]].hostScore,
-//        matchID: data[keys[i]].matchID,
-//        sport: data[keys[i]].sport,
-//        pendingMatchID: keys[i]
-//      }
-//     //  console.log("data")
-//       console.log('nextMatch')
-//       console.log(nextMatch)
-//
-//       allPendingMatchesCopy.push(nextMatch)
-//   }
-//       this.setState({ allPendingMatches: allPendingMatchesCopy })
-//  })
-// }
+
+  //
+  //   componentDidMount(){
+  //     console.log("Con Report did mount")
+  //     //var user =  firebaseAuth().currentUser.uid
+  //     console.log(this.props.user)
+  //     var user = this.props.user
+  //     //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
+  //   var queryRef = db.ref("pendingMatches")
+  //   var that = this
+  //   queryRef.orderByChild(`awayID`).equalTo(user).on("value", (snapshot)=> {
+  //
+  //     var allPendingMatchesCopy = this.state.allPendingMatches
+  //
+  //     const data = snapshot.val()
+  //     var keys = Object.keys(data)
+  //     console.log(data)
+  //     console.log(keys)
+  //
+  //   for (var i =0; i < keys.length; i++) {
+  //
+  //     var nextMatch = {
+  //        awayID: data[keys[i]].awayID,
+  //        awayScore: data[keys[i]].awayScore,
+  //        date: data[keys[i]].date,
+  //        hostID: data[keys[i]].hostID,
+  //        hostScore: data[keys[i]].hostScore,
+  //        matchID: data[keys[i]].matchID,
+  //        sport: data[keys[i]].sport,
+  //        pendingMatchID: keys[i]
+  //      }
+  //     //  console.log("data")
+  //       console.log('nextMatch')
+  //       console.log(nextMatch)
+  //
+  //       allPendingMatchesCopy.push(nextMatch)
+  //   }
+  //       this.setState({ allPendingMatches: allPendingMatchesCopy })
+  //  })
+  // }
 
 componentWillReceiveProps(nextProps){
   console.log("Con Report did mount")

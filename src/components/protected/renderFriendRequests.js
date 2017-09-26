@@ -33,7 +33,9 @@ export default class RenderFriendRequests extends Component {
 
     var nextFriend = {
       //  awayID: data[keys[i]].awayID,
-         user: data[keys[i]].friend
+         user: data[keys[i]].user,
+         name: data[keys[i]].name
+
      }
     //  console.log("data")
       console.log('nextMatch')

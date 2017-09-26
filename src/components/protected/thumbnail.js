@@ -14,11 +14,12 @@ export default class Thumbnail extends Component {
 componentWillReceiveProps(nextProps) {
 console.log("Thumbnail Next Props")
 console.log(JSON.stringify(nextProps))
-console.log(JSON.stringify(nextProps.player.this_user))
-var test = nextProps.user
+console.log(JSON.stringify(nextProps.player))
+var test = nextProps.player.user
 console.log(test);
   // Create a reference to the file we want to download
-var starsRef = firebaseStorageRef.child(`profilePics/${nextProps.player.this_user}`);
+//var starsRef = firebaseStorageRef.child(`profilePics/${nextProps.player.this_user}`);
+var starsRef = firebaseStorageRef.child(`profilePics/${nextProps.player.user}`);
 
 // Get the download URL
 starsRef.getDownloadURL().then(function(url) {
@@ -26,13 +27,13 @@ starsRef.getDownloadURL().then(function(url) {
 //  var img = document.getElementById('myimg');
   //var imgBar = document.getElementById('imgBar')
 //  var img = document.getElementById('myimg')
-  var img =  document.getElementsByClassName(`img-circle avatar ${nextProps.player.this_user}`)
+  var img =  document.getElementsByClassName(`img-circle avatar ${nextProps.player.user}`)
 //  imgBar.src = url
   console.log("thumbnail")
   console.log(url)
 
   for (var i = 0; i < img.length; i++) {
-    console.log(img[i])
+  //  console.log(img[i])
     img[i].src = url
 }
   //this.setState({url})
@@ -113,12 +114,12 @@ starsRef.getDownloadURL().then(function(url) {
       margin: "10px",
     }
 
-    var classNameImg = `img-circle avatar ${this.props.player.this_user}`
+    var classNameImg = `img-circle avatar ${this.props.player.user}`
 
     return(
       <div>
       <label> <img className={classNameImg} id="myimg" src="" alt=""/>
-      { this.props.player.joinerName } </label>
+      { this.props.player.name } </label>
       </div>
     )
   }

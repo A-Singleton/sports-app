@@ -1019,3 +1019,14 @@ user={this.state.User}
                                   //    }
                                   //    this.setState({personArray: personArrayCopy})
                                   //  }
+
+
+                                  //var queryRef_1 = db.ref(`users/${requester}/account-info/friendRequests/`)
+                                  //queryRef_1.orderByChild(`user`).equalTo(`${accepter}`).remove()
+                                  //ref.child(`users/${requester}/account-info/friendRequests/`).orderByChild(`user`).equalTo(`${accepter}`).remove()
+
+
+
+                                  //var queryRef_2 = db.ref(`users/${accepter}/account-info/pendingFriends/`)
+                                  //queryRef_2.orderByChild(`friend`).equalTo(`${requester}`).remove()
+                                  //ref.child(`users/${accepter}/account-info/pendingFriends/`).orderByChild(`friend`).equalTo(`${requester}`).remove()

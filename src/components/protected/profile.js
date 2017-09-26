@@ -82,24 +82,6 @@ export default class profile extends Component {
    })
   })
 
-
-  ref.child(`users/${nextProps.userID}/account-info/rep`).on('value', (snapshot)=> {
-
-  const rep = snapshot.val()
-   console.log('rep')
-   console.log(rep)
-   console.log(rep)
-
-    var rep_sum = 0
-    var keys = Object.keys(rep)
-
-    for (var i =0; i < keys.length; i++) {
-      var k = keys[i];
-      var this_rep = rep[k];
-      rep_sum = rep_sum + this_rep
-    }
-      this.setState({ rep: (rep_sum/keys.length) })
-  })
   }
 
   componentDidMount(){
@@ -161,6 +143,28 @@ console.log('profInfo')
    FirstName: profInfo.FirstName,
    LastName: profInfo.LastName
  })
+})
+
+ref.child(`users/${propsUser}/account-info/rep`).on('value', (snapshot)=> {
+
+const rep = snapshot.val()
+ console.log('rep')
+ console.log(rep)
+ console.log(rep)
+
+  var rep_sum = 0
+  var keys = Object.keys(rep)
+
+  for (var i =0; i < keys.length; i++) {
+    var k = keys[i];
+    var this_rep = rep[k];
+
+    console.log(this_rep.this_rep)
+    rep_sum = rep_sum + this_rep.this_rep
+
+  }
+    console.log((rep_sum/keys.length))
+    that.setState({ rep: Math.round(100*(rep_sum/(5*keys.length))) })
 })
 
   //set consts to state, pass as props to rendering comps

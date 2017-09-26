@@ -37,12 +37,12 @@ export function saveMatch (newMatch, user) {
     var profile = snapshot.val()
     const f_name = profile.FirstName
     const l_name = profile.LastName
-    const joinerName = f_name + " " + l_name
+    const name = f_name + " " + l_name
 
     const this_user = user.uid
     var personPacket = {
-    user,
-    joinerName }
+    user: this_user,
+    name }
 
     var newMatchKey = ref.child('matches').push().key
 
@@ -83,11 +83,10 @@ export function removeMatchBackend(players) {
 
 
 export function joinMatch (user, players, matchID, joinerName, stackID) {
-    //players.push(user.uid)
-    //const this_user = user
+
     var personPacket = {
     user,
-    joinerName }
+    name: joinerName }
 
     players.push(personPacket)
 
@@ -99,8 +98,7 @@ export function joinMatch (user, players, matchID, joinerName, stackID) {
 
     //Sets ID:0 because can then directly delete match by calling match.id
     ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
-    .set({ id: 0
-    })
+    .set({ id: 0 })
 }
 
 
@@ -111,7 +109,7 @@ export function joinMatch (user, players, matchID, joinerName, stackID) {
 
      var personPacket = {
      user,
-     joinerName }
+     name: joinerName }
 
      awayPlayers.push(personPacket)
 
@@ -323,39 +321,39 @@ export function recordMatch(match){
      console.log('element')
      console.log(element)
 
-    ref.child(`users/${element.this_user}/account-info/wonMatches/`).push(matchID)
-    ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
+    ref.child(`users/${element.user}/account-info/wonMatches/`).push(matchID)
+    ref.child(`users/${element.user}/account-info/joinedGames/${matchID}`).remove()
 })
 
  awayID.forEach(function(element) {
-    ref.child(`users/${element.this_user}/account-info/lostMatches/`).push(matchID)
-    ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
+    ref.child(`users/${element.user}/account-info/lostMatches/`).push(matchID)
+    ref.child(`users/${element.user}/account-info/joinedGames/${matchID}`).remove()
 })
   }
 
 // Host loses
   else if(hostScore < awayScore){
      hostID.forEach(function(element) {
-       ref.child(`users/${element.this_user}/account-info/lostMatches/`).push(matchID)
-       ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
+       ref.child(`users/${element.user}/account-info/lostMatches/`).push(matchID)
+       ref.child(`users/${element.user}/account-info/joinedGames/${matchID}`).remove()
   }
 )
      awayID.forEach(function(element) {
-       ref.child(`users/${element.this_user}/account-info/wonMatches/`).push(matchID)
-       ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
+       ref.child(`users/${element.user}/account-info/wonMatches/`).push(matchID)
+       ref.child(`users/${element.user}/account-info/joinedGames/${matchID}`).remove()
   })
   }
 
 // Draw for all
   else{
     hostID.forEach(function(element) {
-      ref.child(`users/${element.this_user}/account-info/drawnMatches/`).push(matchID)
-      ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
+      ref.child(`users/${element.user}/account-info/drawnMatches/`).push(matchID)
+      ref.child(`users/${element.user}/account-info/joinedGames/${matchID}`).remove()
  }
 )
     awayID.forEach(function(element) {
-      ref.child(`users/${element.this_user}/account-info/drawnMatches/`).push(matchID)
-      ref.child(`users/${element.this_user}/account-info/joinedGames/${matchID}`).remove()
+      ref.child(`users/${element.user}/account-info/drawnMatches/`).push(matchID)
+      ref.child(`users/${element.user}/account-info/joinedGames/${matchID}`).remove()
  })
   }
 
@@ -440,12 +438,6 @@ var nextMatch = {
 })
    return yourMatches
 }
-//
-// export function addFriend (friendID, userID) {
-//   console.log(friendID)
-// ref.child(`users/${userID}/account-info/friends`)
-// .push({ friendID })
-// }
 
 export function invite2Match (friends, matchID) {
   console.log(friends)
@@ -455,13 +447,6 @@ ref.child(`matches/${matchID}/invited-friends`)
 })
 }
 
-// export function reportConfirmed (matchID) {
-// //   console.log(friends)
-// // friends.forEach(function(friend) {
-// // ref.child(`matches/${matchID}/invited-friends`)
-// // .push({  })
-// //})
-//}
 
 export function matchDispute (matchID) {
 //   console.log(friends)
@@ -480,11 +465,6 @@ for (var i=0; i < opponents.length; i++ ) {
   ref.child(`users/${this_user}/account-info/rep`)
   .push({ this_rep })
 }
-
-// friends.forEach(function(opponent) {
-// ref.child(`users/${opponent}/account-info/rep`)
-// .push({ rep })
-// })
 }
 
 
@@ -525,35 +505,33 @@ var newMatchKey = ref.child('pendingMatches').push().key
 for (var i=0; i < idStack.length; i++ ) {
   var user = idStack[i]
 
-  // ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
-  // .set({ id: 0
-  // })
-  //
-
     ref.child(`/users/${user}/account-info/pendingMatches/${newMatchKey}`).set({ id: 0 })
 
   }
 }
 
-export function addFriend (friend, user) {
+export function addFriend (friend, friendFirstName, friendLastName,
+                                                              user, userName) {
 console.log(friend)
 console.log(user)
-ref.child(`users/${friend}/account-info/friendRequests`).push({ user })
+var friendName = friendFirstName + " " + friendLastName
+ref.child(`users/${friend}/account-info/friendRequests`).push({ user: user,
+                                                              name: userName })
 
-ref.child(`users/${user}/account-info/pendingFriends`).push({ friend })
+ref.child(`users/${user}/account-info/pendingFriends`).push({ user: friend,
+                                                            name: friendName })
 }
 
-export function acceptFriend (requester, accepter) {
+export function acceptFriend (requester, requesterName, accepter, accepterName) {
 console.log(requester)
 console.log(accepter)
 
-ref.child(`users/${accepter}/account-info/friends`).push({ requester })
+ref.child(`users/${accepter}/account-info/friends`).push({ user: requester,
+                                                          name: requesterName })
 
-ref.child(`users/${requester}/account-info/friends`).push({ accepter })
+ref.child(`users/${requester}/account-info/friends`).push({ user: accepter,
+                                                           name: accepterName })
 
-//var queryRef_1 = db.ref(`users/${requester}/account-info/friendRequests/`)
-//queryRef_1.orderByChild(`user`).equalTo(`${accepter}`).remove()
-//ref.child(`users/${requester}/account-info/friendRequests/`).orderByChild(`user`).equalTo(`${accepter}`).remove()
 let ref_1 = db.ref(`users/${requester}/account-info/friendRequests/`);
 ref_1.orderByChild(`user`).equalTo(`${accepter}`).once('value', snapshot => {
      let updates = {};
@@ -562,9 +540,6 @@ ref_1.orderByChild(`user`).equalTo(`${accepter}`).once('value', snapshot => {
 });
 
 
-//var queryRef_2 = db.ref(`users/${accepter}/account-info/pendingFriends/`)
-//queryRef_2.orderByChild(`friend`).equalTo(`${requester}`).remove()
-//ref.child(`users/${accepter}/account-info/pendingFriends/`).orderByChild(`friend`).equalTo(`${requester}`).remove()
 let ref_2 = db.ref(`users/${accepter}/account-info/pendingFriends/`);
 ref_2.orderByChild(`friend`).equalTo(`${requester}`).once('value', snapshot => {
      let updates = {};
@@ -581,9 +556,38 @@ ref.child(`users/${requester}/account-info/friendRequests/${decliner}`).remove()
 ref.child(`users/${decliner}/account-info/friendRequests/${requester}`).remove()
 }
 
-// export function makeThumbnailInfo (requester, decliner) {
-// console.log(decliner)
-// ref.child(`users/${requester}/account-info/friendRequests/${decliner}`).remove()
-//
-// ref.child(`users/${decliner}/account-info/friendRequests/${requester}`).remove()
-// }
+export function join3 (user, matchID, joinerName, stackID) {
+
+    var players3 = {
+    user,
+    name: joinerName }
+
+    stackID.push(user)
+
+    console.log(players3)
+    ref.child(`matches/${matchID}/`).update({ players3,
+                                              idStack: stackID })
+
+    //Sets ID:0 because can then directly delete match by calling match.id
+    ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
+    .set({ id: 0
+    })
+  }
+
+export function join4 (user, matchID, joinerName, stackID) {
+
+    var players4 = {
+    user,
+    name: joinerName }
+
+    stackID.push(user)
+
+    console.log(players4)
+    ref.child(`matches/${matchID}/`).update({ players4,
+                                              idStack: stackID })
+
+    //Sets ID:0 because can then directly delete match by calling match.id
+    ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
+    .set({ id: 0
+    })
+  }
