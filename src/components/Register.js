@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { auth } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
 import { registerUser } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import Time from 'react-time'
 
 
 function setErrorMsg(error) {
@@ -11,10 +12,12 @@ function setErrorMsg(error) {
 }
 
 export default class Register extends Component {
-  state = { registerError: null }
+  state = { registerError: null, joinTime: new Date() }
 
   handleSubmit = (e) => {
     e.preventDefault()
+
+    var joinTime = this.state.joinTime.toString()
 
     const registration = {
       FirstName: this.fName.value,
@@ -22,7 +25,8 @@ export default class Register extends Component {
       BirthMonth: this.month.value,
       BirthDay: this.day.value,
       BirthYear: this.year.value,
-      Gender: this.gender.value
+      Gender: this.gender.value,
+      JoinTime: joinTime
 }
     // var first_Name_Var = this.fName.value;
     // var last_Name_Var = this.lName.value;
@@ -47,6 +51,13 @@ export default class Register extends Component {
 }
 
   render () {
+    //
+    // let now = new Date()
+    // console.log(now)
+    console.log(this.state.joinTime.toString())
+    //var idea = this.state.joinTime.slice(4, this.state.joinTime.length)
+    //console.log(idea)
+
     return (
       <div className="col-sm-6 col-sm-offset-3">
         <h1>Register</h1>

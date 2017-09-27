@@ -8,8 +8,10 @@ export default class JoinGrid extends Component {
     super(props)
     this.state = {
       max_len: 1,
-      homeSpace: true,
-      awaySpace: true,
+      homeSpace: false,
+      awaySpace: false,
+      thirdSpace: false,
+      fourthSpace: false,
       personArray: []
     }
   }
@@ -64,10 +66,15 @@ export default class JoinGrid extends Component {
        var team_2 = ''
        var team_3 = ''
        var team_4 = ''
-       var team_1_space = false
-       var team_2_space = false
-       var team_3_space = false
-       var team_4_space = false
+       var team_1_space = this.state.homeSpace
+       var team_2_space = this.state.awaySpace
+       var team_3_space = this.state.thirdSpace
+       var team_4_space = this.state.fourthSpace
+
+      //  homeSpace: false,
+      //  awaySpace: false,
+      //  thirdSpace: false,
+      //  fourthSpace: false,
 
 
        if (this.props.sport !== "Golf") {
@@ -115,43 +122,41 @@ export default class JoinGrid extends Component {
           console.log( max_len)
           for (var i =0; i < max_len; i++) {
              if (typeof  players[i] === "undefined") {
+                console.log("Slot 1 Open")
                  team_1 = " Slot Open "
                  team_1_space = true
               }
              else{
                 team_1 = players[i].name
-             // console.log("test_arr_1")
-             // console.log(test_arr_1[i])
              }
 
              if (typeof  players2[i] === "undefined") {
+                console.log("Slot 2 Open")
                  team_2 = " Slot Open "
                  team_2_space = true
               }
              else{
                 team_2 = players2[i].name
-             // console.log("test_arr_1")
-             // console.log(test_arr_1[i])
              }
 
-             if (typeof  players3[i] === "undefined") {
+             if (typeof  players3[0] === "undefined") {
+                console.log("Slot 3 Open")
                  team_3 = " Slot Open "
                  team_3_space = true
               }
+
              else{
-                team_3 = players3[i].name
-             // console.log("test_arr_1")
-             // console.log(test_arr_1[i])
+                team_3 = players3[0].name
              }
 
-             if (typeof  players4[i] === "undefined") {
+             if (typeof  players4[0] === "undefined") {
+                console.log("Slot 4 Open")
                  team_4 = " Slot Open "
                  team_4_space = true
               }
+
              else{
-                team_4 = players4[i].name
-             // console.log("test_arr_1")
-             // console.log(test_arr_1[i])
+                team_4 = players4[0].name
              }
 
              var nextRow = {
@@ -160,12 +165,16 @@ export default class JoinGrid extends Component {
                team_3,
                team_4
              }
-             // console.log("test_arr_2")
-             // console.log(test_arr_2[i])
 
              personArrayCopy.push(nextRow)
            }
-           this.setState({personArray: personArrayCopy,
+
+           console.log(team_1_space)
+           console.log(team_2_space)
+           console.log(team_3_space)
+           console.log(team_4_space)
+
+            this.setState({ personArray: personArrayCopy,
                             max_len,
                             homeSpace: team_1_space,
                             awaySpace: team_2_space,
@@ -200,7 +209,7 @@ export default class JoinGrid extends Component {
         console.log(nextProps.players)
         console.log(nextProps.players2)
         //console.log(this.props.players[1].joinerName)
-
+        console.log(max_len)
         let players = nextProps.players
 
         let players2 = nextProps.players2
@@ -224,10 +233,10 @@ export default class JoinGrid extends Component {
         var team_2 = ''
         var team_3 = ''
         var team_4 = ''
-        var team_1_space = false
-        var team_2_space = false
-        var team_3_space = false
-        var team_4_space = false
+        var team_1_space = this.state.homeSpace
+        var team_2_space = this.state.awaySpace
+        var team_3_space = this.state.thirdSpace
+        var team_4_space = this.state.fourthSpace
 
 
         if (nextProps.sport !== "Golf") {
@@ -239,8 +248,6 @@ export default class JoinGrid extends Component {
            }
           else{
              team_1 = players[i].name
-          // console.log("test_arr_1")
-          // console.log(test_arr_1[i])
           }
 
           if (typeof  players2[i] === "undefined") {
@@ -249,16 +256,12 @@ export default class JoinGrid extends Component {
            }
           else{
              team_2 = players2[i].name
-          // console.log("test_arr_1")
-          // console.log(test_arr_1[i])
           }
 
           var nextRow = {
             team_1,
             team_2
           }
-          // console.log("test_arr_2")
-          // console.log(test_arr_2[i])
 
           personArrayCopy.push(nextRow)
         }
@@ -268,8 +271,6 @@ export default class JoinGrid extends Component {
                          awaySpace: team_2_space })
          }
 
-
-
          else {
            console.log("Second Golf idea")
            console.log( max_len)
@@ -278,31 +279,29 @@ export default class JoinGrid extends Component {
                   team_1 = " Slot Open "
                   team_1_space = true
                }
+
               else{
                  team_1 = players[i].name
-              // console.log("test_arr_1")
-              // console.log(test_arr_1[i])
               }
 
               if (typeof  players2[i] === "undefined") {
                   team_2 = " Slot Open "
                   team_2_space = true
                }
+
               else{
                  team_2 = players2[i].name
-              // console.log("test_arr_1")
-              // console.log(test_arr_1[i])
               }
-              console.log(players3)
 
-              if (typeof  players3 === "undefined") {
+              console.log(players3)
+              //TODO: do something about this
+              if (typeof  players3[0] === "undefined") {
                   team_3 = " Slot Open "
                   team_3_space = true
                }
+
               else{
-                 team_3 = players3.name
-              // console.log("test_arr_1")
-              // console.log(test_arr_1[i])
+                 team_3 = players3[0].name
               }
 
               console.log(players4)
@@ -310,10 +309,9 @@ export default class JoinGrid extends Component {
                   team_4 = " Slot Open "
                   team_4_space = true
                }
+
               else{
-                 team_4 = players4.name
-              // console.log("test_arr_1")
-              // console.log(test_arr_1[i])
+                 team_4 = players4[0].name
               }
 
               var nextRow = {
@@ -425,14 +423,16 @@ export default class JoinGrid extends Component {
       Join Team 2</Button> }
 
       let team_3_Join = null
-      if (this.props.sport === "Golf") {
+      if (this.props.sport === "Golf" && this.state.thirdSpace) {
         team_3_Join = <Button bsStyle="success" onClick={this.joinTeam3}>
         Join Team 3</Button> }
 
         let team_4_Join = null
-        if (this.props.sport === "Golf") {
+        if (this.props.sport === "Golf" && this.state.fourthSpace) {
           team_4_Join = <Button bsStyle="success" onClick={this.joinTeam4}>
           Join Team 4</Button> }
+
+
 
     return(
       <div>

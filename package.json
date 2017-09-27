@@ -11,15 +11,18 @@
     "autosuggest-highlight": "^3.1.0",
     "bootstrap": "^3.3.7",
     "firebase": "^3.6.1",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
     "react-autosuggest": "^9.3.2",
     "react-bootstrap": "^0.31.3",
     "react-datepicker": "^0.52.0",
     "react-dom": "^15.6.1",
+    "react-moment": "^0.6.5",
     "react-places-autocomplete": "^5.4.2",
     "react-progressbar.js": "^0.2.0",
     "react-router-dom": "^4.0.0-beta.8",
-    "react-stars": "^2.2.3"
+    "react-stars": "^2.2.3",
+    "react-trend": "^1.2.4"
   },
   "scripts": {
     "start": "react-scripts start",

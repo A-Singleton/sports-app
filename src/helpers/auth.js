@@ -17,6 +17,8 @@ export function resetPassword (email) {
 }
 
 export function registerUser (info, user) {
+  console.log(info.JoinTime)
+  var JoinTime = info.JoinTime
 ref.child(`users/${user.uid}/personal-info`)
 .set({
   email: user.email,
@@ -26,7 +28,8 @@ ref.child(`users/${user.uid}/personal-info`)
   BirthMonth: info.BirthMonth,
   BirthDay: info.BirthDay,
   BirthYear: info.BirthYear,
-  Gender: info.Gender
+  Gender: info.Gender,
+  JoinTime: JoinTime
 })
 }
 
@@ -367,13 +370,16 @@ export function recordMatch(match){
 // BirthDay: info.BirthDay,
 // BirthYear: info.BirthYear,
 export function updateProfile (info, user) {
-  console.log(info.FirstName)
+  
+  console.log(info)
+  //Gender: info.Gender
 ref.child(`users/${user.uid}/personal-info`)
 .update({
-//   email: info.Email,
-//   FirstName: info.FirstName,
-//   LastName: info.LastName,
-//   Gender: info.Gender
+  email: info.Email,
+  FirstName: info.FirstName,
+  LastName: info.LastName,
+  location: info.location,
+  aboutMe: info.aboutMe,
  }
 )
 }
@@ -565,7 +571,7 @@ export function join3 (user, matchID, joinerName, stackID) {
     stackID.push(user)
 
     console.log(players3)
-    ref.child(`matches/${matchID}/`).update({ players3,
+    ref.child(`matches/${matchID}/`).update({ players3: [players3],
                                               idStack: stackID })
 
     //Sets ID:0 because can then directly delete match by calling match.id
@@ -583,7 +589,7 @@ export function join4 (user, matchID, joinerName, stackID) {
     stackID.push(user)
 
     console.log(players4)
-    ref.child(`matches/${matchID}/`).update({ players4,
+    ref.child(`matches/${matchID}/`).update({ players4: [players4],
                                               idStack: stackID })
 
     //Sets ID:0 because can then directly delete match by calling match.id

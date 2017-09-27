@@ -280,6 +280,7 @@ const pushRightMargin = {
 // <JoinGrid />
 
   var user =  firebaseAuth().currentUser.uid
+  console.log(user)
   var otherUser = 'q2xlsIvehieukIw1QYOi6LxGUp33'
   var otherUser2 = "6Vm6eVPj3aNS3GM8dr2CVDVbtaL2"
     return (

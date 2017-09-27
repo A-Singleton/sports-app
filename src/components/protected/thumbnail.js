@@ -29,8 +29,8 @@ starsRef.getDownloadURL().then(function(url) {
 //  var img = document.getElementById('myimg')
   var img =  document.getElementsByClassName(`img-circle avatar ${nextProps.player.user}`)
 //  imgBar.src = url
-  console.log("thumbnail")
-  console.log(url)
+  //console.log("thumbnail")
+  //console.log(url)
 
   for (var i = 0; i < img.length; i++) {
   //  console.log(img[i])

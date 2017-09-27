@@ -10,6 +10,12 @@ export default class animatedBar extends Component {
   }
 }
 
+componentDidMount(){
+  var progress = this.props.progress
+  console.log(progress)
+  this.setState({progress})
+}
+
 render() {
   var options = {
             strokeWidth: 8,

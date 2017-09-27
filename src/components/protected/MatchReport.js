@@ -9,7 +9,9 @@ export default class MatchReport extends Component{
     super(props)
     this.state = {
       hostScore: -1,
-      awayScore: -1
+      awayScore: -1,
+      threeScore: -1,
+      fourthScore: -1
     }
     this.handleChangeUser = this.handleChangeUser.bind(this)
     this.handleChangeGuest = this.handleChangeGuest.bind(this)
@@ -27,6 +29,18 @@ export default class MatchReport extends Component{
     this.setState({awayScore: event.target.value})
   }
 
+  handleChange3 = (event) => {
+    //value.preventDefault()
+      console.log(event.target.value)
+    this.setState({threeScore: event.target.value})
+  }
+
+  handleChange4 = (event) => {
+    //value.preventDefault()
+      console.log(event.target.value)
+    this.setState({fourthScore: event.target.value})
+  }
+
   onSubmit = (e) => {
     e.preventDefault()
     // need props of players' IDs
@@ -39,6 +53,20 @@ export default class MatchReport extends Component{
     submittedMatch(this.state.hostScore, this.state.awayScore,
        this.props.match.players, this.props.match.players2, this.props.match.id,
      this.props.match.sport, this.props.match.date, user, this.props.match.idStack)
+  }
+
+  onGolfSubmit = (e) => {
+    e.preventDefault()
+    // need props of players' IDs
+    console.log('golf submitted')
+    const user = firebaseAuth().currentUser
+
+    console.log(Object.keys(this.state.hostScore))
+    console.log(JSON.stringify(this.state.hostScore))
+
+    // submittedMatch(this.state.hostScore, this.state.awayScore,
+    //    this.props.match.players, this.props.match.players2, this.props.match.id,
+    //  this.props.match.sport, this.props.match.date, user, this.props.match.idStack)
   }
 
 render(){
@@ -65,20 +93,17 @@ render(){
     width: '40px',
     margin: "10px",
   }
-  //
-  // const homeMargin = {
-  //   marginLeft: "-600px"
-  // }
 
   console.log(" Match Render Props")
   console.log(this.props.match)
   console.log(this.props.players)
   console.log(this.props.players2)
+  console.log(this.props.players3)
+  console.log(this.props.players4)
 
   const isEnabled =
   this.state.hostScore > -1 &&
   this.state.awayScore > -1;
-
 
   var theHomePlayers = this.props.players.map((player, i) => {
 
@@ -110,15 +135,85 @@ if (typeof this.props.players2 !== "undefined") {
       })
     }
 
-    
+    if (typeof this.props.players3 !== "undefined") {
+      var players3 = this.props.players3.map((player, i) => {
+
+        console.log('players 3')
+        console.log(i)
+        console.log(player)
+
+            return(
+              <Thumbnail
+               key={i}
+               player={player}
+              />
+            )
+          })
+        }
+
+        if (typeof this.props.players4 !== "undefined") {
+          var players4 = this.props.players4.map((player, i) => {
+
+            console.log('players 4')
+            console.log(i)
+            console.log(player)
+
+                return(
+                  <Thumbnail
+                   key={i}
+                   player={player}
+                  />
+                )
+              })
+            }
+
   //  { playeer3 }
   //  { player4 }
+ //
+//var golf = {
+// golfIsEnabled()
+const golfIsEnabled =
+this.state.hostScore > -1 &&
+this.state.awayScore > -1 &&
+this.state.threeScore > -1 &&
+this.state.fourthScore > -1
 
+  console.log(" Golf Enabled")
+  console.log(golfIsEnabled)
+  console.log(this.state.hostScore)
+  console.log(this.state.awayScore)
+  console.log(this.state.threeScore)
+  console.log(this.state.fourthScore)
 
   return (
     <div style={divStyle}>
     <h2 style={headerStyle2}> How did the match go? </h2>
     <h3> {this.props.match.sport} on {this.props.match.date} </h3>
+    { (this.props.match.sport === "Golf") ?
+    <div>
+    <Col componentClass={ControlLabel} smOffset={0} sm={2}>
+            { theHomePlayers }
+        <label> <input style={horInput} className="match-report-user" type="number" min="0"
+        onChange={this.handleChangeUser}/></label>
+    </Col>
+    <Col componentClass={ControlLabel} smOffset={1} sm={2}>
+        { theAwayPlayers }
+        <label> <input style={horInput} className="match-report-guest" type="number" min="0"
+        onChange={this.handleChangeGuest}/> </label>
+    </Col>
+    <Col componentClass={ControlLabel} smOffset={3} sm={2}>
+        { players3 }
+        <label> <input style={horInput} className="match-report-guest" type="number" min="0"
+        onChange={this.handleChange3}/> </label>
+    </Col>
+    <Col componentClass={ControlLabel} smOffset={4} sm={2}>
+        { players4 }
+        <label> <input style={horInput} className="match-report-guest" type="number" min="0"
+        onChange={this.handleChange4}/> </label>
+    </Col>
+    </div>
+        :
+        <div>
     <Col componentClass={ControlLabel} smOffset={3} sm={2}>
             { theHomePlayers }
         <label> <input style={horInput} className="match-report-user" type="number" min="0"
@@ -129,10 +224,16 @@ if (typeof this.props.players2 !== "undefined") {
         <label> <input style={horInput} className="match-report-guest" type="number" min="0"
         onChange={this.handleChangeGuest}/> </label>
     </Col>
+  </div>}
     <br/>
+    { (this.props.match.sport === "Golf") ?
+    <Form onSubmit={this.onGolfSubmit}>
+     <Button disabled={!golfIsEnabled} bsStyle="success" type="submit">Submit the Result</Button>
+    </Form>
+    :
     <Form onSubmit={this.onSubmit}>
      <Button disabled={!isEnabled} bsStyle="success" type="submit">Submit the Result</Button>
-    </Form>
+    </Form> }
     </div>
   )
 }

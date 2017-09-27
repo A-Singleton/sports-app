@@ -47,7 +47,8 @@ var otherUser = "Qciqsxq1ZAdCCgGAZzJTqIGE7qp1"
     email: persInfo.email,
     gender: persInfo.Gender,
     aboutMe: persInfo.aboutMe,
-    favSports: persInfo.favSports
+    favSports: persInfo.favSports,
+    location: persInfo.location
      })
     })
 
@@ -133,17 +134,21 @@ handleChangeFname = (event) => {
     console.log(this.state.fName)
     console.log(this.state.lName)
     console.log(this.state.email)
-    console.log(this.state.gender)
-
+    //console.log(this.state.gender)
+    console.log(this.state.aboutUser)
+    console.log(this.state.location)
+//Gender: this.state.gender,
     const updatedInfo = {
       FirstName: this.state.fName,
       LastName: this.state.lName,
       Email: this.state.email,
-      Gender: this.state.gender,
-      aboutMe: this.state.aboutUser
+      aboutMe: this.state.aboutUser,
+      location: this.state.location
 }
-//  const user = firebaseAuth().currentUser
-//  updateProfile(updatedInfo, user)
+
+ const user = firebaseAuth().currentUser
+ updateProfile(updatedInfo, user)
+
 }
 
   render () {

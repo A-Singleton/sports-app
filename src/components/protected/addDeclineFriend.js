@@ -7,8 +7,7 @@ export default class AddDeclineFriend extends Component {
     constructor(props){
       super(props)
       this.state = {
-        FirstName: '',
-        LastName: '',
+        name: '' ,
         requesterID: '',
       }
     }
@@ -17,8 +16,9 @@ export default class AddDeclineFriend extends Component {
     console.log("Con Report did mount")
   //  var user =  firebaseAuth().currentUser.uid
   console.log('this.props.user')
-    console.log(this.props.friendRequest.user)
-    var user = this.props.friendRequest.user
+    console.log(this.props.friendRequest.friendID)
+    var user = this.props.friendRequest.friendID
+    this.setState({requesterID: user})
  //
  //    //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
  //  //var queryRef = db.ref("pendingMatches")
@@ -58,6 +58,10 @@ export default class AddDeclineFriend extends Component {
  // })
 }
 
+componentWillReceiveProps(nextProps) {
+  console.log(nextProps)
+}
+
 // TODO: see if not preventing default is better, probably is
   onSubmit = (e) => {
     //e.preventDefault()
@@ -86,10 +90,11 @@ export default class AddDeclineFriend extends Component {
               margin: "5px",
             }
 
-//
+      //  <Thumbnail />
+
     return(
       <div style={divStyle}>
-      <h2> { this.props.friendRequest.name} Sent you a Friend Request </h2>
+      <h2> { this.state.name } Sent you a Friend Request </h2>
       <label style={score}> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <Button bsStyle="success" type="submit">Accept Friend Request</Button>
