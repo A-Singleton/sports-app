@@ -5,6 +5,7 @@ import ScheduledMatches from './scheduledMatches'
 import ConfirmReport from './confirmReport'
 import MatchReport from './MatchReport'
 import RenderFriendRequests from './renderFriendRequests'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 //TODO: profile pic + url in upper corner
 //1. Add error handling to fb queries
@@ -20,7 +21,9 @@ export default class profile extends Component {
     rep: 0,
     aboutMe: '',
     sports: '',
-    location: ''
+    location: '',
+    favSports: [],
+    userID: ''
   }
 }
 
@@ -96,7 +99,7 @@ if (user) {
 
   // Create a reference to the file we want to download
 //var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
-var starsRef = firebaseStorageRef.child(`profilePics/${propsUser}`)
+var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}`)
 
 // Get the download URL
 starsRef.getDownloadURL().then(function(url) {
@@ -131,7 +134,7 @@ starsRef.getDownloadURL().then(function(url) {
 // retrieve personal-info
 
 //ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
-ref.child(`users/${propsUser}/personal-info`).on('value', (snapshot)=> {
+ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
 
 const profInfo = snapshot.val()
 console.log('profInfo')
@@ -141,7 +144,11 @@ console.log('profInfo')
  that.setState({
    profInfo,
    FirstName: profInfo.FirstName,
-   LastName: profInfo.LastName
+   LastName: profInfo.LastName,
+   aboutMe: profInfo.aboutMe,
+   favSports: profInfo.favSports,
+   userID: user.uid,
+   location: profInfo.location
  })
 })
 
@@ -206,7 +213,7 @@ const rep = snapshot.val()
     console.log('this.state.profInfo')
     console.log(this.state.FirstName)
      console.log('this.props.userID')
-     console.log(this.props.userID)
+  //   console.log(this.props.userID)
 
 return (
 <div className="profile-page">
@@ -224,21 +231,22 @@ return (
    </div>
    <div className="title h5" style={profileText}>
     <h3><strong> {this.state.FirstName + " " + this.state.LastName} </strong> <img className="img-square avatar" src="http://placehold.it/48x38" alt=""/></h3>
-    <h4> Springfield, IN USA </h4>
+    <h4> {this.state.location} </h4>
     <h4> Sports: </h4>
-    <h4> Tennis, Squash </h4>
+    <h4> {this.state.favSports} </h4>
     <h4> About Me: </h4>
-    <h5> I am a competitive racket player, watch out! </h5>
+    <h5> {this.state.aboutMe} </h5>
+    <h4> <Link to={`/protected/editProfile/`}>Edit Profile</Link> </h4>
    </div>
   </div>
   <div className="pull-left activity-feed">
   <h3 style={headerStyle3}><strong> Recent Activity </strong></h3>
-  <RenderFriendRequests user={this.props.userID} name={this.state.FirstName + " " + this.state.LastName}/>
-  <ConfirmReport user={this.props.userID}/>
+  <RenderFriendRequests user={this.state.userID} name={this.state.FirstName + " " + this.state.LastName}/>
+  <ConfirmReport user={this.state.userID}/>
   </div>
   <div className="pull-right scheduled-matches">
   <h3 style={headerStyle3}><strong> Scheduled Matches </strong></h3>
-  <ScheduledMatches user={this.props.userID}/>
+  <ScheduledMatches user={this.state.userID}/>
   </div>
 </div>
 )

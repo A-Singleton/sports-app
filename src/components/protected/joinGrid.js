@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Table, Button } from 'react-bootstrap'
+import { Table, Button, Form,  FormGroup, FormControl, Col,  ControlLabel} from 'react-bootstrap'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import { joinMatch, joinMatchAway, join3, join4, sportsLength } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+//import {Button, } from 'react-bootstrap'
 
 export default class JoinGrid extends Component {
   constructor(props){
@@ -457,7 +458,18 @@ export default class JoinGrid extends Component {
 
     return(
       <div>
-      { team_1_Join } { team_2_Join } { team_3_Join } { team_4_Join }
+      <Col componentClass={ControlLabel} smOffset={1} sm={1}>
+          { team_1_Join }
+      </Col>
+      <Col componentClass={ControlLabel} smOffset={2} sm={1}>
+          { team_2_Join }
+      </Col>
+      <Col componentClass={ControlLabel} smOffset={2} sm={1}>
+          { team_3_Join }
+      </Col>
+      <Col componentClass={ControlLabel} smOffset={2} sm={1}>
+          { team_4_Join }
+      </Col>
       <Table striped condensed hover>
   <thead>
     <tr>

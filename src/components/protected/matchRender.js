@@ -114,16 +114,18 @@ friendRequest = (event) => {
     const user = firebaseAuth().currentUser.uid
 
     //
-    let button = null
-    if (this.props.match.creator === user) {
-      button = <div> Your match </div>
-    }
-    else if (this.props.match.idStack.includes(user)) {
-      button = <div> You Joined the match </div>
-      }
-    else if(this.props.match.creator !== user){
-      button = <button onClick={this.handleJoin} className="btn btn-primary">Join Match</button>
-    }
+    // let button = null
+    // if (this.props.match.creator === user) {
+    //   button = <div> Your match </div>
+    // }
+    // else if (this.props.match.idStack.includes(user)) {
+    //   button = <div> You Joined the match </div>
+    //   }
+    // else if(this.props.match.creator !== user){
+    // //  button = <button onClick={this.handleJoin} className="btn btn-primary">Join Match</button>
+    // button = "Have not joined this match yet"
+    // }
+    //  {button}
 
     //
     let friendButton = null
@@ -134,7 +136,7 @@ friendRequest = (event) => {
 
     //
     let cancelButton = null
-    if (this.props.match.creator === user.uid){
+    if (this.props.match.creator === user){
     cancelButton = <Button bsStyle="danger" onClick={this.removeMatch} className="fa fa-remove">Cancel Match</Button>
     }
 
@@ -148,9 +150,11 @@ friendRequest = (event) => {
     }
 
     var url = `https://firebasestorage.googleapis.com/v0/b/add-users-to-app.appspot.com/o/profilePics%${this.props.match.creator}?alt=media&token=cacccb2e-3200-4dba-94b9-1d71ec491cd9`
-    console.log(url)
+  //  console.log(url)
     var classNameImg = `img-circle avatar ${this.props.match.creator}`
-    console.log(classNameImg)
+//    console.log(classNameImg)
+ //    <h6 className="text-muted time">An hour ago</h6>
+ //        {matchRemark}
 
     return(
       <div className="col-sm-12">
@@ -162,27 +166,19 @@ friendRequest = (event) => {
             <div className="pull-right "> { cancelButton } </div>
             <div className="pull-left meta">
               <div className="title h5">
-               <h4>  <strong> {this.props.match.creatorName} </strong> made a Match </h4>
-               <br/>
-               {matchRemark}
+               <h4>  <strong> { this.props.match.creatorName} </strong> made a public Match </h4>
+               {friendButton}
               </div>
-              <h6 className="text-muted time">An hour ago</h6>
               </div>
             </div>
           </div>
           <div className="col-md-12 post-description">
-          <br/>
-            <h3> {this.props.match.sport} </h3>
-            <br/>
-            <h3> Level: {this.props.match.skill} </h3>
+            <h3> Sport: {this.props.match.sport} </h3>
             <br/>
             <h3> Date: {this.props.match.date} </h3>
             <br/>
-            <h3> Players: {this.props.match.players.length} </h3>
-            <br/>
-            {friendButton}
+            <h3> Level: {this.props.match.skill} </h3>
             </div>
-            {button}
             <div className="actions">
         </div>
 

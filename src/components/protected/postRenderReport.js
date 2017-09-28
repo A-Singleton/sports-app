@@ -16,6 +16,7 @@ export default class postRenderReport extends Component {
        winOrLose: '',
        profit: 0,
        levelBarrier: 0,
+       lowerBarrier: 0,
        current_earnings: 0,
        level: 0
      }
@@ -42,9 +43,11 @@ export default class postRenderReport extends Component {
     // take: level barrier increase by 5%
     //
 
-    const user = firebaseAuth().currentUser.uid
-      db.ref(`users/${user}/account-info/stats`).on('value', (snapshot)=> {
 
+    const user = firebaseAuth().currentUser.uid
+
+
+      db.ref(`users/${user}/account-info/stats`).on('value', (snapshot)=> {
 
         var stats = snapshot.val()
         //var levelStart = stats.levelStart
@@ -54,8 +57,7 @@ export default class postRenderReport extends Component {
         var level = stats.level
       //  var level = 1
         var next_level = level + 1
-        var profit = this.state.winBonus + this.state.gameBonus +
-                                                       this.state.mysteryBonus
+        var profit = this.state.gameBonus +  this.state.mysteryBonus
       //  var new_earnings = stats.current_earnings + profit
         var new_earnings = this.state.current_earnings + profit
 
@@ -69,7 +71,8 @@ export default class postRenderReport extends Component {
         this.setState({ level,
                         current_earnings: new_earnings,
                         profit,
-                        levelBarrier
+                        levelBarrier,
+                        lowerBarrier
           })
       })
   }
@@ -109,24 +112,37 @@ export default class postRenderReport extends Component {
     // const gameBonus = 1000
     // var mysteryBonus = Math.floor(Math.random()*500)
 
+      console.log(this.state.level)
+      console.log(this.state.current_earnings)
+      console.log(this.state.profit)
+      console.log(this.state.levelBarrier)
+      console.log(this.state.lowerBarrier)
+
+
     return(
       <div style={divStyle}>
         <h3> Good game, keep it up! </h3>
           <div>
             <h4> You Earned: </h4>
-            <h4> ${this.state.winBonus + this.state.gameBonus +
-                                                this.state.mysteryBonus}! </h4>
+            <h4> ${ this.state.gameBonus + this.state.mysteryBonus}! </h4>
           </div>
           <div>
             <h4> Earnings Report: </h4>
               <h5> Game Bonus: ${ this.state.gameBonus } </h5>
-              <h5> Win Bonus: ${ this.state.winBonus } </h5>
               <h5> Mystery Bonus: ${ this.state.mysteryBonus } </h5>
-              <h4> Moved Up 3 Ranks! 346th in division A </h4>
           </div>
-          <AnimatedBar profit={this.state.profit}/>
-          <div className="pull-right"> this.state.level + 1 </div>
-          <div className="pull-left"> this.state.level </div>
+
+          { this.state.lowerBarrier === 0 ? '' :
+          <AnimatedBar
+            profit={this.state.profit}
+            pointsLower={this.state.lowerBarrier}
+            pointsHigher={this.state.levelBarrier}
+            level={this.state.level}
+            earnings={this.state.current_earnings}
+            /> }
+
+          <div className="pull-right"> {this.state.level + 1} </div>
+          <div className="pull-left"> {this.state.level} </div>
           <h4> Just 114 Points to go to 37 </h4>
           <Form onSubmit={this.handleSubmit}>
           <Button bsStyle="success" type="submit">

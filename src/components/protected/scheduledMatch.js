@@ -27,7 +27,7 @@ export default class ScheduledMatch extends Component {
 
     //
     return(
-      <div className="col-sm-6">
+      <div className="col-sm-24">
         <div className="panel panel-white post panel-shadow">
           <div className="post-heading">
             <div className="pull-left image">

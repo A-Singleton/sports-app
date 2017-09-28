@@ -44,13 +44,13 @@ const usernameContainer = {
   maxWidth: '400px',
   margin: '0 auto',
   textAlign: 'center',
-  marginTop: '10%'
+  marginTop: '3%'
 }
 
   // Initial page load, show a simple login form
   return (
     <form onSubmit={this.usernameSubmitHandler} style={usernameContainer} className="username-container">
-      <h1 style={h1}>React Instant Chat</h1>
+      <h1 style={h1}>Join the Match Chat</h1>
       <input type="submit" value="Enter Match Messages" />
     </form>
   );

@@ -6,12 +6,14 @@ export default class animatedBar extends Component {
   constructor(){
     super()
   this.state = {
-    progress: 0.8
+    progress: 0
   }
 }
 
 componentDidMount(){
-  var progress = this.props.progress
+  console.log(this.props)
+  var progress = (this.props.earnings - this.props.pointsLower) / (this.props.pointsHigher - this.props.pointsLower)
+  console.log(this.props.earnings - this.props.pointsLower)
   console.log(progress)
   this.setState({progress})
 }

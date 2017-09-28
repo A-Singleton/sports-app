@@ -655,3 +655,20 @@ export function join4 (user, matchID, joinerName, stackID) {
             }
           }
   }
+
+// put in register
+  export function setStats(user) {
+    console.log("Set Stats")
+  db.ref(`users/${user}/account-info/stats`).update({level: 1,
+                                                    nextLevel: 1500,
+                                                    earnings: 0
+                                                  })
+                                                }
+
+  export function updateStats(user, level, nextLevel, earnings) {
+    console.log("Update Stats")
+  db.ref(`users/${user}/account-info/stats`).update({level,
+                                                    nextLevel,
+                                                    earnings
+                                                  })
+                                                }
