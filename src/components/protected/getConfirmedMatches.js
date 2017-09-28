@@ -12,6 +12,7 @@ export default class getConfirmedMatches extends Component {
 
 
 componentWillReceiveProps(nextProps) {
+console.log(nextProps.keys)
   var that = this
 nextProps.keys.forEach(function(element) {
 ref.child(`/pendingMatches/${element}`).on("value", (snapshot)=> {

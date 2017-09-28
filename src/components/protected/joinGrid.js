@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Table, Button } from 'react-bootstrap'
 import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
-import { joinMatch, joinMatchAway, join3, join4 } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { joinMatch, joinMatchAway, join3, join4, sportsLength } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 
 export default class JoinGrid extends Component {
   constructor(props){
@@ -17,332 +17,355 @@ export default class JoinGrid extends Component {
   }
 
   componentDidMount() {
-    var max_len = 1
+    //var max_len = 1
     console.log('Did Mount')
     console.log(this.props)
     console.log(this.props.sport)
-    console.log((this.props.sport === "Soccer - 5 a Side" || "Basketball" ) )
 
-    // if (this.props.sport === "Squash - Doubles" ||
-    //                          "Tennis - Doubles" || "Badminton - Doubles")
-    //    { this.setState({max_len: 2}) }
-      if (this.props.sport === "Golf") {
-        console.log("Golf")
-        max_len = 1
+    let players = this.props.players
+    let players2 = this.props.players2
+    let players3 = this.props.players3
+    let players4 = this.props.players4
+    var personArrayCopy = []
+
+    console.log(players)
+    console.log(players2)
+    console.log(players3)
+    console.log(players4)
+
+     if (typeof  players2 === "undefined") {
+        console.log("Players 2 undefined")
+        //players2 = [players2]
+        players2 = [
+          {name: undefined , user: undefined}
+        ]
       }
 
-    //else
-        if (this.props.sport === "Soccer - 5 a Side" || "Basketball" ) {
-         console.log("enters basketball")
-             max_len = 5 }
-             //let max_length = 5
+      if (typeof  players3 === "undefined") {
+        console.log("Players 3 undefined")
+        players3 = [
+          {name: undefined , user: undefined}
+        ]
+      }
+
+      if (typeof  players4 === "undefined") {
+        console.log("Players 4 undefined")
+        //players4 = [players4]
+        players4 = [
+          {name: undefined , user: undefined}
+        ]
+      }
 
        console.log(this.props.players)
-       console.log(this.props.players2)
-       //console.log(this.props.players[1].joinerName)
+       console.log(players3)
+       console.log(players4)
 
-       let players = this.props.players
-       let players2 = this.props.players2
-      // let players3 = this.props.players3
-       //let players4 = this.props.players4
-       if (typeof  players2 === "undefined") {
-           players2 = [players2]
-        }
-
-        let players3 = this.props.players3
-        console.log(players3)
-        if (typeof  players3 === "undefined") {
-            players3 = [players3]
-         }
-
-         let players4 = this.props.players4
-         if (typeof  players4 === "undefined") {
-             players4 = [players4]
-          }
-
-       console.log(players2)
-       var personArrayCopy = this.state.personArray
-       var team_1 = ''
-       var team_2 = ''
-       var team_3 = ''
-       var team_4 = ''
-       var team_1_space = this.state.homeSpace
-       var team_2_space = this.state.awaySpace
-       var team_3_space = this.state.thirdSpace
-       var team_4_space = this.state.fourthSpace
-
-      //  homeSpace: false,
-      //  awaySpace: false,
-      //  thirdSpace: false,
-      //  fourthSpace: false,
-
+       var max_len = sportsLength(this.props.sport, this.props.maxPlayers)
 
        if (this.props.sport !== "Golf") {
-
-      for (var i =0; i < max_len; i++) {
-         if (typeof  players[i] === "undefined") {
-             team_1 = " Slot Open "
-             team_1_space = true
-          }
-         else{
-            team_1 = players[i].name
-         // console.log("test_arr_1")
-         // console.log(test_arr_1[i])
-         }
-
-         if (typeof  players2[i] === "undefined") {
-             team_2 = " Slot Open "
-             team_2_space = true
-          }
-         else{
-            team_2 = players2[i].name
-         // console.log("test_arr_1")
-         // console.log(test_arr_1[i])
-         }
-
-         var nextRow = {
-           team_1,
-           team_2
-         }
-         // console.log("test_arr_2")
-         // console.log(test_arr_2[i])
-
-         personArrayCopy.push(nextRow)
-       }
-       this.setState({personArray: personArrayCopy,
-                        max_len,
-                        homeSpace: team_1_space,
-                        awaySpace: team_2_space })
-        }
-
+      //  var team_1_space = false
+      //  var team_2_space = false
+       //
+      //  for (var i =0; i < max_len; i++) {
+      //        var team_1 =  { name: players[i].name, user: players[i].user }
+      //        var team_2 =  { name: players2[i].name, user: players2[i].user }
+       //
+      //        if (typeof players[i].user === "undefined") {
+      //          console.log("Slot 1 Open")
+      //          team_1.name = "Slot Open"
+      //          team_1_space = true
+      //        }
+       //
+      //        if (typeof players2[i].user === "undefined") {
+      //          console.log("Slot 2 Open")
+      //          team_2.name = "Slot Open"
+      //          team_2_space = true
+      //        }
+       //
+      //        var nextRow = {
+      //          team_1,
+      //          team_2
+      //        }
+       //
+      //        personArrayCopy.push(nextRow)
+      //      }
+       //
+      //      console.log(personArrayCopy)
+      //      console.log(team_1_space)
+      //      console.log(team_2_space)
+       //
+      //      this.setState({ personArray: personArrayCopy,
+      //                      max_len,
+      //                      homeSpace: team_1_space,
+      //                      awaySpace: team_2_space })
 
 
+
+                var team_1_space = false
+                var team_2_space = false
+
+                console.log()
+
+                for (var i =0; i < max_len; i++) {
+                      //var team_2 =  { name: players2[i].name, user: players2[i].user }
+
+                      if (typeof players[i] === "undefined") {
+                        console.log("Slot 1 Open")
+                      var team_1 = { name: "Slot Open", user: undefined }
+                      //  team_1.name = "Slot Open"
+                        team_1_space = true
+                      }
+
+                      else {
+                     var team_1 =  { name: players[i].name, user: players[i].user } }
+
+                      if (typeof players2[i] === "undefined") {
+                        console.log("Slot 2 Open")
+                        var team_2 = { name: "Slot Open", user: undefined }
+                      //  team_2.name = "Slot Open"
+                        team_2_space = true
+                      }
+                      else {
+                     var team_2 = { name: players2[i].name, user: players2[i].user } }
+
+                      var nextRow = {
+                        team_1,
+                        team_2
+                      }
+
+                      personArrayCopy.push(nextRow)
+                    }
+
+                    console.log(personArrayCopy)
+                    console.log(team_1_space)
+                    console.log(team_2_space)
+
+                    this.setState({ personArray: personArrayCopy,
+                                    max_len,
+                                    homeSpace: team_1_space,
+                                    awaySpace: team_2_space })
+
+
+                         }
+
+      /////////////// Golf Grid
         else {
-          console.log("Second Golf idea")
-          console.log( max_len)
-          for (var i =0; i < max_len; i++) {
-             if (typeof  players[i] === "undefined") {
-                console.log("Slot 1 Open")
-                 team_1 = " Slot Open "
-                 team_1_space = true
-              }
-             else{
-                team_1 = players[i].name
-             }
+          console.log()
+          var team_1_space = false
+          var team_2_space = false
+          var team_3_space = false
+          var team_4_space = false
 
-             if (typeof  players2[i] === "undefined") {
-                console.log("Slot 2 Open")
-                 team_2 = " Slot Open "
-                 team_2_space = true
-              }
-             else{
-                team_2 = players2[i].name
-             }
+                var team_1 =  { name: players[0].name, user: players[0].user }
+                var team_2 =  { name: players2[0].name, user: players2[0].user }
+                var team_3 =  { name: players3[0].name, user: players3[0].user }
+                var team_4 =  { name: players4[0].name, user: players4[0].user }
 
-             if (typeof  players3[0] === "undefined") {
-                console.log("Slot 3 Open")
-                 team_3 = " Slot Open "
-                 team_3_space = true
-              }
+                if (typeof players[0].user === "undefined") {
+                  console.log("Slot 1 Open")
+                  team_1.name = "Slot Open"
+                  team_1_space = true
+                }
 
-             else{
-                team_3 = players3[0].name
-             }
+                if (typeof players2[0].user === "undefined") {
+                  console.log("Slot 2 Open")
+                  team_2.name = "Slot Open"
+                  team_2_space = true
+                }
 
-             if (typeof  players4[0] === "undefined") {
-                console.log("Slot 4 Open")
-                 team_4 = " Slot Open "
-                 team_4_space = true
-              }
+                if (typeof players3[0].user === "undefined") {
+                  console.log("Slot 3 Open")
+                  team_3.name = "Slot Open"
+                  team_3_space = true
+                }
 
-             else{
-                team_4 = players4[0].name
-             }
+                if (typeof players4[0].user === "undefined") {
+                  console.log("Slot 4 Open")
+                  team_4.name = "Slot Open"
+                  team_4_space = true
+                }
 
-             var nextRow = {
-               team_1,
-               team_2,
-               team_3,
-               team_4
-             }
+                var nextRow = {
+                  team_1,
+                  team_2,
+                  team_3,
+                  team_4
+                }
+                personArrayCopy.push(nextRow)
 
-             personArrayCopy.push(nextRow)
-           }
+              console.log(personArrayCopy)
+              console.log(team_1_space)
+              console.log(team_2_space)
+              console.log(team_3_space)
+              console.log(team_4_space)
 
-           console.log(team_1_space)
-           console.log(team_2_space)
-           console.log(team_3_space)
-           console.log(team_4_space)
+      this.setState({ personArray: personArrayCopy,
+                      max_len,
+                      homeSpace: team_1_space,
+                      awaySpace: team_2_space,
+                      thirdSpace: team_3_space,
+                      fourthSpace: team_4_space })
+                        }
+      }
 
-            this.setState({ personArray: personArrayCopy,
-                            max_len,
-                            homeSpace: team_1_space,
-                            awaySpace: team_2_space,
-                            thirdSpace: team_3_space,
-                            fourthSpace: team_4_space })
-        }
-     }
 
   componentWillReceiveProps(nextProps) {
      console.log(nextProps)
 
-     var max_len = 1
+     let players = nextProps.players
+     let players2 = nextProps.players2
+     let players3 = nextProps.players3
+     let players4 = nextProps.players4
+     var personArrayCopy = []
+
+     console.log(players)
+     console.log(players2)
+     console.log(players3)
+     console.log(players4)
+     console.log(nextProps.maxPlayers)
+
+     //var max_len = 1
+     var max_len = sportsLength(nextProps.sport, nextProps.maxPlayers)
      console.log('Did Mount')
      console.log(nextProps.sport)
-     console.log((nextProps.sport === "Soccer - 5 a Side" || "Basketball" ) )
+    //  console.log((nextProps.sport === "Soccer - 5 a Side" || "Basketball" ) )
 
-     // if (this.props.sport === "Squash - Doubles" ||
-     //                          "Tennis - Doubles" || "Badminton - Doubles")
-     //    { this.setState({max_len: 2}) }
-       if (nextProps.sport === "Golf") {
-         console.log("Golf")
-         max_len = 1
-       }
+    if (typeof  players2 === "undefined") {
+       console.log("Players 2 undefined")
+       //players2 = [players2]
+       players2 = [
+         {name: undefined , user: undefined}
+       ]
+     }
 
-     //else
-         else if (nextProps.sport === "Soccer - 5 a Side" || nextProps.sport
-                                                            ==="Basketball" ) {
-          console.log("enters basketball")
-              max_len = 5 }
-              //let max_length = 5
+     if (typeof  players3 === "undefined") {
+       console.log("Players 3 undefined")
+       players3 = [
+         {name: undefined , user: undefined}
+       ]
+     }
+
+     if (typeof  players4 === "undefined") {
+       console.log("Players 4 undefined")
+       //players4 = [players4]
+       players4 = [
+         {name: undefined , user: undefined}
+       ]
+     }
 
         console.log(nextProps.players)
         console.log(nextProps.players2)
         //console.log(this.props.players[1].joinerName)
         console.log(max_len)
-        let players = nextProps.players
-
-        let players2 = nextProps.players2
-        if (typeof  players2 === "undefined") {
-            players2 = [players2]
-         }
-
-         let players3 = nextProps.players3
-         if (typeof  players3 === "undefined") {
-             players3 = [players3]
-          }
-
-          let players4 = nextProps.players4
-          if (typeof  players4 === "undefined") {
-              players4 = [players4]
-           }
-
-        console.log(players2)
-        var personArrayCopy = []
-        var team_1 = ''
-        var team_2 = ''
-        var team_3 = ''
-        var team_4 = ''
-        var team_1_space = this.state.homeSpace
-        var team_2_space = this.state.awaySpace
-        var team_3_space = this.state.thirdSpace
-        var team_4_space = this.state.fourthSpace
-
 
         if (nextProps.sport !== "Golf") {
 
-       for (var i =0; i < max_len; i++) {
-          if (typeof  players[i] === "undefined") {
-              team_1 = " Slot Open "
-              team_1_space = true
-           }
-          else{
-             team_1 = players[i].name
-          }
+          var team_1_space = false
+          var team_2_space = false
 
-          if (typeof  players2[i] === "undefined") {
-              team_2 = " Slot Open "
-              team_2_space = true
-           }
-          else{
-             team_2 = players2[i].name
-          }
+          console.log()
 
-          var nextRow = {
-            team_1,
-            team_2
-          }
+          for (var i =0; i < max_len; i++) {
+                //var team_2 =  { name: players2[i].name, user: players2[i].user }
 
-          personArrayCopy.push(nextRow)
-        }
-        this.setState({personArray: personArrayCopy,
-                         max_len,
-                         homeSpace: team_1_space,
-                         awaySpace: team_2_space })
+                if (typeof players[i] === "undefined") {
+                  console.log("Slot 1 Open")
+                var team_1 = { name: "Slot Open", user: undefined }
+                //  team_1.name = "Slot Open"
+                  team_1_space = true
+                }
+
+                else {
+               var team_1 =  { name: players[i].name, user: players[i].user } }
+
+                if (typeof players2[i] === "undefined") {
+                  console.log("Slot 2 Open")
+                  var team_2 = { name: "Slot Open", user: undefined }
+                //  team_2.name = "Slot Open"
+                  team_2_space = true
+                }
+                else {
+               var team_2 = { name: players2[i].name, user: players2[i].user } }
+
+                var nextRow = {
+                  team_1,
+                  team_2
+                }
+
+                personArrayCopy.push(nextRow)
+              }
+
+              console.log(personArrayCopy)
+              console.log(team_1_space)
+              console.log(team_2_space)
+
+              this.setState({ personArray: personArrayCopy,
+                              max_len,
+                              homeSpace: team_1_space,
+                              awaySpace: team_2_space })
          }
 
          else {
-           console.log("Second Golf idea")
-           console.log( max_len)
-           for (var i =0; i < max_len; i++) {
-              if (typeof  players[i] === "undefined") {
-                  team_1 = " Slot Open "
-                  team_1_space = true
-               }
 
-              else{
-                 team_1 = players[i].name
-              }
+           var team_1_space = false
+           var team_2_space = false
+           var team_3_space = false
+           var team_4_space = false
 
-              if (typeof  players2[i] === "undefined") {
-                  team_2 = " Slot Open "
-                  team_2_space = true
-               }
+         //  for (var i =0; i < max_len; i++) {
+                 var team_1 =  { name: players[0].name, user: players[0].user }
+                 var team_2 =  { name: players2[0].name, user: players2[0].user }
+                 var team_3 =  { name: players3[0].name, user: players3[0].user }
+                 var team_4 =  { name: players4[0].name, user: players4[0].user }
 
-              else{
-                 team_2 = players2[i].name
-              }
+                 if (typeof players[0].user === "undefined") {
+                   console.log("Slot 1 Open")
+                   team_1.name = "Slot Open"
+                   team_1_space = true
+                 }
 
-              console.log(players3)
-              //TODO: do something about this
-              if (typeof  players3[0] === "undefined") {
-                  team_3 = " Slot Open "
-                  team_3_space = true
-               }
+                 if (typeof players2[0].user === "undefined") {
+                   console.log("Slot 2 Open")
+                   team_2.name = "Slot Open"
+                   team_2_space = true
+                 }
 
-              else{
-                 team_3 = players3[0].name
-              }
+                 if (typeof players3[0].user === "undefined") {
+                   console.log("Slot 3 Open")
+                   team_3.name = "Slot Open"
+                   team_3_space = true
+                 }
 
-              console.log(players4)
-              if (typeof  players4[0] === "undefined") {
-                  team_4 = " Slot Open "
-                  team_4_space = true
-               }
+                 if (typeof players4[0].user === "undefined") {
+                   console.log("Slot 4 Open")
+                   team_4.name = "Slot Open"
+                   team_4_space = true
+                 }
 
-              else{
-                 team_4 = players4[0].name
-              }
+                 var nextRow = {
+                   team_1,
+                   team_2,
+                   team_3,
+                   team_4
+                 }
 
-              var nextRow = {
-                team_1,
-                team_2,
-                team_3,
-                team_4
-              }
+                 personArrayCopy.push(nextRow)
+               //}
 
-              personArrayCopy.push(nextRow)
-              console.log(personArrayCopy)
-            }
-            this.setState({personArray: personArrayCopy,
-                             max_len,
-                             homeSpace: team_1_space,
-                             awaySpace: team_2_space,
-                             thirdSpace: team_3_space,
-                             fourthSpace: team_4_space })
+               console.log(personArrayCopy)
+               console.log(team_1_space)
+               console.log(team_2_space)
+               console.log(team_3_space)
+               console.log(team_4_space)
+
+       this.setState({ personArray: personArrayCopy,
+                       max_len,
+                       homeSpace: team_1_space,
+                       awaySpace: team_2_space,
+                       thirdSpace: team_3_space,
+                       fourthSpace: team_4_space })
          }
   }
-
-
-//
-//
-// else if (this.props.match.sport === "Soccer - 11 a Side" || "Softball"
-//                                                          || "Quidditch") {
-//     this.setState({max_len: 11})
-// }
-
-// var grid_lens = [this.props.players.length, this.props.players.length2];
-// var grid_len = Math.max.apply(null, grid_lens)
 
   joinHome = (event) => {
     event.preventDefault()
@@ -386,8 +409,8 @@ export default class JoinGrid extends Component {
     return (
       <tr key={index}>
         <td>{index + 1}</td>
-        <td>{row.team_1}</td>
-        <td>{row.team_2}</td>
+        <td>{row.team_1.name}</td>
+        <td>{row.team_2.name}</td>
       </tr>
     )
   }
@@ -396,10 +419,10 @@ export default class JoinGrid extends Component {
     return (
       <tr key={index}>
         <td>{index + 1}</td>
-        <td>{row.team_1}</td>
-        <td>{row.team_2}</td>
-        <td>{row.team_3}</td>
-        <td>{row.team_4}</td>
+        <td>{row.team_1.name}</td>
+        <td>{row.team_2.name}</td>
+        <td>{row.team_3.name}</td>
+        <td>{row.team_4.name}</td>
       </tr>
     )
   }
@@ -431,8 +454,6 @@ export default class JoinGrid extends Component {
         if (this.props.sport === "Golf" && this.state.fourthSpace) {
           team_4_Join = <Button bsStyle="success" onClick={this.joinTeam4}>
           Join Team 4</Button> }
-
-
 
     return(
       <div>

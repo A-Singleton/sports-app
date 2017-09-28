@@ -36,7 +36,8 @@ componentDidMount(){
           var players4 =  matches[k].players4;
           var creator_first_name = matches[k].creator_first_name;
           var creator_last_name = matches[k].creator_last_name;
-          var idStack = matches[k].idStack
+          var idStack = matches[k].idStack;
+          var maxPlayers = matches[k].maxPlayers;
 
     var nextMatch = {
       id: k,
@@ -49,7 +50,8 @@ componentDidMount(){
       players2: players2,
       idStack: idStack,
       players3: players3,
-      players4: players4
+      players4: players4,
+      maxPlayers 
     }
     console.log(nextMatch)
     allMatchesCopy.push(nextMatch)
@@ -68,7 +70,7 @@ componentDidMount(){
   db.ref(`users/${user}/account-info/friends`).on('value', (snapshot)=> {
       const friends = snapshot.val()
       var keys = Object.keys(friends)
-      var allFriendsCopy = this.state.friendsList
+      var allFriendsCopy = []
           for (var i =0; i < keys.length; i++) {
 
             var friend = friends[keys[i]].user

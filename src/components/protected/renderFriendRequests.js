@@ -19,7 +19,7 @@ export default class RenderFriendRequests extends Component {
     var that = this
   //  var otherUser2 = "6Vm6eVPj3aNS3GM8dr2CVDVbtaL2"
   //queryRef.orderByChild(`awayID`).equalTo(userTest).on("value", (snapshot)=> {
-  db.ref(`users/${this.props.user}/account-info/pendingFriends`).on('value', (snapshot)=> {
+  db.ref(`users/${this.props.user}/account-info/friendRequests`).on('value', (snapshot)=> {
 
     var pendingFriendsCopy = this.state.pendingFriends
 
@@ -35,7 +35,8 @@ export default class RenderFriendRequests extends Component {
       //  awayID: data[keys[i]].awayID,
         // user: data[keys[i]].user,
       //   name: data[keys[i]].name
-         friendID: data[keys[i]].friend
+         userID: data[keys[i]].user,
+         name: data[keys[i]].name
 
      }
     //  console.log("data")
@@ -61,6 +62,7 @@ export default class RenderFriendRequests extends Component {
           <AddDeclineFriend
           key={i}
           friendRequest={friendRequest}
+          userName={this.props.name}
           />
         )
       })

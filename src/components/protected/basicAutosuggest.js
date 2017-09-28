@@ -55,7 +55,7 @@ export default class basicAutosuggest extends Component {
       value: '',
       suggestions: [],
       invites: [],
-      friends: []
+      allFriends: []
     };
   }
 
@@ -67,6 +67,7 @@ export default class basicAutosuggest extends Component {
         var allFriendsCopy = this.state.allFriends
         var friends = snapshot.val()
         var keys = Object.keys(friends)
+        console.log(keys)
 
         for (var i =0; i < keys.length; i++) {
           var k = keys[i];
@@ -81,7 +82,7 @@ export default class basicAutosuggest extends Component {
     console.log(nextFriend)
     allFriendsCopy.push(nextFriend)
   }
-    this.setState({friends: allFriendsCopy})
+    this.setState({allFriends: allFriendsCopy})
       })
 
   }
@@ -148,6 +149,8 @@ export default class basicAutosuggest extends Component {
       )
   })
 
+//{this.state.allFriends.name}
+  console.log(this.state.allFriends[0])
     // Finally, render it!
     return (
       <div>

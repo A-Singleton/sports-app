@@ -233,7 +233,7 @@ return (
   </div>
   <div className="pull-left activity-feed">
   <h3 style={headerStyle3}><strong> Recent Activity </strong></h3>
-  <RenderFriendRequests user={this.props.userID}/>
+  <RenderFriendRequests user={this.props.userID} name={this.state.FirstName + " " + this.state.LastName}/>
   <ConfirmReport user={this.props.userID}/>
   </div>
   <div className="pull-right scheduled-matches">

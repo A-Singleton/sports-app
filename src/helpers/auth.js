@@ -370,7 +370,7 @@ export function recordMatch(match){
 // BirthDay: info.BirthDay,
 // BirthYear: info.BirthYear,
 export function updateProfile (info, user) {
-  
+
   console.log(info)
   //Gender: info.Gender
 ref.child(`users/${user.uid}/personal-info`)
@@ -516,21 +516,22 @@ for (var i=0; i < idStack.length; i++ ) {
   }
 }
 
-export function addFriend (friend, friendFirstName, friendLastName,
-                                                              user, userName) {
+export function addFriend (friend, friendName, user, userName) {
 console.log(friend)
 console.log(user)
-var friendName = friendFirstName + " " + friendLastName
+//var friendName = friendFirstName + " " + friendLastName
 ref.child(`users/${friend}/account-info/friendRequests`).push({ user: user,
                                                               name: userName })
 
 ref.child(`users/${user}/account-info/pendingFriends`).push({ user: friend,
-                                                            name: friendName })
+                                                             name: friendName })
 }
 
 export function acceptFriend (requester, requesterName, accepter, accepterName) {
 console.log(requester)
+console.log(requesterName)
 console.log(accepter)
+console.log(accepterName)
 
 ref.child(`users/${accepter}/account-info/friends`).push({ user: requester,
                                                           name: requesterName })
@@ -538,16 +539,17 @@ ref.child(`users/${accepter}/account-info/friends`).push({ user: requester,
 ref.child(`users/${requester}/account-info/friends`).push({ user: accepter,
                                                            name: accepterName })
 
-let ref_1 = db.ref(`users/${requester}/account-info/friendRequests/`);
+let ref_1 = db.ref(`users/${requester}/account-info/pendingFriends/`);
 ref_1.orderByChild(`user`).equalTo(`${accepter}`).once('value', snapshot => {
+  console.log(snapshot.val())
      let updates = {};
      snapshot.forEach(child => updates[child.key] = null);
      ref_1.update(updates);
 });
 
 
-let ref_2 = db.ref(`users/${accepter}/account-info/pendingFriends/`);
-ref_2.orderByChild(`friend`).equalTo(`${requester}`).once('value', snapshot => {
+let ref_2 = db.ref(`users/${accepter}/account-info/friendRequests/`);
+ref_2.orderByChild(`user`).equalTo(`${requester}`).once('value', snapshot => {
      let updates = {};
      snapshot.forEach(child => updates[child.key] = null);
      ref_2.update(updates);
@@ -596,4 +598,60 @@ export function join4 (user, matchID, joinerName, stackID) {
     ref.child(`users/${user}/account-info/joinedGames/${matchID}`)
     .set({ id: 0
     })
+  }
+
+  export function sportsLength (sport, dflt) {
+
+    if (dflt !== "Default") {
+        console.log('Not Default')
+        return (dflt)
+      }
+
+    else {
+
+        if (sport === "Squash - Doubles") {
+           console.log("Squash - Doubles")
+           return (2)
+          }
+
+           else if (sport === "Tennis - Doubles") {
+             console.log( "Tennis - Doubles")
+             return (2)
+           }
+
+           else if (sport === "Badminton - Doubles") {
+             console.log("Badminton - Doubles")
+             return (2)
+           }
+
+           else if (sport === "Golf") {
+            console.log("Golf")
+            return (1)
+          }
+
+          else if (sport === "Soccer - 5 a Side") {
+                console.log("Soccer - 5 a Side")
+                return (8)
+                }
+
+           else if (sport ===  "Basketball" ) {
+                    console.log("enters basketball")
+                    return (8)
+                 }
+
+           else if (sport === "Quidditch") {
+                   console.log("Quidditch")
+                   return (10)
+                 }
+
+           else if (sport === "Soccer - 11 a Side") {
+                   console.log("Soccer - 11 a Side")
+                   return (15)
+                 }
+
+            else {
+              console.log("1 vs 1 game")
+                return (1)
+            }
+          }
   }

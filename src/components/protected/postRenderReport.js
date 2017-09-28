@@ -49,6 +49,7 @@ export default class postRenderReport extends Component {
         var stats = snapshot.val()
         //var levelStart = stats.levelStart
         var levelBarrier = stats.nextLevel
+        var lowerBarrier = (stats.nextLevel/1.03)
       ///  var levelBarrier = 800
         var level = stats.level
       //  var level = 1
@@ -99,7 +100,7 @@ export default class postRenderReport extends Component {
     //   <Redirect to={'/dashboard'}/>
     // )}
 
-
+//  <ProgressBar active now={73} bsStyle="warning" />
     // Need to add these to stats
 
     // TODO: need some way of determing winner or loser
@@ -123,10 +124,9 @@ export default class postRenderReport extends Component {
               <h5> Mystery Bonus: ${ this.state.mysteryBonus } </h5>
               <h4> Moved Up 3 Ranks! 346th in division A </h4>
           </div>
-          <AnimatedBar />
-          <ProgressBar active now={73} bsStyle="warning" />
-          <div className="pull-right"> 37 </div>
-          <div className="pull-left"> 36 </div>
+          <AnimatedBar profit={this.state.profit}/>
+          <div className="pull-right"> this.state.level + 1 </div>
+          <div className="pull-left"> this.state.level </div>
           <h4> Just 114 Points to go to 37 </h4>
           <Form onSubmit={this.handleSubmit}>
           <Button bsStyle="success" type="submit">

@@ -1,3 +1,242 @@
+
+
+          //  console.log("Second Golf idea")
+          //  console.log( max_len)
+          //  //for (var i =0; i < max_len; i++) {
+          //     if (typeof  players[i] === "undefined") {
+          //         team_1 = " Slot Open "
+          //         team_1_space = true
+          //      }
+           //
+          //     else{
+          //        team_1 = players[i].name
+          //     }
+           //
+          //     if (typeof  players2[i] === "undefined") {
+          //         team_2 = " Slot Open "
+          //         team_2_space = true
+          //      }
+           //
+          //     else{
+          //        team_2 = players2[i].name
+          //     }
+           //
+          //     console.log(players3)
+          //     //TODO: do something about this
+          //     if (typeof  players3[0] === "undefined") {
+          //         team_3 = " Slot Open "
+          //         team_3_space = true
+          //      }
+           //
+          //     else{
+          //        team_3 = players3[0].name
+          //     }
+           //
+          //     console.log(players4)
+          //     if (typeof  players4[0] === "undefined") {
+          //         team_4 = " Slot Open "
+          //         team_4_space = true
+          //      }
+           //
+          //     else{
+          //        team_4 = players4[0].name
+          //     }
+           //
+          //     var nextRow = {
+          //       team_1,
+          //       team_2,
+          //       team_3,
+          //       team_4
+          //     }
+           //
+          //     personArrayCopy.push(nextRow)
+          //     console.log(personArrayCopy)
+          //   //}
+          //   this.setState({personArray: personArrayCopy,
+          //                    max_len,
+          //                    homeSpace: team_1_space,
+          //                    awaySpace: team_2_space,
+          //                    thirdSpace: team_3_space,
+          //                   fourthSpace: team_4_space })
+
+          //
+         //  for (var i =0; i < max_len; i++) {
+         //     if (typeof  players[i] === "undefined") {
+         //         team_1 = " Slot Open "
+         //         team_1_space = true
+         //      }
+         //     else{
+         //        team_1 = players[i].name
+         //     }
+          //
+         //     if (typeof  players2[i] === "undefined") {
+         //         team_2 = " Slot Open "
+         //         team_2_space = true
+         //      }
+         //     else{
+         //        team_2 = players2[i].name
+         //     }
+          //
+         //     var nextRow = {
+         //       team_1,
+         //       team_2
+         //     }
+          //
+         //     personArrayCopy.push(nextRow)
+         //   }
+         //   this.setState({personArray: personArrayCopy,
+         //                    max_len,
+         //                    homeSpace: team_1_space,
+         //                    awaySpace: team_2_space })
+         //    let players = nextProps.players
+
+           // //  let players2 = nextProps.players2
+           //   if (typeof  players2 === "undefined") {
+           //       players2 = [players2]
+           //    }
+           //
+           //    //let players3 = nextProps.players3
+           //    if (typeof  players3 === "undefined") {
+           //        players3 = [players3]
+           //     }
+           //
+           //     //let players4 = nextProps.players4
+           //     if (typeof  players4 === "undefined") {
+           //         players4 = [players4]
+           //      }
+           //   //
+             // console.log(players2)
+             // var personArrayCopy = []
+             // var team_1 = ''
+             // var team_2 = ''
+             // var team_3 = ''
+             // var team_4 = ''
+             // var team_1_space = this.state.homeSpace
+             // var team_2_space = this.state.awaySpace
+             // var team_3_space = this.state.thirdSpace
+             // var team_4_space = this.state.fourthSpace
+             // console.log("Second Golf idea")
+             // console.log( max_len)
+             // for (var i =0; i < max_len; i++) {
+             //    if (typeof  players[i] === "undefined") {
+             //       console.log("Slot 1 Open")
+             //        team_1 = " Slot Open "
+             //        team_1_space = true
+             //     }
+             //    else{
+             //       team_1 = players[i].name
+             //    }
+             //
+             //    if (typeof  players2[i] === "undefined") {
+             //       console.log("Slot 2 Open")
+             //        team_2 = " Slot Open "
+             //        team_2_space = true
+             //     }
+             //    else{
+             //       team_2 = players2[i].name
+             //    }
+             //
+             //    if (typeof  players3[0] === "undefined") {
+             //       console.log("Slot 3 Open")
+             //        team_3 = " Slot Open "
+             //        team_3_space = true
+             //     }
+             //
+             //    else{
+             //       team_3 = players3[0].name
+             //    }
+             //
+             //    if (typeof  players4[0] === "undefined") {
+             //       console.log("Slot 4 Open")
+             //        team_4 = " Slot Open "
+             //        team_4_space = true
+             //     }
+             //
+             //    else{
+             //       team_4 = players4[0].name
+             //    }
+             //
+             //    var nextRow = {
+             //      team_1,
+             //      team_2,
+             //      team_3,
+             //      team_4
+             //    }
+             //
+             //    personArrayCopy.push(nextRow)
+             //  }
+             //
+             //  console.log(team_1_space)
+             //  console.log(team_2_space)
+             //  console.log(team_3_space)
+             //  console.log(team_4_space)
+             //
+             //   this.setState({ personArray: personArrayCopy,
+             //                   max_len,
+             //                   homeSpace: team_1_space,
+             //                   awaySpace: team_2_space,
+             //                   thirdSpace: team_3_space,
+             //                   fourthSpace: team_4_space })
+             //
+             //  if (typeof  players2 === "undefined") {
+             //      players2 = [players2]
+             //   }
+             //
+             //   //players3 = this.props.players3
+             //   console.log(players3)
+             //   if (typeof  players3 === "undefined") {
+             //       players3 = [players3]
+             //    }
+             //
+             //    //let players4 = this.props.players4
+             //    if (typeof  players4 === "undefined") {
+             //        players4 = [players4]
+             //     }
+             //
+             //  console.log(players2)
+             //  var personArrayCopy = this.state.personArray
+             //  var team_1 = ''
+             //  var team_2 = ''
+             //  var team_3 = ''
+             //  var team_4 = ''
+             //  var team_1_space = this.state.homeSpace
+             //  var team_2_space = this.state.awaySpace
+             //  var team_3_space = this.state.thirdSpace
+             //  var team_4_space = this.state.fourthSpace
+             //
+             //  if (this.props.sport !== "Golf") {
+             //
+             // for (var i =0; i < max_len; i++) {
+             //    if (typeof  players[i] === "undefined") {
+             //        team_1 = " Slot Open "
+             //        team_1_space = true
+             //     }
+             //    else{
+             //       team_1 = players[i].name
+             //    }
+             //
+             //    if (typeof  players2[i] === "undefined") {
+             //        team_2 = " Slot Open "
+             //        team_2_space = true
+             //     }
+             //    else{
+             //       team_2 = players2[i].name
+             //    }
+             //
+             //    var nextRow = {
+             //      team_1,
+             //      team_2
+             //    }
+             //
+             //
+             //    personArrayCopy.push(nextRow)
+             //  }
+             //  this.setState({personArray: personArrayCopy,
+             //                   max_len,
+             //                   homeSpace: team_1_space,
+             //                   awaySpace: team_2_space })
+             //   }
+
 .then(() => user)
 //firebase.database().ref(`matches/${this.props.match.id}/players`).push(user.uid)
 
@@ -1030,3 +1269,63 @@ user={this.state.User}
                                   //var queryRef_2 = db.ref(`users/${accepter}/account-info/pendingFriends/`)
                                   //queryRef_2.orderByChild(`friend`).equalTo(`${requester}`).remove()
                                   //ref.child(`users/${accepter}/account-info/pendingFriends/`).orderByChild(`friend`).equalTo(`${requester}`).remove()
+
+
+
+                                  //
+                                  //
+                                  // else if (this.props.match.sport === "Soccer - 11 a Side" || "Softball"
+                                  //                                                          || "Quidditch") {
+                                  //     this.setState({max_len: 11})
+                                  // }
+
+                                  // var grid_lens = [this.props.players.length, this.props.players.length2];
+                                  // var grid_len = Math.max.apply(null, grid_lens)
+
+
+                                      //  // if (this.props.sport === "Squash - Doubles" ||
+                                      //  //                          "Tennis - Doubles" || "Badminton - Doubles")
+                                      //  //    { this.setState({max_len: 2}) }
+                                      //    if (nextProps.sport === "Golf") {
+                                      //      console.log("Golf")
+                                      //      max_len = 1
+                                      //    }
+                                       //
+                                      //  //else
+                                      //      else if (nextProps.sport === "Soccer - 5 a Side" || nextProps.sport
+                                      //                                                         ==="Basketball" ) {
+                                      //       console.log("enters basketball")
+                                      //           max_len = 5 }
+                                                //let max_length = 5
+                                                // console.log("test_arr_2")
+                                                // console.log(test_arr_2[i])
+                                                // console.log("test_arr_1")
+                                                // console.log(test_arr_1[i])
+                                                // console.log("test_arr_1")
+                                                // console.log(test_arr_1[i])
+
+                                                      //  homeSpace: false,
+                                                      //  awaySpace: false,
+                                                      //  thirdSpace: false,
+                                                      //  fourthSpace: false,
+                                                      //console.log(this.props.players[1].joinerName)
+
+                                                     //  let players = this.props.players
+                                                     //  let players2 = this.props.players2
+                                                     // let players3 = this.props.players3
+                                                      //let players4 = this.props.players4
+                                                      // console.log((this.props.sport === "Soccer - 5 a Side" || "Basketball" ) )
+                                                      //
+                                                      // // if (this.props.sport === "Squash - Doubles" ||
+                                                      // //                          "Tennis - Doubles" || "Badminton - Doubles")
+                                                      // //    { this.setState({max_len: 2}) }
+                                                      //   if (this.props.sport === "Golf") {
+                                                      //     console.log("Golf")
+                                                      //     max_len = 1
+                                                      //   }
+                                                      //
+                                                      // //else
+                                                      //     if (this.props.sport === "Soccer - 5 a Side" || "Basketball" ) {
+                                                      //      console.log("enters basketball")
+                                                      //          max_len = 5 }
+                                                               //let max_length = 5

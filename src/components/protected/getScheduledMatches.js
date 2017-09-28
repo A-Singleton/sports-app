@@ -24,8 +24,8 @@ componentWillReceiveProps(nextProps) {
 
   var matches = snapshot.val()
   console.log(matches)
-  var keys = Object.keys(matches)
-  console.log(keys)
+  //var keys = Object.keys(matches)
+  //console.log(keys)
 
         var id = k;
         var skill = matches.skill;
@@ -57,8 +57,9 @@ componentWillReceiveProps(nextProps) {
   console.log(allMatches)
   that.setState({joinedMatches: allMatches})
   })
+  //that.setState({joinedMatches: allMatches})
   })
-
+//  this.setState({joinedMatches: allMatches})
   }
 
 

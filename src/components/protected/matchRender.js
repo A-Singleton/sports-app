@@ -103,8 +103,10 @@ removeMatch(e) {
 friendRequest = (event) => {
   console.log(this.props.match.creator)
   const user = firebaseAuth().currentUser.uid
-  addFriend(this.props.match.creator, this.props.match.creator_first_name,
-                this.props.match.creator_last_name, user, this.props.userName)
+  console.log(this.props.match)
+  console.log(this.props.userName)
+  addFriend(this.props.match.creator, this.props.match.creatorName,
+                                                   user, this.props.userName)
 }
 
   render(){
@@ -193,6 +195,7 @@ friendRequest = (event) => {
         matchID={this.props.match.id}
         userName={this.props.userName}
         idStack={this.props.match.idStack}
+        maxPlayers={this.props.match.maxPlayers}
         />
 
         <ChatButton matchkey={this.props.match.id}/>

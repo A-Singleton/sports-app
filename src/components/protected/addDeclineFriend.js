@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { acceptFriend, declineFriend } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { firebaseAuth, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
+import Thumbnail from './thumbnail'
 
 export default class AddDeclineFriend extends Component {
     constructor(props){
@@ -16,8 +17,8 @@ export default class AddDeclineFriend extends Component {
     console.log("Con Report did mount")
   //  var user =  firebaseAuth().currentUser.uid
   console.log('this.props.user')
-    console.log(this.props.friendRequest.friendID)
-    var user = this.props.friendRequest.friendID
+    console.log(this.props.friendRequest.userID)
+    var user = this.props.friendRequest.userID
     this.setState({requesterID: user})
  //
  //    //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
@@ -60,13 +61,18 @@ export default class AddDeclineFriend extends Component {
 
 componentWillReceiveProps(nextProps) {
   console.log(nextProps)
+
 }
 
 // TODO: see if not preventing default is better, probably is
   onSubmit = (e) => {
-    //e.preventDefault()
-    const user = firebaseAuth().currentUser.uid
-    acceptFriend(this.props.friendRequest.user, user)
+    e.preventDefault()
+    const testUser = "6Vm6eVPj3aNS3GM8dr2CVDVbtaL2"
+    //const user = firebaseAuth().currentUser.uid
+    console.log(this.props.friendRequest)
+    console.log(this.props.userName)
+    acceptFriend(this.props.friendRequest.userID, this.props.friendRequest.name,
+      testUser, this.props.userName)
   }
 
   handleAlternate = (e) => {
@@ -90,12 +96,13 @@ componentWillReceiveProps(nextProps) {
               margin: "5px",
             }
 
-      //  <Thumbnail />
+            //   <label style={score}> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
+      //
 
     return(
       <div style={divStyle}>
       <h2> { this.state.name } Sent you a Friend Request </h2>
-      <label style={score}> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
+        <Thumbnail player={this.props.friendRequest}/>
         <Form onSubmit={this.onSubmit.bind(this)}>
           <Button bsStyle="success" type="submit">Accept Friend Request</Button>
           <br/>

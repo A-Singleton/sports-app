@@ -214,7 +214,7 @@ return (
 
 <FormGroup controlId="formControlsTextarea">
   <ControlLabel>About Me</ControlLabel>
-  <FormControl componentClass="textarea" value={this.state.aboutUser} onChange={this.handleChangeAboutUser} />
+  <FormControl componentClass="textarea" value={this.state.aboutMe} onChange={this.handleChangeAboutUser} />
 </FormGroup>
 
 <FormGroup>

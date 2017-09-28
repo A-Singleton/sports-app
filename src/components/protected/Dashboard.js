@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import TimePicker from 'react-bootstrap-time-picker';
 import Maps from './Maps'
 import ImageUpload from './ImageUpload'
-import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { saveMatch, sportsLength } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import Tournament from './Tournament'
 import FinalFriendsComp from './FinalFriendsComp'
 import MatchFeed from './matchFeed'
@@ -33,6 +33,7 @@ import Thumbnail from './thumbnail'
 import ModalConfirmScore from './modalConfirmScore'
 import MakeMatch from './makeMatch'
 import JoinGrid from './joinGrid'
+import CustomInvite from './inviteFriends2Match'
 
 export default class Dashboard extends Component {
 
@@ -278,18 +279,21 @@ const pushRightMargin = {
 //  <MatchReport />
 //<Mockups />
 // <JoinGrid />
+// <h4> <Link to={`/protected/profileIndex/${ otherUser2 }`}>This Users Test Link</Link> </h4>
+//
+// <MakeMatch />
+//
+// <EditProfile />
 
   var user =  firebaseAuth().currentUser.uid
   console.log(user)
-  var otherUser = 'q2xlsIvehieukIw1QYOi6LxGUp33'
+//  var otherUser = 'q2xlsIvehieukIw1QYOi6LxGUp33'
   var otherUser2 = "6Vm6eVPj3aNS3GM8dr2CVDVbtaL2"
     return (
       <div>
-        <h4> <Link to={`/protected/profileIndex/${otherUser2}`}>This Users Test Link</Link> </h4>
-
-        <MakeMatch />
-
-        <EditProfile />
+      <h4> <Link to={`/protected/profileIndex/${ otherUser2 }`}>This Users Test Link</Link> </h4>
+      <BasicAutosuggest />
+      <CustomInvite />
      </div>
     )
   }

@@ -65,7 +65,7 @@ starsRef.getDownloadURL().then(function(url) {
   componentDidMount() {
     // Create a reference to the file we want to download
     console.log(this.props.player.this_user)
-  var starsRef = firebaseStorageRef.child(`profilePics/${this.props.player.this_user}`);
+  var starsRef = firebaseStorageRef.child(`profilePics/${this.props.player.user}`);
 
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {
@@ -73,7 +73,7 @@ starsRef.getDownloadURL().then(function(url) {
   //  var img = document.getElementById('myimg');
     //var imgBar = document.getElementById('imgBar')
   //  var img = document.getElementById('myimg')
-    var img =  document.getElementsByClassName(`img-circle avatar ${this.props.player.this_user}`)
+    var img =  document.getElementsByClassName(`img-circle avatar ${this.props.player.user}`)
   //  imgBar.src = url
     console.log("thumbnail")
     console.log(url)
