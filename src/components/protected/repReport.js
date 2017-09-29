@@ -71,7 +71,7 @@ display: 'inlineBlock',
     return(
       <div style={divStyle}>
           <div style={divCheckbox}>
-          {this.props.player.joinerName}
+          {this.props.player.name}
           <StarCentered
           style={starStyle}
           value={this.state.rating}

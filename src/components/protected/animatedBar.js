@@ -10,10 +10,11 @@ export default class animatedBar extends Component {
   }
 }
 
+//TODO: Add rendering when pass level
 componentDidMount(){
   console.log(this.props)
-  var progress = (this.props.earnings - this.props.pointsLower) / (this.props.pointsHigher - this.props.pointsLower)
-  console.log(this.props.earnings - this.props.pointsLower)
+  var progress = (this.props.earnings) / (this.props.pointsHigher)
+  //console.log(this.props.earnings - this.props.pointsLower)
   console.log(progress)
   this.setState({progress})
 }

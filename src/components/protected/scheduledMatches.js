@@ -3,8 +3,6 @@ import { ref, firebaseAuth, firebaseStorageRef, taskEvent, db } from 'C:/Users/D
 import GetScheduledMatches from './getScheduledMatches'
 
 export default class scheduledMatches extends Component {
-
-
      constructor(props, context){
       super(props, context)
       //  this.changeList = this.changeList.bind(this)
@@ -48,9 +46,7 @@ render(){
   console.log(this.state.keys)
   const scheduledMatches = ''
 if (this.state.keys) {
-  //  const scheduledMatches = this.state.keys.map((fbKey, i) => {
     console.log('entered key loop')
-    //console.log(fbKey)
     return(
     <GetScheduledMatches
     keyCodes={this.state.keys}/>
@@ -63,5 +59,4 @@ if (this.state.keys) {
     </div>
   )
 }
-
 }

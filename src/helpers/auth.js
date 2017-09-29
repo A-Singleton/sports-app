@@ -467,7 +467,7 @@ export function submitRep (opponents, rep) {
   console.log(rep)
 for (var i=0; i < opponents.length; i++ ) {
   var this_rep = rep[i]
-  var this_user = opponents[i].this_user
+  var this_user = opponents[i].user
   ref.child(`users/${this_user}/account-info/rep`)
   .push({ this_rep })
 }

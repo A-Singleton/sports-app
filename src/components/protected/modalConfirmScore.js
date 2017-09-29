@@ -24,16 +24,27 @@ export default class modalConfirmScore extends Component {
  }
 
  render() {
-   const popover = (
-     <Popover id="modal-popover" title="popover">
-       very popover. such engagement
-     </Popover>
-   );
-   const tooltip = (
-     <Tooltip id="modal-tooltip">
-       wow.
-     </Tooltip>
-   );
+  //  const popover = (
+  //    <Popover id="modal-popover" title="popover">
+  //      very popover. such engagement
+  //    </Popover>
+  //  );
+  //  const tooltip = (
+  //    <Tooltip id="modal-tooltip">
+  //      wow.
+  //    </Tooltip>
+  //  );
+  // <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
+  //
+  // <h4>Popover in a modal</h4>
+  // <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
+  //
+  // <h4>Tooltips in a modal</h4>
+  // <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
+  //
+  // <hr />
+  //
+  // <h4>Overflowing text to show scroll behavior</h4>
 
    var rateOpener = "Rate your Opponent's Sportsmanship"
    var rateExplanation = "Your rating is anonymous, but will help other players find good sports to play with"
@@ -56,17 +67,7 @@ export default class modalConfirmScore extends Component {
          </Modal.Header>
          <Modal.Body>
            <h2> { rateOpener } </h2>
-           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
-           <h4>Popover in a modal</h4>
-           <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
-
-           <h4>Tooltips in a modal</h4>
-           <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
-
-           <hr />
-
-           <h4>Overflowing text to show scroll behavior</h4>
            <ConfirmMatchModal players={this.props.match}/>
 
           <h5> { rateExplanation } </h5>

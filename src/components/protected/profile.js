@@ -214,12 +214,13 @@ const rep = snapshot.val()
     console.log(this.state.FirstName)
      console.log('this.props.userID')
   //   console.log(this.props.userID)
+  //<img className="img-square avatar" src="http://placehold.it/48x38" alt=""/>
 
 return (
 <div className="profile-page">
   <div className="profile" style={profileStyle}>
    <div className="pull-left image">
-    <img className="img-square avatar"  id="myimg" src="" alt="" height="200" width="200"/>
+    <img className="img-square avatar"  id="myimg" src="http://placehold.it/48x38" alt="" height="200" width="200"/>
    </div>
    <div className="pull-right">
     <h3><strong> Key Stats: </strong></h3>
@@ -230,7 +231,7 @@ return (
     <h5 className="text-muted time">See Full Stats</h5>
    </div>
    <div className="title h5" style={profileText}>
-    <h3><strong> {this.state.FirstName + " " + this.state.LastName} </strong> <img className="img-square avatar" src="http://placehold.it/48x38" alt=""/></h3>
+    <h3><strong> {this.state.FirstName + " " + this.state.LastName} </strong> </h3>
     <h4> {this.state.location} </h4>
     <h4> Sports: </h4>
     <h4> {this.state.favSports} </h4>

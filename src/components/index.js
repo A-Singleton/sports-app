@@ -11,6 +11,7 @@ import ProfileIndex from './protected/profileIndex'
 import PostRenderReport from './protected/postRenderReport'
 import RepReport from './protected/repReport'
 import EditProfile from './protected/editProfile'
+import MakeMatch from './protected/makeMatch'
 
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
@@ -153,6 +154,7 @@ export default class App extends Component {
                 <PrivateRoute authed={this.state.authed} path='/postRenderReport' component={PostRenderReport} stuff={myRating}/>
                 <PrivateRoute authed={this.state.authed} path='/repReport' component={RepReport} stuff={myRating}/>
                 <PrivateRoute authed={this.state.authed} path='/protected/editProfile' component={EditProfile} />
+                <PrivateRoute authed={this.state.authed} path='/makeFeed' component={MakeMatch} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

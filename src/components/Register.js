@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { auth } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
-import { registerUser } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
+import { registerUser, setStats } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import Time from 'react-time'
 
 
@@ -41,6 +41,7 @@ export default class Register extends Component {
       firebaseAuth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
+    setStats(user.uid)
     registerUser(registration, user)
 
   } else {
