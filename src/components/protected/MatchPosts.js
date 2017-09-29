@@ -24,17 +24,10 @@ componentWillReceiveProps(nextProps) {
 
     var keys = Object.keys(this.props.matches)
     console.log(keys)
-    //
-    // for (var i =0; i < keys.length; i++) {
-    //   console.log("For loop")
-    //   console.log(this.props.matches[0])
-    //
-    // }
-//const matches = this.props.matches
+
     var theMatches = this.props.matches.map((match, i) => {
-  //  var theMatches = this.state.matches.map((match, i) => {
-    //  console.log(message[0])
-      console.log('match')
+
+      console.log('match Posts')
       console.log(i)
        console.log(match)
 
@@ -42,6 +35,8 @@ componentWillReceiveProps(nextProps) {
         <MatchRender
          key={match.id}
          match={match}
+         friends={this.props.friends}
+         userName={this.props.userName}
         />
       )
     })

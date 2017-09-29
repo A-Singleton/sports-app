@@ -12,10 +12,7 @@ import Tournament from './Tournament'
 import FinalFriendsComp from './FinalFriendsComp'
 import Background from '../images/tennis_background.jpg';
 
-export default class Mockups extends Component{
-
-
-
+export default class Mockups extends Component {
   constructor(props){
     super(props);
     this.state = {

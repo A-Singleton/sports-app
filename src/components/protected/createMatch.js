@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-//import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import * as firebase from "firebase"
 
 export default class CreateMatch extends Component {
-
    constructor(props, context){
     super(props, context)
     //  this.changeList = this.changeList.bind(this)

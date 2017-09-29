@@ -34,7 +34,10 @@ componentDidMount(){
 if (user) {
 // User is signed in.
 
-    ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+var otherUser = "Qciqsxq1ZAdCCgGAZzJTqIGE7qp1"
+
+   ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
+//    ref.child(`users/${otherUser}/personal-info`).on('value', (snapshot)=> {
 
     const persInfo = snapshot.val()
      console.log(persInfo)
@@ -43,11 +46,14 @@ if (user) {
     lName: persInfo.LastName,
     email: persInfo.email,
     gender: persInfo.Gender,
+    aboutMe: persInfo.aboutMe,
+    favSports: persInfo.favSports,
+    location: persInfo.location
      })
     })
 
     // Create a reference to the file we want to download
-  var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
+  var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}.png`);
 
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {
@@ -128,16 +134,21 @@ handleChangeFname = (event) => {
     console.log(this.state.fName)
     console.log(this.state.lName)
     console.log(this.state.email)
-    console.log(this.state.gender)
-
+    //console.log(this.state.gender)
+    console.log(this.state.aboutUser)
+    console.log(this.state.location)
+//Gender: this.state.gender,
     const updatedInfo = {
       FirstName: this.state.fName,
       LastName: this.state.lName,
       Email: this.state.email,
-      Gender: this.state.gender
+      aboutMe: this.state.aboutUser,
+      location: this.state.location
 }
-//  const user = firebaseAuth().currentUser
-//  updateProfile(updatedInfo, user)
+
+ const user = firebaseAuth().currentUser
+ updateProfile(updatedInfo, user)
+
 }
 
   render () {
@@ -203,7 +214,7 @@ return (
 
 <FormGroup controlId="formControlsTextarea">
   <ControlLabel>About Me</ControlLabel>
-  <FormControl componentClass="textarea" value={this.state.aboutUser} onChange={this.handleChangeAboutUser} />
+  <FormControl componentClass="textarea" value={this.state.aboutMe} onChange={this.handleChangeAboutUser} />
 </FormGroup>
 
 <FormGroup>

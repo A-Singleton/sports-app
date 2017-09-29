@@ -2,7 +2,7 @@ import Autosuggest from 'react-autosuggest';
 import React, { Component } from 'react'
 import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
 import { invite2Match } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
-
+import { firebaseAuth, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 
 // Imagine you have a list of languages that you'd like to autosuggest.
 // array from fb, full name, uid under.
@@ -54,8 +54,37 @@ export default class basicAutosuggest extends Component {
     this.state = {
       value: '',
       suggestions: [],
-      invites: []
+      invites: [],
+      allFriends: []
     };
+  }
+
+  componentDidMount () {
+
+    const user = firebaseAuth().currentUser.uid
+
+      db.ref(`users/${user}/account-info/friends/`).on('value', (snapshot)=> {
+        var allFriendsCopy = this.state.allFriends
+        var friends = snapshot.val()
+        var keys = Object.keys(friends)
+        console.log(keys)
+
+        for (var i =0; i < keys.length; i++) {
+          var k = keys[i];
+          var id = friends[k].user;
+          var name = friends[k].name;
+
+    var nextFriend = {
+      id,
+      name
+    }
+
+    console.log(nextFriend)
+    allFriendsCopy.push(nextFriend)
+  }
+    this.setState({allFriends: allFriendsCopy})
+      })
+
   }
 
   onChange = (event, { newValue }) => {
@@ -101,6 +130,7 @@ export default class basicAutosuggest extends Component {
   //  invite2Match(this.state.invites, this.props.matchID)
   }
 
+
   render() {
     const { value, suggestions } = this.state;
 
@@ -119,6 +149,8 @@ export default class basicAutosuggest extends Component {
       )
   })
 
+//{this.state.allFriends.name}
+  console.log(this.state.allFriends[0])
     // Finally, render it!
     return (
       <div>

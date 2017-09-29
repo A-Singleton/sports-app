@@ -24,17 +24,16 @@ componentWillReceiveProps(nextProps) {
 
   var matches = snapshot.val()
   console.log(matches)
-  var keys = Object.keys(matches)
-  console.log(keys)
-// Since this is a special case of 1 time loop, hardcoding 1
-  //    for (var i =0; i < 1; i++) {
+  //var keys = Object.keys(matches)
+  //console.log(keys)
 
         var id = k;
         var skill = matches.skill;
         var sport = matches.sport;
         var date = matches.gameDate;
         var creator_query = matches.creator;
-        var players = matches.players;
+        var homePlayers = matches.homePlayers;
+        var awayPlayers = matches.awayPlayers;
         var creator_first_name = matches.creator_first_name;
         var creator_last_name = matches.creator_last_name;
 
@@ -43,7 +42,8 @@ componentWillReceiveProps(nextProps) {
     skill: skill,
     sport: sport,
     date:  date,
-    players: players,
+    homePlayers: homePlayers,
+    awayPlayers:  awayPlayers,
     creator: creator_query,
     creatorName: creator_first_name + " " + creator_last_name
   }
@@ -57,8 +57,9 @@ componentWillReceiveProps(nextProps) {
   console.log(allMatches)
   that.setState({joinedMatches: allMatches})
   })
+  //that.setState({joinedMatches: allMatches})
   })
-
+//  this.setState({joinedMatches: allMatches})
   }
 
 

@@ -25,8 +25,9 @@ export default class ScheduledMatch extends Component {
   //  const user = firebaseAuth().currentUser.uid
     let button = null
 
+    //
     return(
-      <div className="col-sm-6">
+      <div className="col-sm-24">
         <div className="panel panel-white post panel-shadow">
           <div className="post-heading">
             <div className="pull-left image">
@@ -50,7 +51,7 @@ export default class ScheduledMatch extends Component {
             <br/>
             <h3> Date: {this.props.match.date} </h3>
             <br/>
-            <h3> Players: {this.props.match.players.length} </h3>
+            <h3> Players: {this.props.match.homePlayers.length} </h3>
             <br/>
             </div>
             <div className="actions">

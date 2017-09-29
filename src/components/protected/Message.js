@@ -4,9 +4,20 @@ import { firebaseAuth } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src
 export default class Messages extends Component{
 
 
+componentDidMount(){
+console.log(this.props)
+console.log(this.props.message)
+console.log(this.props.username)
+}
+
+componentWillReceiveProps(nextProps) {
+  console.log(nextProps)
+}
+
 render(){
   // Conditionaly add a style to messages sent by user
 //  const fromMe = this.props.fromMe ? 'from-me' : ''
+console.log(this.props)
 const user = firebaseAuth().currentUser.uid
 const fromMe = this.props.username === user ? 'from-me' : ''
 

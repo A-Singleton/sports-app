@@ -16,17 +16,21 @@ this.state = {
 }
 }
 
+// Need list of all players other than reviewer
+// make array n players long,
+  componentDidMount() {
+
+    console.log(this.props.value)
+
+  }
+
+
   ratingChanged = (newRating) => {
     console.log(newRating)
     this.setState({rating: newRating})
+    this.props.onChange(newRating)
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("submitted")
-    // submitRep(this.props.opp, this.state.rating)
-    this.setState({ fireRedirect: true })
-}
 
   render () {
 
@@ -62,18 +66,12 @@ display: 'inlineBlock',
 
   }
 
-//  const { from } = this.props.location.state || '/'
-  var { fireRedirect } = this.state.fireRedirect
-  console.log(this.state.fireRedirect)
-  console.log(this.state.bool)
 
-    var rateOpener = "Rate your Opponent's Sportsmanship"
-    var rateExplanation = "Your rating is anonymous, but will help other players find good sports to play with"
-
+// TODO: Get thumbnail
     return(
       <div style={divStyle}>
-        <h2> { rateOpener } </h2>
           <div style={divCheckbox}>
+          {this.props.player.name}
           <StarCentered
           style={starStyle}
           value={this.state.rating}
@@ -83,20 +81,8 @@ display: 'inlineBlock',
           size={80}
           color2={'#ffd700'} />
           </div>
-        <h5> { rateExplanation } </h5>
         <h3> You Rate Them: </h3>
         <h3> { this.state.rating } / 5 stars </h3>
-        <Form onSubmit={this.handleSubmit}>
-        <Button bsStyle="success" type="submit">
-           Rate
-        </Button>
-        </Form>
-
-          
-        {this.state.fireRedirect && (
-          <Redirect to={'/postRenderReport'} />
-        )}
-
       </div>
     )
   }

@@ -49,6 +49,11 @@ componentDidMount(){
   this.setState({messages: fbMessages})
 }})}
 
+
+componentWillReceiveProps(nextProps) {
+  console.log(nextProps)
+}
+
 // TODO: limit messages to 6 most recent, with ability to load more at top
 // TODO: fix bug where first messages of new chat room don't render
 componentDidUpdate(){
@@ -62,7 +67,7 @@ componentDidUpdate(){
   console.log(this.state.messages.length)
 
   if (fbMessages.length !== this.state.messages.length){
-    console.log("Weird exception")
+      console.log("Weird exception")
     this.setState({messages: fbMessages})
   }
 }
@@ -86,12 +91,13 @@ sendHandler(message) {
 
   submitMessagesBackend(messageObj, this.props.matchkey)
   //messageObj.fromMe = true
-  this.addMessage(messageObj.message)
+  this.addMessage(messageObj)
 }
 
 addMessage(message) {
     // Append the message to the component state
     const messages = this.state.messages;
+    //var nextMessage = { message: message, username:   }
     messages.push(message);
     this.setState({ messages });
   }

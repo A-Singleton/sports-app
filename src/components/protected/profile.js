@@ -5,18 +5,25 @@ import ScheduledMatches from './scheduledMatches'
 import ConfirmReport from './confirmReport'
 import MatchReport from './MatchReport'
 import RenderFriendRequests from './renderFriendRequests'
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 //TODO: profile pic + url in upper corner
 //1. Add error handling to fb queries
 //3. Component for recent activity
-//
+
 export default class profile extends Component {
   constructor(props){
     super(props)
   this.state = {
     profInfo: '',
     LastName: '',
-    FirstName: ''
+    FirstName: '',
+    rep: 0,
+    aboutMe: '',
+    sports: '',
+    location: '',
+    favSports: [],
+    userID: ''
   }
 }
 
@@ -59,8 +66,6 @@ export default class profile extends Component {
     }
   });
 
-  // retrieve personal-info
-
   //ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
   ref.child(`users/${nextProps.userID}/personal-info`).on('value', (snapshot)=> {
 
@@ -68,7 +73,11 @@ export default class profile extends Component {
   console.log('profInfo')
    console.log(profInfo)
    console.log(profInfo.FirstName)
-   //profileInfo.push(persInfo)
+
+   //    profInfo.aboutMe
+   //    profInfo.sports
+   //    profInfo.location
+
    this.setState({
      profInfo,
      FirstName: profInfo.FirstName,
@@ -77,7 +86,6 @@ export default class profile extends Component {
   })
 
   }
-
 
   componentDidMount(){
     //logic for handling whether it is own users or someone else's
@@ -91,7 +99,7 @@ if (user) {
 
   // Create a reference to the file we want to download
 //var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
-var starsRef = firebaseStorageRef.child(`profilePics/${propsUser}`)
+var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}`)
 
 // Get the download URL
 starsRef.getDownloadURL().then(function(url) {
@@ -126,7 +134,7 @@ starsRef.getDownloadURL().then(function(url) {
 // retrieve personal-info
 
 //ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
-ref.child(`users/${propsUser}/personal-info`).on('value', (snapshot)=> {
+ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
 
 const profInfo = snapshot.val()
 console.log('profInfo')
@@ -136,8 +144,34 @@ console.log('profInfo')
  that.setState({
    profInfo,
    FirstName: profInfo.FirstName,
-   LastName: profInfo.LastName
+   LastName: profInfo.LastName,
+   aboutMe: profInfo.aboutMe,
+   favSports: profInfo.favSports,
+   userID: user.uid,
+   location: profInfo.location
  })
+})
+
+ref.child(`users/${propsUser}/account-info/rep`).on('value', (snapshot)=> {
+
+const rep = snapshot.val()
+ console.log('rep')
+ console.log(rep)
+ console.log(rep)
+
+  var rep_sum = 0
+  var keys = Object.keys(rep)
+
+  for (var i =0; i < keys.length; i++) {
+    var k = keys[i];
+    var this_rep = rep[k];
+
+    console.log(this_rep.this_rep)
+    rep_sum = rep_sum + this_rep.this_rep
+
+  }
+    console.log((rep_sum/keys.length))
+    that.setState({ rep: Math.round(100*(rep_sum/(5*keys.length))) })
 })
 
   //set consts to state, pass as props to rendering comps
@@ -179,41 +213,41 @@ console.log('profInfo')
     console.log('this.state.profInfo')
     console.log(this.state.FirstName)
      console.log('this.props.userID')
-     console.log(this.props.userID)
+  //   console.log(this.props.userID)
+  //<img className="img-square avatar" src="http://placehold.it/48x38" alt=""/>
 
 return (
 <div className="profile-page">
   <div className="profile" style={profileStyle}>
    <div className="pull-left image">
-    <img className="img-square avatar"  id="myimg" src="" alt="" height="200" width="200"/>
+    <img className="img-square avatar"  id="myimg" src="http://placehold.it/48x38" alt="" height="200" width="200"/>
    </div>
    <div className="pull-right">
     <h3><strong> Key Stats: </strong></h3>
     <h4> Trophies Won: 2 </h4>
     <h4> Games played: 86 </h4>
-    <h4> Reputation: 99% </h4>
+    <h4> Reputation: {this.state.rep}% </h4>
     <h4> Member since: August 3, 2017 </h4>
     <h5 className="text-muted time">See Full Stats</h5>
    </div>
    <div className="title h5" style={profileText}>
-    <h3><strong> {this.state.FirstName + " " + this.state.LastName} </strong> <img className="img-square avatar" src="http://placehold.it/48x38" alt=""/></h3>
-    <h4> Springfield, IN USA </h4>
+    <h3><strong> {this.state.FirstName + " " + this.state.LastName} </strong> </h3>
+    <h4> {this.state.location} </h4>
     <h4> Sports: </h4>
-    <h4> Tennis, Squash </h4>
+    <h4> {this.state.favSports} </h4>
     <h4> About Me: </h4>
-    <h5> I am a competitive racket player, watch out! </h5>
+    <h5> {this.state.aboutMe} </h5>
+    <h4> <Link to={`/protected/editProfile/`}>Edit Profile</Link> </h4>
    </div>
   </div>
   <div className="pull-left activity-feed">
   <h3 style={headerStyle3}><strong> Recent Activity </strong></h3>
-  <RenderFriendRequests user={this.props.userID}/>
-  <ConfirmReport user={this.props.userID}/>
-  <h4> Jimbo won a Tennis Match, something to something </h4>
-  <h4> Jimbo creted a Tennis Match, for October 1st </h4>
+  <RenderFriendRequests user={this.state.userID} name={this.state.FirstName + " " + this.state.LastName}/>
+  <ConfirmReport user={this.state.userID}/>
   </div>
   <div className="pull-right scheduled-matches">
   <h3 style={headerStyle3}><strong> Scheduled Matches </strong></h3>
-  <ScheduledMatches user={this.props.userID}/>
+  <ScheduledMatches user={this.state.userID}/>
   </div>
 </div>
 )

@@ -4,7 +4,7 @@ import {getScheduledMatches} from 'C:/Users/Duwan_000/Documents/GitHub/sports-ap
 import MatchPosts from './MatchPosts'
 import { ref, firebaseAuth, firebaseStorageRef, taskEvent, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 
-export default class matchFeed extends Component {
+export default class matchFeedQuery extends Component {
 
   constructor(props){
     super(props)
@@ -16,12 +16,19 @@ export default class matchFeed extends Component {
   }
 
 componentDidMount(){
-  const user = firebaseAuth().currentUser.uid
 
-    db.ref(`matches/`).on('value', (snapshot)=> {
+  var sport = this.props.sport
+  console.log(sport)
 
-    var allMatchesCopy = this.state.allMatches
+  let ref_1 = db.ref(`matches/`);
+  ref_1.orderByChild(`sport`).equalTo(`${sport}`).once('value', snapshot => {
+    console.log(snapshot.val())
+
+    var allMatchesCopy = []
+    console.log(snapshot.val())
     var matches = snapshot.val()
+    console.log(matches)
+    if (typeof matches !== null && typeof matches !== "undefined"){
     var keys = Object.keys(matches)
 
         for (var i =0; i < keys.length; i++) {
@@ -57,10 +64,56 @@ componentDidMount(){
     allMatchesCopy.push(nextMatch)
   //  this.setState({allMatches: allMatchesCopy})
   }
+}
     this.setState({allMatches: allMatchesCopy})
-  })
 
+  });
+
+  const user = firebaseAuth().currentUser.uid
   //
+  //   db.ref(`matches/`).on('value', (snapshot)=> {
+  //
+  //   var allMatchesCopy = this.state.allMatches
+  //   var matches = snapshot.val()
+  //   var keys = Object.keys(matches)
+  //
+  //       for (var i =0; i < keys.length; i++) {
+  //         var k = keys[i];
+  //         var skill = matches[k].skill;
+  //         var sport = matches[k].sport;
+  //         var date = matches[k].gameDate;
+  //         var creator_query = matches[k].creator;
+  //         var players = matches[k].homePlayers;
+  //         var players2 =  matches[k].awayPlayers;
+  //         var players3 =  matches[k].players3;
+  //         var players4 =  matches[k].players4;
+  //         var creator_first_name = matches[k].creator_first_name;
+  //         var creator_last_name = matches[k].creator_last_name;
+  //         var idStack = matches[k].idStack;
+  //         var maxPlayers = matches[k].maxPlayers;
+  //
+  //   var nextMatch = {
+  //     id: k,
+  //     skill: skill,
+  //     sport: sport,
+  //     date:  date,
+  //     players: players,
+  //     creator: creator_query,
+  //     creatorName: creator_first_name + " " + creator_last_name,
+  //     players2: players2,
+  //     idStack: idStack,
+  //     players3: players3,
+  //     players4: players4,
+  //     maxPlayers
+  //   }
+  //   console.log(nextMatch)
+  //   allMatchesCopy.push(nextMatch)
+  // //  this.setState({allMatches: allMatchesCopy})
+  // }
+  //   this.setState({allMatches: allMatchesCopy})
+  // })
+  //
+  // //
   // console.log('allMatches')
   // console.log(fbMatches)
   // this.setState({ allMatches: fbMatches})
@@ -101,6 +154,58 @@ componentDidMount(){
     })
   })
 
+}
+
+componentWillReceiveProps(nextProps){
+console.log(nextProps)
+var sport = nextProps.sport
+
+let ref_1 = db.ref(`matches/`);
+ref_1.orderByChild(`sport`).equalTo(`${sport}`).once('value', snapshot => {
+  console.log(snapshot.val())
+
+  var allMatchesCopy = []
+  var matches = snapshot.val()
+  if (typeof matches !== null && typeof matches !== "undefined"){
+  var keys = Object.keys(matches)
+
+      for (var i =0; i < keys.length; i++) {
+        var k = keys[i];
+        var skill = matches[k].skill;
+        var sport = matches[k].sport;
+        var date = matches[k].gameDate;
+        var creator_query = matches[k].creator;
+        var players = matches[k].homePlayers;
+        var players2 =  matches[k].awayPlayers;
+        var players3 =  matches[k].players3;
+        var players4 =  matches[k].players4;
+        var creator_first_name = matches[k].creator_first_name;
+        var creator_last_name = matches[k].creator_last_name;
+        var idStack = matches[k].idStack;
+        var maxPlayers = matches[k].maxPlayers;
+
+  var nextMatch = {
+    id: k,
+    skill: skill,
+    sport: sport,
+    date:  date,
+    players: players,
+    creator: creator_query,
+    creatorName: creator_first_name + " " + creator_last_name,
+    players2: players2,
+    idStack: idStack,
+    players3: players3,
+    players4: players4,
+    maxPlayers
+  }
+  console.log(nextMatch)
+  allMatchesCopy.push(nextMatch)
+//  this.setState({allMatches: allMatchesCopy})
+}
+}
+  this.setState({allMatches: allMatchesCopy})
+
+});
 }
 
   render(){
