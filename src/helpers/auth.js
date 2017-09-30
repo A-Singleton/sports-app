@@ -85,18 +85,18 @@ export function removeMatchBackend(players) {
 }
 
 
-export function joinMatch (user, players, matchID, joinerName, stackID) {
+export function joinMatch (user, homePlayers, matchID, joinerName, stackID) {
 
     var personPacket = {
     user,
     name: joinerName }
 
-    players.push(personPacket)
+    homePlayers.push(personPacket)
 
     stackID.push(user)
 
-    console.log(players)
-    ref.child(`matches/${matchID}/`).update({ players,
+    console.log(homePlayers)
+    ref.child(`matches/${matchID}/`).update({ homePlayers,
                                               idStack: stackID })
 
     //Sets ID:0 because can then directly delete match by calling match.id

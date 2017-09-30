@@ -34,6 +34,7 @@ import ModalConfirmScore from './modalConfirmScore'
 import MakeMatch from './makeMatch'
 import JoinGrid from './joinGrid'
 import CustomInvite from './inviteFriends2Match'
+import PreSearch from './preSearch'
 
 export default class Dashboard extends Component {
 
@@ -284,6 +285,9 @@ const pushRightMargin = {
 // <MakeMatch />
 //
 // <EditProfile />
+// <h4> <Link to={`/protected/profileIndex/${ user }`}>This Users Test Link</Link> </h4>
+// <BasicAutosuggest />
+// <CustomInvite />
 
   var user =  firebaseAuth().currentUser.uid
   console.log(user)
@@ -291,9 +295,7 @@ const pushRightMargin = {
   //var otherUser2 = "6Vm6eVPj3aNS3GM8dr2CVDVbtaL2"
     return (
       <div>
-      <h4> <Link to={`/protected/profileIndex/${ user }`}>This Users Test Link</Link> </h4>
-      <BasicAutosuggest />
-      <CustomInvite />
+      <PreSearch />
      </div>
     )
   }

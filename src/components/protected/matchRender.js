@@ -25,6 +25,11 @@ export default class MatchRender extends Component {
   this.removeMatch = this.removeMatch.bind(this)
   }
 
+
+componentDidUpdate(){
+  console.log("Comp did Update Match Render")
+}
+
 // TODO: fix src url for each prof pic
 //componentWillReceiveProps(nextProps){
 componentDidMount(){

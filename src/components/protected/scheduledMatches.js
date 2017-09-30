@@ -35,9 +35,11 @@ db.ref(`users/${this.props.user}/account-info/joinedGames`).on('value', (snapsho
 
 var matches = snapshot.val()
 console.log(matches)
+if (matches !== null) {
 var keys = Object.keys(matches)
 console.log(keys)
 this.setState({keys})
+}
 })
 }
 

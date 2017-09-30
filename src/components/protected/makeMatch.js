@@ -157,12 +157,13 @@ export default class MakeMatch extends Component {
     };
 
     const stdInput = {
+      height: '30px',
     width: '200px',
     //  display: 'inlineBlock',
     //textAlign: 'center',
     //border: '1px'
     //solid #000
-    padding: '5px'
+    //padding: '5px'
     }
 
     const headerStyle2 = {
@@ -252,6 +253,20 @@ export default class MakeMatch extends Component {
     marginTop: ' 60px '
     }
 
+    const halfWidthLeft = {
+    width: ' 40% ',
+    display: 'inlineBlock',
+    padding: '0px',
+    marginRight: '15px'
+    }
+
+    const halfWidthRight = {
+    width: ' 40% ',
+    display: 'inlineBlock',
+    padding: '0px',
+    marginLeft: '15px'
+    }
+
     console.log(this.state.startDate)
     console.log(this.state.skill)
     //console.log(this.players.value)
@@ -321,18 +336,17 @@ export default class MakeMatch extends Component {
 
 </div>
 
-<label htmlFor="date" className="col-2 col-form-label">Date and time</label>
-  <input className="form-control" type="date" id="date"
+<label htmlFor="date" className="col-2 col-form-label">2. Date and Time</label>
+<div className="form-inline">
+  <input style={halfWidthLeft} className="form-control" type="date" id="date"
   onChange={this.handleChange}/>
-<br/>
- <div>
-<label style={checkboxLabel}>3. Match Start Time </label>
-<TimePicker  onChange={this.handleTimeChange}
+<TimePicker style={halfWidthRight} onChange={this.handleTimeChange}
 value={this.state.time}
 start="6:00" end="23:30"/>
 </div>
 
 <br/>
+<label className="col-2 col-form-label">3. Where</label>
 <Maps callbackFromParent={this.myCallback}/>
 <br/>
 

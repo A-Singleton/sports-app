@@ -137,9 +137,14 @@ starsRef.getDownloadURL().then(function(url) {
 ref.child(`users/${user.uid}/personal-info`).on('value', (snapshot)=> {
 
 const profInfo = snapshot.val()
+if (profInfo !== null) {
 console.log('profInfo')
  console.log(profInfo)
  console.log(profInfo.FirstName)
+ console.log(profInfo.JoinTime)
+ //var joinTime = profInfo.joinTime
+ //var clippedJoin = joinTime.slice(4, 14)
+ //console.log(clippedJoin)
  //profileInfo.push(persInfo)
  that.setState({
    profInfo,
@@ -150,9 +155,10 @@ console.log('profInfo')
    userID: user.uid,
    location: profInfo.location
  })
+ }
 })
 
-ref.child(`users/${propsUser}/account-info/rep`).on('value', (snapshot)=> {
+ref.child(`users/${user.uid}/account-info/rep`).on('value', (snapshot)=> {
 
 const rep = snapshot.val()
  console.log('rep')
@@ -213,6 +219,7 @@ const rep = snapshot.val()
     console.log('this.state.profInfo')
     console.log(this.state.FirstName)
      console.log('this.props.userID')
+     var user =  firebaseAuth().currentUser.uid
   //   console.log(this.props.userID)
   //<img className="img-square avatar" src="http://placehold.it/48x38" alt=""/>
 
@@ -224,8 +231,8 @@ return (
    </div>
    <div className="pull-right">
     <h3><strong> Key Stats: </strong></h3>
-    <h4> Trophies Won: 2 </h4>
-    <h4> Games played: 86 </h4>
+    <h4> Trophies Won: 0 </h4>
+    <h4> Games played: 0 </h4>
     <h4> Reputation: {this.state.rep}% </h4>
     <h4> Member since: August 3, 2017 </h4>
     <h5 className="text-muted time">See Full Stats</h5>
@@ -237,7 +244,7 @@ return (
     <h4> {this.state.favSports} </h4>
     <h4> About Me: </h4>
     <h5> {this.state.aboutMe} </h5>
-    <h4> <Link to={`/protected/editProfile/`}>Edit Profile</Link> </h4>
+    { this.state.userID === user ? <h4> <Link to={`/protected/editProfile/`}>Edit Profile</Link> </h4> : ''}
    </div>
   </div>
   <div className="pull-left activity-feed">

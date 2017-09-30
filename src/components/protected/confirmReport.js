@@ -68,13 +68,13 @@ componentWillReceiveProps(nextProps){
   })
 
 //var user =  firebaseAuth().currentUser.uid
-console.log(nextProps.user)
-var user = nextProps.user
+//console.log(nextProps.user)
+//var user = nextProps.user
 
   //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
 //var queryRef = db.ref("pendingMatches")
 //queryRef.orderByChild(`idStack`).on("value", (snapshot)=> {
-var that = this
+//var that = this
 
 }
 

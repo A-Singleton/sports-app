@@ -101,22 +101,33 @@ class Maps extends React.Component {
       width: '100%',
     },
     autocompleteItem: {
-      backgroundColor: '#ffffff',
+      backgroundColor: 'white',
       padding: '10px',
-      color: '#555555',
+      color: 'white',
       cursor: 'pointer',
     },
     autocompleteItemActive: {
-      backgroundColor: '#fafafa'
+      backgroundColor: 'white'
     },
     googleLogoContainer: {
       textAlign: 'right',
       padding: '1px',
-      backgroundColor: '#fafafa'
+      backgroundColor: 'white'
     },
     googleLogoImage: {
       width: 50
     }
+  }
+
+  const mapStyles = {
+    input: {
+      display: 'inline-block',
+      width: '90%',
+      padding: '10px',
+    },
+    autocompleteContainer: { backgroundColor: 'white' },
+    autocompleteItem: { color: 'black' },
+    autocompleteItemActive: { color: 'blue' }
   }
 
 
@@ -141,13 +152,12 @@ class Maps extends React.Component {
 
     return (
       <div className='page-wrapper'>
-            <label>3. Enter Address </label>
         <div className='container'>
           <PlacesAutocomplete
             onSelect={this.handleSelect}
             autocompleteItem={AutocompleteItem}
             onEnterKeyDown={this.handleSelect}
-            classNames={defaultStyles}
+            styles={mapStyles}
             inputProps={inputProps}
           />
           {this.state.loading ? <div><i className="fa fa-spinner fa-pulse fa-3x fa-fw Demo__spinner" /></div> : null}

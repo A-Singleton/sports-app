@@ -14,16 +14,16 @@ export default class getConfirmedMatches extends Component {
 componentWillReceiveProps(nextProps) {
 console.log(nextProps.keys)
   var that = this
+  var allPendingMatchesCopy = []
 nextProps.keys.forEach(function(element) {
 ref.child(`/pendingMatches/${element}`).on("value", (snapshot)=> {
 console.log("Entered pending Matches")
   // var allPendingMatchesCopy = this.state.allPendingMatches
-  var allPendingMatchesCopy = that.state.allPendingMatches
 
   const data = snapshot.val()
   console.log(data)
   var keys = Object.keys(data)
-  console.log(data)
+  //console.log(data)
   //console.log(keys)
 
 //for (var i =0; i < data.length; i++) {
@@ -46,9 +46,12 @@ console.log("Entered pending Matches")
   //}
 //}
 
-    that.setState({ allPendingMatches: allPendingMatchesCopy })
+that.setState({ allPendingMatches: allPendingMatchesCopy })
 })
+
 })
+console.log(allPendingMatchesCopy)
+
 }
 
 render () {

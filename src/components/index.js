@@ -12,6 +12,7 @@ import PostRenderReport from './protected/postRenderReport'
 import RepReport from './protected/repReport'
 import EditProfile from './protected/editProfile'
 import MakeMatch from './protected/makeMatch'
+import Profile from './protected/profile'
 
 import { logout } from '../helpers/auth'
 import { firebaseAuth } from '../config/constants'
@@ -107,6 +108,9 @@ export default class App extends Component {
     }
 
 //   console.log(this.props.stuffMine)
+// <li>
+// <Link to="/matchFeed" className="navbar-brand">Match Feed</Link>
+// </li>
 
     return this.state.loading === true ? <h1>Loading</h1> : (
       <BrowserRouter>
@@ -116,15 +120,18 @@ export default class App extends Component {
               <div className="navbar-header">
                 <Link to="/" className="navbar-brand">ProvaSport</Link>
               </div>
-              <ul className="nav navbar-nav pull-right">
+               <ul className="nav navbar-nav pull-right">
+               <li>
+               <Link to="/dashboard" className="navbar-brand"> Search Matches</Link>
+               </li>
+               <li>
+               <Link to="/makeMatch" className="navbar-brand"> Make a Match</Link>
+              </li>
                 <li>
                  <img style={profImage} className="img-square avatar"  id="imgBar" src="" alt="" height="30" width="30"/>
                 </li>
                 <li>
-                <Link to="/dashboard" className="navbar-brand"> Profile</Link>
-                </li>
-                <li>
-                <Link to="/matchFeed" className="navbar-brand">Match Feed</Link>
+                <Link to="/profile" className="navbar-brand"> Profile</Link>
                 </li>
                 <li>
                   {this.state.authed
@@ -154,7 +161,8 @@ export default class App extends Component {
                 <PrivateRoute authed={this.state.authed} path='/postRenderReport' component={PostRenderReport} stuff={myRating}/>
                 <PrivateRoute authed={this.state.authed} path='/repReport' component={RepReport} stuff={myRating}/>
                 <PrivateRoute authed={this.state.authed} path='/protected/editProfile' component={EditProfile} />
-                <PrivateRoute authed={this.state.authed} path='/makeFeed' component={MakeMatch} />
+                <PrivateRoute authed={this.state.authed} path='/makeMatch' component={MakeMatch} />
+                <PrivateRoute authed={this.state.authed} path='/profile' component={Profile} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>

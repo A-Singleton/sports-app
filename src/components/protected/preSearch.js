@@ -167,6 +167,9 @@ const pushRightMargin = {
   marginTop: ' 60px '
 }
 
+const pushDownButton = {
+  marginTop: ' 15px '
+}
 
 // <div className="pull-left activity-feed">
 // <h3 style={headerStyle3}><strong> Tournament Activity </strong></h3>
@@ -255,9 +258,9 @@ Only matches on today
 <option value="Quidditch"> Quidditch </option>
 </FormControl>
 </FormGroup></Col>
-<Col xs={6} md={4}>
+<Col xs={12} md={12}>
 <FormGroup controlId="start-search">
-<Button style={pushRightMargin} bsStyle="success" type="submit">
+<Button style={pushDownButton} bsStyle="success" type="submit">
   SEARCH MATCHES
 </Button>
 </FormGroup>
