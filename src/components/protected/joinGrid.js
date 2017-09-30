@@ -64,48 +64,11 @@ export default class JoinGrid extends Component {
        var max_len = sportsLength(this.props.sport, this.props.maxPlayers)
 
        if (this.props.sport !== "Golf") {
-      //  var team_1_space = false
-      //  var team_2_space = false
-       //
-      //  for (var i =0; i < max_len; i++) {
-      //        var team_1 =  { name: players[i].name, user: players[i].user }
-      //        var team_2 =  { name: players2[i].name, user: players2[i].user }
-       //
-      //        if (typeof players[i].user === "undefined") {
-      //          console.log("Slot 1 Open")
-      //          team_1.name = "Slot Open"
-      //          team_1_space = true
-      //        }
-       //
-      //        if (typeof players2[i].user === "undefined") {
-      //          console.log("Slot 2 Open")
-      //          team_2.name = "Slot Open"
-      //          team_2_space = true
-      //        }
-       //
-      //        var nextRow = {
-      //          team_1,
-      //          team_2
-      //        }
-       //
-      //        personArrayCopy.push(nextRow)
-      //      }
-       //
-      //      console.log(personArrayCopy)
-      //      console.log(team_1_space)
-      //      console.log(team_2_space)
-       //
-      //      this.setState({ personArray: personArrayCopy,
-      //                      max_len,
-      //                      homeSpace: team_1_space,
-      //                      awaySpace: team_2_space })
-
-
 
                 var team_1_space = false
                 var team_2_space = false
 
-                console.log()
+                console.log("did mount")
 
                 for (var i =0; i < max_len; i++) {
                       //var team_2 =  { name: players2[i].name, user: players2[i].user }
@@ -121,11 +84,12 @@ export default class JoinGrid extends Component {
                      var team_1 =  { name: players[i].name, user: players[i].user } }
 
                       if (typeof players2[i] === "undefined") {
-                        console.log("Slot 2 Open")
+                        console.log("Slot 2 Open did mount")
                         var team_2 = { name: "Slot Open", user: undefined }
                       //  team_2.name = "Slot Open"
                         team_2_space = true
                       }
+
                       else {
                      var team_2 = { name: players2[i].name, user: players2[i].user } }
 
@@ -254,8 +218,8 @@ export default class JoinGrid extends Component {
        ]
      }
 
-        console.log(nextProps.players)
-        console.log(nextProps.players2)
+        console.log(players)
+        console.log(players2)
         //console.log(this.props.players[1].joinerName)
         console.log(max_len)
 
@@ -279,12 +243,22 @@ export default class JoinGrid extends Component {
                 else {
                var team_1 =  { name: players[i].name, user: players[i].user } }
 
+               if(i === 0){
+               var blankTest = players2[i].name
+
+              if (typeof blankTest ==="undefined"){
+                var team_2 = { name: "Slot Open", user: undefined }
+              }
+            }
+
+               console.log(typeof players2[i] === "undefined")
                 if (typeof players2[i] === "undefined") {
                   console.log("Slot 2 Open")
                   var team_2 = { name: "Slot Open", user: undefined }
                 //  team_2.name = "Slot Open"
                   team_2_space = true
                 }
+
                 else {
                var team_2 = { name: players2[i].name, user: players2[i].user } }
 
@@ -427,9 +401,6 @@ export default class JoinGrid extends Component {
       </tr>
     )
   }
-
-  // {(this.props.sport === "Golf") ? <td>{row.team_3}</td> : null}
-  // {(this.props.sport === "Golf") ? <td>{row.team_4}</td> : null}
 
   render () {
     console.log(this.props.sport)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
+import { Form,  FormGroup, FormControl, Col, Button, ControlLabel, Grid, Row} from 'react-bootstrap'
 import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import ModalConfirmScore from './modalConfirmScore'
@@ -12,7 +12,6 @@ export default class PendingMatchRender extends Component {
        fireRedirect: false
      }
    }
-
 
   handleSubmit(event) {
       event.preventDefault();
@@ -87,14 +86,23 @@ export default class PendingMatchRender extends Component {
 // <Form onSubmit={this.handleSubmit.bind(this)}>
 //  </Form>
 //  <Button bsStyle="success" type="submit">Confirm the Scores</Button>
+//<img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
+//<img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
 
     return(
       <div style={divStyle}>
       <h2> Jimbo Reported the Scores from Your Match </h2>
       <h3> { this.props.matches.sport + " at " + this.props.matches.date } </h3>
-      { theHomePlayers } { theAwayPlayers }
-      <label style={score}> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> Home: { this.props.matches.hostScore + "  " } </label>
-      <label>  { this.props.matches.awayScore } : Away <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
+
+      <Grid >
+      <Row className="show-grid">
+      <Col xs={6} md={6}>  { theHomePlayers }  </Col>
+      <Col xs={6} md={3}> { theAwayPlayers } </Col>
+      </Row>
+      </ Grid>
+
+      <label style={score}> Home: { this.props.matches.hostScore + "  " } </label>
+      <label>  { this.props.matches.awayScore } : Away  </label>
           <ModalConfirmScore match={this.props.matches}/>
           <br/>
           <h6> Did they make a mistake? </h6>

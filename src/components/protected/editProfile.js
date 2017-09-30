@@ -53,7 +53,7 @@ var otherUser = "Qciqsxq1ZAdCCgGAZzJTqIGE7qp1"
     })
 
     // Create a reference to the file we want to download
-  var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}.png`);
+  var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}`);
 
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {
@@ -214,7 +214,7 @@ return (
 
 <FormGroup controlId="formControlsTextarea">
   <ControlLabel>About Me</ControlLabel>
-  <FormControl componentClass="textarea" value={this.state.aboutMe} onChange={this.handleChangeAboutUser} />
+  <FormControl componentClass="textarea" value={this.state.aboutUser} onChange={this.handleChangeAboutUser} />
 </FormGroup>
 
 <FormGroup>
