@@ -105,7 +105,7 @@ starsRef.getDownloadURL().then(function(url) {
   }
 
   render () {
-
+    console.log("THumbnail")
     const horInput = {
       padding: "2px",
       width: '40px',

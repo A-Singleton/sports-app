@@ -86,8 +86,10 @@ componentWillReceiveProps(nextProps){
       display: 'block',
       textAlign: 'center',
       background: "#eee",
-      padding: "5px",
-      margin: "5px",
+      padding: "0px",
+      margin: "0px",
+      width: "46%",
+      marginTop: "-700px"
       //width: "550px",
       //justifyContent: 'center'
       //alignItems: 'flex',

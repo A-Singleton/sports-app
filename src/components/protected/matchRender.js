@@ -206,7 +206,7 @@ friendRequest = (event) => {
         players={this.props.match.players}
         players2={this.props.match.players2}
         players3={this.props.match.players3}
-        players3={this.props.match.players4}
+        players4={this.props.match.players4}
         />
 
       </div>

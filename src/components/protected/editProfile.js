@@ -46,7 +46,7 @@ var otherUser = "Qciqsxq1ZAdCCgGAZzJTqIGE7qp1"
     lName: persInfo.LastName,
     email: persInfo.email,
     gender: persInfo.Gender,
-    aboutMe: persInfo.aboutMe,
+    aboutUser: persInfo.aboutMe,
     favSports: persInfo.favSports,
     location: persInfo.location
      })
@@ -207,8 +207,10 @@ return (
 <FormGroup controlId="formControlsSelectMultiple">
   <ControlLabel>Played Sports</ControlLabel>
   <FormControl componentClass="select" multiple>
-    <option value="select">select (multiple)</option>
-    <option value="other">...</option>
+    <option value="Golf">Golf</option>
+    <option value="Squash">Squash</option>
+    <option value="Tennis">Tennis</option>
+    <option value="Badminton">Badminton</option>
   </FormControl>
 </FormGroup>
 

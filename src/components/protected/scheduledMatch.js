@@ -76,9 +76,10 @@ export default class ScheduledMatch extends Component {
     let button = null
     var thisUser = this.props.match.creator
     var classNameImg = `img-circle avatar ${thisUser}`
-    //
+    //            <h5> Tomorrow, 5:00 PM </h5>
+
     return(
-      <div className="col-sm-4">
+      <div className="col-sm-12">
         <div className="panel panel-white post panel-shadow">
           <div className="post-heading">
             <div className="pull-left image">
@@ -89,11 +90,10 @@ export default class ScheduledMatch extends Component {
               <h4> <strong> Host: </strong> <Link to={`/protected/profileIndex/${this.props.match.creator}`}>{this.props.match.creatorName} </Link> </h4>
                <br/>
               </div>
-              <h5> Tomorrow, 5:00 PM </h5>
               </div>
             </div>
           </div>
-          <div className="col-md-6 post-description">
+          <div className="col-sm-8 post-description">
           <br/>
             <h3>  {this.props.match.sport} </h3>
             <br/>

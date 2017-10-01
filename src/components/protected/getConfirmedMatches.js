@@ -71,6 +71,9 @@ render () {
   //     )
   //   })
   // }
+  // const divStyle = {
+  //   width: '50%'
+  // }
 
   var pendingMatches = ''
 
@@ -90,7 +93,7 @@ render () {
 
 
   return(
-  <div>
+  <div >
   { pendingMatches }
   </div>
 )

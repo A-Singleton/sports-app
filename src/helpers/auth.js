@@ -457,7 +457,7 @@ ref.child(`matches/${matchID}/invited-friends`)
 export function matchDispute (matchID) {
 //   console.log(friends)
 // friends.forEach(function(friend) {
-// ref.child(`matches/${matchID}/invited-friends`)
+// ref.child(`matches/${matchID}/disputed`)
 // .push({ friend })
 // })
 }
