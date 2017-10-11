@@ -113,7 +113,8 @@ render(){
 
   const container = {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: "100%"
   }
 
   const messages = {
@@ -131,7 +132,7 @@ render(){
   }
 
   const chatInputText = {
-    width: '100%',
+    width: '40%',
     marginLeft: '-20px',
     marginRight: '-20px'
   }
@@ -156,13 +157,13 @@ render(){
   }
 
   const messageBody = {
-    maxWidth: '80%',
+    maxWidth: '20%',
     display: 'inline-block',
     padding: '20px',
     backgroundColor: '#eee',
     border: '1px',
     borderRadius: '5px',
-    paddingRight: '50px'
+    paddingRight: '-20px'
   }
 
   const username = {

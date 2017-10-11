@@ -95,9 +95,12 @@ export default class PendingMatchRender extends Component {
 //      const rightMargin = {
 //
 //}
+ const shadow = {
+   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+ }
 
     return(
-      <div>
+      <div style={shadow}>
       <h2> Jimbo Reported the Scores from Your Match </h2>
       <h3> { this.props.matches.sport + " at " + this.props.matches.date } </h3>
       <br/>

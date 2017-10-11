@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import {HashRouter as Router} from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
@@ -15,7 +16,7 @@ import MakeMatch from './protected/makeMatch'
 import Profile from './protected/profile'
 
 import { logout } from '../helpers/auth'
-import { firebaseAuth } from '../config/constants'
+import { firebaseAuth, firebaseStorageRef } from '../config/constants'
 
 
 const PrivateRoute = ({ component, authed, ...rest }) => {
@@ -80,6 +81,44 @@ export default class App extends Component {
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
+
+
+      // Create a reference to the file we want to download
+    //var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
+    var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}`)
+
+    // Get the download URL
+    starsRef.getDownloadURL().then(function(url) {
+      // Insert url into an <img> tag to "download"
+    //  var img = document.getElementById('myimg');
+      var imgBar = document.getElementById('imgBar');
+      imgBar.src = url
+    //  img.src = url;
+    }).catch(function(error) {
+
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      switch (error.code) {
+        case 'storage/object_not_found':
+          // File doesn't exist
+          break;
+
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
+
+        case 'storage/unknown':
+          // Unknown error occurred, inspect the server response
+          break;
+      }
+    });
+
+
+
         this.setState({
           authed: true,
           loading: false,
@@ -111,9 +150,10 @@ export default class App extends Component {
 // <li>
 // <Link to="/matchFeed" className="navbar-brand">Match Feed</Link>
 // </li>
+    //  <BrowserRouter>
 
     return this.state.loading === true ? <h1>Loading</h1> : (
-      <BrowserRouter>
+    <Router>
         <div>
           <nav className="navbar navbar-default navbar-static-top">
             <div className="container">
@@ -168,7 +208,9 @@ export default class App extends Component {
             </div>
           </div>
         </div>
-      </BrowserRouter>
+    </Router>
     );
   }
 }
+
+  //  </BrowserRouter>

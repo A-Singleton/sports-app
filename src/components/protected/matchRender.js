@@ -7,6 +7,8 @@ import MatchReport from './MatchReport'
 import { Button } from 'react-bootstrap'
 import JoinGrid from './joinGrid'
 import Thumbnail from './thumbnail'
+import GenericModal from './genericModal'
+import GenericModal2 from './genericModal2'
 
 export default class MatchRender extends Component {
 
@@ -160,6 +162,7 @@ friendRequest = (event) => {
 //    console.log(classNameImg)
  //    <h6 className="text-muted time">An hour ago</h6>
  //        {matchRemark}
+//<ChatButton matchkey={this.props.match.id}/>
 
     return(
       <div className="col-sm-12">
@@ -180,6 +183,8 @@ friendRequest = (event) => {
           <div className="col-md-12 post-description">
             <h3> Sport: {this.props.match.sport} </h3>
             <br/>
+            <h3> Location: {this.props.match.location} </h3>
+            <br/>
             <h3> Date: {this.props.match.date} </h3>
             <br/>
             <h3> Level: {this.props.match.skill} </h3>
@@ -199,9 +204,9 @@ friendRequest = (event) => {
         maxPlayers={this.props.match.maxPlayers}
         />
 
-        <ChatButton matchkey={this.props.match.id}/>
+        <GenericModal matchkey={this.props.match.id}/>
 
-        <MatchReport
+        <GenericModal2
         match={this.props.match}
         players={this.props.match.players}
         players2={this.props.match.players2}

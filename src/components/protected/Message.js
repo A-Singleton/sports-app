@@ -26,13 +26,13 @@ const message = {
 }
 
 const messageBody = {
-  maxWidth: '80%',
+  maxWidth: '20%',
   display: 'inline-block',
-  padding: '20px',
+  padding: '10px',
   backgroundColor: '#eee',
   border: '1px',
   borderRadius: '5px',
-  paddingRight: '50px'
+  paddingRight: '-20px'
 }
 
   const messageFromMe = {
@@ -42,9 +42,9 @@ const messageBody = {
   }
 
   const messageFromMeMessageBody = {
-    maxWidth: '80%',
+    maxWidth: '20%',
     display: 'inline-block',
-    padding: '20px',
+    padding: '10px',
     border: '1px',
     borderRadius: '5px',
     paddingRight: '50px',

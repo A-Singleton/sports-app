@@ -45,6 +45,7 @@ componentDidMount(){
           var creator_last_name = matches[k].creator_last_name;
           var idStack = matches[k].idStack;
           var maxPlayers = matches[k].maxPlayers;
+          var location = matches[k].mapDataAddress;
 
     var nextMatch = {
       id: k,
@@ -58,7 +59,8 @@ componentDidMount(){
       idStack: idStack,
       players3: players3,
       players4: players4,
-      maxPlayers
+      maxPlayers,
+      location
     }
     console.log(nextMatch)
     allMatchesCopy.push(nextMatch)

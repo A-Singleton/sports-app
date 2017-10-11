@@ -68,6 +68,9 @@ export default class profile extends Component {
     // Create a reference to the file we want to download
   //var starsRef = firebaseStorageRef.child('profilePics/Classic_Singleton.png');
   var starsRef = firebaseStorageRef.child(`profilePics/${nextProps.userID}`)
+  if (starsRef == null) {
+    starsRef = firebaseStorageRef.child(`defaultPics/default.jpeg`)
+  }
 
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {
@@ -154,7 +157,9 @@ export default class profile extends Component {
     firebaseAuth().onAuthStateChanged(function(user) {
       console.log(propsUser)
 if (user) {
-
+//       if (propsUser !== null) {
+//         user.uid = propsUser
+//       }
   // Create a reference to the file we want to download
 //var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
 var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}`)
@@ -312,7 +317,7 @@ return (
 <div className="profile-page">
   <div className="profile" style={profileStyle}>
    <div className= "image">
-    <img className="img-square avatar"  id="myimg" src="http://placehold.it/48x38" alt="" height="200" width="200"/>
+    <img className="img-square avatar"  id="myimg" src="" alt="" height="200" width="200"/>
    </div>
    <div className="title h5" style={profileText}>
     <h3><strong> {this.state.FirstName + " " + this.state.LastName} </strong> </h3>
