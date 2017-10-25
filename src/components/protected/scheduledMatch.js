@@ -78,8 +78,19 @@ export default class ScheduledMatch extends Component {
     var classNameImg = `img-circle avatar ${thisUser}`
     //            <h5> Tomorrow, 5:00 PM </h5>
 
+    const background = {
+      background: 'white',
+      marginBottom: '15px',
+      borderRadius: '5px'
+      //paddingTop: '300px'
+    }
+
+    const space = {
+      background: '#eee'
+    }
+
     return(
-      <div className="col-sm-12">
+      <div style={background} className="col-sm-12">
         <div className="panel panel-white post panel-shadow">
           <div className="post-heading">
             <div className="pull-left image">

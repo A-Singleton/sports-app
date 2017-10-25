@@ -164,8 +164,20 @@ friendRequest = (event) => {
  //        {matchRemark}
 //<ChatButton matchkey={this.props.match.id}/>
 
+  const background = {
+    background: 'white',
+    marginBottom: '15px',
+    borderRadius: '5px',
+    border: '2px solid #eee'
+  }
+
+  const center = {
+    textAlign: 'center',
+    display: 'block'
+  }
+
     return(
-      <div className="col-sm-12">
+      <div style={background} className="col-sm-12">
         <div className="panel panel-white post panel-shadow">
           <div className="post-heading">
             <div className="pull-left image">
@@ -204,7 +216,9 @@ friendRequest = (event) => {
         maxPlayers={this.props.match.maxPlayers}
         />
 
+        <div style={center}>
         <GenericModal matchkey={this.props.match.id}/>
+        </div>
 
         <GenericModal2
         match={this.props.match}

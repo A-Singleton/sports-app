@@ -150,9 +150,10 @@ const backImg = {
    width: "100%",
    height: "270px",
    border: '2px solid #000',
+   borderRadius: '5px',
    //rightMargin: '150px',
-  backgroundSize: 'cover',
-    backgroundImage: `url(${Background})`
+   backgroundSize: 'cover',
+   backgroundImage: `url(${Background})`
 }
 
 const blue = {

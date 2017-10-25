@@ -55,8 +55,12 @@ if (this.state.keys) {
   )
 }
 
+const padding = {
+  //paddingTop: '30px'
+}
+
   return(
-    <div>
+    <div style={padding}>
     { scheduledMatches }
     </div>
   )

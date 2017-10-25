@@ -95,8 +95,24 @@ export default class PendingMatchRender extends Component {
 //      const rightMargin = {
 //
 //}
+
+// <Grid >
+// <Row className="show-grid">
+// <Col xs={2} xsOffset={0}>  { theHomePlayers }  </Col>
+// <Col xs={2} xsOffset={0}> { theAwayPlayers } </Col>
+// </Row>
+// </ Grid>
+//
+// <Grid >
+// <Row className="show-grid">
+// <Col xs={3} xsOffset={0}> <h3> <strong> Home Score: { this.props.matches.hostScore } </strong> </h3> </Col>
+// <Col xs={3} md={0}> <h3> <strong> { this.props.matches.awayScore } : Away Score </strong> </h3> </Col>
+// </Row>
+// </ Grid>
+
  const shadow = {
-   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)"
+   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+   borderRadius: '5px'
  }
 
     return(
@@ -106,7 +122,7 @@ export default class PendingMatchRender extends Component {
       <br/>
       <Grid >
       <Row className="show-grid">
-      <Col xs={2} xsOffset={0}>  { theHomePlayers }  </Col>
+      <Col xs={2} xsOffset={0}> { theHomePlayers }  </Col>
       <Col xs={2} xsOffset={0}> { theAwayPlayers } </Col>
       </Row>
       </ Grid>

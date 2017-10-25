@@ -256,7 +256,9 @@ const rep = snapshot.val()
     const profileStyle = {
       border: '1px solid #000',
       padding: '10px',
-      marginRight: '55%'
+      marginRight: '55%',
+      background: 'white',
+      borderRadius: '5px'
     }
 
     const profileText = {
@@ -270,11 +272,12 @@ const rep = snapshot.val()
       background: "SteelBlue",
       textAlign: 'center',
       padding: "3px",
-      width: "90%",
+      width: "100%",
       //whiteSpace: 'nowrap',
       border: '1px solid #000',
       padding: '20px',
-      marginTop: '23px'
+      marginTop: '23px',
+      borderRadius: '5px'
     }
 
     const stats ={
@@ -283,17 +286,35 @@ const rep = snapshot.val()
     }
 
     const scheduledMatches = {
-      marginTop: "-450px",
+      marginTop: "-992px",
       marginLeft: "600px",
+      //background: 'white'
       //width: "1000px"
     }
 
     const activityFeed = {
-      marginTop: "-35px",
-      width: "33%",
-      marginLeft: '-15px',
+      marginTop: "1100px",
+      width: "100%",
+    //  marginLeft: '-15px',
 
       //margin
+    }
+
+    const recAc = {
+      marginTop: "18px",
+    }
+
+    const headerStyle3Recent = {
+      color: 'white',
+      background: "SteelBlue",
+      textAlign: 'center',
+      padding: "3px",
+      width: "46%",
+      //whiteSpace: 'nowrap',
+      border: '1px solid #000',
+      padding: '20px',
+      marginTop: '23px',
+      borderRadius: '5px'
     }
 
     console.log('this.state.profInfo')
@@ -311,6 +332,10 @@ const rep = snapshot.val()
   // <ConfirmReport user={this.state.userID}/>
   // </Grid>
   // </div>
+  // <div style={activityFeed} className="activity-feed">
+  // </div>
+
+  console.log(this.state.location)
 
 return (
 
@@ -321,11 +346,11 @@ return (
    </div>
    <div className="title h5" style={profileText}>
     <h3><strong> {this.state.FirstName + " " + this.state.LastName} </strong> </h3>
-    <h4> {this.state.location} </h4>
+    <h4> {typeof this.state.location === "undefined" ? "Somewhere" : this.state.location} </h4>
     <h4> Sports: </h4>
     <h4> {this.state.favSports} </h4>
     <h4> About Me: </h4>
-    <h5> {this.state.aboutMe} </h5>
+    <h5> {typeof this.state.aboutMe === "undefined" ? "I am a new member. Hi!" : this.state.aboutMe  } </h5>
     { this.state.userID === user ? <h4> <Link to={`/protected/editProfile/`}>Edit Profile</Link> </h4> : ''}
    </div>
    <div style={stats} className="key stats">
@@ -338,18 +363,14 @@ return (
    </div>
    </div>
 
+   <h3 style={headerStyle3Recent}> <strong> Recent Activity </strong> </h3>
+   { this.state.userID === user ? <ConfirmReport user={this.state.userID}/> : ''}
+
+
   <div style={scheduledMatches} className="scheduled-matches">
   <h3 style={headerStyle3}><strong> Your Scheduled Matches </strong></h3>
   <ScheduledMatches user={this.state.userID}/>
   </div>
-
-  <div style={activityFeed} className="activity-feed">
-  <h3> <strong> Recent Activity </strong> </h3>
-  <Grid>
-  { this.state.userID === user ? <ConfirmReport user={this.state.userID}/> : ''}
-  </Grid>
-  </div>
-
   </div>
 )
 }

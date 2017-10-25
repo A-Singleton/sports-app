@@ -85,11 +85,12 @@ componentWillReceiveProps(nextProps){
     const divStyle = {
       display: 'block',
       textAlign: 'center',
-      background: "#eee",
+      background: "white",
       padding: "0px",
       margin: "0px",
       width: "46%",
-      marginTop: "-700px"
+      borderRadius: '5px'
+      //marginTop: "-700px"
       //width: "550px",
       //justifyContent: 'center'
       //alignItems: 'flex',

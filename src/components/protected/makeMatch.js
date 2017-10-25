@@ -118,9 +118,11 @@ export default class MakeMatch extends Component {
     const divStyle = {
       display: 'block',
       textAlign: 'center',
-      background: "#eee",
+      //background: "white",
+      background: 'White',
       padding: "5px",
       margin: "5px",
+      borderRadius: '5px',
       //width: "550px",
       //justifyContent: 'center'
       //alignItems: 'flex',
