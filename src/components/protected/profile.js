@@ -6,7 +6,7 @@ import ConfirmReport from './confirmReport'
 import MatchReport from './MatchReport'
 import RenderFriendRequests from './renderFriendRequests'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import { Table, Button, Form,  FormGroup, FormControl, Col,  ControlLabel, Grid, Row} from 'react-bootstrap'
+import { Table, Button, Form,  FormGroup, FormControl, Col,  ControlLabel, Grid, Row, PageHeader} from 'react-bootstrap'
 
 //TODO: profile pic + url in upper corner
 //1. Add error handling to fb queries
@@ -335,11 +335,20 @@ const rep = snapshot.val()
   // <div style={activityFeed} className="activity-feed">
   // </div>
 
+  const hr = {
+  marginTop: '1rem',
+  marginBottom: '1rem',
+  border: 0,
+  borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+}
+
   console.log(this.state.location)
+const parens = '\'s'
 
 return (
 
 <div className="profile-page">
+<PageHeader> {this.state.FirstName + " " + this.state.LastName + parens}  Profile </PageHeader>
   <div className="profile" style={profileStyle}>
    <div className= "image">
     <img className="img-square avatar"  id="myimg" src="" alt="" height="200" width="200"/>
@@ -369,7 +378,8 @@ return (
 
   <div style={scheduledMatches} className="scheduled-matches">
   <h3 style={headerStyle3}><strong> Your Scheduled Matches </strong></h3>
-  <ScheduledMatches user={this.state.userID}/>
+{this.state.userID === user ? <ScheduledMatches user={this.state.userID}/> : ''}
+
   </div>
   </div>
 )
