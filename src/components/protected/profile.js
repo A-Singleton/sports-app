@@ -163,7 +163,9 @@ if (user) {
   // Create a reference to the file we want to download
 //var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
 var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}`)
-
+if (starsRef == null) {
+  starsRef = firebaseStorageRef.child(`defaultPics/default.jpeg`)
+}
 // Get the download URL
 starsRef.getDownloadURL().then(function(url) {
   // Insert url into an <img> tag to "download"

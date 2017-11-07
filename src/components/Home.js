@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PreSearch from './protected/preSearch'
 import { Button, Jumbotron, Grid} from 'react-bootstrap'
 import Background from './images/a-day-at-the-courts.jpg';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 
 
@@ -33,7 +34,7 @@ export default class Home extends Component {
       <h3> Find local teammates and matches, fast </h3>
       <p>Join the community of sports lovers and athletes who are playing
       your favorite sports now</p>
-      <p><Button bsStyle="primary">Sign In</Button></p>
+      <p><Button bsStyle="warning"> <Link to={`profile/`}> Sign Up / Go to Profile </Link>  </Button></p>
       </Jumbotron>
 
       </div>
