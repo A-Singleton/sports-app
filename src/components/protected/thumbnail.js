@@ -4,12 +4,10 @@ import { firebaseStorageRef } from 'C:/Users/Duwan_000/Documents/GitHub/sports-a
 export default class Thumbnail extends Component {
   constructor(props, context) {
     super(props, context);
-
     this.state = {
       url: ''
     }
   }
-
 
 componentWillReceiveProps(nextProps) {
 console.log("Thumbnail Next Props")
@@ -64,7 +62,7 @@ starsRef.getDownloadURL().then(function(url) {
 
   componentDidMount() {
     // Create a reference to the file we want to download
-    console.log(this.props.player.this_user)
+    console.log(this.props.player.user)
   var starsRef = firebaseStorageRef.child(`profilePics/${this.props.player.user}`);
 
   // Get the download URL
@@ -107,7 +105,7 @@ starsRef.getDownloadURL().then(function(url) {
   }
 
   render () {
-
+    console.log("THumbnail")
     const horInput = {
       padding: "2px",
       width: '40px',
@@ -118,7 +116,7 @@ starsRef.getDownloadURL().then(function(url) {
 
     return(
       <div>
-      <label> <img className={classNameImg} id="myimg" src="" alt=""/>
+      <label> <img className={classNameImg} id="myimg" src="" alt="" height="48" width="48"/>
       { this.props.player.name } </label>
       </div>
     )

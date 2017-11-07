@@ -1,5 +1,39 @@
 
-
+//  var team_1_space = false
+//  var team_2_space = false
+ //
+//  for (var i =0; i < max_len; i++) {
+//        var team_1 =  { name: players[i].name, user: players[i].user }
+//        var team_2 =  { name: players2[i].name, user: players2[i].user }
+ //
+//        if (typeof players[i].user === "undefined") {
+//          console.log("Slot 1 Open")
+//          team_1.name = "Slot Open"
+//          team_1_space = true
+//        }
+ //
+//        if (typeof players2[i].user === "undefined") {
+//          console.log("Slot 2 Open")
+//          team_2.name = "Slot Open"
+//          team_2_space = true
+//        }
+ //
+//        var nextRow = {
+//          team_1,
+//          team_2
+//        }
+ //
+//        personArrayCopy.push(nextRow)
+//      }
+ //
+//      console.log(personArrayCopy)
+//      console.log(team_1_space)
+//      console.log(team_2_space)
+ //
+//      this.setState({ personArray: personArrayCopy,
+//                      max_len,
+//                      homeSpace: team_1_space,
+//                      awaySpace: team_2_space })
           //  console.log("Second Golf idea")
           //  console.log( max_len)
           //  //for (var i =0; i < max_len; i++) {

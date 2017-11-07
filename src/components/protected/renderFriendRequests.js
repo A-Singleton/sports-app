@@ -25,6 +25,7 @@ export default class RenderFriendRequests extends Component {
 
     var data = snapshot.val()
     console.log(data)
+    if (data !== null) {
     var keys = Object.keys(data)
 
     console.log(keys)
@@ -45,6 +46,7 @@ export default class RenderFriendRequests extends Component {
 
       pendingFriendsCopy.push(nextFriend)
   }
+}
       this.setState({ pendingFriends: pendingFriendsCopy })
   })
   }

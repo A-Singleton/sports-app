@@ -68,13 +68,13 @@ componentWillReceiveProps(nextProps){
   })
 
 //var user =  firebaseAuth().currentUser.uid
-console.log(nextProps.user)
-var user = nextProps.user
+//console.log(nextProps.user)
+//var user = nextProps.user
 
   //const userTest = "q2xlsIvehieukIw1QYOi6LxGUp33"
 //var queryRef = db.ref("pendingMatches")
 //queryRef.orderByChild(`idStack`).on("value", (snapshot)=> {
-var that = this
+//var that = this
 
 }
 
@@ -85,9 +85,12 @@ var that = this
     const divStyle = {
       display: 'block',
       textAlign: 'center',
-      background: "#eee",
-      padding: "5px",
-      margin: "5px",
+      background: "white",
+      padding: "0px",
+      margin: "0px",
+      width: "46%",
+      borderRadius: '5px'
+      //marginTop: "-700px"
       //width: "550px",
       //justifyContent: 'center'
       //alignItems: 'flex',

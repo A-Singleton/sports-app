@@ -9,7 +9,7 @@ import ImageUpload from './ImageUpload'
 import { saveMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import Tournament from './Tournament'
 import Background from '../images/tennis_background.jpg';
-
+import { PageHeader } from 'react-bootstrap'
 
 // TODO: Show success of submission message, with invite to make another match
 // Redirect to success page, with invite link back to make another. modal with refresh?
@@ -118,9 +118,11 @@ export default class MakeMatch extends Component {
     const divStyle = {
       display: 'block',
       textAlign: 'center',
-      background: "#eee",
+      //background: "white",
+      background: 'White',
       padding: "5px",
       margin: "5px",
+      borderRadius: '5px',
       //width: "550px",
       //justifyContent: 'center'
       //alignItems: 'flex',
@@ -157,12 +159,13 @@ export default class MakeMatch extends Component {
     };
 
     const stdInput = {
+      height: '30px',
     width: '200px',
     //  display: 'inlineBlock',
     //textAlign: 'center',
     //border: '1px'
     //solid #000
-    padding: '5px'
+    //padding: '5px'
     }
 
     const headerStyle2 = {
@@ -252,12 +255,28 @@ export default class MakeMatch extends Component {
     marginTop: ' 60px '
     }
 
+    const halfWidthLeft = {
+    width: ' 40% ',
+    display: 'inlineBlock',
+    padding: '0px',
+    marginRight: '15px'
+    }
+
+    const halfWidthRight = {
+    width: ' 40% ',
+    display: 'inlineBlock',
+    padding: '0px',
+    marginLeft: '15px'
+    }
+
     console.log(this.state.startDate)
     console.log(this.state.skill)
     //console.log(this.players.value)
 
   return(
 <div style={divStyle}>
+
+<PageHeader>Make a Match <small>create a public match that others can join</small></PageHeader>
 
 <h2 style={headerStyle2}> Create a Match! </h2>
 
@@ -321,18 +340,17 @@ export default class MakeMatch extends Component {
 
 </div>
 
-<label htmlFor="date" className="col-2 col-form-label">Date and time</label>
-  <input className="form-control" type="date" id="date"
+<label htmlFor="date" className="col-2 col-form-label">2. Date and Time</label>
+<div className="form-inline">
+  <input style={halfWidthLeft} className="form-control" type="date" id="date"
   onChange={this.handleChange}/>
-<br/>
- <div>
-<label style={checkboxLabel}>3. Match Start Time </label>
-<TimePicker  onChange={this.handleTimeChange}
+<TimePicker style={halfWidthRight} onChange={this.handleTimeChange}
 value={this.state.time}
 start="6:00" end="23:30"/>
 </div>
 
 <br/>
+<label className="col-2 col-form-label">3. Where</label>
 <Maps callbackFromParent={this.myCallback}/>
 <br/>
 

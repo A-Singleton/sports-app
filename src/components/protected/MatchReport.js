@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { submittedMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
-import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
+import { Form,  FormGroup, FormControl, Col, Button, ControlLabel, Row} from 'react-bootstrap'
 import { ref, firebaseAuth, firebaseStorageRef, taskEvent, db } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/config/constants'
 import Thumbnail from './thumbnail'
 
@@ -151,6 +151,8 @@ if (typeof this.props.players2 !== "undefined") {
           })
         }
 
+
+        console.log(this.props.players4)
         if (typeof this.props.players4 !== "undefined") {
           var players4 = this.props.players4.map((player, i) => {
 
@@ -185,11 +187,19 @@ this.state.fourthScore > -1
   console.log(this.state.threeScore)
   console.log(this.state.fourthScore)
 
+  // <Col componentClass={ControlLabel} smOffset={4} sm={2}>
+  //     { players4 }
+  //     <label> <input style={horInput} className="match-report-guest" type="number" min="0"
+  //     onChange={this.handleChange4}/> </label>
+  // </Col>
+
   return (
     <div style={divStyle}>
     <h2 style={headerStyle2}> How did the match go? </h2>
     <h3> {this.props.match.sport} on {this.props.match.date} </h3>
+    <br/>
     { (this.props.match.sport === "Golf") ?
+    <Row>
     <div>
     <Col componentClass={ControlLabel} smOffset={0} sm={2}>
             { theHomePlayers }
@@ -201,17 +211,18 @@ this.state.fourthScore > -1
         <label> <input style={horInput} className="match-report-guest" type="number" min="0"
         onChange={this.handleChangeGuest}/> </label>
     </Col>
-    <Col componentClass={ControlLabel} smOffset={3} sm={2}>
+    <Col componentClass={ControlLabel} smOffset={1} sm={2}>
         { players3 }
         <label> <input style={horInput} className="match-report-guest" type="number" min="0"
         onChange={this.handleChange3}/> </label>
     </Col>
-    <Col componentClass={ControlLabel} smOffset={4} sm={2}>
+    <Col componentClass={ControlLabel} smOffset={1} sm={2}>
         { players4 }
         <label> <input style={horInput} className="match-report-guest" type="number" min="0"
         onChange={this.handleChange4}/> </label>
     </Col>
     </div>
+    </Row>
         :
         <div>
     <Col componentClass={ControlLabel} smOffset={3} sm={2}>
@@ -227,11 +238,15 @@ this.state.fourthScore > -1
   </div>}
     <br/>
     { (this.props.match.sport === "Golf") ?
+    <Row>
     <Form onSubmit={this.onGolfSubmit}>
+      <br/>
      <Button disabled={!golfIsEnabled} bsStyle="success" type="submit">Submit the Result</Button>
     </Form>
+    </Row>
     :
     <Form onSubmit={this.onSubmit}>
+        <br/>
      <Button disabled={!isEnabled} bsStyle="success" type="submit">Submit the Result</Button>
     </Form> }
     </div>

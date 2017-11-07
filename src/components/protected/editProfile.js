@@ -46,14 +46,14 @@ var otherUser = "Qciqsxq1ZAdCCgGAZzJTqIGE7qp1"
     lName: persInfo.LastName,
     email: persInfo.email,
     gender: persInfo.Gender,
-    aboutMe: persInfo.aboutMe,
+    aboutUser: persInfo.aboutMe,
     favSports: persInfo.favSports,
     location: persInfo.location
      })
     })
 
     // Create a reference to the file we want to download
-  var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}.png`);
+  var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}`);
 
   // Get the download URL
   starsRef.getDownloadURL().then(function(url) {
@@ -207,14 +207,16 @@ return (
 <FormGroup controlId="formControlsSelectMultiple">
   <ControlLabel>Played Sports</ControlLabel>
   <FormControl componentClass="select" multiple>
-    <option value="select">select (multiple)</option>
-    <option value="other">...</option>
+    <option value="Golf">Golf</option>
+    <option value="Squash">Squash</option>
+    <option value="Tennis">Tennis</option>
+    <option value="Badminton">Badminton</option>
   </FormControl>
 </FormGroup>
 
 <FormGroup controlId="formControlsTextarea">
   <ControlLabel>About Me</ControlLabel>
-  <FormControl componentClass="textarea" value={this.state.aboutMe} onChange={this.handleChangeAboutUser} />
+  <FormControl componentClass="textarea" value={this.state.aboutUser} onChange={this.handleChangeAboutUser} />
 </FormGroup>
 
 <FormGroup>

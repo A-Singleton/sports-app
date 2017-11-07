@@ -21,7 +21,7 @@ componentDidMount(){
   console.log(sport)
 
   let ref_1 = db.ref(`matches/`);
-  ref_1.orderByChild(`sport`).equalTo(`${sport}`).once('value', snapshot => {
+  ref_1.orderByChild(`sport`).equalTo(`${sport}`).on('value', snapshot => {
     console.log(snapshot.val())
 
     var allMatchesCopy = []
@@ -45,6 +45,7 @@ componentDidMount(){
           var creator_last_name = matches[k].creator_last_name;
           var idStack = matches[k].idStack;
           var maxPlayers = matches[k].maxPlayers;
+          var location = matches[k].mapDataAddress;
 
     var nextMatch = {
       id: k,
@@ -58,7 +59,8 @@ componentDidMount(){
       idStack: idStack,
       players3: players3,
       players4: players4,
-      maxPlayers
+      maxPlayers,
+      location
     }
     console.log(nextMatch)
     allMatchesCopy.push(nextMatch)
@@ -161,7 +163,7 @@ console.log(nextProps)
 var sport = nextProps.sport
 
 let ref_1 = db.ref(`matches/`);
-ref_1.orderByChild(`sport`).equalTo(`${sport}`).once('value', snapshot => {
+ref_1.orderByChild(`sport`).equalTo(`${sport}`).on('value', snapshot => {
   console.log(snapshot.val())
 
   var allMatchesCopy = []
@@ -206,6 +208,10 @@ ref_1.orderByChild(`sport`).equalTo(`${sport}`).once('value', snapshot => {
   this.setState({allMatches: allMatchesCopy})
 
 });
+}
+
+componentDidUpdate(){
+  console.log("Did update")
 }
 
   render(){

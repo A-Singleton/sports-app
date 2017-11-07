@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
+import {HashRouter as Router} from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
@@ -12,9 +13,10 @@ import PostRenderReport from './protected/postRenderReport'
 import RepReport from './protected/repReport'
 import EditProfile from './protected/editProfile'
 import MakeMatch from './protected/makeMatch'
+import Profile from './protected/profile'
 
 import { logout } from '../helpers/auth'
-import { firebaseAuth } from '../config/constants'
+import { firebaseAuth, firebaseStorageRef } from '../config/constants'
 
 
 const PrivateRoute = ({ component, authed, ...rest }) => {
@@ -79,6 +81,44 @@ export default class App extends Component {
   componentDidMount () {
     this.removeListener = firebaseAuth().onAuthStateChanged((user) => {
       if (user) {
+
+
+      // Create a reference to the file we want to download
+    //var starsRef = firebaseStorageRef.child('profilePics/castling kids.png');
+    var starsRef = firebaseStorageRef.child(`profilePics/${user.uid}`)
+
+    // Get the download URL
+    starsRef.getDownloadURL().then(function(url) {
+      // Insert url into an <img> tag to "download"
+    //  var img = document.getElementById('myimg');
+      var imgBar = document.getElementById('imgBar');
+      imgBar.src = url
+    //  img.src = url;
+    }).catch(function(error) {
+
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      switch (error.code) {
+        case 'storage/object_not_found':
+          // File doesn't exist
+          break;
+
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
+
+        case 'storage/unknown':
+          // Unknown error occurred, inspect the server response
+          break;
+      }
+    });
+
+
+
         this.setState({
           authed: true,
           loading: false,
@@ -107,24 +147,31 @@ export default class App extends Component {
     }
 
 //   console.log(this.props.stuffMine)
+// <li>
+// <Link to="/matchFeed" className="navbar-brand">Match Feed</Link>
+// </li>
+    //  <BrowserRouter>
 
     return this.state.loading === true ? <h1>Loading</h1> : (
-      <BrowserRouter>
+    <Router>
         <div>
           <nav className="navbar navbar-default navbar-static-top">
             <div className="container">
               <div className="navbar-header">
                 <Link to="/" className="navbar-brand">ProvaSport</Link>
               </div>
-              <ul className="nav navbar-nav pull-right">
+               <ul className="nav navbar-nav pull-right">
+               <li>
+               <Link to="/dashboard" className="navbar-brand"> Search Matches</Link>
+               </li>
+               <li>
+               <Link to="/makeMatch" className="navbar-brand"> Make a Match</Link>
+              </li>
                 <li>
                  <img style={profImage} className="img-square avatar"  id="imgBar" src="" alt="" height="30" width="30"/>
                 </li>
                 <li>
-                <Link to="/dashboard" className="navbar-brand"> Profile</Link>
-                </li>
-                <li>
-                <Link to="/matchFeed" className="navbar-brand">Match Feed</Link>
+                <Link to="/profile" className="navbar-brand"> Profile</Link>
                 </li>
                 <li>
                   {this.state.authed
@@ -154,13 +201,16 @@ export default class App extends Component {
                 <PrivateRoute authed={this.state.authed} path='/postRenderReport' component={PostRenderReport} stuff={myRating}/>
                 <PrivateRoute authed={this.state.authed} path='/repReport' component={RepReport} stuff={myRating}/>
                 <PrivateRoute authed={this.state.authed} path='/protected/editProfile' component={EditProfile} />
-                <PrivateRoute authed={this.state.authed} path='/makeFeed' component={MakeMatch} />
+                <PrivateRoute authed={this.state.authed} path='/makeMatch' component={MakeMatch} />
+                <PrivateRoute authed={this.state.authed} path='/profile' component={Profile} />
                 <Route render={() => <h3>No Match</h3>} />
               </Switch>
             </div>
           </div>
         </div>
-      </BrowserRouter>
+    </Router>
     );
   }
 }
+
+  //  </BrowserRouter>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form,  FormGroup, FormControl, Col, Button, ControlLabel} from 'react-bootstrap'
+import { Form,  FormGroup, FormControl, Col, Button, ControlLabel, Grid, Row} from 'react-bootstrap'
 import { recordMatch } from 'C:/Users/Duwan_000/Documents/GitHub/sports-app/src/helpers/auth.js'
 import { Route, BrowserRouter, Link, Redirect, Switch } from 'react-router-dom'
 import ModalConfirmScore from './modalConfirmScore'
@@ -12,7 +12,6 @@ export default class PendingMatchRender extends Component {
        fireRedirect: false
      }
    }
-
 
   handleSubmit(event) {
       event.preventDefault();
@@ -31,13 +30,13 @@ export default class PendingMatchRender extends Component {
 
   render () {
 
-        const divStyle = {
-          display: 'block',
-          textAlign: 'center',
-          background: "#eee",
-          padding: "5px",
-          margin: "5px",
-        };
+        // const divStyle = {
+        //   display: 'block',
+        //   textAlign: 'center',
+        //   background: "#eee",
+        //   padding: "5px",
+        //   width: '550px',
+        // };
 
         const score = {
           padding: "5px",
@@ -87,14 +86,54 @@ export default class PendingMatchRender extends Component {
 // <Form onSubmit={this.handleSubmit.bind(this)}>
 //  </Form>
 //  <Button bsStyle="success" type="submit">Confirm the Scores</Button>
+//<img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
+//<img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/>
+//     const leftMargin = {
+//
+//      }
+//
+//      const rightMargin = {
+//
+//}
+
+// <Grid >
+// <Row className="show-grid">
+// <Col xs={2} xsOffset={0}>  { theHomePlayers }  </Col>
+// <Col xs={2} xsOffset={0}> { theAwayPlayers } </Col>
+// </Row>
+// </ Grid>
+//
+// <Grid >
+// <Row className="show-grid">
+// <Col xs={3} xsOffset={0}> <h3> <strong> Home Score: { this.props.matches.hostScore } </strong> </h3> </Col>
+// <Col xs={3} md={0}> <h3> <strong> { this.props.matches.awayScore } : Away Score </strong> </h3> </Col>
+// </Row>
+// </ Grid>
+
+ const shadow = {
+   boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
+   borderRadius: '5px'
+ }
 
     return(
-      <div style={divStyle}>
+      <div style={shadow}>
       <h2> Jimbo Reported the Scores from Your Match </h2>
       <h3> { this.props.matches.sport + " at " + this.props.matches.date } </h3>
-      { theHomePlayers } { theAwayPlayers }
-      <label style={score}> <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> Home: { this.props.matches.hostScore + "  " } </label>
-      <label>  { this.props.matches.awayScore } : Away <img className="img-circle avatar" src="http://placehold.it/48x48" alt=""/> </label>
+      <br/>
+      <Grid >
+      <Row className="show-grid">
+      <Col xs={2} xsOffset={0}> { theHomePlayers }  </Col>
+      <Col xs={2} xsOffset={0}> { theAwayPlayers } </Col>
+      </Row>
+      </ Grid>
+
+      <Grid >
+      <Row className="show-grid">
+      <Col xs={3} xsOffset={0}> <h3> <strong> Home Score: { this.props.matches.hostScore } </strong> </h3> </Col>
+      <Col xs={3} md={0}> <h3> <strong> { this.props.matches.awayScore } : Away Score </strong> </h3> </Col>
+      </Row>
+      </ Grid>
+      <br/>
           <ModalConfirmScore match={this.props.matches}/>
           <br/>
           <h6> Did they make a mistake? </h6>

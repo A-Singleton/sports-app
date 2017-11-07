@@ -32,7 +32,7 @@ render(){
   }
 
   const chatInputText = {
-    width: '100%',
+    width: '50%',
     marginLeft: '-20px',
     marginRight: '-20px'
   }
